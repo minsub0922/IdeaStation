@@ -99,11 +99,12 @@
 		AF07B31822FFC3C300FAE1C8 /* IdeaStation */ = {
 			isa = PBXGroup;
 			children = (
-				AF07B31922FFC3C300FAE1C8 /* AppDelegate.swift */,
-				AF07B31B22FFC3C300FAE1C8 /* ViewController.swift */,
-				AF07B31D22FFC3C300FAE1C8 /* Main.storyboard */,
-				AF07B32322FFC3C400FAE1C8 /* Assets.xcassets */,
-				AF07B32522FFC3C400FAE1C8 /* LaunchScreen.storyboard */,
+				AF07B35022FFC4D800FAE1C8 /* Protocols */,
+				AF07B34F22FFC4CE00FAE1C8 /* Extension */,
+				AF07B34E22FFC4C800FAE1C8 /* Utils */,
+				AF07B34D22FFC4AF00FAE1C8 /* Supporting Files */,
+				AF07B34C22FFC4AA00FAE1C8 /* View */,
+				AF07B34A22FFC49D00FAE1C8 /* ViewController */,
 				AF07B32822FFC3C400FAE1C8 /* Info.plist */,
 				AF07B32022FFC3C300FAE1C8 /* IdeaStation.xcdatamodeld */,
 			);
@@ -126,6 +127,53 @@
 				AF07B33E22FFC3C400FAE1C8 /* Info.plist */,
 			);
 			path = IdeaStationUITests;
+			sourceTree = "<group>";
+		};
+		AF07B34A22FFC49D00FAE1C8 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				AF07B31B22FFC3C300FAE1C8 /* ViewController.swift */,
+				AF07B31D22FFC3C300FAE1C8 /* Main.storyboard */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		AF07B34C22FFC4AA00FAE1C8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		AF07B34D22FFC4AF00FAE1C8 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				AF07B32322FFC3C400FAE1C8 /* Assets.xcassets */,
+				AF07B31922FFC3C300FAE1C8 /* AppDelegate.swift */,
+				AF07B32522FFC3C400FAE1C8 /* LaunchScreen.storyboard */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		AF07B34E22FFC4C800FAE1C8 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		AF07B34F22FFC4CE00FAE1C8 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		AF07B35022FFC4D800FAE1C8 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
