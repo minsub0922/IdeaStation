@@ -23,6 +23,7 @@ import Foundation
 
 // MARK: 위에꺼처럼 JSON파일 되어있음.
 struct MandalartItem: Codable {
+    //let mandalartTexts: [String]
     let mandalartText1: String
     let mandalartText2: String
     let mandalartText3: String
@@ -32,5 +33,6 @@ struct MandalartItem: Codable {
     let mandalartText7: String
     let mandalartText8: String
     let mandalartText9: String
+    
     
 }

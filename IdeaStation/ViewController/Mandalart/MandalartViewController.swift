@@ -8,11 +8,13 @@
 
 import UIKit
 
-class MandalartViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+class MandalartViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UITextFieldDelegate {
     // MARK:- 기본 변수들 선언
     let cellIdentifier: String = "mandalartCell"
     var mandalartItems: [MandalartItem] = []
     @IBOutlet weak var mandalartCollectionView: UICollectionView!
+    public var currentMandalartArea: Int = 1
+    
     
     // MARK: 8방향 버튼 선언 : Outlet
     @IBOutlet weak var leftUpButton: UIButton!
@@ -74,17 +76,33 @@ class MandalartViewController: UIViewController, UICollectionViewDataSource, UIC
         self.mandalartCollectionView.bounds = mandalartBounds
     }
     
+    // MARK:- 영역 밖 탭해주면 키보드 내려주는거
+    @IBAction func tapView(_ sender: UITapGestureRecognizer) {
+        print("tap tap!")
+        self.view.endEditing(true)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        self.view.endEditing(true)
+        return true
+    }
+    
+    
     
     // MARK:- collectionView 필수구현함수
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 9
     }
-    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
         let cell: MandalartCollectionViewCell = mandalartCollectionView.dequeueReusableCell(withReuseIdentifier: self.cellIdentifier, for: indexPath) as! MandalartCollectionViewCell
         
         let mandalartItem: MandalartItem = self.mandalartItems[indexPath.item]
         
+        
+        
+        // MARK: just nogada? 다른 방법이 있을 것 같음. 리스트라던지
         cell.textField1.text = mandalartItem.mandalartText1
         cell.textField2.text = mandalartItem.mandalartText2
         cell.textField3.text = mandalartItem.mandalartText3
@@ -95,18 +113,34 @@ class MandalartViewController: UIViewController, UICollectionViewDataSource, UIC
         cell.textField8.text = mandalartItem.mandalartText8
         cell.textField9.text = mandalartItem.mandalartText9
         
+        // MARK: delegate 선언 : done누르면 키보드 내려가게 하기 위해.
+        cell.textField1.delegate = self
+        cell.textField2.delegate = self
+        cell.textField3.delegate = self
+        cell.textField4.delegate = self
+        cell.textField5.delegate = self
+        cell.textField6.delegate = self
+        cell.textField7.delegate = self
+        cell.textField8.delegate = self
+        cell.textField9.delegate = self
+        
         return cell
     }
+    
+    
+    
     // MARK:- mandalartCollectionView 기본 설정
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
         
-        // MARK: mandalartCollectionView 크기 조절(왜 안되는건지 모르겠음)
-        /*
-        self.mandalartCollectionView.frame = CGRect(x: UIScreen.main.bounds.width, y: UIScreen.main.bounds.height, width: UIScreen.main.bounds.width * 3, height: UIScreen.main.bounds.height * 3)
-         */
+        // MARK: textfield delegate 설정
+        
+        
+        // MARK: mandalartCollectionView 크기 조절
+        self.mandalartCollectionView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width * 3, height: UIScreen.main.bounds.height * 3)
+        
         
         // MARK: mandalart컬렉션 뷰에 flowLayout 적용
         let mandalartFlowLayout: UICollectionViewFlowLayout
@@ -114,7 +148,6 @@ class MandalartViewController: UIViewController, UICollectionViewDataSource, UIC
         mandalartFlowLayout.sectionInset = UIEdgeInsets.zero
         mandalartFlowLayout.minimumInteritemSpacing = 0
         mandalartFlowLayout.minimumLineSpacing = 0
-        
         mandalartFlowLayout.estimatedItemSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
         
         self.mandalartCollectionView.collectionViewLayout = mandalartFlowLayout
@@ -124,7 +157,6 @@ class MandalartViewController: UIViewController, UICollectionViewDataSource, UIC
         guard let dataAsset: NSDataAsset = NSDataAsset(name: "mandalartItems") else{
             return
         }
-        
         do{
             self.mandalartItems = try jsonDecoder.decode([MandalartItem].self, from: dataAsset.data)
         } catch {
@@ -132,8 +164,30 @@ class MandalartViewController: UIViewController, UICollectionViewDataSource, UIC
         }
         
         self.mandalartCollectionView.reloadData()
+        
     }
-    
+//
+//    override func viewDidLayoutSubviews() {
+//        super.viewDidLayoutSubviews()
+//
+//        var topSafeArea: CGFloat
+//        var bottomSafeArea: CGFloat
+//
+//        let guide = view.safeAreaLayoutGuide
+//        let height = guide.layoutFrame.size.height
+//
+//        if #available(iOS 11.0, *) {
+//            topSafeArea = view.safeAreaInsets.top
+//            bottomSafeArea = view.safeAreaInsets.bottom
+//        } else {
+//            topSafeArea = topLayoutGuide.length
+//            bottomSafeArea = bottomLayoutGuide.length
+//        }
+//
+//        // safe area values are now available to use
+//        print(topSafeArea, bottomSafeArea, height)
+//
+//    }
 
     /*
     // MARK: - Navigation
