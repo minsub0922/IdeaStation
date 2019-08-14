@@ -19,8 +19,9 @@
 		AF07B33D22FFC3C400FAE1C8 /* IdeaStationUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF07B33C22FFC3C400FAE1C8 /* IdeaStationUITests.swift */; };
 		AF07B35322FFF71600FAE1C8 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF07B35222FFF71600FAE1C8 /* CategoryViewController.swift */; };
 		AF07B35522FFFFE600FAE1C8 /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF07B35422FFFFE600FAE1C8 /* View+.swift */; };
-		AF07B3592302629B00FAE1C8 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF07B3582302629B00FAE1C8 /* CustomButton.swift */; };
+		AF07B3592302629B00FAE1C8 /* ExpandableBubbleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF07B3582302629B00FAE1C8 /* ExpandableBubbleLabel.swift */; };
 		AF07B35B2302771300FAE1C8 /* UILabelFlexible.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF07B35A2302771300FAE1C8 /* UILabelFlexible.swift */; };
+		AFF64DB72303F68E003F3E3A /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF64DB62303F68E003F3E3A /* SearchViewController.swift */; };
 		C8192C8A4C50ED9291EB9EF2 /* Pods_IdeaStationUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B05A6B68FCC86D29F487D72 /* Pods_IdeaStationUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -64,8 +65,9 @@
 		AF07B33E22FFC3C400FAE1C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AF07B35222FFF71600FAE1C8 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
 		AF07B35422FFFFE600FAE1C8 /* View+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+.swift"; sourceTree = "<group>"; };
-		AF07B3582302629B00FAE1C8 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		AF07B3582302629B00FAE1C8 /* ExpandableBubbleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableBubbleLabel.swift; sourceTree = "<group>"; };
 		AF07B35A2302771300FAE1C8 /* UILabelFlexible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelFlexible.swift; sourceTree = "<group>"; };
+		AFF64DB62303F68E003F3E3A /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		B21B083B41ACFA9326BB7656 /* Pods-IdeaStationTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IdeaStationTests.release.xcconfig"; path = "Target Support Files/Pods-IdeaStationTests/Pods-IdeaStationTests.release.xcconfig"; sourceTree = "<group>"; };
 		B372D9412C6D388DBEF5BC49 /* Pods_IdeaStationTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IdeaStationTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3E5791034235E2A56495166 /* Pods-IdeaStationUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IdeaStationUITests.debug.xcconfig"; path = "Target Support Files/Pods-IdeaStationUITests/Pods-IdeaStationUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -190,7 +192,7 @@
 		AF07B34C22FFC4AA00FAE1C8 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				AF07B3582302629B00FAE1C8 /* CustomButton.swift */,
+				AF07B3582302629B00FAE1C8 /* ExpandableBubbleLabel.swift */,
 				AF07B35A2302771300FAE1C8 /* UILabelFlexible.swift */,
 			);
 			path = View;
@@ -231,9 +233,18 @@
 		AF07B35122FFF6F200FAE1C8 /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				AFF64DB52303F67F003F3E3A /* Search */,
 				AF07B35222FFF71600FAE1C8 /* CategoryViewController.swift */,
 			);
 			path = Category;
+			sourceTree = "<group>";
+		};
+		AFF64DB52303F67F003F3E3A /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				AFF64DB62303F68E003F3E3A /* SearchViewController.swift */,
+			);
+			path = Search;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -466,7 +477,8 @@
 			files = (
 				AF07B35322FFF71600FAE1C8 /* CategoryViewController.swift in Sources */,
 				AF07B31C22FFC3C300FAE1C8 /* ViewController.swift in Sources */,
-				AF07B3592302629B00FAE1C8 /* CustomButton.swift in Sources */,
+				AFF64DB72303F68E003F3E3A /* SearchViewController.swift in Sources */,
+				AF07B3592302629B00FAE1C8 /* ExpandableBubbleLabel.swift in Sources */,
 				AF07B31A22FFC3C300FAE1C8 /* AppDelegate.swift in Sources */,
 				AF07B35B2302771300FAE1C8 /* UILabelFlexible.swift in Sources */,
 				AF07B35522FFFFE600FAE1C8 /* View+.swift in Sources */,

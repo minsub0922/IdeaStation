@@ -9,7 +9,7 @@
 import UIKit
 
 class UILabelFlexible: UILabel {
-    var delegate: ChildLabelTouchActionDelegate?
+    var delegate: ExpandableBubbleLabelChildDelegate?
     
     init(text: String, fontSize: CGFloat, center: CGPoint) {
         super.init(frame: CGRect(origin: .zero, size: CGSize(width: 100, height: 0)))
@@ -36,6 +36,6 @@ class UILabelFlexible: UILabel {
     }
 }
 
-protocol ChildLabelTouchActionDelegate {
+protocol ExpandableBubbleLabelChildDelegate {
     func childLabelTouchBegan(text: String)
 }

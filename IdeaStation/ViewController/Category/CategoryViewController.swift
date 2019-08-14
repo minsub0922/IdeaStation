@@ -15,7 +15,7 @@ class CategoryViewController: UIViewController {
         super.viewDidLoad()
        
         let array = ["gkgkgk", "hohoo", "hihihi", "1231245", "gkgkgk", "hohoo", "hihihi", "1231245"]
-        let view = CustomButton(size: CGSize(width: 60, height: 60), childArray: array, superView: self.view)
+        let view = ExpandableBubbleLabel( superView: self.view)
         self.view.addSubview(view)
     }
 }

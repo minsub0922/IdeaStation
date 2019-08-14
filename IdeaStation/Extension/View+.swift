@@ -37,7 +37,7 @@ extension UIView {
         targetFrame.origin.y -= 5
         self.frame = targetFrame
         
-        UIView.animate(withDuration: 0.25, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 0.2, options: .curveEaseOut, animations: {
+        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 0.2, options: .curveEaseOut, animations: {
             targetFrame.origin.y += 5
             self.frame = targetFrame
         }) { res in

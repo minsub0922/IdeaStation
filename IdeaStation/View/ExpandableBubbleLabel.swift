@@ -8,42 +8,56 @@
 
 import UIKit
 
-class CustomButton: UILabelFlexible {
+class ExpandableBubbleLabel: UILabelFlexible {
     var radius: CGFloat = 20
-    var childArray: [String]!
-    var superView: UIView!
-    var timer = Timer()
-    var time = 0.0
-    var buttonState = ButtonState.collapse
-    let startTime = 0.0
-    var endTime: Double {
+    var childArray: [String] = [] {
+        didSet {
+            for i in 0..<childArray.count {
+                childLabels[i].text = childArray[i]
+            }
+        }
+    }
+    private var childLabels: [UILabelFlexible] = []
+    fileprivate var superView: UIView!
+    fileprivate var timer = Timer()
+    fileprivate var time = 0.0
+    fileprivate var buttonState = ButtonState.collapse
+    fileprivate let startTime = 0.0
+    var childDelegate: ExpandableBubbleLabelChildDelegate?
+    fileprivate var endTime: Double {
         return 0.5 + 0.07 * Double(self.superView.subviews.count-1)
     };
-    let changeTime = 0.15
-    let bounceTime = 0.5
+    fileprivate let changeTime = 0.15
+    fileprivate let bounceTime = 0.5
+    fileprivate let childCount = 8
     
-    init(size: CGSize, childArray: [String], superView: UIView) {
+    init(superView: UIView) {
         let center = CGPoint(x: superView.frame.size.width/2 , y: superView.frame.size.height * 0.4 )
         super.init(text: "연관단어", fontSize: 35, center: center)
-        self.childArray = childArray
         self.textColor = .black
         self.changeHeight(by: 35)
         self.minimumScaleFactor = 0.6
         self.superView = superView
+        self.radius = self.frame.height * 3
         setupLabels()
     }
     
     private func setupLabels() {
-        radius = self.frame.height * 3
-        let thetaStatus = 2 * Float.pi / Float(childArray.count)
-        for i in 0..<childArray.count {
+        
+        let thetaStatus = 2 * Float.pi / Float(childCount)
+        for i in 0..<8 {
             let theta = thetaStatus * Float(i+1)
             let x = self.center.x + radius * CGFloat(cos(theta))
             let y = self.center.y + radius * CGFloat(sin(theta))
-            let label = UILabelFlexible(text: childArray[i], fontSize: 35, center: CGPoint(x: x, y: y))
+            let label = UILabelFlexible(text: "", fontSize: 35, center: CGPoint(x: x, y: y))
             label.delegate = self
+            childLabels.append(label)
             self.superView.addSubview(label)
         }
+    }
+    
+    func updateLabelsAll(array: [String]) {
+        self.childArray = array
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -51,9 +65,8 @@ class CustomButton: UILabelFlexible {
     }
 }
 
-extension CustomButton: ChildLabelTouchActionDelegate {
+extension ExpandableBubbleLabel: ExpandableBubbleLabelChildDelegate {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        print(touches)
         if time > startTime && time < endTime {
             return
         }
@@ -114,17 +127,23 @@ extension CustomButton: ChildLabelTouchActionDelegate {
     }
     
     func childLabelTouchBegan(text: String) {
+        self.fadeIn()
         self.text = text
+        self.childDelegate?.childLabelTouchBegan(text: text)
+        
         timer = Timer.scheduledTimer(
             timeInterval: 0.01,
             target: self,
             selector:  #selector(timerDowncase),
             userInfo: nil, repeats: true)
-        self.fadeIn()
     }
 }
 
-extension CustomButton {
+protocol SearchBubbleChildDelegate {
+    func updateChildArray(coreText: String)
+}
+
+extension ExpandableBubbleLabel {
     func changeFontColor(animation: Bool, color: UIColor) {
         UIView.animate(withDuration: animation ? 0.5 : 0.0) {
              self.textColor = color
