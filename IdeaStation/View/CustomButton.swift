@@ -53,6 +53,7 @@ class CustomButton: UILabelFlexible {
 
 extension CustomButton: ChildLabelTouchActionDelegate {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        print(touches)
         if time > startTime && time < endTime {
             return
         }
@@ -113,7 +114,13 @@ extension CustomButton: ChildLabelTouchActionDelegate {
     }
     
     func childLabelTouchBegan(text: String) {
-        
+        self.text = text
+        timer = Timer.scheduledTimer(
+            timeInterval: 0.01,
+            target: self,
+            selector:  #selector(timerDowncase),
+            userInfo: nil, repeats: true)
+        self.fadeIn()
     }
 }
 
