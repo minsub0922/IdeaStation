@@ -26,15 +26,6 @@ extension CategoryViewController: CircleMenuDelegate {
     }
 }
 
-
-
-
-
-
-
-
-
-
 extension CategoryViewController: PaperOnboardingDataSource {
     
     private func addOnBoarding(){

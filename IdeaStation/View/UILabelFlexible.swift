@@ -9,24 +9,33 @@
 import UIKit
 
 class UILabelFlexible: UILabel {
-    
-    var isFirst = true
+    var delegate: ChildLabelTouchActionDelegate?
     
     init(text: String, fontSize: CGFloat, center: CGPoint) {
-        super.init(frame: CGRect(origin: .zero, size: CGSize(width: 200, height: 0)))
+        super.init(frame: CGRect(origin: .zero, size: CGSize(width: 100, height: 0)))
         self.text = text
         self.center = center
         font = font.withSize(fontSize)
-        minimumScaleFactor = 0.1    //or whatever suits your need
+        minimumScaleFactor = 0.2    //or whatever suits your need
         adjustsFontSizeToFitWidth = true
         lineBreakMode = .byClipping
         numberOfLines = 0
         textColor = .black
         textAlignment = .center
+        isUserInteractionEnabled = true
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.bounce {
+            self.delegate?.childLabelTouchBegan(text: self.text ?? "")
+        }
+    }
 }
 
+protocol ChildLabelTouchActionDelegate {
+    func childLabelTouchBegan(text: String)
+}

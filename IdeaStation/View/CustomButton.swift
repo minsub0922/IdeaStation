@@ -8,100 +8,121 @@
 
 import UIKit
 
-class CustomButton: UIButton {
-    var radius: CGFloat = 50.0
+class CustomButton: UILabelFlexible {
+    var radius: CGFloat = 20
     var childArray: [String]!
     var superView: UIView!
     var timer = Timer()
     var time = 0.0
     var buttonState = ButtonState.collapse
+    let startTime = 0.0
+    var endTime: Double {
+        return 0.5 + 0.07 * Double(self.superView.subviews.count-1)
+    };
+    let changeTime = 0.15
+    let bounceTime = 0.5
     
     init(size: CGSize, childArray: [String], superView: UIView) {
-        super.init(frame: CGRect(origin: .zero, size: size))
-        self.center = CGPoint(x: superView.frame.size.width/2 , y: superView.frame.size.height/2 )
+        let center = CGPoint(x: superView.frame.size.width/2 , y: superView.frame.size.height * 0.4 )
+        super.init(text: "연관단어", fontSize: 35, center: center)
         self.childArray = childArray
-        self.setTitle("연관 단어", for: .normal)
-        self.setTitleColor(.black, for: .normal)
-        self.sizeToFit()
+        self.textColor = .black
+        self.changeHeight(by: 35)
+        self.minimumScaleFactor = 0.6
         self.superView = superView
         setupLabels()
     }
     
     private func setupLabels() {
-        radius = self.frame.width * 1.5
+        radius = self.frame.height * 3
         let thetaStatus = 2 * Float.pi / Float(childArray.count)
         for i in 0..<childArray.count {
             let theta = thetaStatus * Float(i+1)
             let x = self.center.x + radius * CGFloat(cos(theta))
             let y = self.center.y + radius * CGFloat(sin(theta))
-            
-            let label = UILabelFlexible(text: childArray[i], fontSize: 40, center: CGPoint(x: x, y: y))
+            let label = UILabelFlexible(text: childArray[i], fontSize: 35, center: CGPoint(x: x, y: y))
+            label.delegate = self
             self.superView.addSubview(label)
-        }
-    }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if time > 0.0 && time < 0.5 {
-            return
-        }
-        let selector = (buttonState == .collapse) ? #selector(timerUpcase) : #selector(timerDowncase)
-        time = (buttonState == .collapse) ? 0.0 : 0.5
-        timer = Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: selector, userInfo: nil, repeats: true)
-        //self.rotate(to: 2 * CGFloat.pi)
-        //self.pulse()
-    }
-    
-   
-    @objc private func timerUpcase() {
-        if time < 0.15 {
-            time += 0.01
-            for i in superView.subviews {
-                if i is UILabelFlexible {
-                    let center = i.center
-                    i.frame = CGRect(x: 0, y: 0, width: i.frame.width, height: i.frame.height + CGFloat(time*25))
-                    i.center = center
-                }
-            }
-            self.alpha = CGFloat(1 - time * 3)
-        }
-        else if time < 0.5 {
-            time += 0.01
-            for i in superView.subviews {
-                if i is UILabelFlexible {
-                    let center = i.center
-                    i.frame = CGRect(x: 0, y: 0, width: i.frame.width, height: i.frame.height - (0.5-CGFloat(time)))
-                    i.center = center
-                }
-            }
-        }
-        else {
-            timer.invalidate()
-            buttonState = .expanded
-        }
-    }
-    
-    @objc private func timerDowncase() {
-        if time > 0 {
-            time -= 0.01
-            for i in superView.subviews {
-                if i is UILabelFlexible {
-                    let center = i.center
-                    let height = i.frame.height - CGFloat((0.5-time)*20) > 0 ? i.frame.height - CGFloat((0.5-time)*20) : 0
-                    i.frame = CGRect(x: 0, y: 0, width: i.frame.width, height: height)
-                    i.center = center
-                }
-            }
-            self.alpha = CGFloat((1 - time * 7/5 ))
-        } else {
-            timer.invalidate()
-            buttonState = .collapse
         }
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+}
+
+extension CustomButton: ChildLabelTouchActionDelegate {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if time > startTime && time < endTime {
+            return
+        }
+        
+        let isCollapse = (buttonState == .collapse)
+        time = isCollapse ? startTime : endTime
+        timer = Timer.scheduledTimer(
+            timeInterval: 0.01,
+            target: self,
+            selector: isCollapse ? #selector(timerUpcase) : #selector(timerDowncase),
+            userInfo: nil, repeats: true)
+        isCollapse ? self.fadeOut() : self.fadeIn()
+    }
     
+    @objc private func timerUpcase() {
+        time += 0.01
+        if time <= endTime/2 {
+            self.changeHeight(by: -0.3)
+        }
+        
+        for i in 0..<superView.subviews.count - 1 {
+            repectiveUpperCase(index: i)
+        }
+    }
+    
+    @objc private func timerDowncase() {
+        time -= 0.015
+        if time >= endTime/2 {
+            self.changeHeight(by: 0.45)
+        }
+        for i in 0..<superView.subviews.count - 1 {
+            respectiveLowerCase(index: i)
+        }
+    }
+    
+    private func repectiveUpperCase(index: Int) {
+        let item = superView.subviews[index]
+        let timeGap = 0.07 * Double(index)
+        if time < changeTime + timeGap && time > timeGap {    // Get Bigger
+            item.changeHeight(by: (time - timeGap) * 30)
+        }else if time < bounceTime + timeGap && time >= changeTime + timeGap {   // Get Smaller, Bounce
+            item.changeHeight(by: -(bounceTime - time + timeGap))
+        }else if time > endTime {
+            timer.invalidate()
+            buttonState = .expanded
+        }
+    }
+    
+    private func respectiveLowerCase(index: Int) {
+        let item = superView.subviews[index]
+        let timeGap = 0.06 * Double(superView.subviews.count - index)
+        if time < endTime - timeGap && time > endTime - timeGap - changeTime * 0.6 {
+            item.changeHeight(by: -(time+timeGap) * 6 )
+        }else if time < 0 {
+            timer.invalidate()
+            buttonState = .collapse
+        }
+    }
+    
+    func childLabelTouchBegan(text: String) {
+        
+    }
+}
+
+extension CustomButton {
+    func changeFontColor(animation: Bool, color: UIColor) {
+        UIView.animate(withDuration: animation ? 0.5 : 0.0) {
+             self.textColor = color
+        }
+    }
     enum ButtonState {
         case collapse
         case expanded
