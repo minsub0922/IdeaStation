@@ -17,7 +17,7 @@ class SearchViewController: UIViewController {
         super.viewDidLoad()
         
         let params = [
-            "key": API.pixaBayKey,
+            "key": API.pixabayKey,
             "q": "flower"
         ]
         
@@ -39,4 +39,20 @@ extension SearchViewController: ExpandableBubbleLabelChildDelegate {
             self.bubbleLabel.childArray = self.array.compactMap { $0+text }
         }
     }
+}
+
+extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 9
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PixaPictures.self, for: <#T##IndexPath#>)
+    }
+    
+    
+}
+
+class PixabayImageCell: UICollectionViewCell {
+    @IBOutlet weak var imageView: UIImageView!
 }

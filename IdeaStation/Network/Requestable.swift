@@ -38,7 +38,7 @@ extension Requestable {
         
         Alamofire.request(encodedUrl,
                           method: .get,
-                          parameters: nil).responseData { (res) in
+                          parameters: params).responseData { (res) in
                             switch res.result {
                             case .success:
                                 if let value = res.result.value {
