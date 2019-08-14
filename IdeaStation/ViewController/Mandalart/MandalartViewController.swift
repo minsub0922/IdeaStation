@@ -13,8 +13,6 @@ class MandalartViewController: UIViewController, UICollectionViewDataSource, UIC
     let cellIdentifier: String = "mandalartCell"
     var mandalartItems: [MandalartItem] = []
     @IBOutlet weak var mandalartCollectionView: UICollectionView!
-    public var currentMandalartArea: Int = 1
-    
     
     // MARK: 8방향 버튼 선언 : Outlet
     @IBOutlet weak var leftUpButton: UIButton!
@@ -88,8 +86,6 @@ class MandalartViewController: UIViewController, UICollectionViewDataSource, UIC
         return true
     }
     
-    
-    
     // MARK:- collectionView 필수구현함수
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 9
@@ -113,6 +109,8 @@ class MandalartViewController: UIViewController, UICollectionViewDataSource, UIC
         cell.textField8.text = mandalartItem.mandalartText8
         cell.textField9.text = mandalartItem.mandalartText9
         
+        
+        
         // MARK: delegate 선언 : done누르면 키보드 내려가게 하기 위해.
         cell.textField1.delegate = self
         cell.textField2.delegate = self
@@ -127,8 +125,6 @@ class MandalartViewController: UIViewController, UICollectionViewDataSource, UIC
         return cell
     }
     
-    
-    
     // MARK:- mandalartCollectionView 기본 설정
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -139,16 +135,16 @@ class MandalartViewController: UIViewController, UICollectionViewDataSource, UIC
         
         
         // MARK: mandalartCollectionView 크기 조절
-        self.mandalartCollectionView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width * 3, height: UIScreen.main.bounds.height * 3)
-        
+        //self.mandalartCollectionView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
         
         // MARK: mandalart컬렉션 뷰에 flowLayout 적용
         let mandalartFlowLayout: UICollectionViewFlowLayout
         mandalartFlowLayout = UICollectionViewFlowLayout()
         mandalartFlowLayout.sectionInset = UIEdgeInsets.zero
-        mandalartFlowLayout.minimumInteritemSpacing = 0
-        mandalartFlowLayout.minimumLineSpacing = 0
-        mandalartFlowLayout.estimatedItemSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+        mandalartFlowLayout.minimumInteritemSpacing = 10
+        mandalartFlowLayout.minimumLineSpacing = 10
+        mandalartFlowLayout.estimatedItemSize = CGSize(width: UIScreen.main.bounds.width/3-10, height: UIScreen.main.bounds.height/3-10)
+        print(view.safeAreaInsets.top - view.safeAreaInsets.bottom)
         
         self.mandalartCollectionView.collectionViewLayout = mandalartFlowLayout
         
@@ -157,6 +153,7 @@ class MandalartViewController: UIViewController, UICollectionViewDataSource, UIC
         guard let dataAsset: NSDataAsset = NSDataAsset(name: "mandalartItems") else{
             return
         }
+        
         do{
             self.mandalartItems = try jsonDecoder.decode([MandalartItem].self, from: dataAsset.data)
         } catch {
@@ -164,7 +161,6 @@ class MandalartViewController: UIViewController, UICollectionViewDataSource, UIC
         }
         
         self.mandalartCollectionView.reloadData()
-        
     }
 //
 //    override func viewDidLayoutSubviews() {

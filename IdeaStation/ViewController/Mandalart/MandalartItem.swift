@@ -33,6 +33,4 @@ struct MandalartItem: Codable {
     let mandalartText7: String
     let mandalartText8: String
     let mandalartText9: String
-    
-    
 }

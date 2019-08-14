@@ -24,7 +24,6 @@ class MandalartCollectionViewCell: UICollectionViewCell {
     @IBAction public func editingDidEndTextField1(_ sender: UITextField, forEvent event: UIEvent) {
         print("editingDidEndTextField1")
     }
-    
     @IBAction public func editingDidEndTextField2(_ sender: UITextField, forEvent event: UIEvent) {
         print("editingDidEndTextField2")
     }
