@@ -16,6 +16,16 @@ class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let params = [
+            "key": API.pixaBayKey,
+            "q": "flower"
+        ]
+        
+        APISource.shared.getPicturesPixay(params: params) { res in
+            print(res)
+        }
+        
+        
         bubbleLabel = ExpandableBubbleLabel(superView: self.view)
         bubbleLabel.childArray = array
         bubbleLabel.childDelegate = self
