@@ -9,8 +9,8 @@
 import Foundation
 
 class API {
-    static let pixaBayBaseURL = "https://pixabay.com/api/"
-    static let pixaBayKey = "12470240-804dc4fdb5874e9b35535d330" //민섭이꼬
+    static let pixabayBaseURL = "https://pixabay.com/api/"
+    static let pixabayKey = "12470240-804dc4fdb5874e9b35535d330" //민섭이꼬
     
     static let jsonDecoder: JSONDecoder = {
         let jsonDecoder = JSONDecoder()
@@ -19,7 +19,7 @@ class API {
     }()
     
     static let getPictures = {
-        return pixaBayBaseURL + ""
+        return pixabayBaseURL + ""
     }
     
 //
