@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ExpandableBubbleLabel: UILabelFlexible {
+class ExpandableBubbleLabel: FlexibleLabel {
     var radius: CGFloat = 20
     var childArray: [String] = [] {
         didSet {
@@ -19,7 +19,7 @@ class ExpandableBubbleLabel: UILabelFlexible {
     }
     var expandableDelegate: ExpandableBubbleLabelDelegate?
     
-    private var childLabels: [UILabelFlexible] = []
+    private var childLabels: [FlexibleLabel] = []
     fileprivate var superView: UIView!
     fileprivate var timer = Timer()
     fileprivate var time = 0.0
@@ -50,7 +50,7 @@ class ExpandableBubbleLabel: UILabelFlexible {
             let theta = thetaStatus * Float(i+1)
             let x = self.center.x + radius * CGFloat(cos(theta))
             let y = self.center.y + radius * CGFloat(sin(theta))
-            let label = UILabelFlexible(text: "", fontSize: 35, center: CGPoint(x: x, y: y))
+            let label = FlexibleLabel(text: "", fontSize: 35, center: CGPoint(x: x, y: y))
             label.delegate = self
             childLabels.append(label)
             self.superView.addSubview(label)

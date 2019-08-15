@@ -17,40 +17,30 @@ extension UIImage {
     }
 }
 
-let imageCache = NSCache<AnyObject, AnyObject>()
-
-extension UIImageView {
-    var url: String {
-        return ""
+extension UIView {
+    func addShadow() {
+        self.layer.shadowOpacity = 0.6
+        self.layer.shadowColor = UIColor.black.cgColor
+        self.layer.shadowOffset = CGSize(width: 0, height: 2)
+        self.layer.shouldRasterize = true
+        self.layer.rasterizationScale = UIScreen.main.scale
     }
     
-    func loadImageAsyc(url urlString : String){
-        guard let url = URL(string: urlString) else { return }
-                
-        if let imageFromCache = imageCache.object(forKey: urlString as AnyObject) as? UIImage{
-            self.image = imageFromCache
-            return
-        }
-        
-        URLSession.shared.dataTask(with: url, completionHandler: { (data:Data?, res:URLResponse?, error:Error?) in
-            if error != nil {
-                print(error?.localizedDescription)
-                return
-            }
-            DispatchQueue.global().async {
-                let imageToCache = UIImage(data: data!)
-                if self.url != urlString {
-                    DispatchQueue.main.async {
-                        self.image = imageToCache
-                    }
-                }
-                imageCache.setObject(imageToCache!, forKey: urlString as AnyObject)
-            }
-        }).resume()
+    private func setupShadow() {
+        self.layer.cornerRadius = 16.0
+        self.layer.shadowOffset = CGSize(width: 0, height: 3)
+        self.layer.shadowRadius = 3
+        self.layer.shadowOpacity = 0.3
+        self.layer.shadowPath = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: .allCorners, cornerRadii: CGSize(width: 8, height: 8)).cgPath
+        self.layer.shouldRasterize = true
+        self.layer.rasterizationScale = UIScreen.main.scale
     }
-}
-
-extension UIView {
+    
+    func addRounded() {
+        self.layer.cornerRadius = 16.0
+        self.clipsToBounds = true
+    }
+    
     func rotate(to angle: CGFloat) {
         let rotateAnimation = CABasicAnimation(keyPath: "transform.rotation.z")
         rotateAnimation.toValue = CGFloat(angle)
@@ -58,6 +48,7 @@ extension UIView {
         rotateAnimation.isCumulative = true
         layer.add(rotateAnimation, forKey: "rotationAnimation")
     }
+    
     func pulse() {
         UIView.animate(withDuration: 1.0, animations: {
             let center = self.center
@@ -65,6 +56,7 @@ extension UIView {
             self.center = center
         })
     }
+    
     func bounce(completion: @escaping() -> Void) {
         var targetFrame = self.frame
         targetFrame.origin.y -= 5
@@ -77,27 +69,32 @@ extension UIView {
             completion()
         }
     }
-    func fadeOut(to alpha: CGFloat = 0.3) {
+    
+    func fadeOut(until alpha: CGFloat = 0.3) {
         UIView.animate(withDuration: 0.5, animations: {
             self.alpha = alpha
         })
     }
+    
     func fadeIn() {
         UIView.animate(withDuration: 1.0, animations: {
             self.alpha = 1
         })
     }
+    
     func changeHeight(by dHeight: Double) {
         let center = self.center
         self.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: self.frame.height + CGFloat(dHeight) < 0 ? 0 : self.frame.height + CGFloat(dHeight))
         self.center = center
     }
+    
     func changeWidth(by dWidth: Double) {
         print(self.frame.width)
         let center = self.center
         self.frame = CGRect(x: 0, y: 0, width: self.frame.width + CGFloat(dWidth) < 0 ? 0 : self.frame.width + CGFloat(dWidth), height: self.frame.height)
         self.center = center
     }
+    
     func moveTo(x: CGFloat, y: CGFloat) {
         self.center = CGPoint(x: self.center.x + x, y: self.center.y + y)
     }

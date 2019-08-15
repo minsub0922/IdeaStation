@@ -36,6 +36,8 @@ class SearchViewController: UIViewController {
     }
     
     private func getPixaPictures(subject: String) {
+        self.collectionView.isHidden = true
+        
         let params = [
             "key": API.pixabayKey,
             "q": subject
@@ -45,6 +47,7 @@ class SearchViewController: UIViewController {
             self.pictures = res.hits
             
             self.collectionView.performBatchUpdates({
+                self.collectionView.isHidden = false
                 self.collectionView.reloadSections(IndexSet(0...0))
             }, completion: nil)
         }
@@ -53,13 +56,14 @@ class SearchViewController: UIViewController {
 
 extension SearchViewController: ExpandableBubbleLabelDelegate {
     func updateChildArray(coreText: String) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            self.bubbleLabel.childArray = self.array.compactMap { $0+coreText }
-        }
+        getPixaPictures(subject: coreText)
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+//            self.bubbleLabel.childArray = self.array.compactMap { $0+coreText }
+//        }
     }
     
     func beganExpanded() {
-        self.collectionView.fadeOut(to: 0.0)
+        self.collectionView.fadeOut(until: 0.0)
     }
     
     func beganCollapsed() {
@@ -79,10 +83,26 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
         
         let picture = pictures[indexPath.row]
         cell.imageView.loadImageAsyc(url: picture.previewURL)
+        cell.imageView.addRounded()
         return cell
     }
 }
 
 class PixabayImageCell: UICollectionViewCell {
-    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var imageView: FasterImageView!
+    override var bounds: CGRect {
+        didSet {
+            self.setupShadow()
+        }
+    }
+    private func setupShadow() {
+        self.layer.cornerRadius = 16.0
+        self.layer.shadowOffset = CGSize(width: 0, height: 2)
+        self.layer.shadowRadius = 16.0
+        self.layer.shadowOpacity = 0.3
+        self.layer.shadowPath = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: .allCorners, cornerRadii: CGSize(width: 3, height: 2)).cgPath
+        self.layer.shouldRasterize = true
+        self.layer.rasterizationScale = UIScreen.main.scale
+        self.layer.masksToBounds = false
+    }
 }

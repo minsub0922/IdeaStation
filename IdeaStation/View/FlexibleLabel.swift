@@ -8,7 +8,7 @@
 
 import UIKit
 
-class UILabelFlexible: UILabel {
+class FlexibleLabel: UILabel {
     var delegate: ExpandableBubbleLabelChildDelegate?
     
     init(text: String, fontSize: CGFloat, center: CGPoint) {
@@ -23,6 +23,7 @@ class UILabelFlexible: UILabel {
         textColor = .black
         textAlignment = .center
         isUserInteractionEnabled = true
+        addShadow()
     }
     
     required init?(coder aDecoder: NSCoder) {

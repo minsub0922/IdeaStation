@@ -21,7 +21,7 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="EQu-bE-K1U">
                                 <rect key="frame" x="0.0" y="573" width="414" height="269"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="njJ-uv-ofd">
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="njJ-uv-ofd">
                                     <size key="itemSize" width="261" height="187"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -35,16 +35,17 @@
                                             <rect key="frame" x="0.0" y="0.0" width="261" height="187"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="orI-On-qBi">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="orI-On-qBi" customClass="FasterImageView" customModule="IdeaStation" customModuleProvider="target">
                                                     <rect key="frame" x="8" y="52" width="245" height="127"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </imageView>
                                             </subviews>
                                         </view>
                                         <constraints>
-                                            <constraint firstAttribute="bottomMargin" secondItem="orI-On-qBi" secondAttribute="bottom" id="7pK-QZ-bsW"/>
-                                            <constraint firstItem="orI-On-qBi" firstAttribute="leading" secondItem="Eky-gx-wck" secondAttribute="leadingMargin" id="NZs-rk-otQ"/>
-                                            <constraint firstAttribute="trailingMargin" secondItem="orI-On-qBi" secondAttribute="trailing" id="d7h-eG-hwv"/>
-                                            <constraint firstItem="orI-On-qBi" firstAttribute="top" secondItem="Eky-gx-wck" secondAttribute="topMargin" id="kIE-MI-LX5"/>
+                                            <constraint firstItem="orI-On-qBi" firstAttribute="leading" secondItem="Eky-gx-wck" secondAttribute="leadingMargin" id="3bX-WI-tB1"/>
+                                            <constraint firstAttribute="bottomMargin" secondItem="orI-On-qBi" secondAttribute="bottom" id="4w4-aa-Q0g"/>
+                                            <constraint firstItem="orI-On-qBi" firstAttribute="top" secondItem="Eky-gx-wck" secondAttribute="topMargin" id="aV7-25-xEi"/>
+                                            <constraint firstAttribute="trailingMargin" secondItem="orI-On-qBi" secondAttribute="trailing" id="fYI-MH-Eb4"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="imageView" destination="orI-On-qBi" id="I9B-hQ-Sis"/>
