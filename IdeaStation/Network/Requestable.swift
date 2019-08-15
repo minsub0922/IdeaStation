@@ -15,7 +15,6 @@ enum NetworkResult<T> {
     case networkFail
 }
 
-
 protocol Requestable {
     func get<T: Codable>(_ URL: String,
              params: Parameters?,

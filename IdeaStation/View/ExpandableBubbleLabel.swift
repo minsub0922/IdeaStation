@@ -17,13 +17,14 @@ class ExpandableBubbleLabel: UILabelFlexible {
             }
         }
     }
+    var childDelegate: ExpandableBubbleLabelChildDelegate?
+    
     private var childLabels: [UILabelFlexible] = []
     fileprivate var superView: UIView!
     fileprivate var timer = Timer()
     fileprivate var time = 0.0
     fileprivate var buttonState = ButtonState.collapse
     fileprivate let startTime = 0.0
-    var childDelegate: ExpandableBubbleLabelChildDelegate?
     fileprivate var endTime: Double {
         return 0.5 + 0.07 * Double(self.superView.subviews.count-1)
     };
@@ -31,9 +32,9 @@ class ExpandableBubbleLabel: UILabelFlexible {
     fileprivate let bounceTime = 0.5
     fileprivate let childCount = 8
     
-    init(superView: UIView) {
-        let center = CGPoint(x: superView.frame.size.width/2 , y: superView.frame.size.height * 0.4 )
-        super.init(text: "연관단어", fontSize: 35, center: center)
+    init(superView: UIView, text: String) {
+        let center = CGPoint(x: superView.frame.size.width/2, y: superView.frame.size.height*0.4)
+        super.init(text: text, fontSize: 35, center: center)
         self.textColor = .black
         self.changeHeight(by: 35)
         self.minimumScaleFactor = 0.6
@@ -42,8 +43,8 @@ class ExpandableBubbleLabel: UILabelFlexible {
         setupLabels()
     }
     
+    
     private func setupLabels() {
-        
         let thetaStatus = 2 * Float.pi / Float(childCount)
         for i in 0..<8 {
             let theta = thetaStatus * Float(i+1)
@@ -54,10 +55,6 @@ class ExpandableBubbleLabel: UILabelFlexible {
             childLabels.append(label)
             self.superView.addSubview(label)
         }
-    }
-    
-    func updateLabelsAll(array: [String]) {
-        self.childArray = array
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -87,7 +84,7 @@ extension ExpandableBubbleLabel: ExpandableBubbleLabelChildDelegate {
             self.changeHeight(by: -0.3)
         }
         
-        for i in 0..<superView.subviews.count - 1 {
+        for i in 0..<childLabels.count {
             repectiveUpperCase(index: i)
         }
     }
@@ -97,13 +94,13 @@ extension ExpandableBubbleLabel: ExpandableBubbleLabelChildDelegate {
         if time >= endTime/2 {
             self.changeHeight(by: 0.45)
         }
-        for i in 0..<superView.subviews.count - 1 {
+        for i in 0..<childLabels.count {
             respectiveLowerCase(index: i)
         }
     }
     
     private func repectiveUpperCase(index: Int) {
-        let item = superView.subviews[index]
+        let item = childLabels[index]
         let timeGap = 0.07 * Double(index)
         if time < changeTime + timeGap && time > timeGap {    // Get Bigger
             item.changeHeight(by: (time - timeGap) * 30)
@@ -116,8 +113,8 @@ extension ExpandableBubbleLabel: ExpandableBubbleLabelChildDelegate {
     }
     
     private func respectiveLowerCase(index: Int) {
-        let item = superView.subviews[index]
-        let timeGap = 0.06 * Double(superView.subviews.count - index)
+        let item = childLabels[index]
+        let timeGap = 0.06 * Double(childLabels.count - index)
         if time < endTime - timeGap && time > endTime - timeGap - changeTime * 0.6 {
             item.changeHeight(by: -(time+timeGap) * 6 )
         }else if time < 0 {

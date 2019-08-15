@@ -17,6 +17,39 @@ extension UIImage {
     }
 }
 
+extension UIImageView {
+    var url: String {
+        return ""
+    }
+    
+    func loadImageAsyc(url urlString : String){
+        guard let url = URL(string: urlString) else { return }
+        
+        let imageCache = NSCache<AnyObject, AnyObject>()
+        
+        if let imageFromCache = imageCache.object(forKey: urlString as AnyObject) as? UIImage{
+            self.image = imageFromCache
+            return
+        }
+        
+        URLSession.shared.dataTask(with: url, completionHandler: { (data:Data?, res:URLResponse?, error:Error?) in
+            if error != nil {
+                print(error?.localizedDescription)
+                return
+            }
+            DispatchQueue.global().async {
+                let imageToCache = UIImage(data: data!)
+                if self.url != urlString {
+                    DispatchQueue.main.async {
+                        self.image = imageToCache
+                    }
+                }
+                imageCache.setObject(imageToCache!, forKey: urlString as AnyObject)
+            }
+        }).resume()
+    }
+}
+
 extension UIView {
     func rotate(to angle: CGFloat) {
         let rotateAnimation = CABasicAnimation(keyPath: "transform.rotation.z")

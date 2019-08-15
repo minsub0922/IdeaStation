@@ -10,9 +10,5 @@ class CategoryViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-       
-        let array = ["gkgkgk", "hohoo", "hihihi", "1231245", "gkgkgk", "hohoo", "hihihi", "1231245"]
-        let view = ExpandableBubbleLabel( superView: self.view)
-        self.view.addSubview(view)
     }
 }

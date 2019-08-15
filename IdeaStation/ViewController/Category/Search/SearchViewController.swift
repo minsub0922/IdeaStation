@@ -10,26 +10,42 @@ import UIKit
 
 class SearchViewController: UIViewController {
     
+    @IBOutlet weak var collectionView: UICollectionView!
     var bubbleLabel: ExpandableBubbleLabel!
     var array = ["gkgkgk", "hohoo", "hihihi", "1231245", "gkgkgk", "hohoo", "hihihi", "1231245"]
+    var pictures: [Hit] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupExpandableBubbleLabel()
+    }
+    
+    private func setupExpandableBubbleLabel() {
+        bubbleLabel = ExpandableBubbleLabel(superView: self.view, text: "연관 단어")
+        bubbleLabel.childArray = array
+        bubbleLabel.childDelegate = self
+        self.view.addSubview(bubbleLabel)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        getPixaPictures()
+    }
+    
+    private func getPixaPictures() {
         let params = [
             "key": API.pixabayKey,
             "q": "flower"
         ]
         
         APISource.shared.getPicturesPixay(params: params) { res in
-            print(res)
+            self.pictures = res.hits
+            self.collectionView.reloadData {
+                
+            }
         }
-        
-        
-        bubbleLabel = ExpandableBubbleLabel(superView: self.view)
-        bubbleLabel.childArray = array
-        bubbleLabel.childDelegate = self
-        self.view.addSubview(bubbleLabel)
     }
 }
 
@@ -43,11 +59,21 @@ extension SearchViewController: ExpandableBubbleLabelChildDelegate {
 
 extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 9
+        return pictures.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PixaPictures.self, for: <#T##IndexPath#>)
+        guard let cell = collectionView.dequeueReusableCell(PixabayImageCell.self, for: indexPath) as? PixabayImageCell else {
+            return UICollectionViewCell()
+        }
+        
+        let picture = pictures[indexPath.row]
+        cell.imageView.loadImageAsyc(url: picture.previewURL)
+//        var url:NSURL? = NSURL(string: imageString)
+//        var data:NSData? = NSData(contentsOfURL : url!)
+//        var image = UIImage(data : data!)
+//        cell.imageView.image = image
+        return cell
     }
     
     

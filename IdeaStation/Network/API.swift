@@ -19,21 +19,6 @@ class API {
     }()
     
     static let getPictures = {
-        return pixabayBaseURL + ""
+        return pixabayBaseURL
     }
-    
-//
-//    static let token = {
-//        return baseURL + "/token"
-//    }()
-//
-//    //mykeywords/:token
-//    static let myKeywordsToken = { (token) in
-//        return myKeywords + "/" + token
-//    }
-//
-//    static let myFavoriteList = { (token) in
-//        return baseURL + "/worklist/" + token + "/default"
-//    }
-    
 }
