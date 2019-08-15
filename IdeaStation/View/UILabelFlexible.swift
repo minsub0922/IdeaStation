@@ -31,11 +31,11 @@ class UILabelFlexible: UILabel {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.bounce {
-            self.delegate?.childLabelTouchBegan(text: self.text ?? "")
+            self.delegate?.beganChildLabelTouch(text: self.text ?? "")
         }
     }
 }
 
 protocol ExpandableBubbleLabelChildDelegate {
-    func childLabelTouchBegan(text: String)
+    func beganChildLabelTouch(text: String)
 }

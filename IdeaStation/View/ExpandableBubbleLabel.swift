@@ -17,7 +17,7 @@ class ExpandableBubbleLabel: UILabelFlexible {
             }
         }
     }
-    var childDelegate: ExpandableBubbleLabelChildDelegate?
+    var expandableDelegate: ExpandableBubbleLabelDelegate?
     
     private var childLabels: [UILabelFlexible] = []
     fileprivate var superView: UIView!
@@ -76,6 +76,8 @@ extension ExpandableBubbleLabel: ExpandableBubbleLabelChildDelegate {
             selector: isCollapse ? #selector(timerUpcase) : #selector(timerDowncase),
             userInfo: nil, repeats: true)
         isCollapse ? self.fadeOut() : self.fadeIn()
+        isCollapse ? self.expandableDelegate?.beganExpanded() : self.expandableDelegate?.beganCollapsed()
+        
     }
     
     @objc private func timerUpcase() {
@@ -123,10 +125,11 @@ extension ExpandableBubbleLabel: ExpandableBubbleLabelChildDelegate {
         }
     }
     
-    func childLabelTouchBegan(text: String) {
+    func beganChildLabelTouch(text: String) {
         self.fadeIn()
         self.text = text
-        self.childDelegate?.childLabelTouchBegan(text: text)
+        self.expandableDelegate?.updateChildArray(coreText: text)
+        self.expandableDelegate?.beganCollapsed()
         
         timer = Timer.scheduledTimer(
             timeInterval: 0.01,
@@ -136,8 +139,10 @@ extension ExpandableBubbleLabel: ExpandableBubbleLabelChildDelegate {
     }
 }
 
-protocol SearchBubbleChildDelegate {
+protocol ExpandableBubbleLabelDelegate {
     func updateChildArray(coreText: String)
+    func beganExpanded()
+    func beganCollapsed()
 }
 
 extension ExpandableBubbleLabel {
@@ -146,6 +151,7 @@ extension ExpandableBubbleLabel {
              self.textColor = color
         }
     }
+    
     enum ButtonState {
         case collapse
         case expanded

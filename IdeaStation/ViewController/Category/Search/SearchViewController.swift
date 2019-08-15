@@ -12,48 +12,58 @@ class SearchViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     var bubbleLabel: ExpandableBubbleLabel!
-    var array = ["gkgkgk", "hohoo", "hihihi", "1231245", "gkgkgk", "hohoo", "hihihi", "1231245"]
+    var array = ["발톱", "똥", "강아지", "여우", "여자", "사료", "병원", "수의사"]
     var pictures: [Hit] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupExpandableBubbleLabel()
     }
     
     private func setupExpandableBubbleLabel() {
-        bubbleLabel = ExpandableBubbleLabel(superView: self.view, text: "연관 단어")
+        bubbleLabel = ExpandableBubbleLabel(superView: self.view, text: "고양이")
         bubbleLabel.childArray = array
-        bubbleLabel.childDelegate = self
+        bubbleLabel.expandableDelegate = self
         self.view.addSubview(bubbleLabel)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        getPixaPictures()
+        if let subject = bubbleLabel.text {
+            getPixaPictures(subject: subject)
+        }
     }
     
-    private func getPixaPictures() {
+    private func getPixaPictures(subject: String) {
         let params = [
             "key": API.pixabayKey,
-            "q": "flower"
+            "q": subject
         ]
         
         APISource.shared.getPicturesPixay(params: params) { res in
             self.pictures = res.hits
-            self.collectionView.reloadData {
-                
-            }
+            
+            self.collectionView.performBatchUpdates({
+                self.collectionView.reloadSections(IndexSet(0...0))
+            }, completion: nil)
         }
     }
 }
 
-extension SearchViewController: ExpandableBubbleLabelChildDelegate {
-    func childLabelTouchBegan(text: String) {
+extension SearchViewController: ExpandableBubbleLabelDelegate {
+    func updateChildArray(coreText: String) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            self.bubbleLabel.childArray = self.array.compactMap { $0+text }
+            self.bubbleLabel.childArray = self.array.compactMap { $0+coreText }
         }
+    }
+    
+    func beganExpanded() {
+        self.collectionView.fadeOut(to: 0.0)
+    }
+    
+    func beganCollapsed() {
+        self.collectionView.fadeIn()
     }
 }
 
@@ -69,14 +79,8 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
         
         let picture = pictures[indexPath.row]
         cell.imageView.loadImageAsyc(url: picture.previewURL)
-//        var url:NSURL? = NSURL(string: imageString)
-//        var data:NSData? = NSData(contentsOfURL : url!)
-//        var image = UIImage(data : data!)
-//        cell.imageView.image = image
         return cell
     }
-    
-    
 }
 
 class PixabayImageCell: UICollectionViewCell {

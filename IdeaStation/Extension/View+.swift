@@ -17,6 +17,8 @@ extension UIImage {
     }
 }
 
+let imageCache = NSCache<AnyObject, AnyObject>()
+
 extension UIImageView {
     var url: String {
         return ""
@@ -24,9 +26,7 @@ extension UIImageView {
     
     func loadImageAsyc(url urlString : String){
         guard let url = URL(string: urlString) else { return }
-        
-        let imageCache = NSCache<AnyObject, AnyObject>()
-        
+                
         if let imageFromCache = imageCache.object(forKey: urlString as AnyObject) as? UIImage{
             self.image = imageFromCache
             return
@@ -77,9 +77,9 @@ extension UIView {
             completion()
         }
     }
-    func fadeOut() {
+    func fadeOut(to alpha: CGFloat = 0.3) {
         UIView.animate(withDuration: 0.5, animations: {
-            self.alpha = 0.3
+            self.alpha = alpha
         })
     }
     func fadeIn() {
