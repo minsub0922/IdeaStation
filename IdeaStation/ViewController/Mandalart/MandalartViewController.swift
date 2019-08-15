@@ -128,7 +128,7 @@ class MandalartViewController: UIViewController, UICollectionViewDataSource, UIC
     // MARK:- mandalartCollectionView 기본 설정
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        print("asdfasdf")
         // Do any additional setup after loading the view.
         
         // MARK: textfield delegate 설정
@@ -137,14 +137,15 @@ class MandalartViewController: UIViewController, UICollectionViewDataSource, UIC
         // MARK: mandalartCollectionView 크기 조절
         //self.mandalartCollectionView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
         
+        
         // MARK: mandalart컬렉션 뷰에 flowLayout 적용
         let mandalartFlowLayout: UICollectionViewFlowLayout
         mandalartFlowLayout = UICollectionViewFlowLayout()
         mandalartFlowLayout.sectionInset = UIEdgeInsets.zero
         mandalartFlowLayout.minimumInteritemSpacing = 10
         mandalartFlowLayout.minimumLineSpacing = 10
-        mandalartFlowLayout.estimatedItemSize = CGSize(width: UIScreen.main.bounds.width/3-10, height: UIScreen.main.bounds.height/3-10)
-        print(view.safeAreaInsets.top - view.safeAreaInsets.bottom)
+        mandalartFlowLayout.estimatedItemSize = CGSize(width: UIScreen.main.bounds.width/3-10, height: 818/3-10)
+        // height에서 818은 아이폰 XR기준이므로, 방법 강구.
         
         self.mandalartCollectionView.collectionViewLayout = mandalartFlowLayout
         
