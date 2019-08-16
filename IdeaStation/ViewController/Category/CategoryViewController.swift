@@ -49,10 +49,16 @@ class CategoryViewController: UIViewController {
         label.onCenter()
         label.addShadowOnLabel()
         self.view.addSubview(label)
+        label.isUserInteractionEnabled = true
+        label.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(labelTouchBegan)))
     }
     
     fileprivate func setLabelText(i: Int) {
         label.text = "\(categories[i])하러 가기"
+    }
+    
+    @objc func labelTouchBegan() {
+        performSegue(withIdentifier: "search", sender: nil)
     }
 }
 
