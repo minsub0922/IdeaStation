@@ -15,7 +15,7 @@ enum NetworkResult<T> {
     case networkFail
 }
 
-protocol Requestable {
+protocol APISourceProtocol {
     func get<T: Codable>(_ URL: String,
              params: Parameters?,
              completion: @escaping (NetworkResult<(Int, T)>) -> Void)
@@ -25,8 +25,7 @@ protocol Requestable {
               completion: @escaping (NetworkResult<(Int, T)>) -> Void)
 }
 
-extension Requestable {
-    
+extension APISourceProtocol {
     func get<T: Codable>(_ URL: String,
              params: Parameters? = nil,
              completion: @escaping (NetworkResult<(Int, T)>) -> Void) {

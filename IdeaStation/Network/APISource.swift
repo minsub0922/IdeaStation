@@ -9,7 +9,7 @@
 import Foundation
 import Alamofire
 
-struct APISource: Requestable {
+struct APISource: APISourceProtocol {
     static let shared = APISource()
     
     func getPicturesPixay(params: Parameters, completion : @escaping (PixaPictures) -> Void) {

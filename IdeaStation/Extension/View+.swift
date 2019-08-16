@@ -10,34 +10,51 @@ import Foundation
 import UIKit
 
 extension UIImage {
-    func resized(to size: CGSize) -> UIImage {
-        return UIGraphicsImageRenderer(size: size).image { _ in
-            draw(in: CGRect(origin: .zero, size: size))
+    enum ContentMode {
+        case contentFill
+        case contentAspectFill
+        case contentAspectFit
+    }
+    
+    func resize(withSize size: CGSize, contentMode: ContentMode = .contentAspectFill) -> UIImage? {
+        let aspectWidth = size.width / self.size.width;
+        let aspectHeight = size.height / self.size.height;
+        
+        switch contentMode {
+        case .contentFill:
+            return resize(withSize: size)
+        case .contentAspectFit:
+            let aspectRatio = min(aspectWidth, aspectHeight)
+            return resize(withSize: CGSize(width: self.size.width * aspectRatio, height: self.size.height * aspectRatio))
+        case .contentAspectFill:
+            let aspectRatio = max(aspectWidth, aspectHeight)
+            return resize(withSize: CGSize(width: self.size.width * aspectRatio, height: self.size.height * aspectRatio))
         }
+    }
+    
+    private func resize(withSize size: CGSize) -> UIImage? {
+        UIGraphicsBeginImageContextWithOptions(size, false, 1)
+        defer { UIGraphicsEndImageContext() }
+        draw(in: CGRect(x: 0.0, y: 0.0, width: size.width, height: size.height))
+        return UIGraphicsGetImageFromCurrentImageContext()
     }
 }
 
 extension UIView {
-    func addShadow() {
+    func onCenter() {
+        self.center = CGPoint(x: frame.origin.x, y: frame.origin.y)
+    }
+    
+    func addShadowOnLabel(shadowColor: CGColor = UIColor.black.cgColor) {
         self.layer.shadowOpacity = 0.6
-        self.layer.shadowColor = UIColor.black.cgColor
+        self.layer.shadowColor = shadowColor
         self.layer.shadowOffset = CGSize(width: 0, height: 2)
         self.layer.shouldRasterize = true
         self.layer.rasterizationScale = UIScreen.main.scale
     }
     
-    private func setupShadow() {
-        self.layer.cornerRadius = 16.0
-        self.layer.shadowOffset = CGSize(width: 0, height: 3)
-        self.layer.shadowRadius = 3
-        self.layer.shadowOpacity = 0.3
-        self.layer.shadowPath = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: .allCorners, cornerRadii: CGSize(width: 8, height: 8)).cgPath
-        self.layer.shouldRasterize = true
-        self.layer.rasterizationScale = UIScreen.main.scale
-    }
-    
-    func addRounded() {
-        self.layer.cornerRadius = 16.0
+    func addRounded(radius: CGFloat = 16.0) {
+        self.layer.cornerRadius = radius
         self.clipsToBounds = true
     }
     
@@ -70,15 +87,26 @@ extension UIView {
         }
     }
     
-    func fadeOut(until alpha: CGFloat = 0.3) {
-        UIView.animate(withDuration: 0.5, animations: {
+    func fadeOut(until alpha: CGFloat = 0.3, during: Double = 0.5) {
+        UIView.animate(withDuration: during, animations: {
             self.alpha = alpha
         })
     }
     
-    func fadeIn() {
-        UIView.animate(withDuration: 1.0, animations: {
+    func fadeIn(during: Double = 1) {
+        UIView.animate(withDuration: during, animations: {
             self.alpha = 1
+        })
+    }
+    
+    func blink(onNext: (() -> Void)? = nil ) {
+        UIView.animate(withDuration: 0.2, animations: {
+            self.alpha = 0.3
+        }, completion: { res in
+            onNext == nil ? nil : onNext!()
+            UIView.animate(withDuration: 0.15, animations: {
+                self.alpha = 1
+            })
         })
     }
     

@@ -6,9 +6,101 @@
 //  Copyright © 2019 최민섭. All rights reserved.
 //
 import UIKit
-class CategoryViewController: UIViewController {
+import paper_onboarding
 
+class CategoryViewController: UIViewController {
+    let onboarding = PaperOnboarding()
+    let label = UILabel()
+    let categories = ["탐색", "발상", "노트"]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setupPages()
+        addSubview()
+    }
+    
+    private func setupPages() {
+        onboarding.delegate = self
+        onboarding.dataSource = self
+        onboarding.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(onboarding)
+        
+        // add constraints
+        for attribute: NSLayoutConstraint.Attribute in [.left, .right, .top, .bottom] {
+            let constraint = NSLayoutConstraint(item: onboarding,
+                                                attribute: attribute,
+                                                relatedBy: .equal,
+                                                toItem: view,
+                                                attribute: attribute,
+                                                multiplier: 1,
+                                                constant: 0)
+            view.addConstraint(constraint)
+        }
+    }
+    
+    private func addSubview() {
+        label.frame = CGRect(x: view.bounds.width/2, y: view.bounds.height*0.8, width: 0, height: 0)
+        label.font = UIFont(name: "ArialRoundedMTBold", size: 25)
+        setLabelText(i: 0)
+        label.sizeToFit()
+        label.textAlignment = .center
+        label.textColor = .white
+        label.onCenter()
+        label.addShadowOnLabel()
+        self.view.addSubview(label)
+    }
+    
+    fileprivate func setLabelText(i: Int) {
+        label.text = "\(categories[i])하러 가기"
+    }
+}
+
+extension CategoryViewController: PaperOnboardingDelegate, PaperOnboardingDataSource {
+    func onboardingItem(at index: Int) -> OnboardingItemInfo {
+        return [
+            OnboardingItemInfo(informationImage: UIImage(named: "ic-search")!,
+                               title: "Searching Engine",
+                               description: "you can find a lot of words related to your subject",
+                               pageIcon: UIImage(named: "ic-search-mini")!,
+                               color: UIColor(named: "Color1")!,
+                               titleColor: UIColor.white,
+                               descriptionColor: UIColor.white,
+                               titleFont: UIFont.init(name: "ArialRoundedMTBold", size: 30)!,
+                               descriptionFont: UIFont.init(name: "ArialRoundedMTBold", size: 16)!),
+            
+            OnboardingItemInfo(informationImage: UIImage(named: "ic-puzzle")!,
+                               title: "Upgrade, Extend Idea!",
+                               description: "The idea tool 'Mandarart' is the best choice for upgrading and extending your idea",
+                               pageIcon: UIImage(named: "ic-puzzle-mini")!,
+                               color: UIColor(named: "Color2")!,
+                               titleColor: UIColor.white,
+                               descriptionColor: UIColor.white,
+                               titleFont: UIFont.init(name: "ArialRoundedMTBold", size: 30)!,
+                               descriptionFont: UIFont.init(name: "ArialRoundedMTBold", size: 16)!),
+            
+            OnboardingItemInfo(informationImage: UIImage(named: "ic-note")!,
+                               title: "Idea Note",
+                               description: "You can make Idea Note that helps you remind your idea",
+                               pageIcon: UIImage(named: "ic-note-mini")!,
+                               color: UIColor(named: "Color3")!,
+                               titleColor: UIColor.white,
+                               descriptionColor: UIColor.white,
+                               titleFont: UIFont.init(name: "ArialRoundedMTBold", size: 30)!,
+                               descriptionFont: UIFont.init(name: "ArialRoundedMTBold", size: 16)!)
+            ][index]
+    }
+    
+    func onboardingItemsCount() -> Int {
+        return 3
+    }
+    
+    func onboardingWillTransitonToIndex(_ i: Int) {
+        label.blink() {
+            let center = self.label.center
+            self.setLabelText(i: i)
+            self.label.sizeToFit()
+            self.label.center = center
+        }
     }
 }

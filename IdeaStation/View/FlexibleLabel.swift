@@ -23,7 +23,7 @@ class FlexibleLabel: UILabel {
         textColor = .black
         textAlignment = .center
         isUserInteractionEnabled = true
-        addShadow()
+        addShadowOnLabel()
     }
     
     required init?(coder aDecoder: NSCoder) {
