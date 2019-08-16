@@ -12,7 +12,7 @@ class NewMandalartViewController: UIViewController, UICollectionViewDataSource, 
     let cellIdentifier: String = "newMandalartCell"
     var newMandalartItems: [MandalartItem] = []
     
-    var moveToThisAreaNum: Int = 5
+    //var moveToThisAreaNum: Int = 5
     @IBOutlet weak var newMandalartCollectionView: UICollectionView!
     @IBAction func tapInvisibleButton(_ sender: UIButton) {
         print("taptap")
@@ -197,6 +197,7 @@ class NewMandalartViewController: UIViewController, UICollectionViewDataSource, 
         guard let button: UIButton = sender as? UIButton else{
             return
         }
+        
         let newMandalartItem: MandalartItem = self.newMandalartItems[button.tag]
         
         nextViewController.textToSet1 = newMandalartItem.mandalartText1
