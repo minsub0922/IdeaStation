@@ -11,12 +11,15 @@ import UIKit
 class NewMandalartViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UITextViewDelegate {
     let cellIdentifier: String = "newMandalartCell"
     var newMandalartItems: [MandalartItem] = []
-    //var moveToThisArea: Int = 5
+    
+    var moveToThisAreaNum: Int = 5
     @IBOutlet weak var newMandalartCollectionView: UICollectionView!
     @IBAction func tapInvisibleButton(_ sender: UIButton) {
         print("taptap")
         //self.collectionView(newMandalartCollectionView, didSelectItemAt: [0, sender.tag])
     }
+    
+    
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 9
@@ -27,15 +30,39 @@ class NewMandalartViewController: UIViewController, UICollectionViewDataSource, 
         
         let newMandalartItem: MandalartItem = self.newMandalartItems[indexPath.item]
         
-        cell.textView1.text = newMandalartItem.mandalartText1
-        cell.textView2.text = newMandalartItem.mandalartText2
-        cell.textView3.text = newMandalartItem.mandalartText3
-        cell.textView4.text = newMandalartItem.mandalartText4
-        cell.textView5.text = newMandalartItem.mandalartText5
-        cell.textView6.text = newMandalartItem.mandalartText6
-        cell.textView7.text = newMandalartItem.mandalartText7
-        cell.textView8.text = newMandalartItem.mandalartText8
-        cell.textView9.text = newMandalartItem.mandalartText9
+        var textViews: [UITextView] = []
+        var newMandalartTextsFromNewMandalartItem: [String] = []
+        textViews.append(cell.textView1)
+        textViews.append(cell.textView2)
+        textViews.append(cell.textView3)
+        textViews.append(cell.textView4)
+        textViews.append(cell.textView5)
+        textViews.append(cell.textView6)
+        textViews.append(cell.textView7)
+        textViews.append(cell.textView8)
+        textViews.append(cell.textView9)
+        newMandalartTextsFromNewMandalartItem.append(newMandalartItem.mandalartText1)
+        newMandalartTextsFromNewMandalartItem.append(newMandalartItem.mandalartText2)
+        newMandalartTextsFromNewMandalartItem.append(newMandalartItem.mandalartText3)
+        newMandalartTextsFromNewMandalartItem.append(newMandalartItem.mandalartText4)
+        newMandalartTextsFromNewMandalartItem.append(newMandalartItem.mandalartText5)
+        newMandalartTextsFromNewMandalartItem.append(newMandalartItem.mandalartText6)
+        newMandalartTextsFromNewMandalartItem.append(newMandalartItem.mandalartText7)
+        newMandalartTextsFromNewMandalartItem.append(newMandalartItem.mandalartText8)
+        newMandalartTextsFromNewMandalartItem.append(newMandalartItem.mandalartText9)
+        
+        for i in 0...8 {
+            textViews[i].text = newMandalartTextsFromNewMandalartItem[i]
+        }
+//        cell.textView1.text = newMandalartItem.mandalartText1
+//        cell.textView2.text = newMandalartItem.mandalartText2
+//        cell.textView3.text = newMandalartItem.mandalartText3
+//        cell.textView4.text = newMandalartItem.mandalartText4
+//        cell.textView5.text = newMandalartItem.mandalartText5
+//        cell.textView6.text = newMandalartItem.mandalartText6
+//        cell.textView7.text = newMandalartItem.mandalartText7
+//        cell.textView8.text = newMandalartItem.mandalartText8
+//        cell.textView9.text = newMandalartItem.mandalartText9
         cell.button1.tag = indexPath.item
         
         let xStart: Int = 8
@@ -49,6 +76,18 @@ class NewMandalartViewController: UIViewController, UICollectionViewDataSource, 
         
         let oneTextViewWidth: Int = (xWidth - xSpace*25 - xStart)/9
         let oneTextViewHeight: Int = (yWidth - ySpace*25 - yStart)/9
+        
+        // MARK:- TODO
+        /*
+        for i in 0...8 {
+            textViews[i].frame = CGRect(
+                x : xStart + xSpace + (oneTextViewWidth + xSpace) * (i % 3),
+                y : yStart + ySpace + (oneTextViewWidth + ySpace) * (i / 3),
+                width : oneTextViewWidth,
+                height : oneTextViewHeight
+            )
+        }
+         */
         
         cell.textView1.frame = CGRect(
             x: xStart + xSpace,
@@ -107,12 +146,12 @@ class NewMandalartViewController: UIViewController, UICollectionViewDataSource, 
         
         return cell
     }
-    /*
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("indexPath.item : \(indexPath.item)")
         //self.moveToThisArea = indexPath.row
     }
-     */
+     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.

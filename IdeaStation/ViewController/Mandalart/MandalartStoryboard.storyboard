@@ -244,41 +244,70 @@
                                 <rect key="frame" x="20" y="207" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="touchUpLeftUpButton:" destination="6Cl-Di-ZSb" eventType="touchUpInside" id="ojg-IP-2ZB"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N00-4A-JFy">
                                 <rect key="frame" x="184" y="207" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="touchUpUpButton:" destination="6Cl-Di-ZSb" eventType="touchUpInside" id="jkv-Kp-dyS"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qmI-qN-sL6">
                                 <rect key="frame" x="348" y="207" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="touchUpRightUpButton:" destination="6Cl-Di-ZSb" eventType="touchUpInside" id="gbs-MW-MZO"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rdr-eK-71M">
                                 <rect key="frame" x="20" y="433" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="touchUpLeftButton:" destination="6Cl-Di-ZSb" eventType="touchUpInside" id="Fhy-Ig-rgH"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zra-Vj-o1G">
                                 <rect key="frame" x="348" y="433" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="touchUpRightButton:" destination="6Cl-Di-ZSb" eventType="touchUpInside" id="xfg-fN-tZt"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yeb-9P-GbO">
                                 <rect key="frame" x="20" y="667" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="touchUpLeftDownButton:" destination="6Cl-Di-ZSb" eventType="touchUpInside" id="sh6-xZ-5Na"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xbl-kf-Utb">
                                 <rect key="frame" x="184" y="667" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="touchUpDownButton:" destination="6Cl-Di-ZSb" eventType="touchUpInside" id="ewA-ue-esQ"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l3Z-a5-P1C">
                                 <rect key="frame" x="348" y="667" width="46" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="touchUpRightDownButton:" destination="6Cl-Di-ZSb" eventType="touchUpInside" id="bhe-aR-UaC"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jri-1Q-qkL">
+                                <rect key="frame" x="181" y="109" width="52" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="돌아가기"/>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -298,6 +327,7 @@
                         <outlet property="leftButton" destination="Rdr-eK-71M" id="MLi-5A-bzu"/>
                         <outlet property="leftDownButton" destination="yeb-9P-GbO" id="Jii-91-lCD"/>
                         <outlet property="leftUpButton" destination="wGr-wn-CiT" id="U9d-EW-Z5m"/>
+                        <outlet property="returnToBackButton" destination="jri-1Q-qkL" id="ofY-KU-Fxp"/>
                         <outlet property="rightButton" destination="zra-Vj-o1G" id="oqK-bM-FEm"/>
                         <outlet property="rightDownButton" destination="l3Z-a5-P1C" id="aa2-uo-0Fn"/>
                         <outlet property="rightUpButton" destination="qmI-qN-sL6" id="xLl-PT-o2m"/>

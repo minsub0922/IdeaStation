@@ -21,7 +21,7 @@ class NewMandalartCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var button1: UIButton!
     
     @IBAction func touchUpButton(_ sender: UIButton) {
-        print("touchupbutton")
+        print("touchup button pressed. Ready to jump!")
     }
     
 //    @IBOutlet weak var textLabel1: UILabel!

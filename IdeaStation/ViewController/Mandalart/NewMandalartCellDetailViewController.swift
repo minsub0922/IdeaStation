@@ -28,6 +28,8 @@ class NewMandalartCellDetailViewController: UIViewController {
     @IBOutlet weak var downButton: UIButton!
     @IBOutlet weak var rightDownButton: UIButton!
     
+    @IBOutlet weak var returnToBackButton: UIButton!
+    
     @objc func popBack() {
         navigationController?.popViewController(animated: true)
     }
@@ -38,6 +40,34 @@ class NewMandalartCellDetailViewController: UIViewController {
         //tempBut.tag = 3
         //navigationController?.topViewController?.prepare(for: AnyClass, sender: tempBut)
     }
+    
+    @IBAction func touchUpLeftUpButton(_ sender: UIButton) {
+        self.popBack()
+        //presentingViewController.
+    }
+    @IBAction func touchUpUpButton(_ sender: UIButton) {
+        
+    }
+    @IBAction func touchUpRightUpButton(_ sender: UIButton) {
+        
+    }
+    @IBAction func touchUpLeftButton(_ sender: UIButton) {
+        
+    }
+    @IBAction func touchUpRightButton(_ sender: UIButton) {
+        
+    }
+    @IBAction func touchUpLeftDownButton(_ sender: UIButton) {
+        
+    }
+    @IBAction func touchUpDownButton(_ sender: UIButton) {
+        
+    }
+    @IBAction func touchUpRightDownButton(_ sender: UIButton) {
+        
+    }
+    
+    
     public var currentArea: Int = 5 // 1부터 9까지 값을 가짐. button tag + 1
 
     var textToSet1: String?
@@ -52,7 +82,7 @@ class NewMandalartCellDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        print(currentArea)
+//        print(navigationController?.viewControllers.count ?? 0)
         self.detailTextView1.text = textToSet1
         self.detailTextView2.text = textToSet2
         self.detailTextView3.text = textToSet3
@@ -86,12 +116,12 @@ class NewMandalartCellDetailViewController: UIViewController {
             }
         }
         
-        /*
+        
         for i in 0...7 {
-            buttons[i].addTarget(self, action: #selector(popBack), for: .touchUpInside)
-            
+            //buttons[i].addTarget(self, action: #selector(popBack), for: .touchUpInside)
         }
-         */
+        self.returnToBackButton.addTarget(self, action: #selector(popBack), for: .touchUpInside)
+        
         
         /*
          currentArea -> buttons[i]
