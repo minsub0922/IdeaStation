@@ -22,6 +22,7 @@
                     </view>
                     <connections>
                         <segue destination="SZ4-20-LSB" kind="show" identifier="search" id="h0D-fv-HhH"/>
+                        <segue destination="4IQ-nn-jMq" kind="show" identifier="madalart" id="LA5-Rc-zmz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -34,6 +35,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PdP-9I-S23" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1272" y="-210"/>
+        </scene>
+        <!--MandalartStoryboard-->
+        <scene sceneID="WhO-Bw-5A1">
+            <objects>
+                <viewControllerPlaceholder storyboardName="MandalartStoryboard" id="4IQ-nn-jMq" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5k7-kC-eng" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1297" y="-72"/>
         </scene>
     </scenes>
 </document>

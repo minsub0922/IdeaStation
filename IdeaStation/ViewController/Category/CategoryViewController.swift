@@ -12,6 +12,7 @@ class CategoryViewController: UIViewController {
     let onboarding = PaperOnboarding()
     let label = UILabel()
     let categories = ["탐색", "발상", "노트"]
+    var state: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,7 +59,14 @@ class CategoryViewController: UIViewController {
     }
     
     @objc func labelTouchBegan() {
-        performSegue(withIdentifier: "search", sender: nil)
+        switch state {
+        case 0:
+            performSegue(withIdentifier: "search", sender: nil)
+        case 1:
+            performSegue(withIdentifier: "madalart", sender: nil)
+        default:
+            break
+        }
     }
 }
 
@@ -107,6 +115,7 @@ extension CategoryViewController: PaperOnboardingDelegate, PaperOnboardingDataSo
             self.setLabelText(i: i)
             self.label.sizeToFit()
             self.label.center = center
+            self.state = i
         }
     }
 }
