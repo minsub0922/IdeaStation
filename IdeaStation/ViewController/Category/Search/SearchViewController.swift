@@ -18,11 +18,13 @@ class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupExpandableBubbleLabel()
+        ExitButtonForModal(on: self)
     }
+    
     
     private func setupExpandableBubbleLabel() {
         bubbleLabel = ExpandableBubbleLabel(superView: self.view, text: "고양이")
-        bubbleLabel.childArray = array
+        //bubbleLabel.childArray = array
         bubbleLabel.expandableDelegate = self
         self.view.addSubview(bubbleLabel)
     }
@@ -32,6 +34,7 @@ class SearchViewController: UIViewController {
         
         if let subject = bubbleLabel.text {
             getPixaPictures(subject: subject)
+            getRandomTexts(subject: subject)
         }
     }
     
@@ -52,13 +55,13 @@ class SearchViewController: UIViewController {
         }
     }
     
-    private func getRandomTexts() {
+    private func getRandomTexts(subject: String) {
         let param = [
-            "word": "고양이"
+            "word": subject
         ]
         
         APISource.shared.getRandomText(params: param) { res in
-            
+            self.bubbleLabel.childArray = res[0...8].dropLast()
         }
     }
 }
@@ -66,9 +69,7 @@ class SearchViewController: UIViewController {
 extension SearchViewController: ExpandableBubbleLabelDelegate {
     func updateChildArray(coreText: String) {
         getPixaPictures(subject: coreText)
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-//            self.bubbleLabel.childArray = self.array.compactMap { $0+coreText }
-//        }
+        getRandomTexts(subject: coreText)
     }
     
     func beganExpanded() {

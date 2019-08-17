@@ -33,6 +33,7 @@
 		AFCD53322307F31900A1D487 /* InterestStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AFCD532D2307F31900A1D487 /* InterestStoryboard.storyboard */; };
 		AFCD53332307F31900A1D487 /* DidSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCD532E2307F31900A1D487 /* DidSelectViewController.swift */; };
 		AFCD53342307F31900A1D487 /* InterestItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCD532F2307F31900A1D487 /* InterestItem.swift */; };
+		AFCD53362307FDCD00A1D487 /* ExitButtonForModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCD53352307FDCD00A1D487 /* ExitButtonForModal.swift */; };
 		AFF64DB72303F68E003F3E3A /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF64DB62303F68E003F3E3A /* SearchViewController.swift */; };
 		AFF64DB92304037D003F3E3A /* APISourceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF64DB82304037D003F3E3A /* APISourceProtocol.swift */; };
 		AFF64DBD2304058E003F3E3A /* APISource.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF64DBC2304058E003F3E3A /* APISource.swift */; };
@@ -98,6 +99,7 @@
 		AFCD532D2307F31900A1D487 /* InterestStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = InterestStoryboard.storyboard; sourceTree = "<group>"; };
 		AFCD532E2307F31900A1D487 /* DidSelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DidSelectViewController.swift; sourceTree = "<group>"; };
 		AFCD532F2307F31900A1D487 /* InterestItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InterestItem.swift; sourceTree = "<group>"; };
+		AFCD53352307FDCD00A1D487 /* ExitButtonForModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExitButtonForModal.swift; sourceTree = "<group>"; };
 		AFF64DB62303F68E003F3E3A /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		AFF64DB82304037D003F3E3A /* APISourceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APISourceProtocol.swift; sourceTree = "<group>"; };
 		AFF64DBC2304058E003F3E3A /* APISource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APISource.swift; sourceTree = "<group>"; };
@@ -234,6 +236,7 @@
 				AF07B3582302629B00FAE1C8 /* ExpandableBubbleLabel.swift */,
 				AF07B35A2302771300FAE1C8 /* FlexibleLabel.swift */,
 				AFF64DC723051F0F003F3E3A /* FasterImageView.swift */,
+				AFCD53352307FDCD00A1D487 /* ExitButtonForModal.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -575,6 +578,7 @@
 				AFCD53292307F2F100A1D487 /* NewMandalartCellDetailViewController.swift in Sources */,
 				AFCD53312307F31900A1D487 /* InterestViewController.swift in Sources */,
 				AFF64DB72303F68E003F3E3A /* SearchViewController.swift in Sources */,
+				AFCD53362307FDCD00A1D487 /* ExitButtonForModal.swift in Sources */,
 				AFF64DB92304037D003F3E3A /* APISourceProtocol.swift in Sources */,
 				AFF64DC223040EB6003F3E3A /* PixaPictures.swift in Sources */,
 				AFCD53342307F31900A1D487 /* InterestItem.swift in Sources */,

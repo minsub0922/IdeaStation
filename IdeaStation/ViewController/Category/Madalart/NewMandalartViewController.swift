@@ -180,7 +180,17 @@ class NewMandalartViewController: UIViewController, UICollectionViewDataSource, 
             print(error.localizedDescription)
         }
         
+        ExitButtonForModal(on: self)
         self.newMandalartCollectionView.reloadData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.isHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        navigationController?.navigationBar.isHidden = false
     }
     
     // MARK: - Navigation
