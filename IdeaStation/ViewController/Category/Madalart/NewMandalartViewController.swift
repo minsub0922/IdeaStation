@@ -53,6 +53,10 @@ class NewMandalartViewController: UIViewController, UICollectionViewDataSource, 
         
         for i in 0...8 {
             textViews[i].text = newMandalartTextsFromNewMandalartItem[i]
+            textViews[i].addShadowOnLabel()
+            textViews[i].addRounded()
+            textViews[i].textAlignment = .center
+            textViews[i].font = UIFont(name: "System - Sytem", size: 10)
         }
 //        cell.textView1.text = newMandalartItem.mandalartText1
 //        cell.textView2.text = newMandalartItem.mandalartText2
@@ -66,13 +70,13 @@ class NewMandalartViewController: UIViewController, UICollectionViewDataSource, 
         cell.button1.tag = indexPath.item
         
         let xStart: Int = 8
-        let yStart: Int = 8
+        let yStart: Int = 6
         
         let xSpace: Int = 4
         let ySpace: Int = 5
         
         let xWidth: Int = 414
-        let yWidth: Int = 800
+        let yWidth: Int = 800 - 20
         
         let oneTextViewWidth: Int = (xWidth - xSpace*25 - xStart)/9
         let oneTextViewHeight: Int = (yWidth - ySpace*25 - yStart)/9
@@ -143,7 +147,8 @@ class NewMandalartViewController: UIViewController, UICollectionViewDataSource, 
             width: oneTextViewWidth,
             height: oneTextViewHeight
         )
-        
+        cell.addShadowOnLabel()
+        cell.addRounded()
         return cell
     }
     
@@ -162,7 +167,7 @@ class NewMandalartViewController: UIViewController, UICollectionViewDataSource, 
         newMandalartFlowLayout.sectionInset = UIEdgeInsets.zero
         newMandalartFlowLayout.minimumInteritemSpacing = 5
         newMandalartFlowLayout.minimumLineSpacing = 5
-        newMandalartFlowLayout.estimatedItemSize = CGSize(width: UIScreen.main.bounds.width/3-5, height: 750/3)
+        newMandalartFlowLayout.estimatedItemSize = CGSize(width: UIScreen.main.bounds.width/3-5, height: 750/3 - 5)
         // height에서 818은 아이폰 XR기준이므로, 방법 강구.
         
         self.newMandalartCollectionView.collectionViewLayout = newMandalartFlowLayout

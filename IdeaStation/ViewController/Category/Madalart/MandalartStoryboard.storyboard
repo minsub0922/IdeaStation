@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -19,7 +20,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="eMh-zj-3Wi">
-                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <rect key="frame" x="0.0" y="158" width="414" height="704"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Wot-JA-7mM">
                                     <size key="itemSize" width="273" height="425"/>
@@ -119,7 +120,7 @@
                                                 </button>
                                             </subviews>
                                         </view>
-                                        <color key="backgroundColor" red="1" green="0.72845677350000004" blue="0.1825977654" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="backgroundColor" name="Color2"/>
                                         <gestureRecognizers/>
                                         <connections>
                                             <outlet property="button1" destination="tVD-lg-Kju" id="lo6-cG-ywv"/>
@@ -145,7 +146,7 @@
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="h2y-ge-d8c" firstAttribute="bottom" secondItem="eMh-zj-3Wi" secondAttribute="bottom" id="Nqh-JF-fvd"/>
-                            <constraint firstItem="eMh-zj-3Wi" firstAttribute="top" secondItem="h2y-ge-d8c" secondAttribute="top" id="fNz-iP-gTa"/>
+                            <constraint firstItem="eMh-zj-3Wi" firstAttribute="top" secondItem="h2y-ge-d8c" secondAttribute="top" constant="70" id="fNz-iP-gTa"/>
                             <constraint firstItem="h2y-ge-d8c" firstAttribute="trailing" secondItem="eMh-zj-3Wi" secondAttribute="trailing" id="fic-iD-Aty"/>
                             <constraint firstItem="eMh-zj-3Wi" firstAttribute="leading" secondItem="h2y-ge-d8c" secondAttribute="leading" id="vmv-Da-bv2"/>
                         </constraints>
@@ -638,4 +639,9 @@
             <point key="canvasLocation" x="739" y="-249"/>
         </scene>
     </scenes>
+    <resources>
+        <namedColor name="Color2">
+            <color red="0.4050000011920929" green="0.74599999189376831" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>

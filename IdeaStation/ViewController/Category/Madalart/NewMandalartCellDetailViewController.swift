@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import QuartzCore
+
 
 class NewMandalartCellDetailViewController: UIViewController {
     @IBOutlet weak var detailTextView1: UITextView!
@@ -83,6 +85,7 @@ class NewMandalartCellDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 //        print(navigationController?.viewControllers.count ?? 0)
+        
         self.detailTextView1.text = textToSet1
         self.detailTextView2.text = textToSet2
         self.detailTextView3.text = textToSet3
@@ -92,6 +95,23 @@ class NewMandalartCellDetailViewController: UIViewController {
         self.detailTextView7.text = textToSet7
         self.detailTextView8.text = textToSet8
         self.detailTextView9.text = textToSet9
+        
+        var detailTextViews: [UITextView] = []
+        detailTextViews.append(self.detailTextView1)
+        detailTextViews.append(self.detailTextView2)
+        detailTextViews.append(self.detailTextView3)
+        detailTextViews.append(self.detailTextView4)
+        detailTextViews.append(self.detailTextView5)
+        detailTextViews.append(self.detailTextView6)
+        detailTextViews.append(self.detailTextView7)
+        detailTextViews.append(self.detailTextView8)
+        detailTextViews.append(self.detailTextView9)
+        
+        for i in detailTextViews {
+            i.layer.borderWidth = 1.0
+            i.layer.borderColor = UIColor.black.cgColor
+            i.addRounded()
+        }
         // Do any additional setup after loading the view.
         
         var buttons: [UIButton] = []
