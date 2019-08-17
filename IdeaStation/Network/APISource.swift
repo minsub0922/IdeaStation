@@ -12,8 +12,21 @@ import Alamofire
 struct APISource: APISourceProtocol {
     static let shared = APISource()
     
-    func getPicturesPixay(params: Parameters, completion : @escaping (PixaPictures) -> Void) {
+    func getPicturesPixay(params: Parameters, completion: @escaping (PixaPictures) -> Void) {
         get(API.getPictures(), params: params) { (res: NetworkResult<(Int, PixaPictures)>) in
+            switch res {
+            case .networkSuccess(let data):
+                completion(data.1)
+            case .networkError(let error):
+                print(error)
+            case .networkFail:
+                print("Network Fail")
+            }
+        }
+    }
+    
+    func getRandomText(params: Parameters, completion: @escaping ([String]) -> Void) {
+        get(API.getRelatedTexts(), params: params) { (res: NetworkResult<(Int, [String])>) in
             switch res {
             case .networkSuccess(let data):
                 completion(data.1)

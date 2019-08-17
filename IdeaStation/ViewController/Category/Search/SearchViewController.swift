@@ -45,11 +45,18 @@ class SearchViewController: UIViewController {
         
         APISource.shared.getPicturesPixay(params: params) { res in
             self.pictures = res.hits
-            
             self.collectionView.performBatchUpdates({
                 self.collectionView.isHidden = false
                 self.collectionView.reloadSections(IndexSet(0...0))
             }, completion: nil)
+        }
+        
+        let param = [
+            "word": "고양이"
+        ]
+        
+        APISource.shared.getRandomText(params: param) { res in
+            
         }
     }
 }
@@ -95,6 +102,7 @@ class PixabayImageCell: UICollectionViewCell {
             self.setupShadow()
         }
     }
+    
     private func setupShadow() {
         self.layer.cornerRadius = 16.0
         self.layer.shadowOffset = CGSize(width: 0, height: 2)

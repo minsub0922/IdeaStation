@@ -31,13 +31,6 @@ extension UIImage {
             return resize(withSize: CGSize(width: self.size.width * aspectRatio, height: self.size.height * aspectRatio))
         }
     }
-    
-    private func resize(withSize size: CGSize) -> UIImage? {
-        UIGraphicsBeginImageContextWithOptions(size, false, 1)
-        defer { UIGraphicsEndImageContext() }
-        draw(in: CGRect(x: 0.0, y: 0.0, width: size.width, height: size.height))
-        return UIGraphicsGetImageFromCurrentImageContext()
-    }
 }
 
 extension UIView {

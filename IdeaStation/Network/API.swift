@@ -21,4 +21,8 @@ class API {
     static let getPictures = {
         return pixabayBaseURL
     }
+    
+    static let getRelatedTexts = {
+        return "http://13.124.243.199:5000/search"
+    }
 }
