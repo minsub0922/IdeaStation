@@ -50,7 +50,9 @@ class SearchViewController: UIViewController {
                 self.collectionView.reloadSections(IndexSet(0...0))
             }, completion: nil)
         }
-        
+    }
+    
+    private func getRandomTexts() {
         let param = [
             "word": "고양이"
         ]
