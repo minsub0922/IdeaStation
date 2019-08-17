@@ -1,0 +1,6 @@
+framework module Pods_IdeaStation {
+  umbrella header "Pods-IdeaStation-umbrella.h"
+
+  export *
+  module * { export * }
+}
