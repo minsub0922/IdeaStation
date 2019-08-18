@@ -111,6 +111,7 @@ class NewMandalartCellDetailViewController: UIViewController {
             i.layer.borderWidth = 1.0
             i.layer.borderColor = UIColor.black.cgColor
             i.addRounded()
+            i.moveToVerticalCenter()
         }
         // Do any additional setup after loading the view.
         

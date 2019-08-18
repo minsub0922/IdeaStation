@@ -147,6 +147,13 @@ class NewMandalartViewController: UIViewController, UICollectionViewDataSource, 
             width: oneTextViewWidth,
             height: oneTextViewHeight
         )
+        
+        let center = CGPoint(x: cell.frame.width / 2, y: cell.frame.height / 2)
+        
+        for i in 0...8 {
+            textViews[i].moveToVerticalCenter()
+        }
+        
         cell.addShadowOnLabel()
         cell.addRounded()
         return cell
