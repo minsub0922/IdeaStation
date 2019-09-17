@@ -32,8 +32,8 @@ class ExpandableBubbleLabel: FlexibleLabel {
     fileprivate let bounceTime = 0.5
     fileprivate let childCount = 8
     
-    init(superView: UIView, text: String) {
-        let center = CGPoint(x: superView.frame.size.width/2, y: superView.frame.size.height*0.4)
+    init(superView: UIView, text: String, verticalProposition: CGFloat = 0.4) {
+        let center = CGPoint(x: superView.frame.size.width/2, y: superView.frame.size.height*verticalProposition)
         super.init(text: text, fontSize: 35, center: center)
         self.textColor = .black
         self.changeHeight(by: 35)

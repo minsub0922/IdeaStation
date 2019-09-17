@@ -12,7 +12,7 @@ class SearchViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     var bubbleLabel: ExpandableBubbleLabel!
-    var array = ["발톱", "똥", "강아지", "여우", "여자", "사료", "병원", "수의사"]
+    var array = ["운동장", "축구", "아이들", "선생님", "칠판", "시계", "종이", "시험"]
     var pictures: [Hit] = []
     
     override func viewDidLoad() {
@@ -21,10 +21,8 @@ class SearchViewController: UIViewController {
         ExitButtonForModal(on: self)
     }
     
-    
     private func setupExpandableBubbleLabel() {
-        bubbleLabel = ExpandableBubbleLabel(superView: self.view, text: "고양이")
-        //bubbleLabel.childArray = array
+        bubbleLabel = ExpandableBubbleLabel(superView: self.view, text: "학교")
         bubbleLabel.expandableDelegate = self
         self.view.addSubview(bubbleLabel)
     }
@@ -63,6 +61,8 @@ class SearchViewController: UIViewController {
         APISource.shared.getRandomText(params: param) { res in
             self.bubbleLabel.childArray = res[0...8].dropLast()
         }
+        
+        self.bubbleLabel.childArray = array
     }
 }
 
@@ -92,6 +92,9 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
         }
         
         let picture = pictures[indexPath.row]
+        print(indexPath.row)
+        //cell.imageView.loadImageAsyc(url: picture.previewURL)
+        cell.imageView.image = UIImage()
         cell.imageView.loadImageAsyc(url: picture.previewURL)
         cell.imageView.addRounded()
         return cell
@@ -99,7 +102,7 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
 }
 
 class PixabayImageCell: UICollectionViewCell {
-    @IBOutlet weak var imageView: FasterImageView!
+    @IBOutlet weak var imageView: UIImageView!
     override var bounds: CGRect {
         didSet {
             self.setupShadow()
