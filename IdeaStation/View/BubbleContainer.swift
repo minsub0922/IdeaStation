@@ -11,13 +11,14 @@ import UIKit
 protocol BubbleContainerDelegate {
     func expanded()
     func collapsed()
-    func childSelected(completion: @escaping (_ childArray: [String]) -> Void)
+    func childSelected(selectedText: String, completion: @escaping (_ childArray: [String]) -> Void)
 }
 
 class BubbleContainer: UIView {
     /*
      Set FontSize Depends on Bunds Size
      */
+    public var delegate: BubbleContainerDelegate?
     override var bounds: CGRect {
         didSet {
             let width = bounds.width
@@ -39,10 +40,14 @@ class BubbleContainer: UIView {
     private var centerLabel: UILabel = UILabel()
     private var childArray: [UILabel] = []
     private var selectedChildText: String = String()
+    fileprivate var strings: [String] = []
+    fileprivate let childCount: Int
     fileprivate var isCollapse = true
     
     // MARK:- init
     init(frame: CGRect, centerText: String, childTextArray: [String]) {
+        childCount = childTextArray.count
+        
         super.init(frame: frame)
         isUserInteractionEnabled = true
         centerLabel.text = centerText
@@ -133,7 +138,16 @@ extension BubbleContainer {
             // case. Child
             selectedChildText = bubble.text ?? ""
             bubble.bounce {
-                //TODO
+                self.delegate?.childSelected(selectedText: self.selectedChildText, completion: {(strings : [String]) in
+                    self.collapsed()
+                    
+                    self.centerLabel.text = self.selectedChildText
+                    for index in 0..<strings.count {
+                        let child = self.childArray[index]
+                        self.strings.append(child.text!)
+                        child.text = strings[index]
+                    }
+                })
             }
         }
      }
@@ -146,6 +160,7 @@ extension BubbleContainer {
      Change Label Size (with Animation)
      */
     private func collapsed() {
+        self.layer.removeAllAnimations()
         fadeInCenter()
         fadeOutChildren()
     }
@@ -166,13 +181,12 @@ extension BubbleContainer {
         }
     }
     private func fadeOutChildren() {
-        let wholeDuration: Double = 1.5
-        let numberOfChild = childArray.count
+        let wholeDuration: Double = 1.3
         UIView.animateKeyframes(withDuration: wholeDuration, delay: 0, options: [.calculationModeCubic], animations: {
-            for index in 0..<numberOfChild {
-                let child = self.childArray[numberOfChild - 1 - index]
-                let startTime = Double(index)/Double(numberOfChild)
-                let duration = wholeDuration/Double(numberOfChild) * (1 - 0.1 * Double(index))
+            for index in 0..<self.childCount {
+                let child = self.childArray[self.childCount - 1 - index]
+                let startTime = Double(index)/Double(self.childCount)
+                let duration = wholeDuration/Double(self.childCount) * (1 - 0.1 * Double(index))
                 UIView.addKeyframe(withRelativeStartTime: startTime, relativeDuration: duration) {
                     child.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
                     child.alpha = 0
@@ -182,13 +196,12 @@ extension BubbleContainer {
     }
     private func fadeInChildren() {
         let wholeDuration: Double = 1.5
-        let numberOfChild = childArray.count
         let bounceTime: Double = 0.1
         UIView.animateKeyframes(withDuration: wholeDuration+bounceTime, delay: 0, options: [.calculationModeCubic], animations: {
-            for index in 0..<numberOfChild {
+            for index in 0..<self.childCount {
                 let child = self.childArray[index]
-                let startTime = Double(index)/Double(numberOfChild)
-                let duration = wholeDuration/Double(numberOfChild) * (1 - 0.1 * Double(index))
+                let startTime = Double(index)/Double(self.childCount)
+                let duration = wholeDuration/Double(self.childCount) * (1 - 0.1 * Double(index))
                 UIView.addKeyframe(withRelativeStartTime: startTime, relativeDuration: duration) {
                     child.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
                     child.alpha = 1
@@ -196,6 +209,20 @@ extension BubbleContainer {
                 UIView.addKeyframe(withRelativeStartTime: startTime+duration, relativeDuration: bounceTime) {
                     child.transform = CGAffineTransform(scaleX: 1, y: 1)
                 }
+            }
+        })
+    }
+    private func hoveringChildren() {
+        let wholeDuration: Double = 1
+        let numberOfSeqeunce: Double = 4
+        UIView.animateKeyframes(withDuration: wholeDuration, delay: 0, options: [.repeat, .autoreverse], animations: {
+//            for child in self.childArray {
+//                UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 1.0/numberOfSeqeunce) {
+//
+//                }
+//            }
+            UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 1) {
+                
             }
         })
     }

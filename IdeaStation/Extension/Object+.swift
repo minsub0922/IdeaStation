@@ -31,6 +31,12 @@ extension UICollectionView {
         UIView.animate(withDuration: 0, animations: { self.reloadData() })
         completion()
     }
+    
+    func reloadSection(section: Int) {
+        UIView.animate(withDuration: 1) {
+            self.reloadSections(IndexSet(0...section))
+        }
+    }
 }
 
 extension Thread {
