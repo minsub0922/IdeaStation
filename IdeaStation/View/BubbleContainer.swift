@@ -8,6 +8,12 @@
 
 import UIKit
 
+protocol BubbleContainerDelegate {
+    func expanded()
+    func collapsed()
+    func childSelected(completion: @escaping (_ childArray: [String]) -> Void)
+}
+
 class BubbleContainer: UIView {
     /*
      Set FontSize Depends on Bunds Size
@@ -22,7 +28,6 @@ class BubbleContainer: UIView {
             self.radius = radius
             self.setupBubblesLabelSize()
             self.setupBubbles()
-            self.hideChildren()
         }
     }
     /*
@@ -34,6 +39,7 @@ class BubbleContainer: UIView {
     private var centerLabel: UILabel = UILabel()
     private var childArray: [UILabel] = []
     private var selectedChildText: String = String()
+    fileprivate var isCollapse = true
     
     // MARK:- init
     init(frame: CGRect, centerText: String, childTextArray: [String]) {
@@ -42,6 +48,7 @@ class BubbleContainer: UIView {
         centerLabel.text = centerText
         for text in childTextArray {
             let label = UILabel()
+            label.alpha = 0.0
             label.text = text
             childArray.append(label)
         }
@@ -67,6 +74,14 @@ extension BubbleContainer {
             addSubview(child)
         }
     }
+    
+    private func setupBubblesLabelSize() {
+         centerLabel.font = centerLabel.font.withSize(fontSize)
+         for child in childArray {
+            child.font = child.font.withSize(fontSize)
+            child.transform = CGAffineTransform(scaleX: 0, y: 0)
+         }
+     }
     
     private func addGestureRecognizer() {
         centerLabel.isUserInteractionEnabled = true
@@ -96,6 +111,7 @@ extension BubbleContainer {
             child.centerXAnchor.constraint(equalTo: centerXAnchor, constant: x).isActive = true
             child.centerYAnchor.constraint(equalTo: centerYAnchor, constant: y).isActive = true
             child.widthAnchor.constraint(equalToConstant: maxWidthOfLabel).isActive = true
+            
             //Adjust Font Size with LabelSize
             child.heightAnchor.constraint(equalToConstant: fontSize*2).isActive = true
             child.lineBreakMode = .byClipping
@@ -107,18 +123,19 @@ extension BubbleContainer {
 
 // MARK:- Actions
 extension BubbleContainer {
-    @objc fileprivate func tapGestureRecognizer(_ bubble: UITapGestureRecognizer) {
-        print("what the fuct !")
-//         if bubble.isEqual(centerLabel) {
-//            // case. Center
-//            childArray[0].isHidden ? showChildren() : hideChildren()
-//         } else {
-//            // case. Child
-//            selectedChildText = bubble.text ?? ""
-//            bubble.bounce {
-//                //TODO
-//            }
-//         }
+    @objc fileprivate func tapGestureRecognizer(_ recognizer: UITapGestureRecognizer) {
+        guard let bubble = recognizer.view as? UILabel else {return}
+        if bubble.isEqual(centerLabel) {
+            // case. Center
+            isCollapse ? expanded() : collapsed()
+            isCollapse = !isCollapse
+        } else {
+            // case. Child
+            selectedChildText = bubble.text ?? ""
+            bubble.bounce {
+                //TODO
+            }
+        }
      }
 }
 
@@ -128,39 +145,58 @@ extension BubbleContainer {
     /*
      Change Label Size (with Animation)
      */
-    private func setupBubblesLabelSize() {
-        centerLabel.font = centerLabel.font.withSize(fontSize)
-        for child in childArray {
-            child.font = child.font.withSize(fontSize)
+    private func collapsed() {
+        fadeInCenter()
+        fadeOutChildren()
+    }
+    private func expanded() {
+        fadeOutCenter()
+        fadeInChildren()
+    }
+    private func fadeOutCenter() {
+        UIView.animate(withDuration: 0.7) {
+            self.centerLabel.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
+            self.centerLabel.alpha = 0.3
         }
     }
-    private func changeLabelSize(target: [UILabel], multiplyTo: CGFloat, willBeDisappear: Bool) {
-        UIView.animate(withDuration: 1.0, animations: {
-            target[0].transform = CGAffineTransform(scaleX: multiplyTo, y: multiplyTo)
-        }) { _ in
-            if willBeDisappear {
-                target[0].transform = CGAffineTransform(scaleX: 0, y: 0)
+    private func fadeInCenter() {
+        UIView.animate(withDuration: 0.7) {
+            self.centerLabel.transform = CGAffineTransform(scaleX: 1, y: 1)
+            self.centerLabel.alpha = 1
+        }
+    }
+    private func fadeOutChildren() {
+        let wholeDuration: Double = 1.5
+        let numberOfChild = childArray.count
+        UIView.animateKeyframes(withDuration: wholeDuration, delay: 0, options: [.calculationModeCubic], animations: {
+            for index in 0..<numberOfChild {
+                let child = self.childArray[numberOfChild - 1 - index]
+                let startTime = Double(index)/Double(numberOfChild)
+                let duration = wholeDuration/Double(numberOfChild) * (1 - 0.1 * Double(index))
+                UIView.addKeyframe(withRelativeStartTime: startTime, relativeDuration: duration) {
+                    child.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+                    child.alpha = 0
+                }
             }
-        }
+        })
     }
-    private func resetLabelSize(target: [UILabel], backTo: CGFloat) {
-        UIView.animate(withDuration: 1.0) {
-            target[0].transform = CGAffineTransform(scaleX: backTo, y: backTo)
-        }
-    }
-}
-
-// Simple Fucs
-extension BubbleContainer {
-    // MARK:- Set Visibillity
-    private func hideChildren() {
-        for child in childArray {
-            child.isHidden = true
-        }
-    }
-    private func showChildren() {
-        for child in childArray {
-            child.isHidden = false
-        }
+    private func fadeInChildren() {
+        let wholeDuration: Double = 1.5
+        let numberOfChild = childArray.count
+        let bounceTime: Double = 0.1
+        UIView.animateKeyframes(withDuration: wholeDuration+bounceTime, delay: 0, options: [.calculationModeCubic], animations: {
+            for index in 0..<numberOfChild {
+                let child = self.childArray[index]
+                let startTime = Double(index)/Double(numberOfChild)
+                let duration = wholeDuration/Double(numberOfChild) * (1 - 0.1 * Double(index))
+                UIView.addKeyframe(withRelativeStartTime: startTime, relativeDuration: duration) {
+                    child.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
+                    child.alpha = 1
+                }
+                UIView.addKeyframe(withRelativeStartTime: startTime+duration, relativeDuration: bounceTime) {
+                    child.transform = CGAffineTransform(scaleX: 1, y: 1)
+                }
+            }
+        })
     }
 }
