@@ -19,7 +19,7 @@ class TestingViewController: UIViewController {
     }
     
     private func setupBubbleContainer() {
-        let container = BubbleContainer(frame: .zero, centerText: "과학", childTextArray: ["샤ㅐ","아","ㅁㄴ이ㅏ머니아", "안녕", "하늘아~~", "방갑습니다!","좋아가는거야","사회"])
+        let container = BubbleContainer(frame: .zero, centerText: "과학", childTextArray: ["샤ㅐ","아","ㅁㄴ이ㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅏ머니아", "안녕", "하늘아~~", "방갑습니다!","좋아가는거야","사회"])
         self.view.addSubview(container)
         container.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -73,8 +73,10 @@ extension TestingViewController {
         }
     }
     @objc private func touchupCollapse(_ sender: UIButton) {
-        UIView.animate(withDuration: 1.0) {
-            self.testLabel.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
+        UIView.animate(withDuration: 1.0, animations: {
+            self.testLabel.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+        }) { _ in
+            self.testLabel.transform = CGAffineTransform(scaleX: 0, y: 0)
         }
     }
 }

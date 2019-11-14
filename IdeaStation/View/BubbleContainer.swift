@@ -22,6 +22,7 @@ class BubbleContainer: UIView {
             self.radius = radius
             self.setupBubblesLabelSize()
             self.setupBubbles()
+            self.hideChildren()
         }
     }
     /*
@@ -32,11 +33,12 @@ class BubbleContainer: UIView {
     private var radius: CGFloat = 0.0
     private var centerLabel: UILabel = UILabel()
     private var childArray: [UILabel] = []
+    private var selectedChildText: String = String()
     
     // MARK:- init
     init(frame: CGRect, centerText: String, childTextArray: [String]) {
         super.init(frame: frame)
-        
+        isUserInteractionEnabled = true
         centerLabel.text = centerText
         for text in childTextArray {
             let label = UILabel()
@@ -48,9 +50,13 @@ class BubbleContainer: UIView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+}
+
+// MARK:- Setup Views
+extension BubbleContainer {
     // MARK:- SetupView
     private func setupBubbles() {
+        addGestureRecognizer()
         addSubViews()
         addConstraintsForBubbles()
     }
@@ -62,10 +68,20 @@ class BubbleContainer: UIView {
         }
     }
     
+    private func addGestureRecognizer() {
+        centerLabel.isUserInteractionEnabled = true
+        centerLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapGestureRecognizer(_:))))
+        for child in childArray {
+            child.isUserInteractionEnabled = true
+            child.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapGestureRecognizer(_:))))
+        }
+    }
+    
     private func addConstraintsForBubbles() {
         centerLabel.translatesAutoresizingMaskIntoConstraints = false
         centerLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         centerLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        centerLabel.widthAnchor.constraint(equalToConstant: maxWidthOfLabel).isActive = true
         
         // For Adjusting Start Point
         let startTheta = Float.pi / 2
@@ -79,9 +95,35 @@ class BubbleContainer: UIView {
             child.translatesAutoresizingMaskIntoConstraints = false
             child.centerXAnchor.constraint(equalTo: centerXAnchor, constant: x).isActive = true
             child.centerYAnchor.constraint(equalTo: centerYAnchor, constant: y).isActive = true
+            child.widthAnchor.constraint(equalToConstant: maxWidthOfLabel).isActive = true
+            //Adjust Font Size with LabelSize
+            child.heightAnchor.constraint(equalToConstant: fontSize*2).isActive = true
+            child.lineBreakMode = .byClipping
+            child.numberOfLines = 0
+            child.adjustsFontSizeToFitWidth = true
         }
     }
-    
+}
+
+// MARK:- Actions
+extension BubbleContainer {
+    @objc fileprivate func tapGestureRecognizer(_ bubble: UITapGestureRecognizer) {
+        print("what the fuct !")
+//         if bubble.isEqual(centerLabel) {
+//            // case. Center
+//            childArray[0].isHidden ? showChildren() : hideChildren()
+//         } else {
+//            // case. Child
+//            selectedChildText = bubble.text ?? ""
+//            bubble.bounce {
+//                //TODO
+//            }
+//         }
+     }
+}
+
+// MARK:- Animations
+extension BubbleContainer {
     // MARK:- Perform Animation
     /*
      Change Label Size (with Animation)
@@ -92,10 +134,13 @@ class BubbleContainer: UIView {
             child.font = child.font.withSize(fontSize)
         }
     }
-    
-    private func changeLabelSize(target: [UILabel], multiplyTo: CGFloat) {
-        UIView.animate(withDuration: 1.0) {
+    private func changeLabelSize(target: [UILabel], multiplyTo: CGFloat, willBeDisappear: Bool) {
+        UIView.animate(withDuration: 1.0, animations: {
             target[0].transform = CGAffineTransform(scaleX: multiplyTo, y: multiplyTo)
+        }) { _ in
+            if willBeDisappear {
+                target[0].transform = CGAffineTransform(scaleX: 0, y: 0)
+            }
         }
     }
     private func resetLabelSize(target: [UILabel], backTo: CGFloat) {
@@ -103,7 +148,11 @@ class BubbleContainer: UIView {
             target[0].transform = CGAffineTransform(scaleX: backTo, y: backTo)
         }
     }
-    
+}
+
+// Simple Fucs
+extension BubbleContainer {
+    // MARK:- Set Visibillity
     private func hideChildren() {
         for child in childArray {
             child.isHidden = true
