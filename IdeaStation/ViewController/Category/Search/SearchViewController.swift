@@ -92,8 +92,6 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
         }
         
         let picture = pictures[indexPath.row]
-        print(indexPath.row)
-        //cell.imageView.loadImageAsyc(url: picture.previewURL)
         cell.imageView.image = UIImage()
         cell.imageView.loadImageAsyc(url: picture.previewURL)
         cell.imageView.addRounded()
@@ -110,10 +108,10 @@ class PixabayImageCell: UICollectionViewCell {
     }
     
     private func setupShadow() {
-        self.layer.cornerRadius = 16.0
+        self.layer.cornerRadius = 8.0
         self.layer.shadowOffset = CGSize(width: 0, height: 2)
-        self.layer.shadowRadius = 16.0
-        self.layer.shadowOpacity = 0.3
+        self.layer.shadowRadius = 8.0
+        self.layer.shadowOpacity = 0.2
         self.layer.shadowPath = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: .allCorners, cornerRadii: CGSize(width: 3, height: 2)).cgPath
         self.layer.shouldRasterize = true
         self.layer.rasterizationScale = UIScreen.main.scale

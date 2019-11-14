@@ -9,7 +9,7 @@
 import UIKit
 
 class ExpandableBubbleLabel: FlexibleLabel {
-    var radius: CGFloat = 20
+    private var radius: CGFloat = 20
     var childArray: [String] = [] {
         didSet {
             for i in 0..<childArray.count {
@@ -31,18 +31,18 @@ class ExpandableBubbleLabel: FlexibleLabel {
     fileprivate let changeTime = 0.15
     fileprivate let bounceTime = 0.5
     fileprivate let childCount = 8
+    fileprivate let fontSize: CGFloat = 35
     
     init(superView: UIView, text: String, verticalProposition: CGFloat = 0.4) {
         let center = CGPoint(x: superView.frame.size.width/2, y: superView.frame.size.height*verticalProposition)
-        super.init(text: text, fontSize: 35, center: center)
+        super.init(text: text, fontSize: fontSize, center: center)
         self.textColor = .black
-        self.changeHeight(by: 35)
+        self.changeHeight(by: Double(fontSize))
         self.minimumScaleFactor = 0.6
         self.superView = superView
         self.radius = self.frame.height * 3
         setupLabels()
     }
-    
     
     private func setupLabels() {
         let thetaStatus = 2 * Float.pi / Float(childCount)
@@ -50,7 +50,7 @@ class ExpandableBubbleLabel: FlexibleLabel {
             let theta = thetaStatus * Float(i+1)
             let x = self.center.x + radius * CGFloat(cos(theta))
             let y = self.center.y + radius * CGFloat(sin(theta))
-            let label = FlexibleLabel(text: "", fontSize: 35, center: CGPoint(x: x, y: y))
+            let label = FlexibleLabel(text: "", fontSize: fontSize, center: CGPoint(x: x, y: y))
             label.delegate = self
             childLabels.append(label)
             self.superView.addSubview(label)

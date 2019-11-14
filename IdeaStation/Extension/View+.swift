@@ -137,17 +137,17 @@ extension UIImageView {
         }
     }
     
-    func loadImageAsyc(url stringUrl : String){
+    func loadImageAsyc(url stringUrl : String) {
         guard let url = URL(string: stringUrl) else { return }
 
         self.url = stringUrl
         
-        if let imageFromCache = imageCache.object(forKey: stringUrl as AnyObject) as? UIImage{
+        if let imageFromCache = imageCache.object(forKey: stringUrl as AnyObject) as? UIImage {
             self.image = imageFromCache
             return
         }
         
-        URLSession.shared.dataTask(with: url, completionHandler: { (data:Data?, res:URLResponse?, error:Error?) in
+        URLSession.shared.dataTask(with: url) { (data:Data?, res:URLResponse?, error:Error?) in
             if error != nil {
                 print(error?.localizedDescription)
                 return
@@ -166,6 +166,6 @@ extension UIImageView {
                     }
                 }
             }
-        }).resume()
+        }.resume()
     }
 }
