@@ -51,10 +51,12 @@ class BubbleContainer: UIView {
         super.init(frame: frame)
         isUserInteractionEnabled = true
         centerLabel.text = centerText
+        selectedChildText = centerText
         for text in childTextArray {
             let label = UILabel()
             label.alpha = 0.0
             label.text = text
+            strings.append(text)
             childArray.append(label)
         }
     }
@@ -138,15 +140,15 @@ extension BubbleContainer {
             // case. Child
             selectedChildText = bubble.text ?? ""
             bubble.bounce {
+                self.collapsed()
                 self.delegate?.childSelected(selectedText: self.selectedChildText, completion: {(strings : [String]) in
-                    self.collapsed()
-                    
-                    self.centerLabel.text = self.selectedChildText
-                    for index in 0..<strings.count {
-                        let child = self.childArray[index]
-                        self.strings.append(child.text!)
-                        child.text = strings[index]
-                    }
+                    UIView.animate(withDuration: 0, delay: 3, animations: {
+                        for index in 0..<strings.count {
+                            //let child = self.childArray[index]
+                            self.strings.append(strings[index])
+                            //child.text = strings[index]
+                        }
+                    })
                 })
             }
         }
@@ -160,9 +162,22 @@ extension BubbleContainer {
      Change Label Size (with Animation)
      */
     private func collapsed() {
-        self.layer.removeAllAnimations()
+        //self.layer.removeAllAnimations()
+        
+        UIView.transition(with: self.centerLabel,
+        duration: 0.25,
+        options: .transitionCrossDissolve,
+        animations: { [weak self] in
+              self?.centerLabel.text = self?.selectedChildText
+          })
         fadeInCenter()
-        fadeOutChildren()
+        fadeOutChildren() {
+            print(self.strings.count)
+            for i in 0..<self.childCount {
+                print(self.strings[self.strings.count-1-i])
+                self.childArray[i].text = self.strings[self.strings.count-1-i]
+            }
+        }
     }
     private func expanded() {
         fadeOutCenter()
@@ -174,13 +189,15 @@ extension BubbleContainer {
             self.centerLabel.alpha = 0.3
         }
     }
-    private func fadeInCenter() {
-        UIView.animate(withDuration: 0.7) {
+    private func fadeInCenter(completion: @escaping () -> Void = {}) {
+        UIView.animate(withDuration: 0.7, animations: {
             self.centerLabel.transform = CGAffineTransform(scaleX: 1, y: 1)
             self.centerLabel.alpha = 1
-        }
+        }, completion: { _ in
+            completion()
+        })
     }
-    private func fadeOutChildren() {
+    private func fadeOutChildren(completion: @escaping () -> Void) {
         let wholeDuration: Double = 1.3
         UIView.animateKeyframes(withDuration: wholeDuration, delay: 0, options: [.calculationModeCubic], animations: {
             for index in 0..<self.childCount {
@@ -192,6 +209,8 @@ extension BubbleContainer {
                     child.alpha = 0
                 }
             }
+        }, completion: { _ in
+            completion()
         })
     }
     private func fadeInChildren() {
