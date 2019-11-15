@@ -14,11 +14,22 @@ class CategoryViewController: UIViewController {
     let categories = ["탐색", "발상", "노트"]
     var state: Int = 0
     
+    //MA
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupPages()
         addSubview()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
     private func setupPages() {

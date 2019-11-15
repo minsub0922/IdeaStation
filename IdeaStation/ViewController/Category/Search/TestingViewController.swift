@@ -10,6 +10,7 @@ import UIKit
 
 class TestingViewController: UIViewController {
     private let testLabel = UILabel()
+    private var confirmBarButton = UIBarButtonItem()
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -25,6 +26,7 @@ class TestingViewController: UIViewController {
         }
         
         setupCollectionView()
+        setupNavigationBarButton()
     }
     
     private func setupBubbleContainer(subject: String, strings: [String]) {
@@ -55,6 +57,15 @@ class TestingViewController: UIViewController {
         collectionView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         collectionView.topAnchor.constraint(equalTo: view.topAnchor, constant: 50).isActive = true
         collectionView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+    }
+    
+    private func setupNavigationBarButton() {
+        confirmBarButton = UIBarButtonItem(title: "완료", style: .done, target: self, action: #selector(touchupBarButtonAction(_:)))
+        navigationItem.rightBarButtonItem = confirmBarButton
+    }
+    @objc private func touchupBarButtonAction(_ sender: UIBarButtonItem) {
+        guard let storyboard = UIStoryboard(name: "MandalartStoryboard", bundle: nil).instantiateViewController(withIdentifier: "MandalartNavigationController") as? UINavigationController else {return}
+        UIApplication.shared.keyWindow?.rootViewController?.present(storyboard, animated: true, completion: nil)
     }
 }
 
@@ -108,6 +119,7 @@ extension TestingViewController: BubbleContainerDelegate {
     func childSelected(selectedText: String, completion: @escaping ([String]) -> Void) {
         selectedTexts.append(selectedText)
         collectionView.reloadSection(section: 0)
+        collectionView.scrollToItem(at: IndexPath(row: collectionView.numberOfItems(inSection: 0)-1, section: 0), at: .left, animated: true)
         getRandomTexts(subject: selectedText, completion: completion)
     }
 }

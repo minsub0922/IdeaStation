@@ -83,11 +83,13 @@ extension BubbleContainer {
     }
     
     private func setupBubblesLabelSize() {
-         centerLabel.font = centerLabel.font.withSize(fontSize)
-         for child in childArray {
+        centerLabel.font = centerLabel.font.withSize(fontSize)
+        centerLabel.addShadowOnLabel()
+        for child in childArray {
             child.font = child.font.withSize(fontSize)
             child.transform = CGAffineTransform(scaleX: 0, y: 0)
-         }
+            child.addShadowOnLabel()
+        }
      }
     
     private func addGestureRecognizer() {
@@ -120,6 +122,10 @@ extension BubbleContainer {
             child.widthAnchor.constraint(equalToConstant: maxWidthOfLabel).isActive = true
             
             //Adjust Font Size with LabelSize
+            centerLabel.heightAnchor.constraint(equalToConstant: fontSize*2).isActive = true
+            centerLabel.lineBreakMode = .byClipping
+            centerLabel.numberOfLines = 0
+            centerLabel.adjustsFontSizeToFitWidth = true
             child.heightAnchor.constraint(equalToConstant: fontSize*2).isActive = true
             child.lineBreakMode = .byClipping
             child.numberOfLines = 0
@@ -172,9 +178,7 @@ extension BubbleContainer {
           })
         fadeInCenter()
         fadeOutChildren() {
-            print(self.strings.count)
             for i in 0..<self.childCount {
-                print(self.strings[self.strings.count-1-i])
                 self.childArray[i].text = self.strings[self.strings.count-1-i]
             }
         }

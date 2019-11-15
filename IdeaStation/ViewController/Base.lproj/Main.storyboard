@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina6_1" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Pv3-51-XS1">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Category View Controller-->
+        <!--아이디어 탐색-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="CategoryViewController" customModule="IdeaStation" customModuleProvider="target" sceneMemberID="viewController">
@@ -20,6 +18,7 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <navigationItem key="navigationItem" title="아이디어 탐색" id="BvR-SJ-qGG"/>
                     <connections>
                         <segue destination="SZ4-20-LSB" kind="show" identifier="search" id="h0D-fv-HhH"/>
                         <segue destination="4IQ-nn-jMq" kind="show" identifier="madalart" id="LA5-Rc-zmz"/>
@@ -27,11 +26,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="1047.8260869565217" y="347.54464285714283"/>
         </scene>
         <!--Search-->
         <scene sceneID="Kor-RP-cdh">
             <objects>
-                <viewControllerPlaceholder storyboardName="Search" id="SZ4-20-LSB" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="Search" id="SZ4-20-LSB" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="3sT-rG-XxH"/>
+                </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PdP-9I-S23" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1272" y="-210"/>
@@ -39,10 +41,31 @@
         <!--MandalartStoryboard-->
         <scene sceneID="WhO-Bw-5A1">
             <objects>
-                <viewControllerPlaceholder storyboardName="MandalartStoryboard" id="4IQ-nn-jMq" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="MandalartStoryboard" id="4IQ-nn-jMq" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="xhn-fW-l1A"/>
+                </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5k7-kC-eng" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1297" y="-72"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="hQk-a3-7CP">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Pv3-51-XS1" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" id="OGs-BR-AlH">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="QcT-aE-DnK"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aI4-gq-HqD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="137.68115942028987" y="347.54464285714283"/>
         </scene>
     </scenes>
 </document>
