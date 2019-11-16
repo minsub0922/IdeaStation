@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="eMh-zj-3Wi">
-                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Wot-JA-7mM">
                                     <size key="itemSize" width="273" height="425"/>
@@ -163,7 +163,7 @@
             <objects>
                 <viewController id="6Cl-Di-ZSb" customClass="NewMandalartCellDetailViewController" customModule="IdeaStation" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7wa-pN-Obq">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="bQv-4Y-b4Q">
@@ -619,12 +619,28 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="i0A-0T-6gl" kind="relationship" relationship="rootViewController" id="Fim-Yg-FlE"/>
+                        <segue destination="oxU-P0-RGC" kind="relationship" relationship="rootViewController" id="LHk-Gp-yTY"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mSM-j0-fcz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="739" y="-249"/>
+            <point key="canvasLocation" x="-397" y="644"/>
+        </scene>
+        <!--Mandalart View Controller2-->
+        <scene sceneID="sAw-lZ-eUW">
+            <objects>
+                <viewController id="oxU-P0-RGC" customClass="MandalartViewController2" customModule="IdeaStation" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="x6s-xd-ZRK">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="mC4-QD-V9u"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="dbd-0l-74G"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2oq-ny-z3b" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="620" y="637"/>
         </scene>
     </scenes>
 </document>

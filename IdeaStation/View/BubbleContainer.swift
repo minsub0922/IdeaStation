@@ -5,7 +5,6 @@
 //  Created by 최민섭 on 2019/11/14.
 //  Copyright © 2019 최민섭. All rights reserved.
 //
-
 import UIKit
 
 protocol BubbleContainerDelegate {
@@ -42,7 +41,7 @@ class BubbleContainer: UIView {
     private var radius: CGFloat = 0.0
     private var centerLabel: UILabel = UILabel()
     private var childArray: [UILabel] = []
-    private var selectedChildText: String = String()
+    private var selectedChildText: String
     fileprivate var strings: [String] = []
     fileprivate var keywords: [MDKeyword] = []
     fileprivate let childCount: Int
@@ -51,13 +50,6 @@ class BubbleContainer: UIView {
     /*
     Parameters for Memorizing
      */
-//    private var keywords: [[MDKeyword]] = {
-//        var array: [MDKeyword] = []
-//        for i in 0...9 {
-//            array.append(MDKeyword(index: i))
-//        }
-//        return Array(repeating: array, count: 9)
-//    } ()
     
     // MARK:- init
     init(frame: CGRect, centerText: String, childTextArray: [String]) {

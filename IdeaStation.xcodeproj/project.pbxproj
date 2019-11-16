@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A040C262380166000A1DF10 /* MandalartViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A040C252380166000A1DF10 /* MandalartViewController2.swift */; };
+		1A040C292380186400A1DF10 /* MandalartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A040C272380186400A1DF10 /* MandalartCell.swift */; };
+		1A040C2A2380186400A1DF10 /* MandalartCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A040C282380186400A1DF10 /* MandalartCell.xib */; };
+		1A040C2C23801F7C00A1DF10 /* Mandalart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A040C2B23801F7C00A1DF10 /* Mandalart.swift */; };
 		1A13657F237D4DFD00A941CB /* TestingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A13657E237D4DFD00A941CB /* TestingViewController.swift */; };
 		1A136581237D4FEF00A941CB /* BubbleContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A136580237D4FEF00A941CB /* BubbleContainer.swift */; };
 		1A136585237DB6BF00A941CB /* SearchPathCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A136583237DB6BF00A941CB /* SearchPathCell.swift */; };
@@ -70,6 +74,10 @@
 
 /* Begin PBXFileReference section */
 		0B05A6B68FCC86D29F487D72 /* Pods_IdeaStationUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IdeaStationUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1A040C252380166000A1DF10 /* MandalartViewController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MandalartViewController2.swift; sourceTree = "<group>"; };
+		1A040C272380186400A1DF10 /* MandalartCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MandalartCell.swift; sourceTree = "<group>"; };
+		1A040C282380186400A1DF10 /* MandalartCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MandalartCell.xib; sourceTree = "<group>"; };
+		1A040C2B23801F7C00A1DF10 /* Mandalart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mandalart.swift; sourceTree = "<group>"; };
 		1A13657E237D4DFD00A941CB /* TestingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestingViewController.swift; sourceTree = "<group>"; };
 		1A136580237D4FEF00A941CB /* BubbleContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleContainer.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		1A136583237DB6BF00A941CB /* SearchPathCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPathCell.swift; sourceTree = "<group>"; };
@@ -160,6 +168,8 @@
 				1A136584237DB6BF00A941CB /* SearchPathCell.xib */,
 				1A6FFFAD237E406C00AAEFC5 /* HorizontalArrowCell.swift */,
 				1A6FFFAE237E406C00AAEFC5 /* HorizontalArrowCell.xib */,
+				1A040C272380186400A1DF10 /* MandalartCell.swift */,
+				1A040C282380186400A1DF10 /* MandalartCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -270,6 +280,7 @@
 				AF07B35A2302771300FAE1C8 /* FlexibleLabel.swift */,
 				AFCD53352307FDCD00A1D487 /* ExitButton.swift */,
 				1A136580237D4FEF00A941CB /* BubbleContainer.swift */,
+				1A040C2B23801F7C00A1DF10 /* Mandalart.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -328,6 +339,7 @@
 				AFCD531F2307F2F100A1D487 /* MandalartStoryboard.storyboard */,
 				AFCD53202307F2F100A1D487 /* NewMandalartViewController.swift */,
 				AFCD53212307F2F100A1D487 /* NewMandalartCellDetailViewController.swift */,
+				1A040C252380166000A1DF10 /* MandalartViewController2.swift */,
 			);
 			path = Madalart;
 			sourceTree = "<group>";
@@ -486,6 +498,7 @@
 				1A6FFFB0237E406C00AAEFC5 /* HorizontalArrowCell.xib in Resources */,
 				AFCD53322307F31900A1D487 /* InterestStoryboard.storyboard in Resources */,
 				AFF64DC423041A9D003F3E3A /* Search.storyboard in Resources */,
+				1A040C2A2380186400A1DF10 /* MandalartCell.xib in Resources */,
 				AFCD53272307F2F100A1D487 /* MandalartStoryboard.storyboard in Resources */,
 				AF07B32422FFC3C400FAE1C8 /* Assets.xcassets in Resources */,
 				AF07B31F22FFC3C300FAE1C8 /* Main.storyboard in Resources */,
@@ -618,6 +631,7 @@
 				AFCD53312307F31900A1D487 /* InterestViewController.swift in Sources */,
 				AFF64DB72303F68E003F3E3A /* SearchViewController.swift in Sources */,
 				AFCD53362307FDCD00A1D487 /* ExitButton.swift in Sources */,
+				1A040C262380166000A1DF10 /* MandalartViewController2.swift in Sources */,
 				AFF64DB92304037D003F3E3A /* APISourceProtocol.swift in Sources */,
 				AFF64DC223040EB6003F3E3A /* PixaPictures.swift in Sources */,
 				AFCD53342307F31900A1D487 /* InterestItem.swift in Sources */,
@@ -634,6 +648,8 @@
 				AFCD53282307F2F100A1D487 /* NewMandalartViewController.swift in Sources */,
 				1A136585237DB6BF00A941CB /* SearchPathCell.swift in Sources */,
 				AF07B35522FFFFE600FAE1C8 /* View+.swift in Sources */,
+				1A040C292380186400A1DF10 /* MandalartCell.swift in Sources */,
+				1A040C2C23801F7C00A1DF10 /* Mandalart.swift in Sources */,
 				AF07B32222FFC3C300FAE1C8 /* IdeaStation.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
