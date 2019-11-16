@@ -7,7 +7,7 @@ DEPENDENCIES:
   - paper-onboarding
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - Alamofire
     - paper-onboarding
 
@@ -15,6 +15,6 @@ SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
   paper-onboarding: 47ded9ede6ae9dd7ec135dddd8bd3e170b79d799
 
-PODFILE CHECKSUM: bc2125170bceb48b9a3cf75fa99c69f3e26a08aa
+PODFILE CHECKSUM: 833c5c893448e0685d890b450b755403c96252c0
 
-COCOAPODS: 1.6.2
+COCOAPODS: 1.8.4

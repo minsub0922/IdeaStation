@@ -8,7 +8,6 @@ target 'IdeaStation' do
   # Pods for IdeaStation
   pod 'Alamofire'
   pod 'paper-onboarding' 
-
   target 'IdeaStationTests' do
     inherit! :search_paths
     # Pods for testing
