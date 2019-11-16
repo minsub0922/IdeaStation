@@ -18,7 +18,7 @@ class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupExpandableBubbleLabel()
-        ExitButtonForModal(on: self)
+        ExitButton(on: self)
     }
     
     private func setupExpandableBubbleLabel() {

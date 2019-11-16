@@ -180,7 +180,7 @@ class NewMandalartViewController: UIViewController, UICollectionViewDataSource, 
             print(error.localizedDescription)
         }
         
-        ExitButtonForModal(on: self)
+        ExitButton(on: self)
         self.newMandalartCollectionView.reloadData()
     }
     

@@ -11,7 +11,10 @@ import UIKit
 protocol BubbleContainerDelegate {
     func expanded()
     func collapsed()
-    func childSelected(selectedText: String, completion: @escaping (_ childArray: [String]) -> Void)
+    func childSelected(selectedText: String)
+    func childDeSelected(selectedText: String)
+    func gotoExplore(selectedText: String, completion: @escaping (_ childArray: [String]) -> Void)
+    //func childSelected(selectedText: String, completion: @escaping (_ childArray: [String]) -> Void)
 }
 
 class BubbleContainer: UIView {
@@ -41,28 +44,62 @@ class BubbleContainer: UIView {
     private var childArray: [UILabel] = []
     private var selectedChildText: String = String()
     fileprivate var strings: [String] = []
+    fileprivate var keywords: [MDKeyword] = []
     fileprivate let childCount: Int
     fileprivate var isCollapse = true
+    
+    /*
+    Parameters for Memorizing
+     */
+//    private var keywords: [[MDKeyword]] = {
+//        var array: [MDKeyword] = []
+//        for i in 0...9 {
+//            array.append(MDKeyword(index: i))
+//        }
+//        return Array(repeating: array, count: 9)
+//    } ()
     
     // MARK:- init
     init(frame: CGRect, centerText: String, childTextArray: [String]) {
         childCount = childTextArray.count
-        
-        super.init(frame: frame)
-        isUserInteractionEnabled = true
-        centerLabel.text = centerText
         selectedChildText = centerText
-        for text in childTextArray {
-            let label = UILabel()
-            label.alpha = 0.0
-            label.text = text
-            strings.append(text)
-            childArray.append(label)
-        }
+        super.init(frame: frame)
+        
+        updateCenterLabel()
+        initChildLabels(childTextArray: childTextArray)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    fileprivate func updateCenterLabel() {
+        UIView.transition(with: self.centerLabel,
+        duration: 0.25,
+        options: .transitionCrossDissolve,
+        animations: { [weak self] in
+              self?.centerLabel.text = self?.selectedChildText
+          })
+    }
+    
+    fileprivate func initChildLabels(childTextArray: [String]) {
+        centerLabel.text = selectedChildText
+        for i in 0..<childTextArray.count {
+            let text = childTextArray[i]
+            let label = UILabel()
+            label.alpha = 0.0
+            label.text = text
+            label.alpha = 0.5
+            strings.append(text)
+            keywords.append(MDKeyword(keyword: text))
+            childArray.append(label)
+        }
+    }
+    
+    fileprivate func updateChildLabels() {
+        for i in 0..<self.childCount {
+            self.childArray[i].text = self.strings[self.strings.count-1-i]
+        }
     }
 }
 
@@ -94,10 +131,11 @@ extension BubbleContainer {
     
     private func addGestureRecognizer() {
         centerLabel.isUserInteractionEnabled = true
-        centerLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapGestureRecognizer(_:))))
+        centerLabel.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(collapseContainer(_:))))
         for child in childArray {
             child.isUserInteractionEnabled = true
-            child.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapGestureRecognizer(_:))))
+            child.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(selectKeyword(_:))))
+            child.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(exploreKeyword(_:))))
         }
     }
     
@@ -136,29 +174,42 @@ extension BubbleContainer {
 
 // MARK:- Actions
 extension BubbleContainer {
-    @objc fileprivate func tapGestureRecognizer(_ recognizer: UITapGestureRecognizer) {
+    @objc fileprivate func exploreKeyword(_ recognizer: UILongPressGestureRecognizer) {
         guard let bubble = recognizer.view as? UILabel else {return}
-        if bubble.isEqual(centerLabel) {
-            // case. Center
-            isCollapse ? expanded() : collapsed()
-            isCollapse = !isCollapse
-        } else {
-            // case. Child
-            selectedChildText = bubble.text ?? ""
-            bubble.bounce {
-                self.collapsed()
-                self.delegate?.childSelected(selectedText: self.selectedChildText, completion: {(strings : [String]) in
-                    UIView.animate(withDuration: 0, delay: 3, animations: {
-                        for index in 0..<strings.count {
-                            //let child = self.childArray[index]
-                            self.strings.append(strings[index])
-                            //child.text = strings[index]
-                        }
-                    })
-                })
-            }
-        }
-     }
+        selectedChildText = bubble.text ?? ""
+        self.collapsed()
+        self.delegate?.gotoExplore(selectedText: selectedChildText, completion: { strings in
+            UIView.animate(withDuration: 0,
+                           delay: 3,
+                           options: .allowAnimatedContent,
+                           animations: {
+                            self.keywords.append(contentsOf: strings.map { MDKeyword(keyword: $0) })
+            }, completion: nil)
+        })
+    }
+    
+    @objc fileprivate func selectKeyword(_ recognizer: UITapGestureRecognizer) {
+        guard
+            let bubble = recognizer.view as? UILabel,
+            let index = childArray.firstIndex(of: bubble),
+            let selectedText = bubble.text
+            else { return }
+        
+        let isSelected = isBubbleSelected(index: index)
+        bubble.bounce()
+        bubble.changeAlphaWithAnimation(alpha: !isSelected ? 1 : 0.4)
+        
+        !isSelected ?
+            selectBubble(text: selectedText, index: index) :
+            deSelectBubble(text: selectedText, index: index)
+        
+        
+    }
+    
+    @objc fileprivate func collapseContainer(_ recognizer: UITapGestureRecognizer) {
+        isCollapse ? expanded() : collapsed()
+        isCollapse = !isCollapse
+    }
 }
 
 // MARK:- Animations
@@ -168,25 +219,17 @@ extension BubbleContainer {
      Change Label Size (with Animation)
      */
     private func collapsed() {
-        //self.layer.removeAllAnimations()
-        
-        UIView.transition(with: self.centerLabel,
-        duration: 0.25,
-        options: .transitionCrossDissolve,
-        animations: { [weak self] in
-              self?.centerLabel.text = self?.selectedChildText
-          })
+        updateCenterLabel()
         fadeInCenter()
         fadeOutChildren() {
-            for i in 0..<self.childCount {
-                self.childArray[i].text = self.strings[self.strings.count-1-i]
-            }
+            self.updateChildLabels()
         }
     }
     private func expanded() {
         fadeOutCenter()
         fadeInChildren()
     }
+    
     private func fadeOutCenter() {
         UIView.animate(withDuration: 0.7) {
             self.centerLabel.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
@@ -202,7 +245,7 @@ extension BubbleContainer {
         })
     }
     private func fadeOutChildren(completion: @escaping () -> Void) {
-        let wholeDuration: Double = 1.3
+        let wholeDuration: Double = 0.7
         UIView.animateKeyframes(withDuration: wholeDuration, delay: 0, options: [.calculationModeCubic], animations: {
             for index in 0..<self.childCount {
                 let child = self.childArray[self.childCount - 1 - index]
@@ -218,7 +261,7 @@ extension BubbleContainer {
         })
     }
     private func fadeInChildren() {
-        let wholeDuration: Double = 1.5
+        let wholeDuration: Double = 1
         let bounceTime: Double = 0.1
         UIView.animateKeyframes(withDuration: wholeDuration+bounceTime, delay: 0, options: [.calculationModeCubic], animations: {
             for index in 0..<self.childCount {
@@ -227,7 +270,8 @@ extension BubbleContainer {
                 let duration = wholeDuration/Double(self.childCount) * (1 - 0.1 * Double(index))
                 UIView.addKeyframe(withRelativeStartTime: startTime, relativeDuration: duration) {
                     child.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
-                    child.alpha = 1
+                    //TODO
+                    child.alpha = self.isBubbleSelected(index: index) ? 1 : 0.4
                 }
                 UIView.addKeyframe(withRelativeStartTime: startTime+duration, relativeDuration: bounceTime) {
                     child.transform = CGAffineTransform(scaleX: 1, y: 1)
@@ -235,6 +279,22 @@ extension BubbleContainer {
             }
         })
     }
+    
+    private func isBubbleSelected(index: Int) -> Bool {
+        return self.keywords[self.keywords.count - 8 + index].isSelected
+    }
+    
+    private func selectBubble(text: String, index: Int) {
+        self.keywords[self.keywords.count - 8 + index].isSelected = true
+        self.delegate?.childSelected(selectedText: text)
+    }
+    
+    private func deSelectBubble(text: String, index: Int) {
+        self.keywords[self.keywords.count - 8 + index].isSelected = false
+        self.delegate?.childDeSelected(selectedText: text)
+    }
+    
+    // MARK: TODO
     private func hoveringChildren() {
         let wholeDuration: Double = 1
         let numberOfSeqeunce: Double = 4

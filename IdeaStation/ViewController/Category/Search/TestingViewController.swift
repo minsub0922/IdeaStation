@@ -37,8 +37,8 @@ class TestingViewController: UIViewController {
         NSLayoutConstraint.activate([
             container.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             container.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            container.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.6),
-            container.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.6)
+            container.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7),
+            container.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7)
         ])
     }
     
@@ -55,7 +55,7 @@ class TestingViewController: UIViewController {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         collectionView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        collectionView.topAnchor.constraint(equalTo: view.topAnchor, constant: 50).isActive = true
+        collectionView.topAnchor.constraint(equalTo: view.safeAreaTopAnchor, constant: 50).isActive = true
         collectionView.heightAnchor.constraint(equalToConstant: 100).isActive = true
     }
     
@@ -108,18 +108,34 @@ extension TestingViewController: UICollectionViewDelegate, UICollectionViewDeleg
 }
 
 extension TestingViewController: BubbleContainerDelegate {
+    func gotoExplore(selectedText: String, completion: @escaping ([String]) -> Void) {
+        getRandomTexts(subject: selectedText, completion: completion)
+    }
+    
+    func childSelected(selectedText: String) {
+        selectedTexts.append(selectedText)
+        collectionView.reloadSection(section: 0)
+        let row = collectionView.numberOfItems(inSection: 0)-1
+        collectionView.scrollToItem(at: IndexPath(row: row,
+                                                  section: 0),
+                                    at: .left, animated: true)
+    }
+    
+    func childDeSelected(selectedText: String) {
+        guard let index = selectedTexts.firstIndex(of: selectedText) else {return}
+        selectedTexts.remove(at: index)
+        
+        let indexPath = IndexPath(row: index, section: 0)
+        self.collectionView.performBatchUpdates({
+            self.collectionView.deleteItems(at:[indexPath])
+        }, completion: nil)
+    }
+    
     func expanded() {
         
     }
     
     func collapsed() {
         
-    }
-    
-    func childSelected(selectedText: String, completion: @escaping ([String]) -> Void) {
-        selectedTexts.append(selectedText)
-        collectionView.reloadSection(section: 0)
-        collectionView.scrollToItem(at: IndexPath(row: collectionView.numberOfItems(inSection: 0)-1, section: 0), at: .left, animated: true)
-        getRandomTexts(subject: selectedText, completion: completion)
     }
 }

@@ -23,12 +23,16 @@ class IdeaStationTests: XCTestCase {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
-
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    
+    func testMDKeywordsArray() {
+        var a = [Array(arrayLiteral: 0...10)].enumerated()
+        var nestedArray = [Array(arrayLiteral: 0...10)].enumerated().map{ MDKeyword(index: $0.offset) }
+        //var array: [[MDKeyword]] = [[MDKeyword]].init(repeating: nestedArray, count: 3)
+        print(a)
+        print(nestedArray.count)
     }
 
+    func testPerformanceExample() {
+       print("hellow?????")
+    }
 }

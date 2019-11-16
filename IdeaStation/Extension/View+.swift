@@ -67,7 +67,7 @@ extension UIView {
         })
     }
     
-    func bounce(completion: @escaping() -> Void) {
+    func bounce(completion: @escaping() -> Void = {}) {
         var targetFrame = self.frame
         targetFrame.origin.y -= 5
         self.frame = targetFrame
@@ -89,6 +89,12 @@ extension UIView {
     func fadeIn(during: Double = 1) {
         UIView.animate(withDuration: during, animations: {
             self.alpha = 1
+        })
+    }
+    
+    func changeAlphaWithAnimation(alpha: CGFloat) {
+        UIView.animate(withDuration: 0.5, animations: {
+            self.alpha = alpha
         })
     }
     

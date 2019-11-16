@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ExitButtonForModal: UIButton {
+class ExitButton: UIButton {
     var targetVC: UIViewController!
     
     required init?(coder aDecoder: NSCoder) {
