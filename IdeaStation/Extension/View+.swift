@@ -175,3 +175,9 @@ extension UIImageView {
         }.resume()
     }
 }
+extension UITextView {
+    func moveToVerticalCenter() {
+        let topCorrection = (self.bounds.size.height - self.contentSize.height * self.zoomScale) / 2.0
+        self.contentInset = UIEdgeInsets(top: topCorrection, left: 0, bottom: 0, right: 0)
+    }
+}
