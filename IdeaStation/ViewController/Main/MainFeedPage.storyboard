@@ -110,7 +110,7 @@
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="RQU-J3-neg" secondAttribute="height" multiplier="299:51" id="wMD-cY-Lrg"/>
                                                             </constraints>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
@@ -180,7 +180,7 @@
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="bVq-ai-wmP" secondAttribute="height" multiplier="299:51" id="b9Q-dI-ZVk"/>
                                                             </constraints>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
