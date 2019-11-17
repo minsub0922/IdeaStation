@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -20,6 +20,26 @@
 		1A726E8D237FC58E00BFBCE8 /* MDKeyword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A726E8C237FC58E00BFBCE8 /* MDKeyword.swift */; };
 		2028C4EA776D25C4083D2C59 /* Pods_IdeaStationTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B372D9412C6D388DBEF5BC49 /* Pods_IdeaStationTests.framework */; };
 		31EE13BAD2309604DF13A0D6 /* Pods_IdeaStation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 924A4A5B190E234000AAEF91 /* Pods_IdeaStation.framework */; };
+		ABA4DDDB238175A600F959EE /* MainFeedPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ABA4DDDA238175A600F959EE /* MainFeedPage.storyboard */; };
+		ABA4DDDD238175EB00F959EE /* MySeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA4DDDC238175EB00F959EE /* MySeedViewController.swift */; };
+		ABA4DDDF238175FE00F959EE /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA4DDDE238175FE00F959EE /* MainViewController.swift */; };
+		ABA4DDE12381761F00F959EE /* MainSeedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA4DDE02381761F00F959EE /* MainSeedCollectionViewCell.swift */; };
+		ABA4DDE32381762C00F959EE /* MainSproutCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA4DDE22381762C00F959EE /* MainSproutCollectionViewCell.swift */; };
+		ABA4DDE62381764200F959EE /* MainCompetitionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA4DDE52381764200F959EE /* MainCompetitionCollectionViewCell.swift */; };
+		ABA4DDE82381764C00F959EE /* MainFeedCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA4DDE72381764C00F959EE /* MainFeedCodable.swift */; };
+		ABA4DDEA2381765800F959EE /* SharingData.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA4DDE92381765800F959EE /* SharingData.swift */; };
+		ABA4DDED2381770700F959EE /* SpecificationStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ABA4DDEC2381770700F959EE /* SpecificationStoryboard.storyboard */; };
+		ABA4DDEF2381772D00F959EE /* IdeaNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA4DDEE2381772D00F959EE /* IdeaNoteViewController.swift */; };
+		ABA4DDF22381774B00F959EE /* IdeaNoteCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA4DDF02381774B00F959EE /* IdeaNoteCollectionViewCell.swift */; };
+		ABA4DDF32381774B00F959EE /* IdeaNoteCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ABA4DDF12381774B00F959EE /* IdeaNoteCollectionViewCell.xib */; };
+		ABA4DDF62381776700F959EE /* IdeaNoteCollectionViewCell1.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA4DDF42381776700F959EE /* IdeaNoteCollectionViewCell1.swift */; };
+		ABA4DDF72381776700F959EE /* IdeaNoteCollectionViewCell1.xib in Resources */ = {isa = PBXBuildFile; fileRef = ABA4DDF52381776700F959EE /* IdeaNoteCollectionViewCell1.xib */; };
+		ABA4DDFA238177FA00F959EE /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA4DDF9238177FA00F959EE /* LoginViewController.swift */; };
+		ABA4DDFC2381780500F959EE /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA4DDFB2381780500F959EE /* SignUpViewController.swift */; };
+		ABA4DDFE2381780E00F959EE /* LoginStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ABA4DDFD2381780E00F959EE /* LoginStoryboard.storyboard */; };
+		ABA4DE00238179E900F959EE /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ABA4DDFF238179E900F959EE /* GoogleService-Info.plist */; };
+		ABA4DE0223817B3600F959EE /* BaseTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA4DE0123817B3600F959EE /* BaseTabBarController.swift */; };
+		ABB6EF22238170ED00F7EDF4 /* PostResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB6EF21238170ED00F7EDF4 /* PostResponse.swift */; };
 		AF07B31A22FFC3C300FAE1C8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF07B31922FFC3C300FAE1C8 /* AppDelegate.swift */; };
 		AF07B31F22FFC3C300FAE1C8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF07B31D22FFC3C300FAE1C8 /* Main.storyboard */; };
 		AF07B32222FFC3C300FAE1C8 /* IdeaStation.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AF07B32022FFC3C300FAE1C8 /* IdeaStation.xcdatamodeld */; };
@@ -87,6 +107,26 @@
 		60794A05CC535D85F7123EAF /* Pods-IdeaStation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IdeaStation.release.xcconfig"; path = "Target Support Files/Pods-IdeaStation/Pods-IdeaStation.release.xcconfig"; sourceTree = "<group>"; };
 		733FFBE66031E89002553C6D /* Pods-IdeaStation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IdeaStation.debug.xcconfig"; path = "Target Support Files/Pods-IdeaStation/Pods-IdeaStation.debug.xcconfig"; sourceTree = "<group>"; };
 		924A4A5B190E234000AAEF91 /* Pods_IdeaStation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IdeaStation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		ABA4DDDA238175A600F959EE /* MainFeedPage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainFeedPage.storyboard; sourceTree = "<group>"; };
+		ABA4DDDC238175EB00F959EE /* MySeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MySeedViewController.swift; sourceTree = "<group>"; };
+		ABA4DDDE238175FE00F959EE /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		ABA4DDE02381761F00F959EE /* MainSeedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSeedCollectionViewCell.swift; sourceTree = "<group>"; };
+		ABA4DDE22381762C00F959EE /* MainSproutCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSproutCollectionViewCell.swift; sourceTree = "<group>"; };
+		ABA4DDE52381764200F959EE /* MainCompetitionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCompetitionCollectionViewCell.swift; sourceTree = "<group>"; };
+		ABA4DDE72381764C00F959EE /* MainFeedCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainFeedCodable.swift; sourceTree = "<group>"; };
+		ABA4DDE92381765800F959EE /* SharingData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharingData.swift; sourceTree = "<group>"; };
+		ABA4DDEC2381770700F959EE /* SpecificationStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SpecificationStoryboard.storyboard; sourceTree = "<group>"; };
+		ABA4DDEE2381772D00F959EE /* IdeaNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdeaNoteViewController.swift; sourceTree = "<group>"; };
+		ABA4DDF02381774B00F959EE /* IdeaNoteCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdeaNoteCollectionViewCell.swift; sourceTree = "<group>"; };
+		ABA4DDF12381774B00F959EE /* IdeaNoteCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IdeaNoteCollectionViewCell.xib; sourceTree = "<group>"; };
+		ABA4DDF42381776700F959EE /* IdeaNoteCollectionViewCell1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdeaNoteCollectionViewCell1.swift; sourceTree = "<group>"; };
+		ABA4DDF52381776700F959EE /* IdeaNoteCollectionViewCell1.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IdeaNoteCollectionViewCell1.xib; sourceTree = "<group>"; };
+		ABA4DDF9238177FA00F959EE /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		ABA4DDFB2381780500F959EE /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		ABA4DDFD2381780E00F959EE /* LoginStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LoginStoryboard.storyboard; sourceTree = "<group>"; };
+		ABA4DDFF238179E900F959EE /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		ABA4DE0123817B3600F959EE /* BaseTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTabBarController.swift; sourceTree = "<group>"; };
+		ABB6EF21238170ED00F7EDF4 /* PostResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostResponse.swift; sourceTree = "<group>"; };
 		AF07B31622FFC3C300FAE1C8 /* IdeaStation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IdeaStation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF07B31922FFC3C300FAE1C8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AF07B31E22FFC3C300FAE1C8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -199,9 +239,64 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		ABA4DDD72381756600F959EE /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				ABA4DDD92381758200F959EE /* Feed */,
+				ABA4DDD82381757900F959EE /* MySeed */,
+				ABA4DDDA238175A600F959EE /* MainFeedPage.storyboard */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		ABA4DDD82381757900F959EE /* MySeed */ = {
+			isa = PBXGroup;
+			children = (
+				ABA4DDDC238175EB00F959EE /* MySeedViewController.swift */,
+			);
+			path = MySeed;
+			sourceTree = "<group>";
+		};
+		ABA4DDD92381758200F959EE /* Feed */ = {
+			isa = PBXGroup;
+			children = (
+				ABA4DDDE238175FE00F959EE /* MainViewController.swift */,
+				ABA4DDE02381761F00F959EE /* MainSeedCollectionViewCell.swift */,
+				ABA4DDE22381762C00F959EE /* MainSproutCollectionViewCell.swift */,
+				ABA4DDE52381764200F959EE /* MainCompetitionCollectionViewCell.swift */,
+				ABA4DDE72381764C00F959EE /* MainFeedCodable.swift */,
+				ABA4DDE92381765800F959EE /* SharingData.swift */,
+			);
+			path = Feed;
+			sourceTree = "<group>";
+		};
+		ABA4DDEB238176F700F959EE /* Specification */ = {
+			isa = PBXGroup;
+			children = (
+				ABA4DDEC2381770700F959EE /* SpecificationStoryboard.storyboard */,
+				ABA4DDEE2381772D00F959EE /* IdeaNoteViewController.swift */,
+				ABA4DDF02381774B00F959EE /* IdeaNoteCollectionViewCell.swift */,
+				ABA4DDF12381774B00F959EE /* IdeaNoteCollectionViewCell.xib */,
+				ABA4DDF42381776700F959EE /* IdeaNoteCollectionViewCell1.swift */,
+				ABA4DDF52381776700F959EE /* IdeaNoteCollectionViewCell1.xib */,
+			);
+			path = Specification;
+			sourceTree = "<group>";
+		};
+		ABA4DDF8238177E600F959EE /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				ABA4DDF9238177FA00F959EE /* LoginViewController.swift */,
+				ABA4DDFB2381780500F959EE /* SignUpViewController.swift */,
+				ABA4DDFD2381780E00F959EE /* LoginStoryboard.storyboard */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
 		AF07B30D22FFC3C300FAE1C8 = {
 			isa = PBXGroup;
 			children = (
+				ABA4DDFF238179E900F959EE /* GoogleService-Info.plist */,
 				AF07B31822FFC3C300FAE1C8 /* IdeaStation */,
 				AF07B33022FFC3C400FAE1C8 /* IdeaStationTests */,
 				AF07B33B22FFC3C400FAE1C8 /* IdeaStationUITests */,
@@ -259,9 +354,13 @@
 		AF07B34A22FFC49D00FAE1C8 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				ABA4DDF8238177E600F959EE /* Login */,
+				ABA4DDEB238176F700F959EE /* Specification */,
+				ABA4DDD72381756600F959EE /* Main */,
 				AFCD532A2307F31900A1D487 /* Interest */,
 				AF07B35122FFF6F200FAE1C8 /* Category */,
 				AF07B31D22FFC3C300FAE1C8 /* Main.storyboard */,
+				ABA4DE0123817B3600F959EE /* BaseTabBarController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -372,6 +471,7 @@
 			isa = PBXGroup;
 			children = (
 				AFF64DC123040EB6003F3E3A /* PixaPictures.swift */,
+				ABB6EF21238170ED00F7EDF4 /* PostResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -484,15 +584,21 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ABA4DDF72381776700F959EE /* IdeaNoteCollectionViewCell1.xib in Resources */,
 				AF07B32722FFC3C400FAE1C8 /* LaunchScreen.storyboard in Resources */,
+				ABA4DE00238179E900F959EE /* GoogleService-Info.plist in Resources */,
 				1A136586237DB6BF00A941CB /* SearchPathCell.xib in Resources */,
+				ABA4DDDB238175A600F959EE /* MainFeedPage.storyboard in Resources */,
 				1A6FFFB0237E406C00AAEFC5 /* HorizontalArrowCell.xib in Resources */,
 				AFCD53322307F31900A1D487 /* InterestStoryboard.storyboard in Resources */,
 				AFF64DC423041A9D003F3E3A /* Search.storyboard in Resources */,
+				ABA4DDED2381770700F959EE /* SpecificationStoryboard.storyboard in Resources */,
 				1A040C2A2380186400A1DF10 /* MandalartCell.xib in Resources */,
 				AFCD53272307F2F100A1D487 /* MandalartStoryboard.storyboard in Resources */,
 				AF07B32422FFC3C400FAE1C8 /* Assets.xcassets in Resources */,
+				ABA4DDFE2381780E00F959EE /* LoginStoryboard.storyboard in Resources */,
 				AF07B31F22FFC3C300FAE1C8 /* Main.storyboard in Resources */,
+				ABA4DDF32381774B00F959EE /* IdeaNoteCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -603,35 +709,47 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ABA4DE0223817B3600F959EE /* BaseTabBarController.swift in Sources */,
 				AFF64DBF2304074A003F3E3A /* API.swift in Sources */,
 				1A136581237D4FEF00A941CB /* BubbleContainer.swift in Sources */,
+				ABA4DDFA238177FA00F959EE /* LoginViewController.swift in Sources */,
+				ABA4DDE32381762C00F959EE /* MainSproutCollectionViewCell.swift in Sources */,
+				ABA4DDE62381764200F959EE /* MainCompetitionCollectionViewCell.swift in Sources */,
 				AF07B35322FFF71600FAE1C8 /* CategoryViewController.swift in Sources */,
 				AFF64DBD2304058E003F3E3A /* APISource.swift in Sources */,
-				AFCD53222307F2F100A1D487 /* MandalartCollectionViewCell.swift in Sources */,
 				1A726E8D237FC58E00BFBCE8 /* MDKeyword.swift in Sources */,
 				1A13657F237D4DFD00A941CB /* TestingViewController.swift in Sources */,
 				AFCD53242307F2F100A1D487 /* NewMandalartCollectionViewCell.swift in Sources */,
 				AFCD53292307F2F100A1D487 /* NewMandalartCellDetailViewController.swift in Sources */,
 				AFCD53312307F31900A1D487 /* InterestViewController.swift in Sources */,
+				ABA4DDE82381764C00F959EE /* MainFeedCodable.swift in Sources */,
 				AFF64DB72303F68E003F3E3A /* SearchViewController.swift in Sources */,
 				AFCD53362307FDCD00A1D487 /* ExitButton.swift in Sources */,
 				1A040C262380166000A1DF10 /* MandalartViewController2.swift in Sources */,
+				ABA4DDEA2381765800F959EE /* SharingData.swift in Sources */,
 				AFF64DB92304037D003F3E3A /* APISourceProtocol.swift in Sources */,
+				ABA4DDEF2381772D00F959EE /* IdeaNoteViewController.swift in Sources */,
 				AFF64DC223040EB6003F3E3A /* PixaPictures.swift in Sources */,
 				AFCD53342307F31900A1D487 /* InterestItem.swift in Sources */,
 				1A6FFFAF237E406C00AAEFC5 /* HorizontalArrowCell.swift in Sources */,
-				AFCD53252307F2F100A1D487 /* UIViewExtension.swift in Sources */,
+				ABA4DDF22381774B00F959EE /* IdeaNoteCollectionViewCell.swift in Sources */,
 				AFCD53332307F31900A1D487 /* DidSelectViewController.swift in Sources */,
+				ABA4DDF62381776700F959EE /* IdeaNoteCollectionViewCell1.swift in Sources */,
 				AF07B3592302629B00FAE1C8 /* ExpandableBubbleLabel.swift in Sources */,
 				AF07B31A22FFC3C300FAE1C8 /* AppDelegate.swift in Sources */,
 				AFCD53262307F2F100A1D487 /* MandalartItem.swift in Sources */,
 				AFF64DC623041E74003F3E3A /* Object+.swift in Sources */,
 				AF07B35B2302771300FAE1C8 /* FlexibleLabel.swift in Sources */,
+				ABB6EF22238170ED00F7EDF4 /* PostResponse.swift in Sources */,
+				ABA4DDDF238175FE00F959EE /* MainViewController.swift in Sources */,
 				AFCD53302307F31900A1D487 /* InterestCollectionViewCell.swift in Sources */,
+				ABA4DDDD238175EB00F959EE /* MySeedViewController.swift in Sources */,
 				AFCD53282307F2F100A1D487 /* NewMandalartViewController.swift in Sources */,
 				1A136585237DB6BF00A941CB /* SearchPathCell.swift in Sources */,
+				ABA4DDFC2381780500F959EE /* SignUpViewController.swift in Sources */,
 				AF07B35522FFFFE600FAE1C8 /* View+.swift in Sources */,
 				1A040C292380186400A1DF10 /* MandalartCell.swift in Sources */,
+				ABA4DDE12381761F00F959EE /* MainSeedCollectionViewCell.swift in Sources */,
 				1A040C2C23801F7C00A1DF10 /* Mandalart.swift in Sources */,
 				AF07B32222FFC3C300FAE1C8 /* IdeaStation.xcdatamodeld in Sources */,
 			);

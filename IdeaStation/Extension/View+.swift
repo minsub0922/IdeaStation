@@ -180,4 +180,13 @@ extension UITextView {
         let topCorrection = (self.bounds.size.height - self.contentSize.height * self.zoomScale) / 2.0
         self.contentInset = UIEdgeInsets(top: topCorrection, left: 0, bottom: 0, right: 0)
     }
+    func centerVertically() {
+        let fittingSize = CGSize(width: bounds.width, height: CGFloat.greatestFiniteMagnitude)
+        let size = sizeThatFits(fittingSize)
+        let topOffset = (bounds.size.height - size.height * zoomScale) / 2
+        let positiveTopOffset = max(1, topOffset)
+        
+        contentOffset.y = -positiveTopOffset
+        
+    }
 }

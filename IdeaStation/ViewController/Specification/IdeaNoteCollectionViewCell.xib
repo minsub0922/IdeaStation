@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="IdeaNoteCollectionViewCell" reuseIdentifier="IdeaNoteCollectionViewCell" id="xbt-5N-tda" customClass="IdeaNoteCollectionViewCell" customModule="IdeaStation" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="258" height="351"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="258" height="351"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" preservesSuperviewLayoutMargins="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="72b-EP-WTX">
+                        <rect key="frame" x="8" y="19.5" width="242" height="22"/>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pMi-wg-Xps">
+                        <rect key="frame" x="8" y="44" width="242" height="26"/>
+                        <viewLayoutGuide key="safeArea" id="ihV-bb-ypK"/>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                        <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="interactive" text="text from user" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="pyw-92-q8e">
+                        <rect key="frame" x="8" y="140.5" width="242" height="70"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="tfm-Gq-DCT"/>
+                        <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                        <textInputTraits key="textInputTraits"/>
+                    </textView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xyw-fc-6wN">
+                        <rect key="frame" x="8" y="220.5" width="242" height="5"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="5" id="EEu-gu-lru"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="pMi-wg-Xps" firstAttribute="trailingMargin" secondItem="xbt-5N-tda" secondAttribute="trailingMargin" id="1CI-aY-SKK"/>
+                <constraint firstItem="pyw-92-q8e" firstAttribute="leadingMargin" secondItem="xbt-5N-tda" secondAttribute="leadingMargin" id="5sA-my-b73"/>
+                <constraint firstItem="pMi-wg-Xps" firstAttribute="leading" secondItem="72b-EP-WTX" secondAttribute="leading" id="Fw4-f5-kpi"/>
+                <constraint firstItem="72b-EP-WTX" firstAttribute="top" secondItem="xbt-5N-tda" secondAttribute="bottom" multiplier="1/18" id="IFb-Kz-0sU"/>
+                <constraint firstItem="pMi-wg-Xps" firstAttribute="bottom" secondItem="xbt-5N-tda" secondAttribute="bottom" multiplier="1/5" id="MpD-qj-2IC"/>
+                <constraint firstItem="Xyw-fc-6wN" firstAttribute="top" secondItem="pyw-92-q8e" secondAttribute="bottom" constant="10" id="Prs-lv-q42"/>
+                <constraint firstAttribute="trailingMargin" secondItem="Xyw-fc-6wN" secondAttribute="trailingMargin" id="QBg-C7-Y8B"/>
+                <constraint firstItem="Xyw-fc-6wN" firstAttribute="leadingMargin" secondItem="xbt-5N-tda" secondAttribute="leadingMargin" id="UyX-jk-AT2"/>
+                <constraint firstItem="72b-EP-WTX" firstAttribute="leadingMargin" secondItem="xbt-5N-tda" secondAttribute="leadingMargin" id="ViX-j1-HsU"/>
+                <constraint firstAttribute="trailingMargin" secondItem="pyw-92-q8e" secondAttribute="trailingMargin" id="aWL-Ga-hh3"/>
+                <constraint firstItem="pyw-92-q8e" firstAttribute="bottom" secondItem="xbt-5N-tda" secondAttribute="bottom" multiplier="6/10" id="c3J-sk-wF7"/>
+                <constraint firstItem="pMi-wg-Xps" firstAttribute="top" secondItem="xbt-5N-tda" secondAttribute="bottom" multiplier="1/8" id="dia-sJ-O2a"/>
+                <constraint firstItem="pyw-92-q8e" firstAttribute="top" secondItem="xbt-5N-tda" secondAttribute="bottom" multiplier="4/10" id="jk9-yZ-LbF"/>
+                <constraint firstItem="72b-EP-WTX" firstAttribute="bottom" secondItem="xbt-5N-tda" secondAttribute="bottom" multiplier="17/144" id="k1a-jE-1lL"/>
+                <constraint firstItem="72b-EP-WTX" firstAttribute="trailingMargin" secondItem="xbt-5N-tda" secondAttribute="trailingMargin" id="lSa-gr-nFg"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="e3k-9R-jmn"/>
+            <size key="customSize" width="253.5" height="154.5"/>
+            <connections>
+                <outlet property="inputTextView" destination="pyw-92-q8e" id="WKp-gW-Exz"/>
+                <outlet property="subtitleLabel" destination="pMi-wg-Xps" id="15c-4g-ZQ6"/>
+                <outlet property="titleLabel" destination="72b-EP-WTX" id="iBx-Vf-bww"/>
+            </connections>
+            <point key="canvasLocation" x="-430.43478260869568" y="23.772321428571427"/>
+        </collectionViewCell>
+    </objects>
+</document>
