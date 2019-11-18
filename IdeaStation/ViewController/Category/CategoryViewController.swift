@@ -75,6 +75,8 @@ class CategoryViewController: UIViewController {
             performSegue(withIdentifier: "search", sender: nil)
         case 1:
             performSegue(withIdentifier: "madalart", sender: nil)
+        case 2:
+            performSegue(withIdentifier: "note", sender: nil)
         default:
             break
         }

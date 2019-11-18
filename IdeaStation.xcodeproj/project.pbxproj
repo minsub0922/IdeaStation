@@ -26,10 +26,6 @@
 		ABA4DDE82381764C00F959EE /* MainFeedCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA4DDE72381764C00F959EE /* MainFeedCodable.swift */; };
 		ABA4DDED2381770700F959EE /* SpecificationStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ABA4DDEC2381770700F959EE /* SpecificationStoryboard.storyboard */; };
 		ABA4DDEF2381772D00F959EE /* IdeaNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA4DDEE2381772D00F959EE /* IdeaNoteViewController.swift */; };
-		ABA4DDF22381774B00F959EE /* IdeaNoteCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA4DDF02381774B00F959EE /* IdeaNoteCollectionViewCell.swift */; };
-		ABA4DDF32381774B00F959EE /* IdeaNoteCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ABA4DDF12381774B00F959EE /* IdeaNoteCollectionViewCell.xib */; };
-		ABA4DDF62381776700F959EE /* IdeaNoteCollectionViewCell1.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA4DDF42381776700F959EE /* IdeaNoteCollectionViewCell1.swift */; };
-		ABA4DDF72381776700F959EE /* IdeaNoteCollectionViewCell1.xib in Resources */ = {isa = PBXBuildFile; fileRef = ABA4DDF52381776700F959EE /* IdeaNoteCollectionViewCell1.xib */; };
 		ABA4DDFA238177FA00F959EE /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA4DDF9238177FA00F959EE /* LoginViewController.swift */; };
 		ABA4DDFC2381780500F959EE /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA4DDFB2381780500F959EE /* SignUpViewController.swift */; };
 		ABA4DDFE2381780E00F959EE /* LoginStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ABA4DDFD2381780E00F959EE /* LoginStoryboard.storyboard */; };
@@ -39,6 +35,9 @@
 		ABA4DE062381992E00F959EE /* MainSproutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA4DE052381992E00F959EE /* MainSproutTableViewCell.swift */; };
 		ABA4DE082381993800F959EE /* MainCompetitionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA4DE072381993800F959EE /* MainCompetitionTableViewCell.swift */; };
 		ABA4DE0A23819BBC00F959EE /* SharingData.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA4DE0923819BBC00F959EE /* SharingData.swift */; };
+		ABA4DE0C2382350000F959EE /* ExplainCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA4DE0B2382350000F959EE /* ExplainCollectionViewCell.swift */; };
+		ABA4DE0E2382351600F959EE /* UserAnalysisCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA4DE0D2382351600F959EE /* UserAnalysisCollectionViewCell.swift */; };
+		ABA4DE10238236F900F959EE /* UserInputSharing.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA4DE0F238236F900F959EE /* UserInputSharing.swift */; };
 		ABB6EF22238170ED00F7EDF4 /* PostResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB6EF21238170ED00F7EDF4 /* PostResponse.swift */; };
 		AF07B31A22FFC3C300FAE1C8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF07B31922FFC3C300FAE1C8 /* AppDelegate.swift */; };
 		AF07B31F22FFC3C300FAE1C8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AF07B31D22FFC3C300FAE1C8 /* Main.storyboard */; };
@@ -113,10 +112,6 @@
 		ABA4DDE72381764C00F959EE /* MainFeedCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainFeedCodable.swift; sourceTree = "<group>"; };
 		ABA4DDEC2381770700F959EE /* SpecificationStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SpecificationStoryboard.storyboard; sourceTree = "<group>"; };
 		ABA4DDEE2381772D00F959EE /* IdeaNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdeaNoteViewController.swift; sourceTree = "<group>"; };
-		ABA4DDF02381774B00F959EE /* IdeaNoteCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdeaNoteCollectionViewCell.swift; sourceTree = "<group>"; };
-		ABA4DDF12381774B00F959EE /* IdeaNoteCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IdeaNoteCollectionViewCell.xib; sourceTree = "<group>"; };
-		ABA4DDF42381776700F959EE /* IdeaNoteCollectionViewCell1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdeaNoteCollectionViewCell1.swift; sourceTree = "<group>"; };
-		ABA4DDF52381776700F959EE /* IdeaNoteCollectionViewCell1.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IdeaNoteCollectionViewCell1.xib; sourceTree = "<group>"; };
 		ABA4DDF9238177FA00F959EE /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		ABA4DDFB2381780500F959EE /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		ABA4DDFD2381780E00F959EE /* LoginStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LoginStoryboard.storyboard; sourceTree = "<group>"; };
@@ -126,6 +121,9 @@
 		ABA4DE052381992E00F959EE /* MainSproutTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSproutTableViewCell.swift; sourceTree = "<group>"; };
 		ABA4DE072381993800F959EE /* MainCompetitionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCompetitionTableViewCell.swift; sourceTree = "<group>"; };
 		ABA4DE0923819BBC00F959EE /* SharingData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharingData.swift; sourceTree = "<group>"; };
+		ABA4DE0B2382350000F959EE /* ExplainCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplainCollectionViewCell.swift; sourceTree = "<group>"; };
+		ABA4DE0D2382351600F959EE /* UserAnalysisCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAnalysisCollectionViewCell.swift; sourceTree = "<group>"; };
+		ABA4DE0F238236F900F959EE /* UserInputSharing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInputSharing.swift; sourceTree = "<group>"; };
 		ABB6EF21238170ED00F7EDF4 /* PostResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostResponse.swift; sourceTree = "<group>"; };
 		AF07B31622FFC3C300FAE1C8 /* IdeaStation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IdeaStation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF07B31922FFC3C300FAE1C8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -275,10 +273,8 @@
 			children = (
 				ABA4DDEC2381770700F959EE /* SpecificationStoryboard.storyboard */,
 				ABA4DDEE2381772D00F959EE /* IdeaNoteViewController.swift */,
-				ABA4DDF02381774B00F959EE /* IdeaNoteCollectionViewCell.swift */,
-				ABA4DDF12381774B00F959EE /* IdeaNoteCollectionViewCell.xib */,
-				ABA4DDF42381776700F959EE /* IdeaNoteCollectionViewCell1.swift */,
-				ABA4DDF52381776700F959EE /* IdeaNoteCollectionViewCell1.xib */,
+				ABA4DE0B2382350000F959EE /* ExplainCollectionViewCell.swift */,
+				ABA4DE0D2382351600F959EE /* UserAnalysisCollectionViewCell.swift */,
 			);
 			path = Specification;
 			sourceTree = "<group>";
@@ -361,6 +357,7 @@
 				AF07B35122FFF6F200FAE1C8 /* Category */,
 				AF07B31D22FFC3C300FAE1C8 /* Main.storyboard */,
 				ABA4DE0123817B3600F959EE /* BaseTabBarController.swift */,
+				ABA4DE0F238236F900F959EE /* UserInputSharing.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -584,7 +581,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ABA4DDF72381776700F959EE /* IdeaNoteCollectionViewCell1.xib in Resources */,
 				AF07B32722FFC3C400FAE1C8 /* LaunchScreen.storyboard in Resources */,
 				ABA4DE00238179E900F959EE /* GoogleService-Info.plist in Resources */,
 				1A136586237DB6BF00A941CB /* SearchPathCell.xib in Resources */,
@@ -598,7 +594,6 @@
 				AF07B32422FFC3C400FAE1C8 /* Assets.xcassets in Resources */,
 				ABA4DDFE2381780E00F959EE /* LoginStoryboard.storyboard in Resources */,
 				AF07B31F22FFC3C300FAE1C8 /* Main.storyboard in Resources */,
-				ABA4DDF32381774B00F959EE /* IdeaNoteCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -731,17 +726,17 @@
 				AFF64DC223040EB6003F3E3A /* PixaPictures.swift in Sources */,
 				AFCD53342307F31900A1D487 /* InterestItem.swift in Sources */,
 				1A6FFFAF237E406C00AAEFC5 /* HorizontalArrowCell.swift in Sources */,
-				ABA4DDF22381774B00F959EE /* IdeaNoteCollectionViewCell.swift in Sources */,
 				AFCD53332307F31900A1D487 /* DidSelectViewController.swift in Sources */,
-				ABA4DDF62381776700F959EE /* IdeaNoteCollectionViewCell1.swift in Sources */,
 				AF07B3592302629B00FAE1C8 /* ExpandableBubbleLabel.swift in Sources */,
 				AF07B31A22FFC3C300FAE1C8 /* AppDelegate.swift in Sources */,
 				AFCD53262307F2F100A1D487 /* MandalartItem.swift in Sources */,
 				AFF64DC623041E74003F3E3A /* Object+.swift in Sources */,
 				AF07B35B2302771300FAE1C8 /* FlexibleLabel.swift in Sources */,
 				ABA4DE0A23819BBC00F959EE /* SharingData.swift in Sources */,
+				ABA4DE0E2382351600F959EE /* UserAnalysisCollectionViewCell.swift in Sources */,
 				ABB6EF22238170ED00F7EDF4 /* PostResponse.swift in Sources */,
 				ABA4DDDF238175FE00F959EE /* MainViewController.swift in Sources */,
+				ABA4DE10238236F900F959EE /* UserInputSharing.swift in Sources */,
 				AFCD53302307F31900A1D487 /* InterestCollectionViewCell.swift in Sources */,
 				ABA4DDDD238175EB00F959EE /* MySeedViewController.swift in Sources */,
 				ABA4DE042381992100F959EE /* MainSeedTableViewCell.swift in Sources */,
@@ -749,6 +744,7 @@
 				1A136585237DB6BF00A941CB /* SearchPathCell.swift in Sources */,
 				ABA4DDFC2381780500F959EE /* SignUpViewController.swift in Sources */,
 				AF07B35522FFFFE600FAE1C8 /* View+.swift in Sources */,
+				ABA4DE0C2382350000F959EE /* ExplainCollectionViewCell.swift in Sources */,
 				1A040C292380186400A1DF10 /* MandalartCell.swift in Sources */,
 				1A040C2C23801F7C00A1DF10 /* Mandalart.swift in Sources */,
 				AF07B32222FFC3C300FAE1C8 /* IdeaStation.xcdatamodeld in Sources */,

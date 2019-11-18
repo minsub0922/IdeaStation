@@ -8,32 +8,28 @@
 
 import UIKit
 
-class IdeaNoteViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+class IdeaNoteViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UITextViewDelegate, UITextFieldDelegate {
     
     @IBOutlet weak var ideaNoteCollectionView: UICollectionView!
+    @IBOutlet weak var ideaTitle: UILabel!
     
     override func viewDidLoad() {
         // Do any additional setup after loading the view.
+        super.viewDidLoad()
+        
         ideaNoteCollectionView.delegate = self
         ideaNoteCollectionView.dataSource = self
-
-        super.viewDidLoad()
-
-        let nibName = UINib(nibName: "IdeaNoteCollectionViewCell", bundle: nil)
-        let nibName1 = UINib(nibName: "IdeaNoteCollectionViewCell1", bundle: nil)
-        
-        ideaNoteCollectionView.register(nibName, forCellWithReuseIdentifier: IdeaNoteCollectionViewCell.className)
-        ideaNoteCollectionView.register(nibName1, forCellWithReuseIdentifier: IdeaNoteCollectionViewCell1.className)
-
+        ideaTitle.text = UserSharingData.shared.ideaTitle
+        ideaNoteCollectionView.reloadData()
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return 2
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = collectionView.bounds.width
-        let height = collectionView.bounds.height
+        let width = self.ideaNoteCollectionView.bounds.width
+        let height = self.ideaNoteCollectionView.bounds.height
         
         return CGSize(width: width, height: height)
     }
@@ -48,35 +44,42 @@ class IdeaNoteViewController: UIViewController, UICollectionViewDataSource, UICo
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        
         switch indexPath.item {
         case 0:
-            let cell = ideaNoteCollectionView.dequeueReusableCell(withReuseIdentifier: IdeaNoteCollectionViewCell.className, for: indexPath) as! IdeaNoteCollectionViewCell
+            let cell = ideaNoteCollectionView.dequeueReusableCell(withReuseIdentifier: "idea-explain", for: indexPath) as! ExplainCollectionViewCell
             
-            cell.titleLabel.text = "아이디어 설명"
-//            cell.titleLabel.sizeToFit()
-            cell.subtitleLabel.text = "아이디어의 이점을 포함하여 간단하게\n설명해주세요!"
-//            cell.subtitleLabel.sizeToFit()
-            cell.inputTextView.text = "원격으로 반려견에게 사료를 주거나 카메라를 통해 실시간으로 반려견의 상태를 확인할 수 있는 IoT 토탈케어 서비스"
-            cell.inputTextView.centerVertically()
-//            cell.inputTextView.sizeToFit()
+            cell.inputTextView.text = UserSharingData.shared.userIdeaExplain
             return cell
-        case 1...4:
-            let cell = ideaNoteCollectionView.dequeueReusableCell(withReuseIdentifier: IdeaNoteCollectionViewCell1.className, for: indexPath) as! IdeaNoteCollectionViewCell1
-                        
-            cell.titleLabel1.text = "5W"
-//                        cell.titleLabel.sizeToFit()
-            cell.subtitleLabel1.text = "육하원칙에 의거하여 아이디어를 구체화 시켜보세요!"
-            //            cell.subtitleLabel.sizeToFit()
-            cell.inputTextView1.text = "원격으로 반려견에게 사료를 주거나 카메라를 통해 실시간으로 반려견의 상태를 확인할 수 있는 IoT 토탈케어 서비스2222"
-            cell.inputTextView1.centerVertically()
-            //            cell.inputTextView.sizeToFit()
-                        return cell
+        case 1:
+            let cell = ideaNoteCollectionView.dequeueReusableCell(withReuseIdentifier: "user-analysis", for: indexPath) as! UserAnalysisCollectionViewCell
+            
+            cell.targetUserTextField.text = UserSharingData.shared.userAnalysisTarget
+            cell.customerActivity.text = UserSharingData.shared.userAnalysisCustomer
+            cell.uncomfortableThings.text = UserSharingData.shared.userAnalysisUncomfortable
+            cell.gainThings.text = UserSharingData.shared.userAnalysisGain
+            
+            return cell
         default:
             return UICollectionViewCell()
         }
         
     }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        print(textView.text)
+        self.view.endEditing(true)
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        print(textView.text)
+        self.view.endEditing(true)
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        print(textField.text)
+        self.view.endEditing(true)
+    }
+    
     /*
     // MARK: - Navigation
 
@@ -86,5 +89,6 @@ class IdeaNoteViewController: UIViewController, UICollectionViewDataSource, UICo
         // Pass the selected object to the new view controller.
     }
     */
+
 
 }
