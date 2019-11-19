@@ -9,7 +9,7 @@
 import UIKit
 
 class ExitButton: UIButton {
-    var targetVC: UIViewController!
+    unowned var targetVC: UIViewController!
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
