@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="t7e-MI-XRR">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="ipad9_7" orientation="portrait" layout="fullscreen" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
@@ -13,54 +13,52 @@
             <objects>
                 <viewController id="94l-Rz-Qf2" customClass="MainViewController" customModule="IdeaStation" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="TM5-1A-Bcd">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="OCr-qH-AR9">
-                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <rect key="frame" x="0.0" y="50" width="768" height="924"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="feed-seed" rowHeight="174" id="BM8-Qz-XVF" customClass="MainSeedTableViewCell" customModule="IdeaStation" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="174"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="feed-seed" rowHeight="215" id="BM8-Qz-XVF" customClass="MainSeedTableViewCell" customModule="IdeaStation" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="768" height="215"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="BM8-Qz-XVF" id="z0M-OU-gCQ">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="174"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="768" height="215"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pbH-VO-wT8">
-                                                    <rect key="frame" x="20" y="11" width="374" height="67"/>
+                                                    <rect key="frame" x="15" y="11" width="738" height="132"/>
                                                     <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="오늘의 추천 씨드" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VIS-9p-gUJ">
+                                                            <rect key="frame" x="82" y="8" width="648" height="116"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="idea-seed" translatesAutoresizingMaskIntoConstraints="NO" id="IEq-aW-omL">
-                                                            <rect key="frame" x="8" y="8" width="51" height="51"/>
+                                                            <rect key="frame" x="8" y="33" width="66" height="66"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="IEq-aW-omL" secondAttribute="height" multiplier="1:1" id="ZY4-Ts-T1T"/>
                                                             </constraints>
                                                         </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="오늘의 추천 씨드" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VIS-9p-gUJ">
-                                                            <rect key="frame" x="67" y="8" width="299" height="51"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="width" secondItem="VIS-9p-gUJ" secondAttribute="height" multiplier="299:51" id="0jo-ky-26d"/>
-                                                            </constraints>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
                                                     </subviews>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="bottomMargin" secondItem="IEq-aW-omL" secondAttribute="bottom" id="2Mw-jq-R3F"/>
+                                                        <constraint firstItem="IEq-aW-omL" firstAttribute="centerY" secondItem="pbH-VO-wT8" secondAttribute="centerY" id="CNL-5b-8Dy"/>
                                                         <constraint firstAttribute="bottomMargin" secondItem="VIS-9p-gUJ" secondAttribute="bottom" id="Y6W-KN-AeF"/>
-                                                        <constraint firstItem="IEq-aW-omL" firstAttribute="top" secondItem="pbH-VO-wT8" secondAttribute="topMargin" id="ZQw-rc-A3q"/>
                                                         <constraint firstItem="VIS-9p-gUJ" firstAttribute="top" secondItem="pbH-VO-wT8" secondAttribute="topMargin" id="eW3-CG-2LZ"/>
                                                         <constraint firstItem="IEq-aW-omL" firstAttribute="leading" secondItem="pbH-VO-wT8" secondAttribute="leadingMargin" id="nk4-Vx-GDY"/>
+                                                        <constraint firstItem="IEq-aW-omL" firstAttribute="height" secondItem="pbH-VO-wT8" secondAttribute="height" multiplier="0.5" id="pgd-Ge-QGW"/>
                                                         <constraint firstAttribute="width" secondItem="pbH-VO-wT8" secondAttribute="height" multiplier="374:67" id="rkc-CC-Ylm"/>
+                                                        <constraint firstItem="VIS-9p-gUJ" firstAttribute="leading" secondItem="IEq-aW-omL" secondAttribute="trailing" constant="8" id="vGd-de-Ljs"/>
                                                         <constraint firstItem="VIS-9p-gUJ" firstAttribute="trailing" secondItem="pbH-VO-wT8" secondAttribute="trailingMargin" id="xLc-L8-TU8"/>
                                                     </constraints>
                                                 </view>
                                                 <textView userInteractionEnabled="NO" contentMode="scaleToFill" editable="NO" text="매번 막차 시간을 일일히 확인하는 게 너무 불편합니다......" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wAv-Qm-Dw9">
-                                                    <rect key="frame" x="20" y="78" width="374" height="85"/>
+                                                    <rect key="frame" x="20" y="143" width="728" height="61"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                     <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 </textView>
                                             </subviews>
@@ -70,65 +68,58 @@
                                                 <constraint firstItem="wAv-Qm-Dw9" firstAttribute="bottom" secondItem="z0M-OU-gCQ" secondAttribute="bottomMargin" id="3QL-Jd-6Ea"/>
                                                 <constraint firstItem="pbH-VO-wT8" firstAttribute="trailing" secondItem="z0M-OU-gCQ" secondAttribute="trailingMargin" id="3zA-Ah-JBy"/>
                                                 <constraint firstItem="pbH-VO-wT8" firstAttribute="top" secondItem="z0M-OU-gCQ" secondAttribute="topMargin" id="DCD-Cq-zHT"/>
+                                                <constraint firstItem="wAv-Qm-Dw9" firstAttribute="top" secondItem="pbH-VO-wT8" secondAttribute="bottom" id="FN9-jo-o0e"/>
                                                 <constraint firstItem="pbH-VO-wT8" firstAttribute="leading" secondItem="z0M-OU-gCQ" secondAttribute="leadingMargin" id="NaY-ue-Lx9"/>
                                                 <constraint firstItem="wAv-Qm-Dw9" firstAttribute="leading" secondItem="z0M-OU-gCQ" secondAttribute="leading" constant="20" id="kEE-wp-wCp"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="wAv-Qm-Dw9" secondAttribute="bottom" constant="11" id="WHF-B0-2u3"/>
-                                        </constraints>
                                         <connections>
                                             <outlet property="seedDescription" destination="wAv-Qm-Dw9" id="70l-n7-s4W"/>
                                             <outlet property="todaySeedTitle" destination="VIS-9p-gUJ" id="KLf-bL-nPw"/>
                                             <segue destination="YIf-Sn-6f0" kind="show" id="CT2-Rj-jLU"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="feed-sprout" rowHeight="524" id="TeS-Cc-2XL" customClass="MainSproutTableViewCell" customModule="IdeaStation" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="202" width="414" height="524"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="feed-sprout" rowHeight="1277" id="TeS-Cc-2XL" customClass="MainSproutTableViewCell" customModule="IdeaStation" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="243" width="768" height="1277"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="TeS-Cc-2XL" id="eFc-cp-cZM">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="524"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="768" height="1277"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="elevatorPitch" translatesAutoresizingMaskIntoConstraints="NO" id="rsV-3j-vYx">
-                                                    <rect key="frame" x="20" y="78" width="374" height="374"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" secondItem="rsV-3j-vYx" secondAttribute="height" multiplier="1:1" id="wSm-OH-GoO"/>
-                                                    </constraints>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="elevatorPitch" translatesAutoresizingMaskIntoConstraints="NO" id="rsV-3j-vYx">
+                                                    <rect key="frame" x="15" y="143" width="738" height="738"/>
                                                 </imageView>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XtW-ZT-fv5">
-                                                    <rect key="frame" x="20" y="11" width="374" height="67"/>
+                                                    <rect key="frame" x="15" y="11" width="738" height="132"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="idea-sprout" translatesAutoresizingMaskIntoConstraints="NO" id="1bY-Kg-BO7">
-                                                            <rect key="frame" x="8" y="8" width="51" height="51"/>
+                                                            <rect key="frame" x="8" y="33" width="66" height="66"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="1bY-Kg-BO7" secondAttribute="height" multiplier="1:1" id="bYK-Wq-zdt"/>
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="오늘의 새싹" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RQU-J3-neg">
-                                                            <rect key="frame" x="67" y="8" width="299" height="51"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="width" secondItem="RQU-J3-neg" secondAttribute="height" multiplier="299:51" id="wMD-cY-Lrg"/>
-                                                            </constraints>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                                            <rect key="frame" x="82" y="8" width="648" height="116"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                     <constraints>
+                                                        <constraint firstItem="1bY-Kg-BO7" firstAttribute="height" secondItem="XtW-ZT-fv5" secondAttribute="height" multiplier="0.5" id="0tt-bo-UJo"/>
                                                         <constraint firstAttribute="bottomMargin" secondItem="RQU-J3-neg" secondAttribute="bottom" id="Oea-Nk-4sf"/>
+                                                        <constraint firstItem="RQU-J3-neg" firstAttribute="leading" secondItem="1bY-Kg-BO7" secondAttribute="trailing" constant="8" id="TLC-IO-zBB"/>
                                                         <constraint firstItem="1bY-Kg-BO7" firstAttribute="leading" secondItem="XtW-ZT-fv5" secondAttribute="leadingMargin" id="bNS-Nv-uzh"/>
-                                                        <constraint firstItem="1bY-Kg-BO7" firstAttribute="top" secondItem="XtW-ZT-fv5" secondAttribute="topMargin" id="e6r-nR-RdQ"/>
                                                         <constraint firstAttribute="trailingMargin" secondItem="RQU-J3-neg" secondAttribute="trailing" id="em1-tc-q6n"/>
-                                                        <constraint firstAttribute="bottomMargin" secondItem="1bY-Kg-BO7" secondAttribute="bottom" id="usP-7G-dhV"/>
+                                                        <constraint firstItem="1bY-Kg-BO7" firstAttribute="centerY" secondItem="XtW-ZT-fv5" secondAttribute="centerY" id="fFC-9m-mqY"/>
                                                         <constraint firstAttribute="width" secondItem="XtW-ZT-fv5" secondAttribute="height" multiplier="374:67" id="xxb-Rc-Rfy"/>
                                                         <constraint firstItem="RQU-J3-neg" firstAttribute="top" secondItem="XtW-ZT-fv5" secondAttribute="topMargin" id="y4o-hT-Gc0"/>
                                                     </constraints>
                                                 </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="막차 시간 계산해주는 앱서비스" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RHs-Ys-4Ct">
-                                                    <rect key="frame" x="20" y="452" width="374" height="61"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="막차 시간 계산해주는 앱서비스" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RHs-Ys-4Ct">
+                                                    <rect key="frame" x="15" y="936" width="738" height="35"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -153,34 +144,31 @@
                                             <segue destination="mIz-nQ-RPL" kind="show" id="Lor-K9-cGv"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="feed-competition" rowHeight="516" id="yTK-tA-Ael" customClass="MainCompetitionTableViewCell" customModule="IdeaStation" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="726" width="414" height="516"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="feed-competition" rowHeight="624" id="yTK-tA-Ael" customClass="MainCompetitionTableViewCell" customModule="IdeaStation" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="1520" width="768" height="624"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="yTK-tA-Ael" id="Wwr-yf-mwg">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="516"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="768" height="624"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="petfoodPackageDesignCompetition" translatesAutoresizingMaskIntoConstraints="NO" id="Rfh-x5-iKm">
-                                                    <rect key="frame" x="20" y="78" width="374" height="374"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="petfoodPackageDesignCompetition" translatesAutoresizingMaskIntoConstraints="NO" id="Rfh-x5-iKm">
+                                                    <rect key="frame" x="15" y="143" width="738" height="362"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="Rfh-x5-iKm" secondAttribute="height" multiplier="1:1" id="hMc-qn-ALS"/>
                                                     </constraints>
                                                 </imageView>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jgg-Ta-lY2">
-                                                    <rect key="frame" x="20" y="11" width="374" height="67"/>
+                                                    <rect key="frame" x="15" y="11" width="738" height="132"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="idea-competition" translatesAutoresizingMaskIntoConstraints="NO" id="dYk-rE-df6">
-                                                            <rect key="frame" x="8" y="8" width="51" height="51"/>
+                                                            <rect key="frame" x="8" y="33" width="66" height="66"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="dYk-rE-df6" secondAttribute="height" multiplier="1:1" id="NYH-Gz-fIc"/>
                                                             </constraints>
                                                         </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="오늘의 공모전" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bVq-ai-wmP">
-                                                            <rect key="frame" x="67" y="8" width="299" height="51"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="width" secondItem="bVq-ai-wmP" secondAttribute="height" multiplier="299:51" id="b9Q-dI-ZVk"/>
-                                                            </constraints>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="오늘의 공모전" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bVq-ai-wmP">
+                                                            <rect key="frame" x="82" y="8" width="648" height="116"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
@@ -188,17 +176,21 @@
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                     <constraints>
                                                         <constraint firstAttribute="trailingMargin" secondItem="bVq-ai-wmP" secondAttribute="trailing" id="B7o-rl-kue"/>
+                                                        <constraint firstItem="bVq-ai-wmP" firstAttribute="leading" secondItem="dYk-rE-df6" secondAttribute="trailing" constant="8" id="BN8-nv-IBn"/>
+                                                        <constraint firstItem="dYk-rE-df6" firstAttribute="centerY" secondItem="Jgg-Ta-lY2" secondAttribute="centerY" id="DJW-Ek-3eR"/>
                                                         <constraint firstItem="bVq-ai-wmP" firstAttribute="top" secondItem="Jgg-Ta-lY2" secondAttribute="topMargin" id="GEM-CL-yDH"/>
+                                                        <constraint firstItem="dYk-rE-df6" firstAttribute="height" secondItem="Jgg-Ta-lY2" secondAttribute="height" multiplier="0.5" id="Yis-Ip-Q08"/>
                                                         <constraint firstAttribute="bottomMargin" secondItem="bVq-ai-wmP" secondAttribute="bottom" id="n67-zW-I5G"/>
                                                         <constraint firstItem="dYk-rE-df6" firstAttribute="leading" secondItem="Jgg-Ta-lY2" secondAttribute="leadingMargin" id="oqx-vn-taH"/>
-                                                        <constraint firstItem="dYk-rE-df6" firstAttribute="top" secondItem="Jgg-Ta-lY2" secondAttribute="topMargin" id="ruT-57-hPI"/>
-                                                        <constraint firstAttribute="bottomMargin" secondItem="dYk-rE-df6" secondAttribute="bottom" id="vK8-LI-wYL"/>
                                                         <constraint firstAttribute="width" secondItem="Jgg-Ta-lY2" secondAttribute="height" multiplier="374:67" id="xVZ-Eh-a6a"/>
                                                     </constraints>
                                                 </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="펫푸드 제품 패키지 디자인 공모전" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3HV-cl-gjO">
-                                                    <rect key="frame" x="20" y="452" width="374" height="53"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="펫푸드 제품 패키지 디자인 공모전" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3HV-cl-gjO">
+                                                    <rect key="frame" x="15" y="564" width="738" height="49"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="49" id="blb-lH-A4G"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -243,24 +235,24 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1CS-mG-pwI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2585.507246376812" y="-139.28571428571428"/>
+            <point key="canvasLocation" x="2585.15625" y="-139.453125"/>
         </scene>
         <!--공모전-->
         <scene sceneID="2yU-h9-2Zv">
             <objects>
                 <viewController id="dgU-qZ-EPj" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cUM-qW-9p3">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="petfoodPackageDesignCompetition" translatesAutoresizingMaskIntoConstraints="NO" id="MCu-iR-ENq">
-                                <rect key="frame" x="0.0" y="88" width="414" height="538"/>
+                                <rect key="frame" x="0.0" y="50" width="768" height="471"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="MCu-iR-ENq" secondAttribute="height" multiplier="1:1.3" id="vym-4b-VDy"/>
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bg7-tB-TdE">
-                                <rect key="frame" x="12" y="638" width="390" height="163"/>
+                                <rect key="frame" x="12" y="533" width="744" height="429"/>
                                 <subviews>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="[팀블라썸] 펫푸드 제품 패키지 디자인 공모전" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="kiH-7Y-Wy1">
                                         <rect key="frame" x="8" y="8" width="374" height="82"/>
@@ -307,11 +299,11 @@
             <objects>
                 <viewController id="mIz-nQ-RPL" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="TcE-XV-mgC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="elevatorPitch" translatesAutoresizingMaskIntoConstraints="NO" id="clS-Ld-XAq">
-                                <rect key="frame" x="0.0" y="88" width="414" height="538"/>
+                                <rect key="frame" x="0.0" y="50" width="768" height="998"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="clS-Ld-XAq" secondAttribute="height" multiplier="207:269" id="Xna-JE-sBa"/>
                                 </constraints>
@@ -352,7 +344,7 @@
             <objects>
                 <viewController id="YIf-Sn-6f0" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WNh-lP-tzj">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" text="매번 막차 시간을 일일히 확인하는 게 너무 불편합니다......" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dkg-M2-Ybd">
@@ -409,7 +401,7 @@
             <objects>
                 <viewController id="LHU-U4-HIA" customClass="MySeedViewController" customModule="IdeaStation" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VZa-a6-CD0">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="57r-GQ-3i6">
@@ -439,7 +431,7 @@
                     <tabBarItem key="tabBarItem" title="Feed" image="idea-feed" id="nze-7w-RNk"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ydL-10-4X6">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="50"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

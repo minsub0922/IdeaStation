@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="hBI-Dz-Jzf">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="ipad9_7" orientation="portrait" layout="fullscreen" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
@@ -14,11 +14,11 @@
             <objects>
                 <viewController id="hBI-Dz-Jzf" customClass="IdeaNoteViewController" customModule="IdeaStation" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="xZ6-LA-OXG">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="inK-ZS-vXj">
-                                <rect key="frame" x="20" y="44" width="374" height="60"/>
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="inK-ZS-vXj">
+                                <rect key="frame" x="20" y="0.0" width="728" height="117"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fTX-xw-oNv">
                                         <rect key="frame" x="0.0" y="3" width="30" height="54"/>
@@ -42,12 +42,9 @@
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="inK-ZS-vXj" secondAttribute="height" multiplier="187:30" id="McX-0C-fIg"/>
-                                </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tEs-0H-YeW">
-                                <rect key="frame" x="20" y="112" width="374" height="92"/>
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tEs-0H-YeW">
+                                <rect key="frame" x="20" y="125" width="728" height="179"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="원격 강아지 토탈케어 IoT 서비스" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HVW-qv-dXu">
                                         <rect key="frame" x="8" y="36" width="358" height="21"/>
@@ -58,15 +55,12 @@
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="tEs-0H-YeW" secondAttribute="height" multiplier="187:46" id="t5t-Lw-qVw"/>
-                                </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JKs-Oy-TWV">
-                                <rect key="frame" x="20" y="212" width="374" height="542"/>
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JKs-Oy-TWV">
+                                <rect key="frame" x="20" y="312" width="728" height="1055"/>
                                 <subviews>
-                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" pagingEnabled="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="iz8-yG-gLO">
-                                        <rect key="frame" x="0.0" y="0.0" width="374" height="542"/>
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceHorizontal="YES" pagingEnabled="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="iz8-yG-gLO">
+                                        <rect key="frame" x="0.0" y="0.0" width="728" height="1055"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Za5-XN-gKE">
                                             <size key="itemSize" width="147" height="260"/>
@@ -377,14 +371,14 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="JKs-Oy-TWV" secondAttribute="height" multiplier="187:271" id="Nvv-Lf-xql"/>
+                                    <constraint firstAttribute="bottom" secondItem="iz8-yG-gLO" secondAttribute="bottom" id="SSb-me-z2K"/>
                                     <constraint firstItem="iz8-yG-gLO" firstAttribute="leading" secondItem="JKs-Oy-TWV" secondAttribute="leading" id="Uxl-pe-UKg"/>
                                     <constraint firstItem="iz8-yG-gLO" firstAttribute="top" secondItem="JKs-Oy-TWV" secondAttribute="top" id="ZVb-aR-laa"/>
-                                    <constraint firstAttribute="bottom" secondItem="iz8-yG-gLO" secondAttribute="bottom" id="kWe-dB-2Rh"/>
                                     <constraint firstAttribute="trailing" secondItem="iz8-yG-gLO" secondAttribute="trailing" id="l2V-8U-EfV"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h9x-uw-uQ7">
-                                <rect key="frame" x="20" y="762" width="374" height="100"/>
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="h9x-uw-uQ7">
+                                <rect key="frame" x="20" y="762" width="728" height="100"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </view>
                         </subviews>
@@ -403,7 +397,7 @@
                             <constraint firstItem="oyL-bc-JRh" firstAttribute="trailing" secondItem="h9x-uw-uQ7" secondAttribute="trailing" constant="20" id="dRh-cB-JOK"/>
                             <constraint firstItem="JKs-Oy-TWV" firstAttribute="leading" secondItem="oyL-bc-JRh" secondAttribute="leading" constant="20" id="gQ8-tG-ofB"/>
                             <constraint firstItem="h9x-uw-uQ7" firstAttribute="top" secondItem="JKs-Oy-TWV" secondAttribute="bottom" constant="8" id="iKh-sG-DCG"/>
-                            <constraint firstItem="h9x-uw-uQ7" firstAttribute="bottom" secondItem="oyL-bc-JRh" secondAttribute="bottom" id="wHO-bL-QnW"/>
+                            <constraint firstItem="oyL-bc-JRh" firstAttribute="bottom" secondItem="h9x-uw-uQ7" secondAttribute="bottom" id="lSN-H2-grM"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="oyL-bc-JRh"/>
                     </view>
