@@ -14,7 +14,6 @@ class MandalartCell: UICollectionViewCell {
     }
 
     public func setupView(center: String, children: [String]) {
-        print("hellow funcking world")
         let mandalart = Mandalart(frame: .zero, centerText: center, childTexts: children)
         addSubview(mandalart)
         

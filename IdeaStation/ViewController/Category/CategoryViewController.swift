@@ -63,6 +63,7 @@ class CategoryViewController: UIViewController {
         self.view.addSubview(label)
         label.isUserInteractionEnabled = true
         label.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(labelTouchBegan)))
+        ExitButton(on: self)
     }
     
     fileprivate func setLabelText(i: Int) {

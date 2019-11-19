@@ -156,7 +156,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pFe-pG-h3R" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1644.9275362318842" y="-181.47321428571428"/>
+            <point key="canvasLocation" x="619" y="-181"/>
         </scene>
         <!--New Mandalart Cell Detail View Controller-->
         <scene sceneID="Ljx-pB-yjb">
@@ -613,9 +613,15 @@
             <objects>
                 <navigationController storyboardIdentifier="MandalartNavigationController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="A7R-Re-Hhs" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="RKU-7A-r15">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="RKU-7A-r15">
+                        <rect key="frame" x="0.0" y="44" width="414" height="104.5"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        </textAttributes>
+                        <textAttributes key="largeTitleTextAttributes">
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -626,17 +632,17 @@
             </objects>
             <point key="canvasLocation" x="-397" y="644"/>
         </scene>
-        <!--Mandalart View Controller2-->
+        <!--만달아트-->
         <scene sceneID="sAw-lZ-eUW">
             <objects>
-                <viewController id="oxU-P0-RGC" customClass="MandalartViewController2" customModule="IdeaStation" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="만달아트" id="oxU-P0-RGC" customClass="MandalartViewController" customModule="IdeaStation" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="x6s-xd-ZRK">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="mC4-QD-V9u"/>
                     </view>
-                    <navigationItem key="navigationItem" id="dbd-0l-74G"/>
+                    <navigationItem key="navigationItem" title="만달아트" id="dbd-0l-74G"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2oq-ny-z3b" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

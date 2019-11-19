@@ -125,6 +125,17 @@ extension UIView {
     func moveTo(x: CGFloat, y: CGFloat) {
         self.center = CGPoint(x: self.center.x + x, y: self.center.y + y)
     }
+    
+    func addShadow() {
+        self.layer.cornerRadius = 8.0
+        self.layer.shadowOffset = CGSize(width: 0, height: 2)
+        self.layer.shadowRadius = 8.0
+        self.layer.shadowOpacity = 0.2
+        self.layer.shadowPath = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: .allCorners, cornerRadii: CGSize(width: 3, height: 2)).cgPath
+        self.layer.shouldRasterize = true
+        self.layer.rasterizationScale = UIScreen.main.scale
+        self.layer.masksToBounds = false
+    }
 }
 
 let imageCache = NSCache<AnyObject, AnyObject>()
@@ -174,6 +185,8 @@ extension UIImageView {
             }
         }.resume()
     }
+    
+  
 }
 extension UITextView {
     func moveToVerticalCenter() {

@@ -30,7 +30,7 @@ class Mandalart: UIView {
     private var radius: CGFloat = 0.0
     private var centerLabel: UILabel = UILabel()
     private let childCount = 8
-    private var children: [UILabel] = []
+    private var children: [UITextField] = []
     private var containers: [UIView] = {
         var containers: [UIView] = []
         for i in 0..<9 {
@@ -64,7 +64,7 @@ extension Mandalart {
         centerLabel.textAlignment = .center
 
         for i in 0..<childCount {
-            let label = UILabel()
+            let label = UITextField()
             label.text = childTexts[i]
             label.textColor = .black
             label.textAlignment = .center
@@ -90,7 +90,8 @@ extension Mandalart {
     private func setupLabelSize() {
         centerLabel.font = centerLabel.font.withSize(fontSize)
         for child in children {
-            child.font = child.font.withSize(fontSize)
+            //child.font = child.font.withSize(fontSize)
+            child.font = child.font?.withSize(fontSize)
         }
     }
     
@@ -132,8 +133,8 @@ extension Mandalart {
             centerLabel.lineBreakMode = .byClipping
             centerLabel.numberOfLines = 0
             centerLabel.adjustsFontSizeToFitWidth = true
-            child.lineBreakMode = .byClipping
-            child.numberOfLines = 0
+//            child.lineBreakMode = .byClipping
+//            child.numberOfLines = 0
             child.adjustsFontSizeToFitWidth = true
         }
     }

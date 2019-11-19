@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MandalartViewController2: UIViewController {
+class MandalartViewController: UIViewController {
     private let collectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .vertical
@@ -16,10 +16,22 @@ class MandalartViewController2: UIViewController {
     }()
     private let scrollView: UIScrollView = UIScrollView(frame: .zero)
     private let container: UIView = UIView(frame: .zero)
+    private var selectedTests: [String] = []
+    private var centerKeyword: String = String()
+    private var keywords: [String] {
+        var keywords: [String] = []
+        keywords.append(centerKeyword)
+        keywords.append(contentsOf: selectedTests)
+        return keywords
+    }
+    
+    public func setKeywords(centerKeyword: String, selectedTexts: [String]) {
+        self.centerKeyword = centerKeyword
+        self.selectedTests = selectedTexts
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         setupView()
     }
     
@@ -30,6 +42,11 @@ class MandalartViewController2: UIViewController {
         
         setupCollectionView()
         setupScrollView()
+        setupButtons()
+    }
+    
+    private func setupButtons() {
+        ExitButton(on: navigationController!.navigationBar, target: self)
     }
     
     private func setupScrollView() {
@@ -69,13 +86,13 @@ class MandalartViewController2: UIViewController {
     }
 }
 
-extension MandalartViewController2: UIScrollViewDelegate {
+extension MandalartViewController: UIScrollViewDelegate {
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return container
     }
 }
 
-extension MandalartViewController2: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension MandalartViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = view.bounds.width / 3 - 10
         return CGSize(width: width, height: width)
@@ -95,7 +112,13 @@ extension MandalartViewController2: UICollectionViewDelegate, UICollectionViewDa
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(MandalartCell.self, for: indexPath)
-        cell.setupView(center: "hello", children: ["여자","남자","둘이","만나면","싸우기만","더하겠냐","세상살이","다그래"])
+        let section = indexPath.section
+        let centerIndex = section * 9 % keywords.count
+        var children: [String] = []
+        for i in 1...8 {
+            children.append(keywords[(centerIndex+i) % keywords.count])
+        }
+        cell.setupView(center: keywords[centerIndex], children: children)
         return cell
     }
 }

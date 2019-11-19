@@ -188,8 +188,6 @@ extension BubbleContainer {
         !isSelected ?
             selectBubble(text: selectedText, index: index) :
             deSelectBubble(text: selectedText, index: index)
-        
-        
     }
     
     @objc fileprivate func collapseContainer(_ recognizer: UITapGestureRecognizer) {
@@ -209,9 +207,11 @@ extension BubbleContainer {
         fadeInCenter()
         fadeOutChildren() {
             self.updateChildLabels()
+            self.delegate?.collapsed()
         }
     }
     private func expanded() {
+        self.delegate?.expanded()
         fadeOutCenter()
         fadeInChildren()
     }

@@ -51,7 +51,6 @@ class BaseTabBarController: UITabBarController {
     @objc private func touchupButton(_ button: UIButton) {
         guard let target = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainNavigationController") as? UINavigationController else { return }
         target.modalPresentationStyle = .fullScreen
-        ExitButton.init(on: target)
         present(target, animated: true, completion: nil)
     }
     
