@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -29,7 +29,7 @@
 		AF07B33D22FFC3C400FAE1C8 /* IdeaStationUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF07B33C22FFC3C400FAE1C8 /* IdeaStationUITests.swift */; };
 		AF07B35322FFF71600FAE1C8 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF07B35222FFF71600FAE1C8 /* CategoryViewController.swift */; };
 		AF07B35522FFFFE600FAE1C8 /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF07B35422FFFFE600FAE1C8 /* View+.swift */; };
-		AF07B3592302629B00FAE1C8 /* ExpandableBubbleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF07B3582302629B00FAE1C8 /* ExpandableBubbleLabel.swift */; };
+		AF07B3592302629B00FAE1C8 /* ExpandableBubbleLabel(deprecated).swift in Sources */ = {isa = PBXBuildFile; fileRef = AF07B3582302629B00FAE1C8 /* ExpandableBubbleLabel(deprecated).swift */; };
 		AF07B35B2302771300FAE1C8 /* FlexibleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF07B35A2302771300FAE1C8 /* FlexibleLabel.swift */; };
 		AFCD53242307F2F100A1D487 /* NewMandalartCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCD531C2307F2F100A1D487 /* NewMandalartCollectionViewCell.swift */; };
 		AFCD53262307F2F100A1D487 /* MandalartItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFCD531E2307F2F100A1D487 /* MandalartItem.swift */; };
@@ -102,7 +102,7 @@
 		AF07B33E22FFC3C400FAE1C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AF07B35222FFF71600FAE1C8 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
 		AF07B35422FFFFE600FAE1C8 /* View+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+.swift"; sourceTree = "<group>"; };
-		AF07B3582302629B00FAE1C8 /* ExpandableBubbleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableBubbleLabel.swift; sourceTree = "<group>"; };
+		AF07B3582302629B00FAE1C8 /* ExpandableBubbleLabel(deprecated).swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ExpandableBubbleLabel(deprecated).swift"; sourceTree = "<group>"; };
 		AF07B35A2302771300FAE1C8 /* FlexibleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlexibleLabel.swift; sourceTree = "<group>"; };
 		AFCD531C2307F2F100A1D487 /* NewMandalartCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewMandalartCollectionViewCell.swift; sourceTree = "<group>"; };
 		AFCD531E2307F2F100A1D487 /* MandalartItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MandalartItem.swift; sourceTree = "<group>"; };
@@ -270,7 +270,7 @@
 			isa = PBXGroup;
 			children = (
 				1A136582237DB69600A941CB /* Cell */,
-				AF07B3582302629B00FAE1C8 /* ExpandableBubbleLabel.swift */,
+				AF07B3582302629B00FAE1C8 /* ExpandableBubbleLabel(deprecated).swift */,
 				AF07B35A2302771300FAE1C8 /* FlexibleLabel.swift */,
 				AFCD53352307FDCD00A1D487 /* ExitButton.swift */,
 				1A136580237D4FEF00A941CB /* BubbleContainer.swift */,
@@ -607,7 +607,6 @@
 				1A136581237D4FEF00A941CB /* BubbleContainer.swift in Sources */,
 				AF07B35322FFF71600FAE1C8 /* CategoryViewController.swift in Sources */,
 				AFF64DBD2304058E003F3E3A /* APISource.swift in Sources */,
-				AFCD53222307F2F100A1D487 /* MandalartCollectionViewCell.swift in Sources */,
 				1A726E8D237FC58E00BFBCE8 /* MDKeyword.swift in Sources */,
 				1A13657F237D4DFD00A941CB /* TestingViewController.swift in Sources */,
 				AFCD53242307F2F100A1D487 /* NewMandalartCollectionViewCell.swift in Sources */,
@@ -620,9 +619,8 @@
 				AFF64DC223040EB6003F3E3A /* PixaPictures.swift in Sources */,
 				AFCD53342307F31900A1D487 /* InterestItem.swift in Sources */,
 				1A6FFFAF237E406C00AAEFC5 /* HorizontalArrowCell.swift in Sources */,
-				AFCD53252307F2F100A1D487 /* UIViewExtension.swift in Sources */,
 				AFCD53332307F31900A1D487 /* DidSelectViewController.swift in Sources */,
-				AF07B3592302629B00FAE1C8 /* ExpandableBubbleLabel.swift in Sources */,
+				AF07B3592302629B00FAE1C8 /* ExpandableBubbleLabel(deprecated).swift in Sources */,
 				AF07B31A22FFC3C300FAE1C8 /* AppDelegate.swift in Sources */,
 				AFCD53262307F2F100A1D487 /* MandalartItem.swift in Sources */,
 				AFF64DC623041E74003F3E3A /* Object+.swift in Sources */,

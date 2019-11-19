@@ -21,12 +21,22 @@ class TestingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         getRandomTexts(subject: subject) { (strings) in
             self.setupBubbleContainer(subject: self.subject, strings: strings)
         }
         
         setupCollectionView()
         setupNavigationBarButton()
+    }
+    
+    private func setupMockData(subject: String, completion: @escaping ([String]) -> Void = { _ in }) {
+        var strings: [String] = []
+        for i in 0...8 {
+            strings.append(subject+"\(i)")
+        }
+        
+        completion(strings)
     }
     
     private func setupBubbleContainer(subject: String, strings: [String]) {
@@ -55,7 +65,7 @@ class TestingViewController: UIViewController {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         collectionView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        collectionView.topAnchor.constraint(equalTo: view.safeAreaTopAnchor, constant: 50).isActive = true
+        collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50).isActive = true
         collectionView.heightAnchor.constraint(equalToConstant: 100).isActive = true
     }
     
@@ -110,6 +120,7 @@ extension TestingViewController: UICollectionViewDelegate, UICollectionViewDeleg
 extension TestingViewController: BubbleContainerDelegate {
     func gotoExplore(selectedText: String, completion: @escaping ([String]) -> Void) {
         getRandomTexts(subject: selectedText, completion: completion)
+        //setupMockData(subject: selectedText, completion: completion)
     }
     
     func childSelected(selectedText: String) {

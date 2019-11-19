@@ -13,7 +13,6 @@ protocol BubbleContainerDelegate {
     func childSelected(selectedText: String)
     func childDeSelected(selectedText: String)
     func gotoExplore(selectedText: String, completion: @escaping (_ childArray: [String]) -> Void)
-    //func childSelected(selectedText: String, completion: @escaping (_ childArray: [String]) -> Void)
 }
 
 class BubbleContainer: UIView {
@@ -42,7 +41,6 @@ class BubbleContainer: UIView {
     private var centerLabel: UILabel = UILabel()
     private var childArray: [UILabel] = []
     private var selectedChildText: String
-    fileprivate var strings: [String] = []
     fileprivate var keywords: [MDKeyword] = []
     fileprivate let childCount: Int
     fileprivate var isCollapse = true
@@ -82,7 +80,6 @@ class BubbleContainer: UIView {
             label.alpha = 0.0
             label.text = text
             label.alpha = 0.5
-            strings.append(text)
             keywords.append(MDKeyword(keyword: text))
             childArray.append(label)
         }
@@ -90,7 +87,7 @@ class BubbleContainer: UIView {
     
     fileprivate func updateChildLabels() {
         for i in 0..<self.childCount {
-            self.childArray[i].text = self.strings[self.strings.count-1-i]
+            self.childArray[i].text = self.keywords[self.keywords.count-self.childCount+i].keyword
         }
     }
 }
@@ -167,16 +164,13 @@ extension BubbleContainer {
 // MARK:- Actions
 extension BubbleContainer {
     @objc fileprivate func exploreKeyword(_ recognizer: UILongPressGestureRecognizer) {
+        if recognizer.state == .ended { return }
+        
         guard let bubble = recognizer.view as? UILabel else {return}
         selectedChildText = bubble.text ?? ""
-        self.collapsed()
         self.delegate?.gotoExplore(selectedText: selectedChildText, completion: { strings in
-            UIView.animate(withDuration: 0,
-                           delay: 3,
-                           options: .allowAnimatedContent,
-                           animations: {
-                            self.keywords.append(contentsOf: strings.map { MDKeyword(keyword: $0) })
-            }, completion: nil)
+            self.keywords.append(contentsOf: strings.map { MDKeyword(keyword: $0) })
+            self.collapsed()
         })
     }
     
@@ -240,7 +234,7 @@ extension BubbleContainer {
         let wholeDuration: Double = 0.7
         UIView.animateKeyframes(withDuration: wholeDuration, delay: 0, options: [.calculationModeCubic], animations: {
             for index in 0..<self.childCount {
-                let child = self.childArray[self.childCount - 1 - index]
+                let child = self.childArray[self.childCount-1-index]
                 let startTime = Double(index)/Double(self.childCount)
                 let duration = wholeDuration/Double(self.childCount) * (1 - 0.1 * Double(index))
                 UIView.addKeyframe(withRelativeStartTime: startTime, relativeDuration: duration) {
@@ -248,7 +242,7 @@ extension BubbleContainer {
                     child.alpha = 0
                 }
             }
-        }, completion: { _ in
+        }, completion: { res in
             completion()
         })
     }
@@ -273,16 +267,16 @@ extension BubbleContainer {
     }
     
     private func isBubbleSelected(index: Int) -> Bool {
-        return self.keywords[self.keywords.count - 8 + index].isSelected
+        return self.keywords[self.keywords.count - childCount + index].isSelected
     }
     
     private func selectBubble(text: String, index: Int) {
-        self.keywords[self.keywords.count - 8 + index].isSelected = true
+        self.keywords[self.keywords.count - childCount + index].isSelected = true
         self.delegate?.childSelected(selectedText: text)
     }
     
     private func deSelectBubble(text: String, index: Int) {
-        self.keywords[self.keywords.count - 8 + index].isSelected = false
+        self.keywords[self.keywords.count - childCount + index].isSelected = false
         self.delegate?.childDeSelected(selectedText: text)
     }
     
