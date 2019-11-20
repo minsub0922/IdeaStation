@@ -38,8 +38,8 @@ class BaseTabBarController: UITabBarController {
         NSLayoutConstraint.activate([
             button.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             button.centerYAnchor.constraint(equalTo: tabBar.topAnchor, constant: 10),
-            button.widthAnchor.constraint(equalTo: tabBar.widthAnchor, multiplier: 1/5),
-            button.heightAnchor.constraint(equalTo: tabBar.widthAnchor, multiplier: 1/5)
+            button.widthAnchor.constraint(equalTo: tabBar.heightAnchor, multiplier: 4/5),
+            button.heightAnchor.constraint(equalTo: tabBar.heightAnchor, multiplier: 4/5)
         ])
     }
     

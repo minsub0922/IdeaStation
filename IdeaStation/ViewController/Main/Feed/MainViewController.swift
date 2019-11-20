@@ -35,7 +35,8 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
         // Do any additional setup after loading the view.
         self.mainTableView.delegate = self
         self.mainTableView.dataSource = self
-        self.mainTableView.rowHeight = UITableView.automaticDimension
+        //self.mainTableView.rowHeight = UITableView.automaticDimension
+        //self.mainTableView.estimatedRowHeight = 500
         
         // MARK:- guest@naver.com  111111
         
@@ -45,11 +46,12 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
             
         self.mainTableView.reloadData()
     }
-    
+    /*
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 500
+        return 1000
     }
-    
+ */
+    /*
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch SharingData.shared.postResponseArray[indexPath.item].type {
         case 1:
@@ -62,7 +64,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
             return 200
         }
     }
-    
+    */
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return SharingData.shared.postResponseArray.count
     }
@@ -133,6 +135,7 @@ class MainViewController: UIViewController, UITableViewDataSource, UITableViewDe
             
             SharingData.shared.postResponseArray = postResponseArray
             self.mainTableView.reloadData()
+            self.mainTableView.rowHeight = UITableView.automaticDimension
             
         })
         
