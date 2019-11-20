@@ -25,6 +25,10 @@ class MandalartViewController: UIViewController {
         return keywords
     }
     
+    @IBAction func tapbackgroundAction(_ sender: Any) {
+        view.endEditing(true)
+    }
+    
     public func setKeywords(centerKeyword: String, selectedTexts: [String]) {
         self.centerKeyword = centerKeyword
         self.selectedTests = selectedTexts
@@ -36,6 +40,7 @@ class MandalartViewController: UIViewController {
     }
     
     private func setupView() {
+        view.addSubview(UIView(frame: .zero))
         container.addSubview(collectionView)
         scrollView.addSubview(container)
         view.addSubview(scrollView)

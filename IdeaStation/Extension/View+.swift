@@ -126,11 +126,25 @@ extension UIView {
         self.center = CGPoint(x: self.center.x + x, y: self.center.y + y)
     }
     
-    func addShadow() {
-        self.layer.cornerRadius = 8.0
-        self.layer.shadowOffset = CGSize(width: 0, height: 2)
-        self.layer.shadowRadius = 8.0
-        self.layer.shadowOpacity = 0.2
+    enum ShadowType {
+        case normal
+        case small
+    }
+    
+    func addShadow(type: ShadowType = ShadowType.normal) {
+        switch type {
+        case .normal:
+            self.layer.cornerRadius = 8.0
+            self.layer.shadowOffset = CGSize(width: 0, height: 2)
+            self.layer.shadowRadius = 8.0
+            self.layer.shadowOpacity = 0.2
+        case .small:
+            self.layer.cornerRadius = 2.0
+            self.layer.shadowOffset = CGSize(width: 0, height: 1)
+            self.layer.shadowRadius = 2.0
+            self.layer.shadowOpacity = 0.2
+        }
+        
         self.layer.shadowPath = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: .allCorners, cornerRadii: CGSize(width: 3, height: 2)).cgPath
         self.layer.shouldRasterize = true
         self.layer.rasterizationScale = UIScreen.main.scale
@@ -203,3 +217,29 @@ extension UITextView {
         
     }
 }
+
+extension UIFont {
+    var bold: UIFont {
+        return with(traits: .traitBold)
+    } // bold
+    
+    var italic: UIFont {
+        return with(traits: .traitItalic)
+    } // italic
+    
+    var boldItalic: UIFont {
+        return with(traits: [.traitBold, .traitItalic])
+    } // boldItalic
+    
+    var normal: UIFont {
+        return with(traits: [])
+    }
+    
+    func with(traits: UIFontDescriptor.SymbolicTraits) -> UIFont {
+        guard let descriptor = self.fontDescriptor.withSymbolicTraits(traits) else {
+            return self
+        } // guard
+        
+        return UIFont(descriptor: descriptor, size: 0)
+    } // with(traits:)
+} // extension

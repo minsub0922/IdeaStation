@@ -35,8 +35,9 @@ class Mandalart: UIView {
         var containers: [UIView] = []
         for i in 0..<9 {
             let view = UIView()
+            //view.addShadow(type: .small)
             let blue = UIColor.blue.withAlphaComponent(0.6)
-            view.backgroundColor = blue
+            //view.backgroundColor = blue
             containers.append(view)
         }
         return containers

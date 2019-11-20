@@ -11,6 +11,14 @@ import UIKit
 class MandalartCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        backgroundColor = .white
+    }
+    
+    override var bounds: CGRect {
+        didSet {
+            addShadow(type: .small)
+        }
     }
 
     public func setupView(center: String, children: [String]) {

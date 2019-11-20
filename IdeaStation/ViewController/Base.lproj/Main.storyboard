@@ -16,7 +16,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <gestureRecognizers/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="F83-vQ-HDO" appends="YES" id="8oC-gY-t2S"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" title="아이디어 탐색" id="BvR-SJ-qGG"/>
                     <connections>
@@ -26,6 +30,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="F83-vQ-HDO">
+                    <connections>
+                        <action selector="tapBackgroundAction:" destination="BYZ-38-t0r" id="zTh-vS-PIO"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="935" y="348"/>
         </scene>
@@ -70,7 +79,6 @@
         <!--Navigation Controller-->
         <scene sceneID="hQk-a3-7CP">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="aI4-gq-HqD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController storyboardIdentifier="MainNavigationController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Pv3-51-XS1" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="OGs-BR-AlH">
@@ -84,6 +92,7 @@
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="QcT-aE-DnK"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aI4-gq-HqD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="161" y="348"/>
         </scene>

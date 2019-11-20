@@ -640,11 +640,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <gestureRecognizers/>
                         <viewLayoutGuide key="safeArea" id="mC4-QD-V9u"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="70B-Ha-5Lu" appends="YES" id="hYi-0W-mOg"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" title="만달아트" id="dbd-0l-74G"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2oq-ny-z3b" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="70B-Ha-5Lu">
+                    <connections>
+                        <action selector="tapbackgroundAction:" destination="oxU-P0-RGC" id="Be3-bt-Cu4"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="620" y="637"/>
         </scene>

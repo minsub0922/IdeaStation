@@ -7,7 +7,6 @@ target 'IdeaStation' do
 
   # Pods for IdeaStation
   pod 'Alamofire'
-  pod 'paper-onboarding' 
   pod 'Firebase/Auth'
   pod 'Firebase/Core'
   pod 'Firebase/Database'

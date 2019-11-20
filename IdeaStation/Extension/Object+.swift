@@ -52,3 +52,9 @@ extension Thread {
         }
     }
 }
+
+extension UIColor {
+//    var apptheme: UIColor {
+//        return UIColor(displayP3Red: <#T##CGFloat#>, green: <#T##CGFloat#>, blue: <#T##CGFloat#>, alpha: <#T##CGFloat#>)
+//    }
+}
