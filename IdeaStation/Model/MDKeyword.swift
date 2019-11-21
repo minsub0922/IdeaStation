@@ -12,4 +12,5 @@ struct MDKeyword {
     //var index: Int
     let keyword: String
     var isSelected: Bool = false
+    var rank: Int = 0
 }

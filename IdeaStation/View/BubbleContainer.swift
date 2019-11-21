@@ -36,6 +36,12 @@ class BubbleContainer: UIView {
      also can be Max Size of both Label width and height
      */
     private var fontSize: CGFloat = 0.0
+    private var minFonSize: CGFloat {
+        return fontSize * 0.3
+    }
+    private var maxFontSize: CGFloat {
+        return fontSize * 1.3
+    }
     private var maxWidthOfLabel: CGFloat = 0.0
     private var radius: CGFloat = 0.0
     private var centerLabel: UILabel = UILabel()
@@ -45,18 +51,14 @@ class BubbleContainer: UIView {
     fileprivate let childCount: Int
     fileprivate var isCollapse = true
     
-    /*
-    Parameters for Memorizing
-     */
-    
     // MARK:- init
-    init(frame: CGRect, centerText: String, childTextArray: [String]) {
+    init(frame: CGRect, centerText: String, childTextArray: [MDKeyword]) {
         childCount = childTextArray.count
         selectedChildText = centerText
         super.init(frame: frame)
         
         updateCenterLabel()
-        initChildLabels(childTextArray: childTextArray)
+        initChildLabels(children: childTextArray)
     }
     
     required init?(coder: NSCoder) {
@@ -72,17 +74,18 @@ class BubbleContainer: UIView {
           })
     }
     
-    fileprivate func initChildLabels(childTextArray: [String]) {
+    fileprivate func initChildLabels(children: [MDKeyword]) {
         centerLabel.text = selectedChildText
-        for i in 0..<childTextArray.count {
-            let text = childTextArray[i]
+        for child in children {
+            let text = child.keyword
             let label = UILabel()
             label.alpha = 0.0
             label.text = text
             label.alpha = 0.5
-            keywords.append(MDKeyword(keyword: text))
             childArray.append(label)
         }
+        keywords.append(contentsOf: children)
+        keywords.shuffle()
     }
     
     fileprivate func updateChildLabels() {
@@ -99,6 +102,7 @@ extension BubbleContainer {
         addGestureRecognizer()
         addSubViews()
         addConstraintsForBubbles()
+        setAdjustedFontSizeForChildren()
     }
     
     private func addSubViews() {
@@ -112,7 +116,7 @@ extension BubbleContainer {
         centerLabel.font = centerLabel.font.withSize(fontSize)
         centerLabel.addShadowOnLabel()
         for child in childArray {
-            child.font = child.font.withSize(fontSize)
+            child.font = child.font.withSize(minFonSize)
             child.transform = CGAffineTransform(scaleX: 0, y: 0)
             child.addShadowOnLabel()
         }
@@ -133,30 +137,36 @@ extension BubbleContainer {
         centerLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         centerLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         centerLabel.widthAnchor.constraint(equalToConstant: maxWidthOfLabel).isActive = true
+        centerLabel.heightAnchor.constraint(equalToConstant: fontSize*2).isActive = true
+        centerLabel.lineBreakMode = .byClipping
+        centerLabel.numberOfLines = 0
+        centerLabel.adjustsFontSizeToFitWidth = true
         
-        // For Adjusting Start Point
         let startTheta = Float.pi / 2
         let thetaStatus = 2 * Float.pi / Float(childArray.count)
-        
         for i in 0..<childArray.count {
-            let child = childArray[i]
+            let childLabel = childArray[i]
             let theta = (startTheta + thetaStatus * Float(i+1)).truncatingRemainder(dividingBy: 2 * Float.pi)
             let x = center.x + radius * CGFloat(cos(theta))
             let y = center.y + radius * CGFloat(sin(theta))
-            child.translatesAutoresizingMaskIntoConstraints = false
-            child.centerXAnchor.constraint(equalTo: centerXAnchor, constant: x).isActive = true
-            child.centerYAnchor.constraint(equalTo: centerYAnchor, constant: y).isActive = true
-            child.widthAnchor.constraint(equalToConstant: maxWidthOfLabel).isActive = true
-            
+            childLabel.centerXAnchor.constraint(equalTo: centerXAnchor, constant: x).isActive = true
+            childLabel.centerYAnchor.constraint(equalTo: centerYAnchor, constant: y).isActive = true
+            childLabel.translatesAutoresizingMaskIntoConstraints = false
+            childLabel.widthAnchor.constraint(equalToConstant: maxWidthOfLabel).isActive = true
             //Adjust Font Size with LabelSize
-            centerLabel.heightAnchor.constraint(equalToConstant: fontSize*2).isActive = true
-            centerLabel.lineBreakMode = .byClipping
-            centerLabel.numberOfLines = 0
-            centerLabel.adjustsFontSizeToFitWidth = true
-            child.heightAnchor.constraint(equalToConstant: fontSize*2).isActive = true
-            child.lineBreakMode = .byClipping
-            child.numberOfLines = 0
-            child.adjustsFontSizeToFitWidth = true
+            childLabel.heightAnchor.constraint(equalToConstant: fontSize*2).isActive = true
+            childLabel.lineBreakMode = .byClipping
+            childLabel.numberOfLines = 0
+            childLabel.adjustsFontSizeToFitWidth = true
+        }
+    }
+    
+    private func setAdjustedFontSizeForChildren() {
+        let gap = (maxFontSize - minFonSize) / CGFloat(childCount)
+        for i in 0..<childArray.count {
+            let childLabel = childArray[i]
+            let rank = self.keywords[self.keywords.count - childCount + i].rank
+            childLabel.font = childLabel.font.withSize(minFonSize + gap * CGFloat(rank))
         }
     }
 }
@@ -164,7 +174,7 @@ extension BubbleContainer {
 // MARK:- Actions
 extension BubbleContainer {
     @objc fileprivate func exploreKeyword(_ recognizer: UILongPressGestureRecognizer) {
-        if recognizer.state == .ended { return }
+        if recognizer.state != .ended { return }
         
         guard let bubble = recognizer.view as? UILabel else {return}
         selectedChildText = bubble.text ?? ""

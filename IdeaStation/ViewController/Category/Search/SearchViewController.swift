@@ -31,6 +31,7 @@ class SearchViewController: UIViewController {
     fileprivate var selectedTexts: [String] = []
     fileprivate var subject = "사랑"
     fileprivate var pictures: [Hit] = []
+    public var keywords: [String] = []
     
     @IBOutlet weak var navigationBar: UINavigationBar!
     
@@ -41,8 +42,19 @@ class SearchViewController: UIViewController {
         setupCollectionView()
         setupButtons()
         setupAutolayouts()
-        refreshDatas(subject: subject) { strings in
-            self.setupBubbleContainer(subject: self.subject, strings: strings)
+//        refreshDatas(subject: subject) { strings in
+//            //self.setupBubbleContainer(subject: self.subject, strings: strings)
+//            self.imagesCollectionView.isHidden = false
+//            self.imagesCollectionView.fadeIn()
+//        }
+        
+        getClusters(subjects: keywords) { clusters in
+            var count = 0
+            let childArray = clusters.getTop8Clusters().map { a -> MDKeyword in
+                count += 1
+                return MDKeyword(keyword: a.category, rank: count)
+            }
+            self.setupBubbleContainer(subject: self.subject, childs: childArray)
             self.imagesCollectionView.isHidden = false
             self.imagesCollectionView.fadeIn()
         }
@@ -51,8 +63,8 @@ class SearchViewController: UIViewController {
 
 // MARK:- SetupView
 extension SearchViewController {
-    private func setupBubbleContainer(subject: String, strings: [String]) {
-        let container = BubbleContainer(frame: .zero, centerText: subject, childTextArray: strings)
+    private func setupBubbleContainer(subject: String, childs: [MDKeyword]) {
+        let container = BubbleContainer(frame: .zero, centerText: subject, childTextArray: childs)
         container.delegate = self
         container.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(container)
@@ -155,6 +167,12 @@ extension SearchViewController {
                 self.imagesCollectionView.reloadSections(IndexSet(0...0))
             }, completion: nil)
         }
+    }
+    
+    fileprivate func getClusters(subjects: [String], completion: @escaping (Clusters) -> Void) {
+        let words = subjects.reduce("") { $0 + $1 + " "}.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        APISource.shared.getCluster(words: words, completion: completion)
     }
 }
 

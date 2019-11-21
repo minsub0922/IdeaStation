@@ -154,9 +154,10 @@ extension CategoryViewController {
     }
     
     @objc private func touchupSearchButton(_ button: UIButton) {
-        guard let target = UIStoryboard(name: "Search", bundle: nil).instantiateViewController(withIdentifier: "SearchViewController") as? UIViewController else {return}
+        guard let target = UIStoryboard(name: "Search", bundle: nil).instantiateViewController(withIdentifier: "SearchViewController") as? SearchViewController else {return}
         target.modalPresentationStyle = .fullScreen
         target.modalTransitionStyle = .crossDissolve
+        target.keywords = self.keywords
         
         weak var ghost = self.presentingViewController
         //dismiss(animated: true) {

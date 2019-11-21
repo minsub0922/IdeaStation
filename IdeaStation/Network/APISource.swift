@@ -57,4 +57,13 @@ struct APISource: APISourceProtocol {
             params: params,
             completion: commonResponseHandler(completion: completion))
     }
+    
+    func getCluster(words: String, completion: @escaping (Clusters) -> Void) {
+        let params = [
+            "word": words
+        ]
+        get(API.getClusters,
+            params: params,
+            completion: commonResponseHandler(completion: completion))
+    }
 }
