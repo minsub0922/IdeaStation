@@ -39,12 +39,7 @@ class CategoryViewController: UIViewController {
         button.tintColor = .black
         button.alpha = 0
         button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    } ()
-    private let nextButton: UIButton = {
-        let button = UIButton(frame: .zero)
-        button.setTitle("다음", for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(touchupButton(_:)), for: .touchUpInside)
         return button
     } ()
     private let closeButton: UIButton = {
@@ -56,6 +51,16 @@ class CategoryViewController: UIViewController {
         button.imageEdgeInsets = UIEdgeInsets(top: inset, left: inset, bottom: inset, right:inset)
         button.addTarget(self, action: #selector(touchupCloseButton(_:)), for: .touchUpInside)
         button.backgroundColor = .lightGray
+        return button
+    } ()
+    private let searchButton: UIButton = {
+        let button = UIButton(frame: .zero)
+        button.alpha = 0
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(UIImage(named: "ic-search"), for: .normal)
+        button.contentVerticalAlignment = .fill
+        button.contentHorizontalAlignment = .fill
+        button.addTarget(self, action: #selector(touchupSearchButton(_:)), for: .touchUpInside)
         return button
     } ()
 
@@ -81,6 +86,7 @@ class CategoryViewController: UIViewController {
         super.viewDidLayoutSubviews()
         closeButton.addCircularRounded()
         closeButton.addCircularShadow()
+        searchButton.addShadow()
     }
     
     private func setupView() {
@@ -88,32 +94,11 @@ class CategoryViewController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.registerNib(SearchPathCell.self)
-        plusButton.addTarget(self, action: #selector(touchupButton(_:)), for: .touchUpInside)
-        nextButton.addTarget(self, action: #selector(touchupNextButton(_:)), for: .touchUpInside)
-            
+        
         addSubview()
         addConstraints()
     }
-    
-    @objc private func touchupButton(_ button: UIButton) {
-        guard let text = textField.text else {return}
-        keywords.append(text)
-        textField.text = nil
-        self.view.endEditing(true)
-        self.collectionView.reloadSection(section: 0)
-        
-    }
-    
-    @objc private func touchupNextButton(_ button: UIButton) {
-        guard let target = UIStoryboard(name: "Search", bundle: nil).instantiateViewController(withIdentifier: "SearchViewController") as? UIViewController else {return}
-        target.modalPresentationStyle = .fullScreen
-        present(target, animated: true, completion: nil)
-    }
-    
-    @objc private func touchupCloseButton(_ button: UIButton) {
-          self.dismiss(animated: true, completion: nil)
-          interactiveTransition?.finish()
-    }
+
     
     private func addSubview() {
         //ExitButton(on: self)
@@ -121,7 +106,7 @@ class CategoryViewController: UIViewController {
         view.addSubview(textField)
         view.addSubview(underline)
         view.addSubview(collectionView)
-        view.addSubview(nextButton)
+        view.addSubview(searchButton)
         view.addSubview(closeButton)
     }
     
@@ -139,17 +124,44 @@ class CategoryViewController: UIViewController {
             textField.leftAnchor.constraint(equalTo: underline.leftAnchor),
             textField.rightAnchor.constraint(equalTo: plusButton.leftAnchor, constant: -15),
             textField.heightAnchor.constraint(equalToConstant: 20),
+            searchButton.rightAnchor.constraint(equalTo: underline.rightAnchor),
+            searchButton.widthAnchor.constraint(equalToConstant: 25),
+            searchButton.heightAnchor.constraint(equalToConstant: 25),
             collectionView.topAnchor.constraint(equalTo: underline.bottomAnchor, constant: 15),
-            collectionView.centerXAnchor.constraint(equalTo: underline.centerXAnchor),
-            collectionView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
+            collectionView.leftAnchor.constraint(equalTo: underline.leftAnchor),
+            collectionView.rightAnchor.constraint(equalTo: searchButton.leftAnchor, constant: -15),
             collectionView.heightAnchor.constraint(equalToConstant: 50),
-            nextButton.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -30),
-            nextButton.bottomAnchor.constraint(equalToSystemSpacingBelow: view.safeAreaLayoutGuide.bottomAnchor, multiplier: -30),
-//            closeButton.widthAnchor.constraint(equalToConstant: closeButtonWidth!),
-//            closeButton.heightAnchor.constraint(equalToConstant: closeButtonWidth!)
+            searchButton.centerYAnchor.constraint(equalTo: collectionView.centerYAnchor)
         ])
+    }
+}
+
+// MARK: Actions
+extension CategoryViewController {
+    @objc private func touchupButton(_ button: UIButton) {
+        guard let text = textField.text else {return}
+        keywords.append(text)
+        textField.text = nil
+        self.view.endEditing(true)
+        self.collectionView.reloadSection(section: 0)
+        self.searchButton.fadeIn()
+        self.searchButton.bounce()
+    }
+    
+    @objc private func touchupCloseButton(_ button: UIButton) {
+          self.dismiss(animated: true, completion: nil)
+          interactiveTransition?.finish()
+    }
+    
+    @objc private func touchupSearchButton(_ button: UIButton) {
+        guard let target = UIStoryboard(name: "Search", bundle: nil).instantiateViewController(withIdentifier: "SearchViewController") as? UIViewController else {return}
+        target.modalPresentationStyle = .fullScreen
+        target.modalTransitionStyle = .crossDissolve
         
-        //closeButton.center = closeButtonCenter!
+        weak var ghost = self.presentingViewController
+        //dismiss(animated: true) {
+            present(target, animated: true, completion: nil)
+        //}
     }
 }
 

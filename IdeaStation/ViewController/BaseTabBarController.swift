@@ -35,7 +35,7 @@ class BaseTabBarController: UITabBarController {
     // MARK:- View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        UIApplication.shared.keyWindow?.rootViewController = self
         setupButton()
         setupTabbar()
         // Do any additional setup after loading the view.

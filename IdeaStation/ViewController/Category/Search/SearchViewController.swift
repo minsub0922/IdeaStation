@@ -101,7 +101,7 @@ extension SearchViewController {
         mandalartButton.centerYAnchor.constraint(equalTo: keyWordsCollectionView.centerYAnchor).isActive = true
         
         keyWordsCollectionView.translatesAutoresizingMaskIntoConstraints = false
-        keyWordsCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,
+        keyWordsCollectionView.topAnchor.constraint(equalTo: navigationBar.bottomAnchor,
                                                     constant: 16).isActive = true
         keyWordsCollectionView.heightAnchor.constraint(equalToConstant: 100).isActive = true
         keyWordsCollectionView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
@@ -122,15 +122,16 @@ extension SearchViewController {
 extension SearchViewController {
     @objc private func touchupButton(_ sender: UIButton) {
         weak var ghost = self.presentingViewController
-        self.dismiss(animated: true, completion: {
+        //self.dismiss(animated: true, completion: {
             guard
                 let navigationController = UIStoryboard(name: "MandalartStoryboard", bundle: nil).instantiateViewController(withIdentifier: "MandalartNavigationController") as? UINavigationController,
                 let target = navigationController.viewControllers.first as? MandalartViewController
             else {return}
             target.setKeywords(centerKeyword: self.subject, selectedTexts: self.selectedTexts)
+            navigationController.modalTransitionStyle = .crossDissolve
             navigationController.modalPresentationStyle = .fullScreen
-            ghost?.present(navigationController, animated: true, completion: nil)
-        })
+            present(navigationController, animated: true, completion: nil)
+        //})
     }
 }
 
