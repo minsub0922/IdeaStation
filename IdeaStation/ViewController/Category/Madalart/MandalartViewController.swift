@@ -14,6 +14,14 @@ class MandalartViewController: UIViewController {
         flowLayout.scrollDirection = .vertical
         return UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
     }()
+    private let ideaButton: UIButton = {
+        let button = UIButton(frame: .zero)
+        button.setTitle("조합하기", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(touchupIdeaButton(_:)), for: .touchUpInside)
+        return button
+    }()
     private let scrollView: UIScrollView = UIScrollView(frame: .zero)
     private let container: UIView = UIView(frame: .zero)
     private var selectedTexts: [String] = []
@@ -32,7 +40,6 @@ class MandalartViewController: UIViewController {
     public func setKeywords(centerKeyword: String, selectedTexts: [String]) {
         self.centerKeyword = centerKeyword
         self.selectedTexts = selectedTexts
-        print(selectedTexts)
     }
     
     override func viewDidLoad() {
@@ -53,6 +60,12 @@ class MandalartViewController: UIViewController {
     
     private func setupButtons() {
         ExitButton(on: navigationController!.navigationBar, target: self)
+        view.addSubview(ideaButton)
+        
+        ideaButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20).isActive = true
+        ideaButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        ideaButton.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.7).isActive = true
+        ideaButton.heightAnchor.constraint(equalToConstant: 30).isActive = true
     }
     
     private func setupScrollView() {
@@ -89,6 +102,10 @@ class MandalartViewController: UIViewController {
         collectionView.heightAnchor.constraint(equalTo: container.heightAnchor).isActive = true
         collectionView.centerXAnchor.constraint(equalTo: container.centerXAnchor).isActive = true
         collectionView.centerYAnchor.constraint(equalTo: container.centerYAnchor).isActive = true
+    }
+    
+    @objc private func touchupIdeaButton(_ button: UIButton) {
+        
     }
 }
 

@@ -134,9 +134,8 @@ extension Mandalart {
             centerLabel.lineBreakMode = .byClipping
             centerLabel.numberOfLines = 0
             centerLabel.adjustsFontSizeToFitWidth = true
-//            child.lineBreakMode = .byClipping
-//            child.numberOfLines = 0
             child.adjustsFontSizeToFitWidth = true
+            child.minimumFontSize = 5.0
         }
     }
     

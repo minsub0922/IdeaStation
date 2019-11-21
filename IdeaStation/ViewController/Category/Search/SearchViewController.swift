@@ -32,10 +32,13 @@ class SearchViewController: UIViewController {
         let label = UILabel(frame: .zero)
         label.alpha = 0
         label.textColor = .lightGray
-        label.font = label.font.withSize(13)
+        label.font = label.font.withSize(12)
+        label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     } ()
+    private var bubbleContainer: BubbleContainer!
+    
     fileprivate var selectedTexts: [String] = []
     fileprivate var pictures: [Hit] = []
     fileprivate var clusters: Clusters?
@@ -65,18 +68,24 @@ class SearchViewController: UIViewController {
 // MARK:- SetupView
 extension SearchViewController {
     private func setupBubbleContainer(subject: String, childs: [MDKeyword]) {
-        let container = BubbleContainer(frame: .zero, centerText: subject, childTextArray: childs)
-        container.alpha = 0
-        container.delegate = self
-        container.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(container)
+        bubbleContainer = BubbleContainer(frame: .zero, centerText: subject, childTextArray: childs)
+        bubbleContainer.alpha = 0
+        bubbleContainer.delegate = self
+        bubbleContainer.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(bubbleContainer)
+        let topConstraints = bubbleContainer.topAnchor.constraint(equalTo: keyWordsCollectionView.bottomAnchor, constant: 15)
+        let bottomConstraint = bubbleContainer.bottomAnchor.constraint(equalTo: imagesCollectionView.topAnchor, constant: -15)
+        topConstraints.priority = .defaultHigh
+        bottomConstraint.priority = .defaultHigh
         NSLayoutConstraint.activate([
-            container.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            container.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            container.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7),
-            container.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7)
+            topConstraints,
+            bottomConstraint,
+            bubbleContainer.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            bubbleContainer.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            bubbleContainer.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7),
+            bubbleContainer.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7)
         ])
-        container.fadeIn()
+        bubbleContainer.fadeIn()
     }
     
     private func setupCollectionView() {
@@ -131,8 +140,8 @@ extension SearchViewController {
         
         countLabel.centerXAnchor.constraint(equalTo: mandalartButton.centerXAnchor).isActive = true
         countLabel.widthAnchor.constraint(equalToConstant: 50).isActive = true
-        countLabel.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        countLabel.bottomAnchor.constraint(equalTo: mandalartButton.topAnchor, constant: -10).isActive = true
+        countLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        countLabel.bottomAnchor.constraint(equalTo: mandalartButton.topAnchor, constant: -5).isActive = true
     }
     
    
