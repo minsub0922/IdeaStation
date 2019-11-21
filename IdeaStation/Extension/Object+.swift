@@ -70,3 +70,9 @@ extension UIColor {
 extension UIStoryboard {
     
 }
+
+extension String {
+    var trim: String {
+        return self.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+}

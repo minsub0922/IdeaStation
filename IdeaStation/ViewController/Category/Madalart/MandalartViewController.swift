@@ -16,12 +16,12 @@ class MandalartViewController: UIViewController {
     }()
     private let scrollView: UIScrollView = UIScrollView(frame: .zero)
     private let container: UIView = UIView(frame: .zero)
-    private var selectedTests: [String] = []
+    private var selectedTexts: [String] = []
     private var centerKeyword: String = String()
     private var keywords: [String] {
         var keywords: [String] = []
         keywords.append(centerKeyword)
-        keywords.append(contentsOf: selectedTests)
+        keywords.append(contentsOf: selectedTexts)
         return keywords
     }
     
@@ -31,7 +31,8 @@ class MandalartViewController: UIViewController {
     
     public func setKeywords(centerKeyword: String, selectedTexts: [String]) {
         self.centerKeyword = centerKeyword
-        self.selectedTests = selectedTexts
+        self.selectedTexts = selectedTexts
+        print(selectedTexts)
     }
     
     override func viewDidLoad() {

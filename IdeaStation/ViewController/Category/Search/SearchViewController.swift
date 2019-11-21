@@ -21,16 +21,24 @@ class SearchViewController: UIViewController {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.isHidden = true
+        collectionView.alpha = 0
         return collectionView
     } ()
     private let mandalartButton: UIButton =  {
         return UIButton(frame: CGRect(origin: .zero,
                                       size: CGSize(width: 25, height: 25)))
     } ()
+    private let countLabel: UILabel = {
+        let label = UILabel(frame: .zero)
+        label.alpha = 0
+        label.textColor = .lightGray
+        label.font = label.font.withSize(13)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    } ()
     fileprivate var selectedTexts: [String] = []
-    fileprivate var subject = "사랑"
     fileprivate var pictures: [Hit] = []
+    fileprivate var clusters: Clusters?
     public var keywords: [String] = []
     
     @IBOutlet weak var navigationBar: UINavigationBar!
@@ -39,25 +47,18 @@ class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.addSubview(countLabel)
         setupCollectionView()
         setupButtons()
         setupAutolayouts()
-//        refreshDatas(subject: subject) { strings in
-//            //self.setupBubbleContainer(subject: self.subject, strings: strings)
-//            self.imagesCollectionView.isHidden = false
-//            self.imagesCollectionView.fadeIn()
-//        }
         
         getClusters(subjects: keywords) { clusters in
-            var count = 0
-            let childArray = clusters.getTop8Clusters().map { a -> MDKeyword in
-                count += 1
-                return MDKeyword(keyword: a.category, rank: count)
-            }
-            self.setupBubbleContainer(subject: self.subject, childs: childArray)
-            self.imagesCollectionView.isHidden = false
+            self.clusters = clusters
+            let children = clusters.related8ClustersMDKeywords()
+            self.setupBubbleContainer(subject: self.keywords[0], childs: children)
             self.imagesCollectionView.fadeIn()
         }
+        getPixaPictures(subject: keywords[0])
     }
 }
 
@@ -65,6 +66,7 @@ class SearchViewController: UIViewController {
 extension SearchViewController {
     private func setupBubbleContainer(subject: String, childs: [MDKeyword]) {
         let container = BubbleContainer(frame: .zero, centerText: subject, childTextArray: childs)
+        container.alpha = 0
         container.delegate = self
         container.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(container)
@@ -74,6 +76,7 @@ extension SearchViewController {
             container.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7),
             container.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7)
         ])
+        container.fadeIn()
     }
     
     private func setupCollectionView() {
@@ -125,6 +128,11 @@ extension SearchViewController {
         imagesCollectionView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         imagesCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20).isActive = true
         imagesCollectionView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.2).isActive = true
+        
+        countLabel.centerXAnchor.constraint(equalTo: mandalartButton.centerXAnchor).isActive = true
+        countLabel.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        countLabel.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        countLabel.bottomAnchor.constraint(equalTo: mandalartButton.topAnchor, constant: -10).isActive = true
     }
     
    
@@ -139,7 +147,7 @@ extension SearchViewController {
                 let navigationController = UIStoryboard(name: "MandalartStoryboard", bundle: nil).instantiateViewController(withIdentifier: "MandalartNavigationController") as? UINavigationController,
                 let target = navigationController.viewControllers.first as? MandalartViewController
             else {return}
-            target.setKeywords(centerKeyword: self.subject, selectedTexts: self.selectedTexts)
+            target.setKeywords(centerKeyword: self.keywords[0], selectedTexts: self.selectedTexts)
             navigationController.modalTransitionStyle = .crossDissolve
             navigationController.modalPresentationStyle = .fullScreen
             present(navigationController, animated: true, completion: nil)
@@ -149,15 +157,18 @@ extension SearchViewController {
 
 // APIS
 extension SearchViewController {
-    fileprivate func refreshDatas(subject: String, completion: @escaping ([String]) -> Void) {
-        getRandomTexts(subject: subject, completion: completion)
-        getPixaPictures(subject: subject)
-    }
-    
-    fileprivate func getRandomTexts(subject: String, completion: @escaping ([String]) -> Void) {
-        APISource.shared.getRandomText(word: subject) { res in
-            completion(res[0...8].dropLast())
+    fileprivate func refreshDatas(keyword: String, completion: @escaping ([MDKeyword]) -> Void) {
+        guard let clusters = clusters else { return }
+        if clusters.isCategory(word: keyword) {
+            completion(clusters.related8WordsMDKeywords(word: keyword))
+        } else {
+            getClusters(subjects: [keyword]) { clusters in
+                self.clusters = clusters
+                completion(clusters.related8ClustersMDKeywords())
+            }
         }
+        
+        getPixaPictures(subject: keyword)
     }
     
     fileprivate func getPixaPictures(subject: String) {
@@ -170,8 +181,7 @@ extension SearchViewController {
     }
     
     fileprivate func getClusters(subjects: [String], completion: @escaping (Clusters) -> Void) {
-        let words = subjects.reduce("") { $0 + $1 + " "}.trimmingCharacters(in: .whitespacesAndNewlines)
-        
+        let words = subjects.reduce("") { $0 + $1 + " "}.trim
         APISource.shared.getCluster(words: words, completion: completion)
     }
 }
@@ -224,8 +234,8 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDelega
 }
 
 extension SearchViewController: BubbleContainerDelegate {
-    func gotoExplore(selectedText: String, completion: @escaping ([String]) -> Void) {
-        refreshDatas(subject: selectedText, completion: completion)
+    func gotoExplore(selectedText: String, completion: @escaping ([MDKeyword]) -> Void) {
+        refreshDatas(keyword: selectedText, completion: completion)
     }
     
     func childSelected(selectedText: String) {
@@ -237,6 +247,8 @@ extension SearchViewController: BubbleContainerDelegate {
                                     at: .left, animated: true)
         self.mandalartButton.fadeIn()
         self.mandalartButton.bounce()
+        self.countLabel.fadeIn()
+        self.countLabel.text = "\(selectedTexts.count) / 70"
     }
     
     func childDeSelected(selectedText: String) {
@@ -250,6 +262,7 @@ extension SearchViewController: BubbleContainerDelegate {
         
         if selectedTexts.count == 0 {
             self.mandalartButton.fadeOut(until: 0)
+            self.countLabel.fadeOut(until: 0)
         }
     }
     
@@ -258,7 +271,6 @@ extension SearchViewController: BubbleContainerDelegate {
     }
     
     func collapsed() {
-        self.imagesCollectionView.isHidden = false
         self.imagesCollectionView.fadeIn(during: 0.5)
     }
 }

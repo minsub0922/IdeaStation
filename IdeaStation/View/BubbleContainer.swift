@@ -12,7 +12,7 @@ protocol BubbleContainerDelegate {
     func collapsed()
     func childSelected(selectedText: String)
     func childDeSelected(selectedText: String)
-    func gotoExplore(selectedText: String, completion: @escaping (_ childArray: [String]) -> Void)
+    func gotoExplore(selectedText: String, completion: @escaping (_ childArray: [MDKeyword]) -> Void)
 }
 
 class BubbleContainer: UIView {
@@ -50,6 +50,7 @@ class BubbleContainer: UIView {
     fileprivate var keywords: [MDKeyword] = []
     fileprivate let childCount: Int
     fileprivate var isCollapse = true
+    fileprivate var isPossibleExplore: Bool = true
     
     // MARK:- init
     init(frame: CGRect, centerText: String, childTextArray: [MDKeyword]) {
@@ -76,6 +77,7 @@ class BubbleContainer: UIView {
     
     fileprivate func initChildLabels(children: [MDKeyword]) {
         centerLabel.text = selectedChildText
+        let children = children.shuffled()
         for child in children {
             let text = child.keyword
             let label = UILabel()
@@ -85,13 +87,13 @@ class BubbleContainer: UIView {
             childArray.append(label)
         }
         keywords.append(contentsOf: children)
-        keywords.shuffle()
     }
     
     fileprivate func updateChildLabels() {
         for i in 0..<self.childCount {
             self.childArray[i].text = self.keywords[self.keywords.count-self.childCount+i].keyword
         }
+        self.setAdjustedFontSizeForChildren()
     }
 }
 
@@ -165,7 +167,7 @@ extension BubbleContainer {
         let gap = (maxFontSize - minFonSize) / CGFloat(childCount)
         for i in 0..<childArray.count {
             let childLabel = childArray[i]
-            let rank = self.keywords[self.keywords.count - childCount + i].rank
+            let rank = 8 - self.keywords[self.keywords.count - childCount + i].rank
             childLabel.font = childLabel.font.withSize(minFonSize + gap * CGFloat(rank))
         }
     }
@@ -174,12 +176,12 @@ extension BubbleContainer {
 // MARK:- Actions
 extension BubbleContainer {
     @objc fileprivate func exploreKeyword(_ recognizer: UILongPressGestureRecognizer) {
-        if recognizer.state != .ended { return }
-        
+        if recognizer.state == .ended || !isPossibleExplore { return }
+        isPossibleExplore = false
         guard let bubble = recognizer.view as? UILabel else {return}
         selectedChildText = bubble.text ?? ""
-        self.delegate?.gotoExplore(selectedText: selectedChildText, completion: { strings in
-            self.keywords.append(contentsOf: strings.map { MDKeyword(keyword: $0) })
+        self.delegate?.gotoExplore(selectedText: selectedChildText, completion: { keywords in
+            self.keywords.append(contentsOf: keywords.shuffled())
             self.collapsed()
         })
     }
@@ -218,6 +220,7 @@ extension BubbleContainer {
         fadeOutChildren() {
             self.updateChildLabels()
             self.delegate?.collapsed()
+            self.isPossibleExplore = true
         }
     }
     private func expanded() {
