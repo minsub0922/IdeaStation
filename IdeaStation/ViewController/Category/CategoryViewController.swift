@@ -6,6 +6,7 @@
 //  Copyright © 2019 최민섭. All rights reserved.
 //
 import UIKit
+import BubbleTransition
 
 class CategoryViewController: UIViewController {
     let textField: UITextField = {
@@ -28,7 +29,7 @@ class CategoryViewController: UIViewController {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .white
+        collectionView.backgroundColor = .none
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
     } ()
@@ -40,8 +41,32 @@ class CategoryViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     } ()
-    
+    private let nextButton: UIButton = {
+        let button = UIButton(frame: .zero)
+        button.setTitle("다음", for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    } ()
+    private let closeButton: UIButton = {
+        let button = UIButton(frame: .zero)
+        button.setImage(UIImage(named: "close"), for: .normal)
+        button.contentVerticalAlignment = .fill
+        button.contentHorizontalAlignment = .fill
+        let inset: CGFloat = 17
+        button.imageEdgeInsets = UIEdgeInsets(top: inset, left: inset, bottom: inset, right:inset)
+        button.addTarget(self, action: #selector(touchupCloseButton(_:)), for: .touchUpInside)
+        button.backgroundColor = .lightGray
+        return button
+    } ()
+
     private var keywords: [String] = []
+    public weak var interactiveTransition: BubbleInteractiveTransition?
+    
+    public func setupCloseButton(center: CGPoint, width: CGFloat) {
+        closeButton.frame = CGRect(origin: center,
+                                   size: CGSize(width: width, height: width))
+        closeButton.center = center
+    }
     
     @IBAction func tapBackgroundAction(_ sender: Any) {
         view.endEditing(true)
@@ -52,12 +77,19 @@ class CategoryViewController: UIViewController {
         
         setupView()
     }
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        closeButton.addCircularRounded()
+        closeButton.addCircularShadow()
+    }
+    
     private func setupView() {
         textField.delegate = self
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.registerNib(SearchPathCell.self)
         plusButton.addTarget(self, action: #selector(touchupButton(_:)), for: .touchUpInside)
+        nextButton.addTarget(self, action: #selector(touchupNextButton(_:)), for: .touchUpInside)
             
         addSubview()
         addConstraints()
@@ -72,13 +104,25 @@ class CategoryViewController: UIViewController {
         
     }
     
+    @objc private func touchupNextButton(_ button: UIButton) {
+        guard let target = UIStoryboard(name: "Search", bundle: nil).instantiateViewController(withIdentifier: "SearchViewController") as? UIViewController else {return}
+        target.modalPresentationStyle = .fullScreen
+        present(target, animated: true, completion: nil)
+    }
+    
+    @objc private func touchupCloseButton(_ button: UIButton) {
+          self.dismiss(animated: true, completion: nil)
+          interactiveTransition?.finish()
+    }
+    
     private func addSubview() {
         //ExitButton(on: self)
         view.addSubview(plusButton)
         view.addSubview(textField)
         view.addSubview(underline)
         view.addSubview(collectionView)
-        
+        view.addSubview(nextButton)
+        view.addSubview(closeButton)
     }
     
     private func addConstraints() {
@@ -95,11 +139,17 @@ class CategoryViewController: UIViewController {
             textField.leftAnchor.constraint(equalTo: underline.leftAnchor),
             textField.rightAnchor.constraint(equalTo: plusButton.leftAnchor, constant: -15),
             textField.heightAnchor.constraint(equalToConstant: 20),
-            collectionView.topAnchor.constraint(equalTo: underline.bottomAnchor, constant: 30),
+            collectionView.topAnchor.constraint(equalTo: underline.bottomAnchor, constant: 15),
             collectionView.centerXAnchor.constraint(equalTo: underline.centerXAnchor),
             collectionView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
-            collectionView.heightAnchor.constraint(equalToConstant: 100)
+            collectionView.heightAnchor.constraint(equalToConstant: 50),
+            nextButton.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -30),
+            nextButton.bottomAnchor.constraint(equalToSystemSpacingBelow: view.safeAreaLayoutGuide.bottomAnchor, multiplier: -30),
+//            closeButton.widthAnchor.constraint(equalToConstant: closeButtonWidth!),
+//            closeButton.heightAnchor.constraint(equalToConstant: closeButtonWidth!)
         ])
+        
+        //closeButton.center = closeButtonCenter!
     }
 }
 

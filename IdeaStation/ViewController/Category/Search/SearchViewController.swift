@@ -32,6 +32,8 @@ class SearchViewController: UIViewController {
     fileprivate var subject = "사랑"
     fileprivate var pictures: [Hit] = []
     
+    @IBOutlet weak var navigationBar: UINavigationBar!
+    
     // MARK:- View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -83,7 +85,7 @@ extension SearchViewController {
     }
     
     private func setupButtons() {
-        ExitButton(on: navigationController!.navigationBar, target: self)
+        ExitButton(on: navigationBar, target: self)
         mandalartButton.setImage(UIImage(named: "ic-mandalart"), for: .normal)
         mandalartButton.addTarget(self, action: #selector(touchupButton(_:)), for: .touchUpInside)
         mandalartButton.tintColor = .black

@@ -51,6 +51,12 @@ extension UIView {
         self.clipsToBounds = true
     }
     
+    func addCircularRounded() {
+        let radius = self.bounds.width / 2
+        self.layer.cornerRadius = radius
+        self.clipsToBounds = true
+    }
+    
     func rotate(to angle: CGFloat) {
         let rotateAnimation = CABasicAnimation(keyPath: "transform.rotation.z")
         rotateAnimation.toValue = CGFloat(angle)
@@ -150,6 +156,15 @@ extension UIView {
         self.layer.rasterizationScale = UIScreen.main.scale
         self.layer.masksToBounds = false
     }
+    
+    func addCircularShadow() {
+        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowOffset = CGSize(width: 0.0, height: 0)
+        layer.masksToBounds = false
+        layer.shadowRadius = 4.0
+        layer.shadowOpacity = 0.15
+        layer.cornerRadius = frame.width / 2
+    }
 }
 
 let imageCache = NSCache<AnyObject, AnyObject>()
@@ -243,3 +258,19 @@ extension UIFont {
         return UIFont(descriptor: descriptor, size: 0)
     } // with(traits:)
 } // extension
+
+extension CALayer {
+    // Sketch 스타일의 그림자를 생성하는 유틸리티 함수
+    func applyShadow(
+        color: UIColor = .black,
+        alpha: Float = 0.5,
+        x: CGFloat = 0,
+        y: CGFloat = 2,
+        blur: CGFloat = 4
+    ) {
+        shadowColor = color.cgColor
+        shadowOpacity = alpha
+        shadowOffset = CGSize(width: x, height: y)
+        shadowRadius = blur / 2.0
+    }
+}

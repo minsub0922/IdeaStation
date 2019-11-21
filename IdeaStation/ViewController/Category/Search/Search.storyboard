@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="4J7-Hj-w3r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="q66-hN-0Ju">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -11,36 +11,35 @@
         <!--아이디어 탐색-->
         <scene sceneID="c5d-yw-cGj">
             <objects>
-                <viewController id="q66-hN-0Ju" customClass="SearchViewController" customModule="IdeaStation" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SearchViewController" title="아이디어 탐색" useStoryboardIdentifierAsRestorationIdentifier="YES" id="q66-hN-0Ju" customClass="SearchViewController" customModule="IdeaStation" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="siV-MC-Naq">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translucent="NO" largeTitles="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TQT-G1-4ta">
+                                <rect key="frame" x="0.0" y="44" width="414" height="105"/>
+                                <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <items>
+                                    <navigationItem title="아이디어 탐색" id="9zC-yn-3vs"/>
+                                </items>
+                            </navigationBar>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="TQT-G1-4ta" firstAttribute="trailing" secondItem="h1c-we-zEn" secondAttribute="trailing" id="R5G-XI-y9c"/>
+                            <constraint firstItem="TQT-G1-4ta" firstAttribute="leading" secondItem="h1c-we-zEn" secondAttribute="leading" id="sYz-e6-bx2"/>
+                            <constraint firstItem="TQT-G1-4ta" firstAttribute="top" secondItem="h1c-we-zEn" secondAttribute="top" id="ugg-f1-Lye"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="h1c-we-zEn"/>
                     </view>
                     <navigationItem key="navigationItem" title="아이디어 탐색" id="RMJ-2z-Ngb"/>
+                    <connections>
+                        <outlet property="navigationBar" destination="TQT-G1-4ta" id="YJN-rm-xcF"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Lg-S8-w7A" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1157.9710144927537" y="22.767857142857142"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="dth-qX-rb6">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="4J7-Hj-w3r" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="smH-ys-8NJ">
-                        <rect key="frame" x="0.0" y="44" width="414" height="104.5"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="q66-hN-0Ju" kind="relationship" relationship="rootViewController" id="5j4-c7-huf"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="NdR-EA-WK4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="247.82608695652175" y="22.767857142857142"/>
         </scene>
     </scenes>
 </document>
