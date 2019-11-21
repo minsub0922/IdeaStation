@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="t7e-MI-XRR">
-    <device id="ipad9_7" orientation="portrait" layout="fullscreen" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="dND-nj-D2k">
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,17 +13,17 @@
             <objects>
                 <viewController id="94l-Rz-Qf2" customClass="MainViewController" customModule="IdeaStation" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="TM5-1A-Bcd">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="OCr-qH-AR9">
-                                <rect key="frame" x="0.0" y="50" width="768" height="924"/>
+                                <rect key="frame" x="0.0" y="88" width="375" height="641"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="feed-seed" rowHeight="218" id="BM8-Qz-XVF" customClass="MainSeedTableViewCell" customModule="IdeaStation" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="768" height="218"/>
+                                        <rect key="frame" x="0.0" y="28" width="375" height="218"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="BM8-Qz-XVF" id="z0M-OU-gCQ">
-                                            <rect key="frame" x="0.0" y="0.0" width="768" height="218"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="218"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" id="pbH-VO-wT8">
@@ -81,14 +81,14 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="feed-sprout" rowHeight="586" id="TeS-Cc-2XL" customClass="MainSproutTableViewCell" customModule="IdeaStation" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="246" width="768" height="586"/>
+                                        <rect key="frame" x="0.0" y="246" width="375" height="586"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="TeS-Cc-2XL" id="eFc-cp-cZM">
-                                            <rect key="frame" x="0.0" y="0.0" width="768" height="586"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="586"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" image="elevatorPitch" id="rsV-3j-vYx">
-                                                    <rect key="frame" x="15" y="143" width="738" height="354"/>
+                                                    <rect key="frame" x="15" y="142" width="353" height="355"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <view contentMode="scaleToFill" id="XtW-ZT-fv5">
@@ -148,16 +148,16 @@
                                             <segue destination="mIz-nQ-RPL" kind="show" id="Lor-K9-cGv"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="feed-competition" rowHeight="1368" id="yTK-tA-Ael" customClass="MainCompetitionTableViewCell" customModule="IdeaStation" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="832" width="768" height="1368"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="feed-competition" rowHeight="1176" id="yTK-tA-Ael" customClass="MainCompetitionTableViewCell" customModule="IdeaStation" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="832" width="375" height="1176"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="yTK-tA-Ael" id="Wwr-yf-mwg">
-                                            <rect key="frame" x="0.0" y="0.0" width="768" height="1368"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="1176"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" image="petfoodPackageDesignCompetition" id="Rfh-x5-iKm">
-                                                    <rect key="frame" x="15" y="143" width="738" height="1014"/>
-                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                                    <rect key="frame" x="15" y="122" width="353" height="872"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                                 </imageView>
                                                 <view contentMode="scaleToFill" id="Jgg-Ta-lY2">
                                                     <rect key="frame" x="15" y="11" width="738" height="132"/>
@@ -169,8 +169,9 @@
                                                                 <constraint firstAttribute="width" secondItem="dYk-rE-df6" secondAttribute="height" multiplier="1:1" id="NYH-Gz-fIc"/>
                                                             </constraints>
                                                         </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="오늘의 공모전" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bVq-ai-wmP">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="오늘의 공모전" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" id="bVq-ai-wmP">
                                                             <rect key="frame" x="82" y="8" width="648" height="116"/>
+                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -189,7 +190,7 @@
                                                     </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" preservesSuperviewLayoutMargins="YES" layoutMarginsFollowReadableWidth="YES" text="펫푸드 제품 패키지 디자인 공모전" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3HV-cl-gjO">
-                                                    <rect key="frame" x="15" y="1258" width="738" height="87"/>
+                                                    <rect key="frame" x="15" y="1058" width="738" height="75"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                                     <nil key="textColor"/>
@@ -243,24 +244,24 @@
             <objects>
                 <viewController id="dgU-qZ-EPj" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cUM-qW-9p3">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="petfoodPackageDesignCompetition" translatesAutoresizingMaskIntoConstraints="NO" id="MCu-iR-ENq">
-                                <rect key="frame" x="0.0" y="50" width="768" height="614.5"/>
+                                <rect key="frame" x="0.0" y="87.999999999999972" width="375" height="487.33333333333326"/>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bg7-tB-TdE">
-                                <rect key="frame" x="12" y="676.5" width="744" height="285.5"/>
+                                <rect key="frame" x="12" y="587.33333333333337" width="351" height="129.66666666666663"/>
                                 <subviews>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="[팀블라썸] 펫푸드 제품 패키지 디자인 공모전" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="kiH-7Y-Wy1">
-                                        <rect key="frame" x="8" y="8" width="728" height="82"/>
+                                        <rect key="frame" x="8" y="8" width="335" height="65"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="35"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="#기획/아이디어  #펫푸드  #제품  #디자인  #식품  #반려동물  #강아지" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="0TV-z0-luW">
-                                        <rect key="frame" x="8" y="98" width="728" height="57"/>
+                                        <rect key="frame" x="8" y="81" width="335" height="45"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="25"/>
@@ -306,21 +307,21 @@
             <objects>
                 <viewController id="mIz-nQ-RPL" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="TcE-XV-mgC">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="elevatorPitch" translatesAutoresizingMaskIntoConstraints="NO" id="clS-Ld-XAq">
-                                <rect key="frame" x="0.0" y="50" width="768" height="614.5"/>
+                                <rect key="frame" x="0.0" y="87.999999999999972" width="375" height="487.33333333333326"/>
                             </imageView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="막차 시간 계산해주는 앱서비스" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="xTD-UN-mmf">
-                                <rect key="frame" x="20" y="664.5" width="728" height="82"/>
+                                <rect key="frame" x="20" y="575.33333333333337" width="335" height="65"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="35"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="#앱서비스  #지하철  #시간  #막차  #술 " textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="g4a-Aq-QHV">
-                                <rect key="frame" x="20" y="754.5" width="728" height="57"/>
+                                <rect key="frame" x="20" y="648.33333333333337" width="335" height="45"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
@@ -355,28 +356,28 @@
             <objects>
                 <viewController id="YIf-Sn-6f0" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WNh-lP-tzj">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="매번 막차 시간을 일일히 확인하는 게 너무 불편합니다......" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dkg-M2-Ybd">
-                                <rect key="frame" x="20" y="210" width="728" height="85"/>
+                            <textView multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" editable="NO" text="매번 막차 시간을 일일히 확인하는 게 너무 불편합니다......" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dkg-M2-Ybd">
+                                <rect key="frame" x="20" y="210" width="335" height="85"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <view contentMode="scaleToFill" id="Ofe-Um-d2d">
+                            <view contentMode="scaleToFill" ambiguous="YES" id="Ofe-Um-d2d">
                                 <rect key="frame" x="15" y="70" width="738" height="132"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="오늘의 추천 씨드" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o2K-7P-LHw">
-                                        <rect key="frame" x="82" y="8" width="648" height="116"/>
+                                        <rect key="frame" x="46" y="26" width="684" height="36"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="idea-seed" translatesAutoresizingMaskIntoConstraints="NO" id="gZU-p9-QnE">
-                                        <rect key="frame" x="8" y="33" width="66" height="66"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="idea-seed" translatesAutoresizingMaskIntoConstraints="NO" id="gZU-p9-QnE">
+                                        <rect key="frame" x="8" y="33" width="30" height="66"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="gZU-p9-QnE" secondAttribute="height" multiplier="1:1" id="b20-Se-On0"/>
                                         </constraints>
@@ -436,7 +437,7 @@
             <objects>
                 <viewController id="LHU-U4-HIA" customClass="MySeedViewController" customModule="IdeaStation" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VZa-a6-CD0">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="57r-GQ-3i6">
@@ -459,6 +460,21 @@
             </objects>
             <point key="canvasLocation" x="1624.6376811594205" y="501.5625"/>
         </scene>
+        <!--Main View Controller2-->
+        <scene sceneID="PCf-uT-id8">
+            <objects>
+                <viewController id="dND-nj-D2k" customClass="MainViewController2" customModule="IdeaStation" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="axw-74-U3j">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="HXI-ka-AiY"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="teQ-qm-9K0" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1088" y="1646"/>
+        </scene>
         <!--Feed-->
         <scene sceneID="0ZS-OK-zb7">
             <objects>
@@ -466,7 +482,7 @@
                     <tabBarItem key="tabBarItem" title="Feed" image="idea-feed" id="nze-7w-RNk"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ydL-10-4X6">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="50"/>
+                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
