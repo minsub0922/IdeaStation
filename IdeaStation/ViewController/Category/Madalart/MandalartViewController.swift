@@ -46,6 +46,7 @@ class MandalartViewController: UIViewController {
     }
     private var mandalartKeywords: [String] = []
     private var cellCount = 0
+    private var keywordsForIdea: [String] = []
     
     @IBAction func tapbackgroundAction(_ sender: Any) {
         view.endEditing(true)
@@ -181,13 +182,20 @@ extension MandalartViewController: UICollectionViewDelegate, UICollectionViewDat
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(MandalartCell.self, for: indexPath)
         var centerIndex = 0
-        if indexPath.row < 4 {
-            centerIndex = (indexPath.row+1)
-        } else if indexPath.row == 4 {
-            centerIndex = 0
-        } else {
-            centerIndex = indexPath.row
+        
+        switch indexPath.row {
+        case 0: centerIndex = 1
+        case 1: centerIndex = 2
+        case 2: centerIndex = 3
+        case 3: centerIndex = 8
+        case 4: centerIndex = 0
+        case 5: centerIndex = 4
+        case 6: centerIndex = 7
+        case 7: centerIndex = 6
+        case 8: centerIndex = 5
+        default: break
         }
+        
         let centerKeyword = mandalartKeywords[centerIndex]
         let hasKeyword = keywords.filter {$0.keyword.elementsEqual(centerKeyword)}
         let centerImagePath = hasKeyword.count > 0 ? hasKeyword[0].imagePath : ""
@@ -209,7 +217,8 @@ extension MandalartViewController: UICollectionViewDelegate, UICollectionViewDat
 
 extension MandalartViewController: MandalartCellDelegate {
     func touchupCell(isSelected: Bool, category: String, children: [String]) {
-        print(children)
+        keywordsForIdea.append(category)
+        keywordsForIdea.append(contentsOf: children)
     }
 }
 

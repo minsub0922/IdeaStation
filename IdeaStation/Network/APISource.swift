@@ -58,9 +58,10 @@ struct APISource: APISourceProtocol {
             completion: commonResponseHandler(completion: completion))
     }
     
-    func getCluster(words: String, completion: @escaping (Clusters) -> Void) {
+    func getCluster(words: [String], completion: @escaping (Clusters) -> Void) {
+        let word = words.reduce("") { $0 + $1 + " "}.trim
         let params = [
-            "word": words
+            "word": word
         ]
         get(API.getClusters,
             params: params,
@@ -68,8 +69,9 @@ struct APISource: APISourceProtocol {
     }
     
     func getIdea(words: [String], completion: @escaping (String) -> Void)  {
+        let word = words.reduce("") { $0 + $1 + " "}.trim
         let params = [
-            "word": words
+            "word": word
         ]
         get(API.getIdea(),
             params: params,
@@ -77,8 +79,9 @@ struct APISource: APISourceProtocol {
     }
     
     func getMandalart(words: [String], completion: @escaping ([String]) -> Void)  {
+        let word = words.reduce("") { $0 + $1 + " "}.trim
         let params = [
-            "word": words
+            "word": word
         ]
         get(API.getMandalart(),
             params: params,

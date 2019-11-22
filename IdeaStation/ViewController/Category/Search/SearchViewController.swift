@@ -195,8 +195,7 @@ extension SearchViewController {
     }
     
     fileprivate func getClusters(subjects: [String], completion: @escaping (Clusters) -> Void) {
-        let words = subjects.reduce("") { $0 + $1 + " "}.trim
-        APISource.shared.getCluster(words: words, completion: completion)
+        APISource.shared.getCluster(words: subjects, completion: completion)
     }
 }
 
