@@ -38,6 +38,7 @@ class Mandalart: UIView {
             //view.addShadow(type: .small)
             let blue = UIColor.blue.withAlphaComponent(0.6)
             //view.backgroundColor = blue
+            view.translatesAutoresizingMaskIntoConstraints = false
             containers.append(view)
         }
         return containers
@@ -118,12 +119,14 @@ extension Mandalart {
             let x = radius * adjustedValueForTF(value: cos(theta))
             let y = radius * adjustedValueForTF(value: sin(theta))
             let container = containers[i]
-            container.translatesAutoresizingMaskIntoConstraints = false
+            
+            //container
             container.centerXAnchor.constraint(equalTo: centerXAnchor, constant: x).isActive = true
             container.centerYAnchor.constraint(equalTo: centerYAnchor, constant: y).isActive = true
             container.widthAnchor.constraint(equalToConstant: cellSize).isActive = true
             container.heightAnchor.constraint(equalToConstant: cellSize).isActive = true
             
+            //child
             child.translatesAutoresizingMaskIntoConstraints = false
             child.centerXAnchor.constraint(equalTo: centerXAnchor, constant: x).isActive = true
             child.centerYAnchor.constraint(equalTo: centerYAnchor, constant: y).isActive = true
@@ -141,5 +144,51 @@ extension Mandalart {
     
     private func adjustedValueForTF(value: Float) -> CGFloat {
         return CGFloat(round(value))
+    }
+}
+
+// Draw BezierPath
+extension Mandalart {
+    override func draw(_ rect: CGRect) {
+        setStartPointsForDrawing(center: self.center, radius: cellSize / 2)
+    }
+    
+    private func setStartPointsForDrawing(center: CGPoint, radius: CGFloat) {
+        let startPointsDirections: [[CGFloat]] = [[1,-1],[1,1],[-1,1],[-1,-1]]
+        let drawingPathDirections: [[CGFloat]] = [[0,1],[0,-1],[1,0],[-1,0]]
+        let length = radius
+        for pointDirection in startPointsDirections {
+            let startPoint = CGPoint(x: center.x + radius * pointDirection[0],
+                                     y: center.y + radius * pointDirection[1])
+            for pathDirection in drawingPathDirections {
+                let endPoint = CGPoint(x: startPoint.x + length * pathDirection[0],
+                                       y: startPoint.y + length * pathDirection[1])
+                drawPath(from: startPoint, to: endPoint)
+            }
+        }
+        
+    }
+    
+    private func drawPath(from: CGPoint, to: CGPoint) {
+        let path = UIBezierPath()
+        let arcLayer = CAShapeLayer()
+        //path.lineJoinStyle = .round
+        //path.usesEvenOddFillRule = true
+        //시작점
+        path.move(to: from)
+        //path 지정
+        path.addLine(to: to)
+        
+        arcLayer.path = path.cgPath
+        arcLayer.lineWidth = 0.3
+        //arcLayer.fillColor = UIColor.black.cgColor
+        arcLayer.strokeColor = UIColor.black.withAlphaComponent(0.4).cgColor
+        layer.addSublayer(arcLayer)
+        
+//        //선들을잇는작업
+//        path.close()
+//        //다각형을 그리는게 아니라 선분이니까 !
+//        UIColor.systemGray.set()
+//        path.stroke()
     }
 }

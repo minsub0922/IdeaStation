@@ -12,7 +12,11 @@ class MandalartViewController: UIViewController {
     private let collectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .vertical
-        return UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+        collectionView.contentInset = .init(top: 5, left: 5, bottom: 5, right: 5)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.backgroundColor = .white
+        return collectionView
     }()
     private let ideaButton: UIButton = {
         let button = UIButton(frame: .zero)
@@ -27,6 +31,7 @@ class MandalartViewController: UIViewController {
     private var selectedTexts: [String] = []
     private var centerKeyword: String = String()
     private var keywords: [String] {
+        if selectedTexts.count == 0 { return ["이게사랑인가요","이제다시","사랑에연습이있었다면"]}
         var keywords: [String] = []
         keywords.append(centerKeyword)
         keywords.append(contentsOf: selectedTexts)
@@ -56,6 +61,8 @@ class MandalartViewController: UIViewController {
         setupCollectionView()
         setupScrollView()
         setupButtons()
+        
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
     }
     
     private func setupButtons() {
@@ -79,7 +86,7 @@ class MandalartViewController: UIViewController {
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         
         let sizeAnchor = view.bounds.width > view.bounds.height ? view.heightAnchor : view.widthAnchor
-        scrollView.widthAnchor.constraint(equalTo: sizeAnchor, constant: -20).isActive = true
+        scrollView.widthAnchor.constraint(equalTo: sizeAnchor).isActive = true
         scrollView.heightAnchor.constraint(equalTo: sizeAnchor).isActive = true
         scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         scrollView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
@@ -89,14 +96,14 @@ class MandalartViewController: UIViewController {
         container.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor).isActive = true
         container.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
         container.heightAnchor.constraint(equalTo: scrollView.heightAnchor).isActive = true
+        
+        container.isUserInteractionEnabled = true
     }
     
     private func setupCollectionView() {
         collectionView.registerNib(MandalartCell.self)
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.backgroundColor = .white
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
         
         collectionView.widthAnchor.constraint(equalTo: container.widthAnchor).isActive = true
         collectionView.heightAnchor.constraint(equalTo: container.heightAnchor).isActive = true
@@ -117,7 +124,7 @@ extension MandalartViewController: UIScrollViewDelegate {
 
 extension MandalartViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = view.bounds.width / 3 - 10
+        let width = collectionView.bounds.width / 3 - 10
         return CGSize(width: width, height: width)
     }
     
@@ -142,6 +149,13 @@ extension MandalartViewController: UICollectionViewDelegate, UICollectionViewDat
             children.append(keywords[(centerIndex+i) % keywords.count])
         }
         cell.setupView(center: keywords[centerIndex], children: children)
+        cell.delegate = self
         return cell
+    }
+}
+
+extension MandalartViewController: MandalartCellDelegate {
+    func touchupCell(isSelected: Bool, category: String, children: [String]) {
+        print(children)
     }
 }
