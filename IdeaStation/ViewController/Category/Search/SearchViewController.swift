@@ -15,13 +15,16 @@ class SearchViewController: UIViewController {
     private let keyWordsCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        return UICollectionView(frame: .zero, collectionViewLayout: layout)
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.allowsSelection = true
+        return collectionView
     } ()
     private let imagesCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.alpha = 0
+        collectionView.allowsSelection = true
         return collectionView
     } ()
     private let mandalartButton: UIButton =  {
@@ -39,17 +42,21 @@ class SearchViewController: UIViewController {
     } ()
     private var bubbleContainer: BubbleContainer!
     
-    fileprivate var selectedTexts: [String] = []
+    fileprivate var selectedKeywords: [MDKeyword] = []
     fileprivate var pictures: [Hit] = []
     fileprivate var clusters: Clusters?
     public var keywords: [String] = []
+    fileprivate var centerImageURL: String = String()
     
-    @IBOutlet weak var navigationBar: UINavigationBar!
+    @IBOutlet weak var navigationBar: UINavigationBar! {
+        didSet {
+            navigationBar.alpha = 0
+        }
+    }
     
     // MARK:- View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         view.addSubview(countLabel)
         setupCollectionView()
         setupButtons()
@@ -60,6 +67,7 @@ class SearchViewController: UIViewController {
             let children = clusters.related8ClustersMDKeywords()
             self.setupBubbleContainer(subject: self.keywords[0], childs: children)
             self.imagesCollectionView.fadeIn()
+            self.navigationBar.fadeIn()
         }
         getPixaPictures(subject: keywords[0])
     }
@@ -152,14 +160,14 @@ extension SearchViewController {
     @objc private func touchupButton(_ sender: UIButton) {
         weak var ghost = self.presentingViewController
         //self.dismiss(animated: true, completion: {
-            guard
-                let navigationController = UIStoryboard(name: "MandalartStoryboard", bundle: nil).instantiateViewController(withIdentifier: "MandalartNavigationController") as? UINavigationController,
-                let target = navigationController.viewControllers.first as? MandalartViewController
+        guard
+            let navigationController = UIStoryboard(name: "MandalartStoryboard", bundle: nil).instantiateViewController(withIdentifier: "MandalartNavigationController") as? UINavigationController,
+            let target = navigationController.viewControllers.first as? MandalartViewController
             else {return}
-            target.setKeywords(centerKeyword: self.keywords[0], selectedTexts: self.selectedTexts)
-            navigationController.modalTransitionStyle = .crossDissolve
-            navigationController.modalPresentationStyle = .fullScreen
-            present(navigationController, animated: true, completion: nil)
+        target.setKeywords(centerKeyword: self.keywords[0], centerImageURL: self.centerImageURL, selectedTexts: self.selectedKeywords)
+        navigationController.modalTransitionStyle = .crossDissolve
+        navigationController.modalPresentationStyle = .fullScreen
+        present(navigationController, animated: true, completion: nil)
         //})
     }
 }
@@ -198,7 +206,7 @@ extension SearchViewController {
 extension SearchViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView.isEqual(keyWordsCollectionView) {
-            return selectedTexts.count * 2 - 1
+            return selectedKeywords.count * 2 - 1
         } else {
             return pictures.count
         }
@@ -228,7 +236,8 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDelega
         if collectionView.isEqual(keyWordsCollectionView) {
             if indexPath.row % 2 == 0 {
                 let cell = collectionView.dequeueReusableCell(SearchPathCell.self, for: indexPath)
-                cell.label.text = selectedTexts[indexPath.row / 2]
+                cell.label.text = selectedKeywords[indexPath.row / 2].keyword
+                cell.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(longpressCellRecognizer(_:))))
                 return cell
             } else {
                 let cell = collectionView.dequeueReusableCell(HorizontalArrowCell.self, for: indexPath)
@@ -240,6 +249,43 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDelega
             return cell
         }
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView.isEqual(keyWordsCollectionView) && indexPath.row % 2 == 0 {
+            collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+            bubbleContainer.exploreSelectedKeyword(keyword: selectedKeywords[indexPath.row / 2].keyword)
+        } else {    // Select Image
+            guard let cell = collectionView.cellForItem(at: indexPath) as? SearchImagecell else { return }
+            cell.applyShadow()
+            let imageURL = self.pictures[indexPath.row].previewURL
+            let subject = bubbleContainer.getSubject()
+            if keywords[0].elementsEqual(subject) { self.centerImageURL = imageURL; return}
+            
+            self.selectedKeywords = self.selectedKeywords.map{
+                return $0.keyword.elementsEqual(subject) ? MDKeyword(keyword: $0.keyword, imagePath: imageURL) : $0
+            }
+        }
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        if collectionView.isEqual(imagesCollectionView) {
+            guard let cell = collectionView.cellForItem(at: indexPath) as? SearchImagecell else { return }
+            cell.applyShadow()
+        }
+    }
+    
+    // Delete Selected Text With Cell
+    @objc private func longpressCellRecognizer(_ sender: UILongPressGestureRecognizer) {
+        if sender.state == .ended {
+            let p = sender.location(in: self.keyWordsCollectionView)
+            guard let indexPath = self.keyWordsCollectionView.indexPathForItem(at: p) else { return }
+            if indexPath.row % 2 != 0 { return }
+            self.selectedKeywords.remove(at: indexPath.row / 2)
+            let indexPathOfArrow = IndexPath(row: indexPath.row - 1, section: 0)
+            self.keyWordsCollectionView.deleteItems(at: [indexPathOfArrow, indexPath])
+        }
+    }
 }
 
 extension SearchViewController: BubbleContainerDelegate {
@@ -248,7 +294,7 @@ extension SearchViewController: BubbleContainerDelegate {
     }
     
     func childSelected(selectedText: String) {
-        selectedTexts.append(selectedText)
+        selectedKeywords.append(MDKeyword(keyword: selectedText))
         keyWordsCollectionView.reloadSection(section: 0)
         let row = keyWordsCollectionView.numberOfItems(inSection: 0)-1
         keyWordsCollectionView.scrollToItem(at: IndexPath(row: row,
@@ -257,19 +303,20 @@ extension SearchViewController: BubbleContainerDelegate {
         self.mandalartButton.fadeIn()
         self.mandalartButton.bounce()
         self.countLabel.fadeIn()
-        self.countLabel.text = "\(selectedTexts.count) / 70"
+        self.countLabel.text = "\(selectedKeywords.count) / 70"
     }
     
     func childDeSelected(selectedText: String) {
-        guard let index = selectedTexts.firstIndex(of: selectedText) else {return}
-        selectedTexts.remove(at: index)
-        
+        let selectedKeywords = self.selectedKeywords.map {$0.keyword}
+        guard let index = selectedKeywords.firstIndex(of: selectedText) else {return}
+        self.selectedKeywords.remove(at: index)
+        self.countLabel.text = "\(self.selectedKeywords.count) / 70"
         let indexPath = IndexPath(row: index, section: 0)
         self.keyWordsCollectionView.performBatchUpdates({
             self.keyWordsCollectionView.deleteItems(at:[indexPath])
         }, completion: nil)
         
-        if selectedTexts.count == 0 {
+        if self.selectedKeywords.count == 0 {
             self.mandalartButton.fadeOut(until: 0)
             self.countLabel.fadeOut(until: 0)
         }

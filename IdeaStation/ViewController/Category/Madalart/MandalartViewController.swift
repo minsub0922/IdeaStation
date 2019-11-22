@@ -28,12 +28,13 @@ class MandalartViewController: UIViewController {
     }()
     private let scrollView: UIScrollView = UIScrollView(frame: .zero)
     private let container: UIView = UIView(frame: .zero)
-    private var selectedTexts: [String] = []
+    private var selectedTexts: [MDKeyword] = []
     private var centerKeyword: String = String()
-    private var keywords: [String] {
-        if selectedTexts.count == 0 { return ["이게사랑인가요","이제다시","사랑에연습이있었다면"]}
-        var keywords: [String] = []
-        keywords.append(centerKeyword)
+    private var centerImageURL: String = String()
+    private var keywords: [MDKeyword] {
+        //if selectedTexts.count == 0 { return ["이게사랑인가요","이제다시","사랑에연습이있었다면"]}
+        var keywords: [MDKeyword] = []
+        keywords.append(MDKeyword(keyword: centerKeyword))
         keywords.append(contentsOf: selectedTexts)
         return keywords
     }
@@ -42,9 +43,10 @@ class MandalartViewController: UIViewController {
         view.endEditing(true)
     }
     
-    public func setKeywords(centerKeyword: String, selectedTexts: [String]) {
+    public func setKeywords(centerKeyword: String, centerImageURL: String, selectedTexts: [MDKeyword]) {
         self.centerKeyword = centerKeyword
         self.selectedTexts = selectedTexts
+        self.centerImageURL = centerImageURL
     }
     
     override func viewDidLoad() {
@@ -144,11 +146,11 @@ extension MandalartViewController: UICollectionViewDelegate, UICollectionViewDat
         let cell = collectionView.dequeueReusableCell(MandalartCell.self, for: indexPath)
         let section = indexPath.section
         let centerIndex = section * 9 % keywords.count
-        var children: [String] = []
+        var children: [MDKeyword] = []
         for i in 1...8 {
             children.append(keywords[(centerIndex+i) % keywords.count])
         }
-        cell.setupView(center: keywords[centerIndex], children: children)
+        cell.setupView(center: MDKeyword(keyword: keywords[centerIndex].keyword, imagePath: centerImageURL), children: children)
         cell.delegate = self
         return cell
     }

@@ -30,9 +30,9 @@ class MandalartCell: UICollectionViewCell {
     private var category: String = String()
     private var children: [String] = []
 
-    public func setupView(center: String, children: [String]) {
-        self.category = center
-        self.children = children
+    public func setupView(center: MDKeyword,children: [MDKeyword]) {
+        self.category = center.keyword
+        self.children = children.map {$0.keyword}
         
         let mandalart = Mandalart(frame: .zero, centerText: center, childTexts: children)
         mandalart.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapGestureRecognizer(_:))))

@@ -31,14 +31,13 @@ class Mandalart: UIView {
     private var centerLabel: UILabel = UILabel()
     private let childCount = 8
     private var children: [UITextField] = []
-    private var containers: [UIView] = {
-        var containers: [UIView] = []
+    private var containers: [UIImageView] = {
+        var containers: [UIImageView] = []
         for i in 0..<9 {
-            let view = UIView()
-            //view.addShadow(type: .small)
+            let view = UIImageView()
             let blue = UIColor.blue.withAlphaComponent(0.6)
-            //view.backgroundColor = blue
             view.translatesAutoresizingMaskIntoConstraints = false
+            view.alpha = 0.3
             containers.append(view)
         }
         return containers
@@ -48,7 +47,7 @@ class Mandalart: UIView {
      */
     
     // MARK:- init
-    init(frame: CGRect, centerText: String, childTexts: [String]) {
+    init(frame: CGRect, centerText: MDKeyword, childTexts: [MDKeyword]) {
         super.init(frame: frame)
         
         initLabels(centerText: centerText, childTexts: childTexts)
@@ -61,17 +60,20 @@ class Mandalart: UIView {
 
 // MARK:- SetupView
 extension Mandalart {
-    fileprivate func initLabels(centerText: String, childTexts: [String]) {
-        centerLabel.text = centerText
+    fileprivate func initLabels(centerText: MDKeyword, childTexts: [MDKeyword]) {
+        centerLabel.text = centerText.keyword
         centerLabel.textAlignment = .center
 
         for i in 0..<childCount {
             let label = UITextField()
-            label.text = childTexts[i]
+            label.text = childTexts[i].keyword
             label.textColor = .black
             label.textAlignment = .center
             children.append(label)
+            containers[i].loadImageAsyc(url: childTexts[i].imagePath)
         }
+        
+        containers[8].loadImageAsyc(url: centerText.imagePath)
     }
     
     fileprivate func setupCells() {
@@ -98,7 +100,6 @@ extension Mandalart {
     }
     
     private func addConstraintsForLabels() {
-        containers[8].translatesAutoresizingMaskIntoConstraints = false
         containers[8].centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         containers[8].centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         containers[8].widthAnchor.constraint(equalToConstant: cellSize).isActive = true

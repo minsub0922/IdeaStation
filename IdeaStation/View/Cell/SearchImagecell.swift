@@ -12,6 +12,7 @@ class SearchImagecell: UICollectionViewCell {
     private let imageView: UIImageView = {
         let imageView = UIImageView(frame: .zero)
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.backgroundColor = .white
         return imageView
     } ()
     
@@ -19,7 +20,12 @@ class SearchImagecell: UICollectionViewCell {
         didSet {
             setupImageView()
             self.addShadow()
+            layer.shadowOpacity = isSelected ? 3 : 0.2
         }
+    }
+    
+    public func applyShadow() {
+        layer.shadowOpacity = isSelected ? 3 : 0.2
     }
     
     private func setupImageView() {
@@ -36,5 +42,6 @@ class SearchImagecell: UICollectionViewCell {
     public func setupView(imagePath: String) {
         imageView.image = UIImage()
         imageView.loadImageAsyc(url: imagePath)
+        layer.shadowOpacity = isSelected ? 5 : 0.2
     }
 }

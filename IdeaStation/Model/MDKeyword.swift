@@ -13,4 +13,5 @@ struct MDKeyword {
     let keyword: String
     var isSelected: Bool = false
     var rank: Int = 0
+    var imagePath: String = String()
 }

@@ -95,6 +95,10 @@ class BubbleContainer: UIView {
         }
         self.setAdjustedFontSizeForChildren()
     }
+    
+    public func getSubject() -> String {
+        return centerLabel.text!
+    }
 }
 
 // MARK:- Setup Views
@@ -181,6 +185,14 @@ extension BubbleContainer {
         guard let bubble = recognizer.view as? UILabel else {return}
         selectedChildText = bubble.text ?? ""
         self.delegate?.gotoExplore(selectedText: selectedChildText, completion: { keywords in
+            self.keywords.append(contentsOf: keywords.shuffled())
+            self.collapsed()
+        })
+    }
+    
+    public func exploreSelectedKeyword(keyword: String) {
+        self.delegate?.gotoExplore(selectedText: keyword, completion: { keywords in
+            self.selectedChildText = keyword
             self.keywords.append(contentsOf: keywords.shuffled())
             self.collapsed()
         })
