@@ -115,7 +115,7 @@ extension Mandalart {
         let thetaStatus = 2 * Float.pi / Float(childCount)
         for i in 0..<childCount {
             let child = children[i]
-            let theta = (thetaStatus * Float(i+1)).truncatingRemainder(dividingBy: 2 * Float.pi)
+            let theta = (thetaStatus * Float((i+5)%childCount)).truncatingRemainder(dividingBy: 2 * Float.pi)
             
             let x = radius * adjustedValueForTF(value: cos(theta))
             let y = radius * adjustedValueForTF(value: sin(theta))
