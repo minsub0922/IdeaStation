@@ -66,4 +66,22 @@ struct APISource: APISourceProtocol {
             params: params,
             completion: commonResponseHandler(completion: completion))
     }
+    
+    func getIdea(words: [String], completion: @escaping (String) -> Void)  {
+        let params = [
+            "word": words
+        ]
+        get(API.getIdea(),
+            params: params,
+            completion: commonResponseHandler(completion: completion))
+    }
+    
+    func getMandalart(words: [String], completion: @escaping ([String]) -> Void)  {
+        let params = [
+            "word": words
+        ]
+        get(API.getMandalart(),
+            params: params,
+            completion: commonResponseHandler(completion: completion))
+    }
 }

@@ -6,4 +6,7 @@
 //  Copyright © 2019 최민섭. All rights reserved.
 //
 
-import Foundation
+import UIKit
+
+let idealButtonSize: CGFloat = 50
+let idealButtonBottomSpace: CGFloat = 30

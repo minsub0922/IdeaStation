@@ -158,17 +158,14 @@ extension SearchViewController {
 // MARK:- Actions
 extension SearchViewController {
     @objc private func touchupButton(_ sender: UIButton) {
-        weak var ghost = self.presentingViewController
-        //self.dismiss(animated: true, completion: {
         guard
             let navigationController = UIStoryboard(name: "MandalartStoryboard", bundle: nil).instantiateViewController(withIdentifier: "MandalartNavigationController") as? UINavigationController,
             let target = navigationController.viewControllers.first as? MandalartViewController
-            else {return}
+        else { return }
         target.setKeywords(centerKeyword: self.keywords[0], centerImageURL: self.centerImageURL, selectedTexts: self.selectedKeywords)
         navigationController.modalTransitionStyle = .crossDissolve
         navigationController.modalPresentationStyle = .fullScreen
         present(navigationController, animated: true, completion: nil)
-        //})
     }
 }
 

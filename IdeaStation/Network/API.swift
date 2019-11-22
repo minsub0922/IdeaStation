@@ -37,4 +37,12 @@ class API {
     static let getGooglePictures = {
         return googlePicturesBaseURL
     }()
+    
+    static let getIdea = {
+        return "http://13.124.243.199:5000/make_idea"
+    }
+    
+    static let getMandalart = {
+        return "http://13.124.243.199:5000/mapping"
+    }
 }
