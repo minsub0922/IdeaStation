@@ -8,14 +8,34 @@
 
 import UIKit
 
+protocol MandalartCellDelegate: class {
+    func touchupCell(isSelected: Bool, category: String, children: [String])
+}
+
 class MandalartCell: UICollectionViewCell {
+    weak var delegate: MandalartCellDelegate?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        backgroundColor = .white
     }
+    
+    override var bounds: CGRect {
+        didSet {
+            addShadow(type: .small)
+        }
+    }
+    
+    private var category: String = String()
+    private var children: [String] = []
 
-    public func setupView(center: String, children: [String]) {
-        print("hellow funcking world")
+    public func setupView(center: MDKeyword,children: [MDKeyword]) {
+        self.category = center.keyword
+        self.children = children.map {$0.keyword}
+        
         let mandalart = Mandalart(frame: .zero, centerText: center, childTexts: children)
+        mandalart.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapGestureRecognizer(_:))))
         addSubview(mandalart)
         
         mandalart.translatesAutoresizingMaskIntoConstraints = false
@@ -23,5 +43,12 @@ class MandalartCell: UICollectionViewCell {
         mandalart.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
         mandalart.topAnchor.constraint(equalTo: topAnchor).isActive = true
         mandalart.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+    }
+    
+    @objc private func tapGestureRecognizer(_ sender: UITapGestureRecognizer) {
+        isSelected = !isSelected
+        delegate?.touchupCell(isSelected: isSelected, category: self.category, children: self.children)
+        layer.shadowOpacity = isSelected ? 3 : 0.2
+        layer.shadowRadius = isSelected ? 4.0 : 2.0
     }
 }

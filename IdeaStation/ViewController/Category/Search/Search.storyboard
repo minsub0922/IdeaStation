@@ -8,85 +8,38 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Search View Controller-->
-        <scene sceneID="d7c-N3-SNb">
-            <objects>
-                <viewController id="2hg-OJ-OU6" customClass="SearchViewController" customModule="IdeaStation" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Ldb-xX-KI2">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="EQu-bE-K1U">
-                                <rect key="frame" x="0.0" y="573" width="414" height="269"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="njJ-uv-ofd">
-                                    <size key="itemSize" width="261" height="187"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PixabayImageCell" id="Eky-gx-wck" customClass="PixabayImageCell" customModule="IdeaStation" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="41" width="261" height="187"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                            <rect key="frame" x="0.0" y="0.0" width="261" height="187"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="orI-On-qBi">
-                                                    <rect key="frame" x="8" y="8" width="245" height="171"/>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </imageView>
-                                            </subviews>
-                                        </view>
-                                        <constraints>
-                                            <constraint firstItem="orI-On-qBi" firstAttribute="leading" secondItem="Eky-gx-wck" secondAttribute="leadingMargin" id="3bX-WI-tB1"/>
-                                            <constraint firstAttribute="bottomMargin" secondItem="orI-On-qBi" secondAttribute="bottom" id="4w4-aa-Q0g"/>
-                                            <constraint firstItem="orI-On-qBi" firstAttribute="top" secondItem="Eky-gx-wck" secondAttribute="topMargin" id="aV7-25-xEi"/>
-                                            <constraint firstAttribute="trailingMargin" secondItem="orI-On-qBi" secondAttribute="trailing" id="fYI-MH-Eb4"/>
-                                        </constraints>
-                                        <connections>
-                                            <outlet property="imageView" destination="orI-On-qBi" id="I9B-hQ-Sis"/>
-                                        </connections>
-                                    </collectionViewCell>
-                                </cells>
-                                <connections>
-                                    <outlet property="dataSource" destination="2hg-OJ-OU6" id="ta7-jc-tyz"/>
-                                    <outlet property="delegate" destination="2hg-OJ-OU6" id="uSW-gl-b6J"/>
-                                </connections>
-                            </collectionView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="uNu-2e-Sye" firstAttribute="bottom" secondItem="EQu-bE-K1U" secondAttribute="bottom" constant="20" id="825-Xt-jbj"/>
-                            <constraint firstItem="uNu-2e-Sye" firstAttribute="trailing" secondItem="EQu-bE-K1U" secondAttribute="trailing" id="U5i-iq-M9z"/>
-                            <constraint firstItem="EQu-bE-K1U" firstAttribute="height" secondItem="Ldb-xX-KI2" secondAttribute="height" multiplier="0.3" id="eDV-C1-nE9"/>
-                            <constraint firstItem="EQu-bE-K1U" firstAttribute="leading" secondItem="uNu-2e-Sye" secondAttribute="leading" id="pB3-Ti-xdf"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="uNu-2e-Sye"/>
-                    </view>
-                    <connections>
-                        <outlet property="collectionView" destination="EQu-bE-K1U" id="mfH-xt-2zH"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="d6i-Td-2fw" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-905.79710144927549" y="23.4375"/>
-        </scene>
-        <!--Testing View Controller-->
+        <!--아이디어 탐색-->
         <scene sceneID="c5d-yw-cGj">
             <objects>
-                <viewController id="q66-hN-0Ju" customClass="TestingViewController" customModule="IdeaStation" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SearchViewController" title="아이디어 탐색" useStoryboardIdentifierAsRestorationIdentifier="YES" id="q66-hN-0Ju" customClass="SearchViewController" customModule="IdeaStation" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="siV-MC-Naq">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" translucent="NO" largeTitles="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TQT-G1-4ta">
+                                <rect key="frame" x="0.0" y="44" width="414" height="105"/>
+                                <viewLayoutGuide key="safeArea" id="jYE-RS-ZQ8"/>
+                                <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <items>
+                                    <navigationItem title="아이디어 탐색" id="9zC-yn-3vs"/>
+                                </items>
+                            </navigationBar>
+                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="TQT-G1-4ta" firstAttribute="trailing" secondItem="h1c-we-zEn" secondAttribute="trailing" id="R5G-XI-y9c"/>
+                            <constraint firstItem="TQT-G1-4ta" firstAttribute="leading" secondItem="h1c-we-zEn" secondAttribute="leading" id="sYz-e6-bx2"/>
+                            <constraint firstItem="TQT-G1-4ta" firstAttribute="top" secondItem="h1c-we-zEn" secondAttribute="top" id="ugg-f1-Lye"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="h1c-we-zEn"/>
                     </view>
+                    <connections>
+                        <outlet property="navigationBar" destination="TQT-G1-4ta" id="YJN-rm-xcF"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Lg-S8-w7A" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="249" y="23"/>
+            <point key="canvasLocation" x="1157.9710144927537" y="22.767857142857142"/>
         </scene>
     </scenes>
 </document>

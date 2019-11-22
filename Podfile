@@ -7,12 +7,13 @@ target 'IdeaStation' do
 
   # Pods for IdeaStation
   pod 'Alamofire'
-  pod 'paper-onboarding' 
   pod 'Firebase/Auth'
   pod 'Firebase/Core'
   pod 'Firebase/Database'
   pod 'Firebase/Analytics'
   pod 'Firebase/Storage'
+  pod 'BubbleTransition', '~> 3.2.0'
+
   target 'IdeaStationTests' do
     inherit! :search_paths
     # Pods for testing

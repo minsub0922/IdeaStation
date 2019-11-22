@@ -52,3 +52,27 @@ extension Thread {
         }
     }
 }
+
+extension UIColor {
+    open class var appthemeColor: UIColor {
+        return UIColor(displayP3Red: 86/255.0, green: 181/255.0, blue: 210/255.0, alpha: 1)
+    }
+    
+    open class var darkAppthemeColor: UIColor {
+        return UIColor(displayP3Red: 70/255.0, green: 149/255.0, blue: 174/255.0, alpha: 1)
+    }
+    
+    open class var lightlightGray: UIColor {
+        return UIColor(displayP3Red: 250/255.0, green: 250/255.0, blue: 250/255.0, alpha: 1)
+    }
+}
+
+extension UIStoryboard {
+    
+}
+
+extension String {
+    var trim: String {
+        return self.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+}

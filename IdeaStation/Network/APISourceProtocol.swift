@@ -43,6 +43,7 @@ extension APISourceProtocol {
                                     let decoder = JSONDecoder()
                                     do {
                                         let resCode = res.response?.statusCode ?? 0
+                                        print(resCode)
                                         let datas = try decoder.decode(T.self, from: value)
                                         let result = (resCode, datas)
                                         completion(.networkSuccess(result))

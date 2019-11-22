@@ -12,8 +12,7 @@ protocol BubbleContainerDelegate {
     func collapsed()
     func childSelected(selectedText: String)
     func childDeSelected(selectedText: String)
-    func gotoExplore(selectedText: String, completion: @escaping (_ childArray: [String]) -> Void)
-    //func childSelected(selectedText: String, completion: @escaping (_ childArray: [String]) -> Void)
+    func gotoExplore(selectedText: String, completion: @escaping (_ childArray: [MDKeyword]) -> Void)
 }
 
 class BubbleContainer: UIView {
@@ -37,28 +36,30 @@ class BubbleContainer: UIView {
      also can be Max Size of both Label width and height
      */
     private var fontSize: CGFloat = 0.0
+    private var minFonSize: CGFloat {
+        return fontSize * 0.3
+    }
+    private var maxFontSize: CGFloat {
+        return fontSize * 1.3
+    }
     private var maxWidthOfLabel: CGFloat = 0.0
     private var radius: CGFloat = 0.0
     private var centerLabel: UILabel = UILabel()
     private var childArray: [UILabel] = []
     private var selectedChildText: String
-    fileprivate var strings: [String] = []
     fileprivate var keywords: [MDKeyword] = []
     fileprivate let childCount: Int
     fileprivate var isCollapse = true
-    
-    /*
-    Parameters for Memorizing
-     */
+    fileprivate var isPossibleExplore: Bool = true
     
     // MARK:- init
-    init(frame: CGRect, centerText: String, childTextArray: [String]) {
+    init(frame: CGRect, centerText: String, childTextArray: [MDKeyword]) {
         childCount = childTextArray.count
         selectedChildText = centerText
         super.init(frame: frame)
         
         updateCenterLabel()
-        initChildLabels(childTextArray: childTextArray)
+        initChildLabels(children: childTextArray)
     }
     
     required init?(coder: NSCoder) {
@@ -74,24 +75,29 @@ class BubbleContainer: UIView {
           })
     }
     
-    fileprivate func initChildLabels(childTextArray: [String]) {
+    fileprivate func initChildLabels(children: [MDKeyword]) {
         centerLabel.text = selectedChildText
-        for i in 0..<childTextArray.count {
-            let text = childTextArray[i]
+        let children = children.shuffled()
+        for child in children {
+            let text = child.keyword
             let label = UILabel()
             label.alpha = 0.0
             label.text = text
             label.alpha = 0.5
-            strings.append(text)
-            keywords.append(MDKeyword(keyword: text))
             childArray.append(label)
         }
+        keywords.append(contentsOf: children)
     }
     
     fileprivate func updateChildLabels() {
         for i in 0..<self.childCount {
-            self.childArray[i].text = self.strings[self.strings.count-1-i]
+            self.childArray[i].text = self.keywords[self.keywords.count-self.childCount+i].keyword
         }
+        self.setAdjustedFontSizeForChildren()
+    }
+    
+    public func getSubject() -> String {
+        return centerLabel.text!
     }
 }
 
@@ -102,6 +108,7 @@ extension BubbleContainer {
         addGestureRecognizer()
         addSubViews()
         addConstraintsForBubbles()
+        setAdjustedFontSizeForChildren()
     }
     
     private func addSubViews() {
@@ -115,7 +122,7 @@ extension BubbleContainer {
         centerLabel.font = centerLabel.font.withSize(fontSize)
         centerLabel.addShadowOnLabel()
         for child in childArray {
-            child.font = child.font.withSize(fontSize)
+            child.font = child.font.withSize(minFonSize)
             child.transform = CGAffineTransform(scaleX: 0, y: 0)
             child.addShadowOnLabel()
         }
@@ -136,30 +143,36 @@ extension BubbleContainer {
         centerLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         centerLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         centerLabel.widthAnchor.constraint(equalToConstant: maxWidthOfLabel).isActive = true
+        centerLabel.heightAnchor.constraint(equalToConstant: fontSize*2).isActive = true
+        centerLabel.lineBreakMode = .byClipping
+        centerLabel.numberOfLines = 0
+        centerLabel.adjustsFontSizeToFitWidth = true
         
-        // For Adjusting Start Point
         let startTheta = Float.pi / 2
         let thetaStatus = 2 * Float.pi / Float(childArray.count)
-        
         for i in 0..<childArray.count {
-            let child = childArray[i]
+            let childLabel = childArray[i]
             let theta = (startTheta + thetaStatus * Float(i+1)).truncatingRemainder(dividingBy: 2 * Float.pi)
             let x = center.x + radius * CGFloat(cos(theta))
             let y = center.y + radius * CGFloat(sin(theta))
-            child.translatesAutoresizingMaskIntoConstraints = false
-            child.centerXAnchor.constraint(equalTo: centerXAnchor, constant: x).isActive = true
-            child.centerYAnchor.constraint(equalTo: centerYAnchor, constant: y).isActive = true
-            child.widthAnchor.constraint(equalToConstant: maxWidthOfLabel).isActive = true
-            
+            childLabel.centerXAnchor.constraint(equalTo: centerXAnchor, constant: x).isActive = true
+            childLabel.centerYAnchor.constraint(equalTo: centerYAnchor, constant: y).isActive = true
+            childLabel.translatesAutoresizingMaskIntoConstraints = false
+            childLabel.widthAnchor.constraint(equalToConstant: maxWidthOfLabel).isActive = true
             //Adjust Font Size with LabelSize
-            centerLabel.heightAnchor.constraint(equalToConstant: fontSize*2).isActive = true
-            centerLabel.lineBreakMode = .byClipping
-            centerLabel.numberOfLines = 0
-            centerLabel.adjustsFontSizeToFitWidth = true
-            child.heightAnchor.constraint(equalToConstant: fontSize*2).isActive = true
-            child.lineBreakMode = .byClipping
-            child.numberOfLines = 0
-            child.adjustsFontSizeToFitWidth = true
+            childLabel.heightAnchor.constraint(equalToConstant: fontSize*2).isActive = true
+            childLabel.lineBreakMode = .byClipping
+            childLabel.numberOfLines = 0
+            childLabel.adjustsFontSizeToFitWidth = true
+        }
+    }
+    
+    private func setAdjustedFontSizeForChildren() {
+        let gap = (maxFontSize - minFonSize) / CGFloat(childCount)
+        for i in 0..<childArray.count {
+            let childLabel = childArray[i]
+            let rank = 8 - self.keywords[self.keywords.count - childCount + i].rank
+            childLabel.font = childLabel.font.withSize(minFonSize + gap * CGFloat(rank))
         }
     }
 }
@@ -167,16 +180,21 @@ extension BubbleContainer {
 // MARK:- Actions
 extension BubbleContainer {
     @objc fileprivate func exploreKeyword(_ recognizer: UILongPressGestureRecognizer) {
+        if recognizer.state == .ended || !isPossibleExplore { return }
+        isPossibleExplore = false
         guard let bubble = recognizer.view as? UILabel else {return}
         selectedChildText = bubble.text ?? ""
-        self.collapsed()
-        self.delegate?.gotoExplore(selectedText: selectedChildText, completion: { strings in
-            UIView.animate(withDuration: 0,
-                           delay: 3,
-                           options: .allowAnimatedContent,
-                           animations: {
-                            self.keywords.append(contentsOf: strings.map { MDKeyword(keyword: $0) })
-            }, completion: nil)
+        self.delegate?.gotoExplore(selectedText: selectedChildText, completion: { keywords in
+            self.keywords.append(contentsOf: keywords.shuffled())
+            self.collapsed()
+        })
+    }
+    
+    public func exploreSelectedKeyword(keyword: String) {
+        self.delegate?.gotoExplore(selectedText: keyword, completion: { keywords in
+            self.selectedChildText = keyword
+            self.keywords.append(contentsOf: keywords.shuffled())
+            self.collapsed()
         })
     }
     
@@ -194,8 +212,6 @@ extension BubbleContainer {
         !isSelected ?
             selectBubble(text: selectedText, index: index) :
             deSelectBubble(text: selectedText, index: index)
-        
-        
     }
     
     @objc fileprivate func collapseContainer(_ recognizer: UITapGestureRecognizer) {
@@ -215,9 +231,12 @@ extension BubbleContainer {
         fadeInCenter()
         fadeOutChildren() {
             self.updateChildLabels()
+            self.delegate?.collapsed()
+            self.isPossibleExplore = true
         }
     }
     private func expanded() {
+        self.delegate?.expanded()
         fadeOutCenter()
         fadeInChildren()
     }
@@ -240,7 +259,7 @@ extension BubbleContainer {
         let wholeDuration: Double = 0.7
         UIView.animateKeyframes(withDuration: wholeDuration, delay: 0, options: [.calculationModeCubic], animations: {
             for index in 0..<self.childCount {
-                let child = self.childArray[self.childCount - 1 - index]
+                let child = self.childArray[self.childCount-1-index]
                 let startTime = Double(index)/Double(self.childCount)
                 let duration = wholeDuration/Double(self.childCount) * (1 - 0.1 * Double(index))
                 UIView.addKeyframe(withRelativeStartTime: startTime, relativeDuration: duration) {
@@ -248,7 +267,7 @@ extension BubbleContainer {
                     child.alpha = 0
                 }
             }
-        }, completion: { _ in
+        }, completion: { res in
             completion()
         })
     }
@@ -273,16 +292,16 @@ extension BubbleContainer {
     }
     
     private func isBubbleSelected(index: Int) -> Bool {
-        return self.keywords[self.keywords.count - 8 + index].isSelected
+        return self.keywords[self.keywords.count - childCount + index].isSelected
     }
     
     private func selectBubble(text: String, index: Int) {
-        self.keywords[self.keywords.count - 8 + index].isSelected = true
+        self.keywords[self.keywords.count - childCount + index].isSelected = true
         self.delegate?.childSelected(selectedText: text)
     }
     
     private func deSelectBubble(text: String, index: Int) {
-        self.keywords[self.keywords.count - 8 + index].isSelected = false
+        self.keywords[self.keywords.count - childCount + index].isSelected = false
         self.delegate?.childDeSelected(selectedText: text)
     }
     
