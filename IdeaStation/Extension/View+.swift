@@ -51,6 +51,12 @@ extension UIView {
         self.clipsToBounds = true
     }
     
+    func addCircularRounded() {
+        let radius = self.bounds.width / 2
+        self.layer.cornerRadius = radius
+        self.clipsToBounds = true
+    }
+    
     func rotate(to angle: CGFloat) {
         let rotateAnimation = CABasicAnimation(keyPath: "transform.rotation.z")
         rotateAnimation.toValue = CGFloat(angle)
@@ -125,6 +131,40 @@ extension UIView {
     func moveTo(x: CGFloat, y: CGFloat) {
         self.center = CGPoint(x: self.center.x + x, y: self.center.y + y)
     }
+    
+    enum ShadowType {
+        case normal
+        case small
+    }
+    
+    func addShadow(type: ShadowType = ShadowType.normal) {
+        switch type {
+        case .normal:
+            self.layer.cornerRadius = 8.0
+            self.layer.shadowOffset = CGSize(width: 0, height: 2)
+            self.layer.shadowRadius = 8.0
+            self.layer.shadowOpacity = 0.2
+        case .small:
+            self.layer.cornerRadius = 2.0
+            self.layer.shadowOffset = CGSize(width: 0, height: 0)
+            self.layer.shadowRadius = 2.0
+            self.layer.shadowOpacity = 0.2
+        }
+        
+        self.layer.shadowPath = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: .allCorners, cornerRadii: CGSize(width: 3, height: 2)).cgPath
+        self.layer.shouldRasterize = true
+        self.layer.rasterizationScale = UIScreen.main.scale
+        self.layer.masksToBounds = false
+    }
+    
+    func addCircularShadow() {
+        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowOffset = CGSize(width: 0.0, height: 0)
+        layer.masksToBounds = false
+        layer.shadowRadius = 4.0
+        layer.shadowOpacity = 0.15
+        layer.cornerRadius = frame.width / 2
+    }
 }
 
 let imageCache = NSCache<AnyObject, AnyObject>()
@@ -174,6 +214,8 @@ extension UIImageView {
             }
         }.resume()
     }
+    
+  
 }
 extension UITextView {
     func moveToVerticalCenter() {
@@ -188,5 +230,47 @@ extension UITextView {
         
         contentOffset.y = -positiveTopOffset
         
+    }
+}
+
+extension UIFont {
+    var bold: UIFont {
+        return with(traits: .traitBold)
+    } // bold
+    
+    var italic: UIFont {
+        return with(traits: .traitItalic)
+    } // italic
+    
+    var boldItalic: UIFont {
+        return with(traits: [.traitBold, .traitItalic])
+    } // boldItalic
+    
+    var normal: UIFont {
+        return with(traits: [])
+    }
+    
+    func with(traits: UIFontDescriptor.SymbolicTraits) -> UIFont {
+        guard let descriptor = self.fontDescriptor.withSymbolicTraits(traits) else {
+            return self
+        } // guard
+        
+        return UIFont(descriptor: descriptor, size: 0)
+    } // with(traits:)
+} // extension
+
+extension CALayer {
+    // Sketch 스타일의 그림자를 생성하는 유틸리티 함수
+    func applyShadow(
+        color: UIColor = .black,
+        alpha: Float = 0.5,
+        x: CGFloat = 0,
+        y: CGFloat = 2,
+        blur: CGFloat = 4
+    ) {
+        shadowColor = color.cgColor
+        shadowOpacity = alpha
+        shadowOffset = CGSize(width: x, height: y)
+        shadowRadius = blur / 2.0
     }
 }

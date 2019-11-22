@@ -1,120 +1,328 @@
 //
-//  SearchViewController.swift
+//  TestingViewController.swift
 //  IdeaStation
 //
-//  Created by 최민섭 on 14/08/2019.
+//  Created by 최민섭 on 2019/11/14.
 //  Copyright © 2019 최민섭. All rights reserved.
 //
 
 import UIKit
 
 class SearchViewController: UIViewController {
+    // MARK:- Parameters
+    private let testLabel = UILabel()
+    private var confirmBarButton = UIBarButtonItem()
+    private let keyWordsCollectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.allowsSelection = true
+        return collectionView
+    } ()
+    private let imagesCollectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        collectionView.alpha = 0
+        collectionView.allowsSelection = true
+        return collectionView
+    } ()
+    private let mandalartButton: UIButton =  {
+        return UIButton(frame: CGRect(origin: .zero,
+                                      size: CGSize(width: 25, height: 25)))
+    } ()
+    private let countLabel: UILabel = {
+        let label = UILabel(frame: .zero)
+        label.alpha = 0
+        label.textColor = .lightGray
+        label.font = label.font.withSize(12)
+        label.textAlignment = .center
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    } ()
+    private var bubbleContainer: BubbleContainer!
     
-    @IBOutlet weak var collectionView: UICollectionView!
-    var bubbleLabel: ExpandableBubbleLabel!
-    var array = ["운동장", "축구", "아이들", "선생님", "칠판", "시계", "종이", "시험"]
-    var pictures: [Hit] = []
+    fileprivate var selectedKeywords: [MDKeyword] = []
+    fileprivate var pictures: [Hit] = []
+    fileprivate var clusters: Clusters?
+    public var keywords: [String] = []
+    fileprivate var centerImageURL: String = String()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setupExpandableBubbleLabel()
-        ExitButton(on: self)
-    }
-    
-    private func setupExpandableBubbleLabel() {
-        bubbleLabel = ExpandableBubbleLabel(superView: self.view, text: "학교")
-        bubbleLabel.expandableDelegate = self
-        self.view.addSubview(bubbleLabel)
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        if let subject = bubbleLabel.text {
-            getPixaPictures(subject: subject)
-            getRandomTexts(subject: subject)
+    @IBOutlet weak var navigationBar: UINavigationBar! {
+        didSet {
+            navigationBar.alpha = 0
         }
     }
     
-    private func getPixaPictures(subject: String) {
-        self.collectionView.isHidden = true
+    // MARK:- View Life Cycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.addSubview(countLabel)
+        setupCollectionView()
+        setupButtons()
+        setupAutolayouts()
         
-        let params = [
-            "key": API.pixabayKey,
-            "q": subject
-        ]
+        getClusters(subjects: keywords) { clusters in
+            self.clusters = clusters
+            let children = clusters.related8ClustersMDKeywords()
+            self.setupBubbleContainer(subject: self.keywords[0], childs: children)
+            self.imagesCollectionView.fadeIn()
+            self.navigationBar.fadeIn()
+        }
+        getPixaPictures(subject: keywords[0])
+    }
+}
+
+// MARK:- SetupView
+extension SearchViewController {
+    private func setupBubbleContainer(subject: String, childs: [MDKeyword]) {
+        bubbleContainer = BubbleContainer(frame: .zero, centerText: subject, childTextArray: childs)
+        bubbleContainer.alpha = 0
+        bubbleContainer.delegate = self
+        bubbleContainer.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(bubbleContainer)
+        let topConstraints = bubbleContainer.topAnchor.constraint(equalTo: keyWordsCollectionView.bottomAnchor, constant: 15)
+        let bottomConstraint = bubbleContainer.bottomAnchor.constraint(equalTo: imagesCollectionView.topAnchor, constant: -15)
+        topConstraints.priority = .defaultHigh
+        bottomConstraint.priority = .defaultHigh
+        NSLayoutConstraint.activate([
+            topConstraints,
+            bottomConstraint,
+            bubbleContainer.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            bubbleContainer.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            bubbleContainer.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7),
+            bubbleContainer.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7)
+        ])
+        bubbleContainer.fadeIn()
+    }
+    
+    private func setupCollectionView() {
+        keyWordsCollectionView.registerNib(SearchPathCell.self)
+        keyWordsCollectionView.registerNib(HorizontalArrowCell.self)
+        keyWordsCollectionView.delegate = self
+        keyWordsCollectionView.dataSource = self
+        imagesCollectionView.registerNib(SearchImagecell.self)
+        imagesCollectionView.delegate = self
+        imagesCollectionView.dataSource = self
+        view.addSubview(keyWordsCollectionView)
+        view.addSubview(imagesCollectionView)
         
-        APISource.shared.getPicturesPixay(params: params) { res in
+        keyWordsCollectionView.contentInset = UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 0)
+        keyWordsCollectionView.showsHorizontalScrollIndicator = false
+        keyWordsCollectionView.backgroundColor = .white
+        
+        imagesCollectionView.contentInset = UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 0)
+        imagesCollectionView.showsHorizontalScrollIndicator = false
+        imagesCollectionView.backgroundColor = .white
+    }
+    
+    private func setupButtons() {
+        ExitButton(on: navigationBar, target: self)
+        mandalartButton.setImage(UIImage(named: "ic-mandalart"), for: .normal)
+        mandalartButton.addTarget(self, action: #selector(touchupButton(_:)), for: .touchUpInside)
+        mandalartButton.tintColor = .black
+        mandalartButton.alpha = 0
+        mandalartButton.addShadow()
+        view.addSubview(mandalartButton)
+    }
+    
+    private func setupAutolayouts() {
+        mandalartButton.translatesAutoresizingMaskIntoConstraints = false
+        mandalartButton.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor,
+                                               constant: -15).isActive = true
+        mandalartButton.centerYAnchor.constraint(equalTo: keyWordsCollectionView.centerYAnchor).isActive = true
+        
+        keyWordsCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        keyWordsCollectionView.topAnchor.constraint(equalTo: navigationBar.bottomAnchor,
+                                                    constant: 16).isActive = true
+        keyWordsCollectionView.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        keyWordsCollectionView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        keyWordsCollectionView.rightAnchor.constraint(equalTo: mandalartButton.leftAnchor,
+        constant: -20).isActive = true
+    
+        imagesCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        imagesCollectionView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        imagesCollectionView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        imagesCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20).isActive = true
+        imagesCollectionView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.2).isActive = true
+        
+        countLabel.centerXAnchor.constraint(equalTo: mandalartButton.centerXAnchor).isActive = true
+        countLabel.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        countLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
+        countLabel.bottomAnchor.constraint(equalTo: mandalartButton.topAnchor, constant: -5).isActive = true
+    }
+    
+   
+}
+
+// MARK:- Actions
+extension SearchViewController {
+    @objc private func touchupButton(_ sender: UIButton) {
+        guard
+            let navigationController = UIStoryboard(name: "MandalartStoryboard", bundle: nil).instantiateViewController(withIdentifier: "MandalartNavigationController") as? UINavigationController,
+            let target = navigationController.viewControllers.first as? MandalartViewController
+        else { return }
+        target.setKeywords(centerKeyword: self.keywords[0], centerImageURL: self.centerImageURL, selectedTexts: self.selectedKeywords)
+        navigationController.modalTransitionStyle = .crossDissolve
+        navigationController.modalPresentationStyle = .fullScreen
+        present(navigationController, animated: true, completion: nil)
+    }
+}
+
+// APIS
+extension SearchViewController {
+    fileprivate func refreshDatas(keyword: String, completion: @escaping ([MDKeyword]) -> Void) {
+        guard let clusters = clusters else { return }
+        if clusters.isCategory(word: keyword) {
+            completion(clusters.related8WordsMDKeywords(word: keyword))
+        } else {
+            getClusters(subjects: [keyword]) { clusters in
+                self.clusters = clusters
+                completion(clusters.related8ClustersMDKeywords())
+            }
+        }
+        
+        getPixaPictures(subject: keyword)
+    }
+    
+    fileprivate func getPixaPictures(subject: String) {
+        APISource.shared.getPicturesPixay(word: subject) { res in
             self.pictures = res.hits
-            self.collectionView.performBatchUpdates({
-                self.collectionView.isHidden = false
-                self.collectionView.reloadSections(IndexSet(0...0))
+            self.imagesCollectionView.performBatchUpdates({
+                self.imagesCollectionView.reloadSections(IndexSet(0...0))
             }, completion: nil)
         }
     }
     
-    private func getRandomTexts(subject: String) {
-        let param = [
-            "word": subject
-        ]
-        
-        APISource.shared.getRandomText(params: param) { res in
-            self.bubbleLabel.childArray = res[0...8].dropLast()
-        }
-        
-        self.bubbleLabel.childArray = array
+    fileprivate func getClusters(subjects: [String], completion: @escaping (Clusters) -> Void) {
+        APISource.shared.getCluster(words: subjects, completion: completion)
     }
 }
 
-extension SearchViewController: ExpandableBubbleLabelDelegate {
-    func updateChildArray(coreText: String) {
-        getPixaPictures(subject: coreText)
-        getRandomTexts(subject: coreText)
-    }
-    
-    func beganExpanded() {
-        self.collectionView.fadeOut(until: 0.0)
-    }
-    
-    func beganCollapsed() {
-        self.collectionView.fadeIn()
-    }
-}
-
-extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension SearchViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return pictures.count
+        if collectionView.isEqual(keyWordsCollectionView) {
+            return selectedKeywords.count * 2 - 1
+        } else {
+            return pictures.count
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if collectionView.isEqual(keyWordsCollectionView) {
+            let isEven = indexPath.row % 2 == 0
+            let width: CGFloat = isEven ? 70 : 15
+            let height: CGFloat = isEven ? collectionView.bounds.height : 15
+            return CGSize(width: width, height: height)
+        } else {
+            let height = collectionView.bounds.height * 0.8
+            return CGSize(width: height * 1.5, height: height)
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        if collectionView.isEqual(keyWordsCollectionView) {
+            return .leastNonzeroMagnitude
+        } else {
+            return collectionView.bounds.width / 30
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(PixabayImageCell.self, for: indexPath) as? PixabayImageCell else {
-            return UICollectionViewCell()
-        }
-        
-        let picture = pictures[indexPath.row]
-        cell.imageView.image = UIImage()
-        cell.imageView.loadImageAsyc(url: picture.previewURL)
-        cell.imageView.addRounded()
-        return cell
-    }
-}
-
-class PixabayImageCell: UICollectionViewCell {
-    @IBOutlet weak var imageView: UIImageView!
-    override var bounds: CGRect {
-        didSet {
-            self.setupShadow()
+        if collectionView.isEqual(keyWordsCollectionView) {
+            if indexPath.row % 2 == 0 {
+                let cell = collectionView.dequeueReusableCell(SearchPathCell.self, for: indexPath)
+                cell.label.text = selectedKeywords[indexPath.row / 2].keyword
+                cell.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(longpressCellRecognizer(_:))))
+                return cell
+            } else {
+                let cell = collectionView.dequeueReusableCell(HorizontalArrowCell.self, for: indexPath)
+                return cell
+            }
+        } else {
+            let cell = collectionView.dequeueReusableCell(SearchImagecell.self, for: indexPath)
+            cell.setupView(imagePath: pictures[indexPath.row].previewURL)
+            return cell
         }
     }
     
-    private func setupShadow() {
-        self.layer.cornerRadius = 8.0
-        self.layer.shadowOffset = CGSize(width: 0, height: 2)
-        self.layer.shadowRadius = 8.0
-        self.layer.shadowOpacity = 0.2
-        self.layer.shadowPath = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: .allCorners, cornerRadii: CGSize(width: 3, height: 2)).cgPath
-        self.layer.shouldRasterize = true
-        self.layer.rasterizationScale = UIScreen.main.scale
-        self.layer.masksToBounds = false
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView.isEqual(keyWordsCollectionView) && indexPath.row % 2 == 0 {
+            collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+            bubbleContainer.exploreSelectedKeyword(keyword: selectedKeywords[indexPath.row / 2].keyword)
+        } else {    // Select Image
+            guard let cell = collectionView.cellForItem(at: indexPath) as? SearchImagecell else { return }
+            cell.applyShadow()
+            let imageURL = self.pictures[indexPath.row].previewURL
+            let subject = bubbleContainer.getSubject()
+            if keywords[0].elementsEqual(subject) { self.centerImageURL = imageURL; return}
+            
+            self.selectedKeywords = self.selectedKeywords.map{
+                return $0.keyword.elementsEqual(subject) ? MDKeyword(keyword: $0.keyword, imagePath: imageURL) : $0
+            }
+        }
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        if collectionView.isEqual(imagesCollectionView) {
+            guard let cell = collectionView.cellForItem(at: indexPath) as? SearchImagecell else { return }
+            cell.applyShadow()
+        }
+    }
+    
+    // Delete Selected Text With Cell
+    @objc private func longpressCellRecognizer(_ sender: UILongPressGestureRecognizer) {
+        if sender.state == .ended {
+            let p = sender.location(in: self.keyWordsCollectionView)
+            guard let indexPath = self.keyWordsCollectionView.indexPathForItem(at: p) else { return }
+            if indexPath.row % 2 != 0 { return }
+            self.selectedKeywords.remove(at: indexPath.row / 2)
+            let indexPathOfArrow = IndexPath(row: indexPath.row - 1, section: 0)
+            self.keyWordsCollectionView.deleteItems(at: [indexPathOfArrow, indexPath])
+        }
+    }
+}
+
+extension SearchViewController: BubbleContainerDelegate {
+    func gotoExplore(selectedText: String, completion: @escaping ([MDKeyword]) -> Void) {
+        refreshDatas(keyword: selectedText, completion: completion)
+    }
+    
+    func childSelected(selectedText: String) {
+        selectedKeywords.append(MDKeyword(keyword: selectedText))
+        keyWordsCollectionView.reloadSection(section: 0)
+        let row = keyWordsCollectionView.numberOfItems(inSection: 0)-1
+        keyWordsCollectionView.scrollToItem(at: IndexPath(row: row,
+                                                  section: 0),
+                                    at: .left, animated: true)
+        self.mandalartButton.fadeIn()
+        self.mandalartButton.bounce()
+        self.countLabel.fadeIn()
+        self.countLabel.text = "\(selectedKeywords.count) / 70"
+    }
+    
+    func childDeSelected(selectedText: String) {
+        let selectedKeywords = self.selectedKeywords.map {$0.keyword}
+        guard let index = selectedKeywords.firstIndex(of: selectedText) else {return}
+        self.selectedKeywords.remove(at: index)
+        self.countLabel.text = "\(self.selectedKeywords.count) / 70"
+        let indexPath = IndexPath(row: index, section: 0)
+        self.keyWordsCollectionView.performBatchUpdates({
+            self.keyWordsCollectionView.deleteItems(at:[indexPath])
+        }, completion: nil)
+        
+        if self.selectedKeywords.count == 0 {
+            self.mandalartButton.fadeOut(until: 0)
+            self.countLabel.fadeOut(until: 0)
+        }
+    }
+    
+    func expanded() {
+        self.imagesCollectionView.fadeOut(until: 0.0)
+    }
+    
+    func collapsed() {
+        self.imagesCollectionView.fadeIn(during: 0.5)
     }
 }

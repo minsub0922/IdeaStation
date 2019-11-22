@@ -30,13 +30,14 @@ class Mandalart: UIView {
     private var radius: CGFloat = 0.0
     private var centerLabel: UILabel = UILabel()
     private let childCount = 8
-    private var children: [UILabel] = []
-    private var containers: [UIView] = {
-        var containers: [UIView] = []
+    private var children: [UITextField] = []
+    private var containers: [UIImageView] = {
+        var containers: [UIImageView] = []
         for i in 0..<9 {
-            let view = UIView()
+            let view = UIImageView()
             let blue = UIColor.blue.withAlphaComponent(0.6)
-            view.backgroundColor = blue
+            view.translatesAutoresizingMaskIntoConstraints = false
+            view.alpha = 0.3
             containers.append(view)
         }
         return containers
@@ -46,7 +47,7 @@ class Mandalart: UIView {
      */
     
     // MARK:- init
-    init(frame: CGRect, centerText: String, childTexts: [String]) {
+    init(frame: CGRect, centerText: MDKeyword, childTexts: [MDKeyword]) {
         super.init(frame: frame)
         
         initLabels(centerText: centerText, childTexts: childTexts)
@@ -59,17 +60,20 @@ class Mandalart: UIView {
 
 // MARK:- SetupView
 extension Mandalart {
-    fileprivate func initLabels(centerText: String, childTexts: [String]) {
-        centerLabel.text = centerText
+    fileprivate func initLabels(centerText: MDKeyword, childTexts: [MDKeyword]) {
+        centerLabel.text = centerText.keyword
         centerLabel.textAlignment = .center
 
         for i in 0..<childCount {
-            let label = UILabel()
-            label.text = childTexts[i]
+            let label = UITextField()
+            label.text = childTexts[i].keyword
             label.textColor = .black
             label.textAlignment = .center
             children.append(label)
+            containers[i].loadImageAsyc(url: childTexts[i].imagePath)
         }
+        
+        containers[8].loadImageAsyc(url: centerText.imagePath)
     }
     
     fileprivate func setupCells() {
@@ -90,12 +94,12 @@ extension Mandalart {
     private func setupLabelSize() {
         centerLabel.font = centerLabel.font.withSize(fontSize)
         for child in children {
-            child.font = child.font.withSize(fontSize)
+            //child.font = child.font.withSize(fontSize)
+            child.font = child.font?.withSize(fontSize)
         }
     }
     
     private func addConstraintsForLabels() {
-        containers[8].translatesAutoresizingMaskIntoConstraints = false
         containers[8].centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         containers[8].centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         containers[8].widthAnchor.constraint(equalToConstant: cellSize).isActive = true
@@ -111,17 +115,19 @@ extension Mandalart {
         let thetaStatus = 2 * Float.pi / Float(childCount)
         for i in 0..<childCount {
             let child = children[i]
-            let theta = (thetaStatus * Float(i+1)).truncatingRemainder(dividingBy: 2 * Float.pi)
+            let theta = (thetaStatus * Float((i+5)%childCount)).truncatingRemainder(dividingBy: 2 * Float.pi)
             
             let x = radius * adjustedValueForTF(value: cos(theta))
             let y = radius * adjustedValueForTF(value: sin(theta))
             let container = containers[i]
-            container.translatesAutoresizingMaskIntoConstraints = false
+            
+            //container
             container.centerXAnchor.constraint(equalTo: centerXAnchor, constant: x).isActive = true
             container.centerYAnchor.constraint(equalTo: centerYAnchor, constant: y).isActive = true
             container.widthAnchor.constraint(equalToConstant: cellSize).isActive = true
             container.heightAnchor.constraint(equalToConstant: cellSize).isActive = true
             
+            //child
             child.translatesAutoresizingMaskIntoConstraints = false
             child.centerXAnchor.constraint(equalTo: centerXAnchor, constant: x).isActive = true
             child.centerYAnchor.constraint(equalTo: centerYAnchor, constant: y).isActive = true
@@ -132,13 +138,58 @@ extension Mandalart {
             centerLabel.lineBreakMode = .byClipping
             centerLabel.numberOfLines = 0
             centerLabel.adjustsFontSizeToFitWidth = true
-            child.lineBreakMode = .byClipping
-            child.numberOfLines = 0
             child.adjustsFontSizeToFitWidth = true
+            child.minimumFontSize = 5.0
         }
     }
     
     private func adjustedValueForTF(value: Float) -> CGFloat {
         return CGFloat(round(value))
+    }
+}
+
+// Draw BezierPath
+extension Mandalart {
+    override func draw(_ rect: CGRect) {
+        setStartPointsForDrawing(center: self.center, radius: cellSize / 2)
+    }
+    
+    private func setStartPointsForDrawing(center: CGPoint, radius: CGFloat) {
+        let startPointsDirections: [[CGFloat]] = [[1,-1],[1,1],[-1,1],[-1,-1]]
+        let drawingPathDirections: [[CGFloat]] = [[0,1],[0,-1],[1,0],[-1,0]]
+        let length = radius
+        for pointDirection in startPointsDirections {
+            let startPoint = CGPoint(x: center.x + radius * pointDirection[0],
+                                     y: center.y + radius * pointDirection[1])
+            for pathDirection in drawingPathDirections {
+                let endPoint = CGPoint(x: startPoint.x + length * pathDirection[0],
+                                       y: startPoint.y + length * pathDirection[1])
+                drawPath(from: startPoint, to: endPoint)
+            }
+        }
+        
+    }
+    
+    private func drawPath(from: CGPoint, to: CGPoint) {
+        let path = UIBezierPath()
+        let arcLayer = CAShapeLayer()
+        //path.lineJoinStyle = .round
+        //path.usesEvenOddFillRule = true
+        //시작점
+        path.move(to: from)
+        //path 지정
+        path.addLine(to: to)
+        
+        arcLayer.path = path.cgPath
+        arcLayer.lineWidth = 0.3
+        //arcLayer.fillColor = UIColor.black.cgColor
+        arcLayer.strokeColor = UIColor.black.withAlphaComponent(0.4).cgColor
+        layer.addSublayer(arcLayer)
+        
+//        //선들을잇는작업
+//        path.close()
+//        //다각형을 그리는게 아니라 선분이니까 !
+//        UIColor.systemGray.set()
+//        path.stroke()
     }
 }

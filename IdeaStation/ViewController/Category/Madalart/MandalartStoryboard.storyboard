@@ -156,7 +156,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pFe-pG-h3R" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1644.9275362318842" y="-181.47321428571428"/>
+            <point key="canvasLocation" x="619" y="-181"/>
         </scene>
         <!--New Mandalart Cell Detail View Controller-->
         <scene sceneID="Ljx-pB-yjb">
@@ -613,9 +613,16 @@
             <objects>
                 <navigationController storyboardIdentifier="MandalartNavigationController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="A7R-Re-Hhs" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="RKU-7A-r15">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="RKU-7A-r15">
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        </textAttributes>
+                        <textAttributes key="largeTitleTextAttributes">
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -624,23 +631,62 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mSM-j0-fcz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-397" y="644"/>
+            <point key="canvasLocation" x="-284" y="637"/>
         </scene>
-        <!--Mandalart View Controller2-->
+        <!--만달아트-->
         <scene sceneID="sAw-lZ-eUW">
             <objects>
-                <viewController id="oxU-P0-RGC" customClass="MandalartViewController2" customModule="IdeaStation" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="만달아트" id="oxU-P0-RGC" customClass="MandalartViewController" customModule="IdeaStation" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="x6s-xd-ZRK">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <gestureRecognizers/>
                         <viewLayoutGuide key="safeArea" id="mC4-QD-V9u"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="70B-Ha-5Lu" appends="YES" id="hYi-0W-mOg"/>
+                        </connections>
                     </view>
-                    <navigationItem key="navigationItem" id="dbd-0l-74G"/>
+                    <navigationItem key="navigationItem" title="만달아트" id="dbd-0l-74G"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2oq-ny-z3b" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="70B-Ha-5Lu">
+                    <connections>
+                        <action selector="tapbackgroundAction:" destination="oxU-P0-RGC" id="Be3-bt-Cu4"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="620" y="637"/>
+        </scene>
+        <!--Create Idea View Controller-->
+        <scene sceneID="4po-Ng-oil">
+            <objects>
+                <viewController storyboardIdentifier="CreateIdeaViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="emF-lQ-yq4" customClass="CreateIdeaViewController" customModule="IdeaStation" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="UbM-pe-WxI">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translucent="NO" largeTitles="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wgh-Xn-5GK">
+                                <rect key="frame" x="0.0" y="44" width="414" height="105"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <items>
+                                    <navigationItem title="아이디어 추론" id="6cg-WX-3R8"/>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="wgh-Xn-5GK" firstAttribute="leading" secondItem="G9L-ST-7oR" secondAttribute="leading" id="GwE-Rz-oLt"/>
+                            <constraint firstAttribute="trailing" secondItem="wgh-Xn-5GK" secondAttribute="trailing" id="bId-kc-rGf"/>
+                            <constraint firstItem="wgh-Xn-5GK" firstAttribute="top" secondItem="G9L-ST-7oR" secondAttribute="top" id="yl0-hg-3Hm"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="G9L-ST-7oR"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gDM-AW-uJj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1683" y="638"/>
         </scene>
     </scenes>
 </document>
