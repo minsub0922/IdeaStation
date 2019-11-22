@@ -67,11 +67,14 @@ class BaseTabBarController: UITabBarController {
         container.addSubview(button)
         view.addSubview(container)
         
+        //탭바 중앙 버튼
         NSLayoutConstraint.activate([
             container.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             container.centerYAnchor.constraint(equalTo: tabBar.topAnchor, constant: 15),
-            container.widthAnchor.constraint(equalTo: tabBar.widthAnchor, multiplier: 1/6),
-            container.heightAnchor.constraint(equalTo: tabBar.widthAnchor, multiplier: 1/6),
+//            container.widthAnchor.constraint(equalTo: tabBar.widthAnchor, multiplier: 1/6),
+//            container.heightAnchor.constraint(equalTo: tabBar.widthAnchor, multiplier: 1/6),
+            container.widthAnchor.constraint(equalToConstant: 60),
+            container.heightAnchor.constraint(equalToConstant: 60),
             button.centerXAnchor.constraint(equalTo: container.centerXAnchor),
             button.centerYAnchor.constraint(equalTo: container.centerYAnchor),
             button.widthAnchor.constraint(equalTo: container.widthAnchor, multiplier: 0.8),

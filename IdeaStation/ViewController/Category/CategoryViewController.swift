@@ -170,23 +170,15 @@ extension CategoryViewController: UITextFieldDelegate {
     func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         underline.fadeIn()
         plusButton.fadeIn()
-        moveView(to: -150)
         return true
     }
     
     func textFieldShouldEndEditing(_ textField: UITextField) -> Bool {
-        underline.fadeOut(until: 0.3)
-        plusButton.fadeOut(until: 0)
-        moveView(to: 150)
-        return true
-    }
-    
-    private func moveView(to: CGFloat) {
-        UIView.animate(withDuration: 0.3) {
-            for subview in self.view.subviews {
-                subview.frame.origin.y = subview.frame.origin.y + to
-            }
+        if textField.text?.isEmpty ?? true {
+            plusButton.fadeOut(until: 0)
         }
+        underline.fadeOut(until: 0.3)
+        return true
     }
 }
 
