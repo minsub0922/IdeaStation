@@ -9,13 +9,11 @@
 import UIKit
 
 class MySeedViewController: UIViewController {
-    @IBOutlet var labelForTest: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        labelForTest.text = "test test test"
     }
     
 

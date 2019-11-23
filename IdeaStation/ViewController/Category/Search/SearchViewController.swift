@@ -47,6 +47,8 @@ class SearchViewController: UIViewController {
     fileprivate var clusters: Clusters?
     public var keywords: [String] = []
     fileprivate var centerImageURL: String = String()
+    private var dummyAtmosphere = ["공기","순환","미세먼지", "가로등", "마일리지", "공기청정기", "대기오염", "태양열"]
+    private var dummyTraveling = ["여행준비물","관광지", "대여", "짐", "관광객", "서비스", "관광상품", "렌트"]
     
     @IBOutlet weak var navigationBar: UINavigationBar! {
         didSet {
@@ -62,9 +64,25 @@ class SearchViewController: UIViewController {
         setupButtons()
         setupAutolayouts()
         
+        let word = self.keywords.reduce("") { $0 + $1 + " "}.trim
         getClusters(subjects: keywords) { clusters in
             self.clusters = clusters
-            let children = clusters.related8ClustersMDKeywords()
+            var children = clusters.related8ClustersMDKeywords()
+            
+            ///set Dummy
+            
+            if word.elementsEqual("대기 오염") {
+                for i in 0..<children.count {
+                    children[i].keyword = self.dummyAtmosphere[i]
+                }
+            } else if word.elementsEqual("여행 관광") {
+                for i in 0..<children.count {
+                    children[i].keyword = self.dummyTraveling[i]
+                }
+            }
+            
+            /////
+            
             self.setupBubbleContainer(subject: self.keywords[0], childs: children)
             self.imagesCollectionView.fadeIn()
             self.navigationBar.fadeIn()

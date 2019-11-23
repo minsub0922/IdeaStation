@@ -10,12 +10,17 @@ import UIKit
 import BubbleTransition
 
 class CreateIdeaViewController: UIViewController {
-    private let ideaLabel: UILabel = {
-        let label = UILabel(frame: .zero)
+    private let ideaLabel: UIButton = {
+        let label = UIButton(frame: .zero)
         label.translatesAutoresizingMaskIntoConstraints = false
+        //label.font = label.font.withSize(30)
+        label.titleLabel?.font = label.titleLabel?.font.withSize(30)
         label.layer.borderWidth = 0.5
         label.layer.borderColor = UIColor.lightText.cgColor
-        label.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapIdeaLabel(_:))))
+        label.setTitleColor(.black, for: .normal)
+        label.isUserInteractionEnabled = true
+        //label.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapIdeaLabel(_:))))
+        label.addTarget(self, action: #selector(touchupIdeaLabel(_:)), for: .touchUpInside)
         return label
     } ()
     private let refreshButton: UIButton = {
@@ -36,6 +41,7 @@ class CreateIdeaViewController: UIViewController {
     private var ideaList: [String] {
         return UserDefaults.standard.stringArray(forKey: "ideaList") ?? []
     }
+    private var ideas: [String] = []
     private let closeButton: UIButton = {
         let button = UIButton(frame: .zero)
         button.backgroundColor = .black
@@ -57,11 +63,17 @@ class CreateIdeaViewController: UIViewController {
     @objc private func touchupRefreshButton(_ button: UIButton) {
         makeIdea(keywords: selectedKeywords)
     }
-    
-    @objc private func tapIdeaLabel(_ recognizer: UITapGestureRecognizer) {
-        UserDefaults.standard.set(self.ideaLabel.text!, forKey: "ideaList")
-        collectionView.reloadSection(section: 0)
-    }
+//
+//    @objc private func tapIdeaLabel(_ recognizer: UITapGestureRecognizer) {
+//        UserDefaults.standard.set(self.ideaLabel.text!, forKey: "ideaList")
+//        print("clci")
+//        ideas.append(self.ideaLabel.text!)
+//        collectionView.reloadSection(section: 0)
+//    }
+    @objc private func touchupIdeaLabel(_ recognizer: Any) {
+           ideas.append(self.ideaLabel.currentTitle!)
+           collectionView.reloadSection(section: 0)
+       }
     
     public var selectedKeywords: [String] = []
     public weak var interactiveTransition: BubbleInteractiveTransition?
@@ -116,22 +128,24 @@ class CreateIdeaViewController: UIViewController {
     private func makeIdea(keywords: [String]) {
         //TODO
         APISource.shared.getIdea(words: keywords) { idea in
-            self.ideaLabel.text = idea
+//            self.ideaLabel.text = idea[0]
+            self.ideaLabel.setTitle(idea[0], for: .normal)
         }
     }
 }
 
 extension CreateIdeaViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.bounds.width, height: 40)
+        return CGSize(width: collectionView.bounds.width, height: 60)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return ideaList.count
+        return ideas.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(SearchPathCell.self, for: indexPath)
+        cell.label.text = ideas[indexPath.row]
         return cell
     }
 }

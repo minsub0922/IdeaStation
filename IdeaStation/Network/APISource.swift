@@ -68,7 +68,7 @@ struct APISource: APISourceProtocol {
             completion: commonResponseHandler(completion: completion))
     }
     
-    func getIdea(words: [String], completion: @escaping (String) -> Void)  {
+    func getIdea(words: [String], completion: @escaping ([String]) -> Void)  {
         let word = words.reduce("") { $0 + $1 + " "}.trim
         let params = [
             "word": word

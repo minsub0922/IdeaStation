@@ -17,13 +17,13 @@
 		1A136586237DB6BF00A941CB /* SearchPathCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A136584237DB6BF00A941CB /* SearchPathCell.xib */; };
 		1A6FFFAF237E406C00AAEFC5 /* HorizontalArrowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6FFFAD237E406C00AAEFC5 /* HorizontalArrowCell.swift */; };
 		1A6FFFB0237E406C00AAEFC5 /* HorizontalArrowCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A6FFFAE237E406C00AAEFC5 /* HorizontalArrowCell.xib */; };
-		1A70E5662383E1E7008B8AE2 /* SearchImagecell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A70E5642383E1E7008B8AE2 /* SearchImagecell.swift */; };
 		1A70E5672383E1E7008B8AE2 /* SearchImagecell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A70E5652383E1E7008B8AE2 /* SearchImagecell.xib */; };
 		1A70E56923841393008B8AE2 /* GooglePictures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A70E56823841393008B8AE2 /* GooglePictures.swift */; };
 		1A70E57023844702008B8AE2 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A70E56F23844702008B8AE2 /* Utils.swift */; };
 		1A726E8D237FC58E00BFBCE8 /* MDKeyword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A726E8C237FC58E00BFBCE8 /* MDKeyword.swift */; };
-		1AD7CA622386B8ED00D11C2C /* Clusters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD7CA612386B8ED00D11C2C /* Clusters.swift */; };
 		1AF7FA2923885B8300FC8972 /* CreateIdeaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF7FA2823885B8300FC8972 /* CreateIdeaViewController.swift */; };
+		1AF7FA2A2388A8A000FC8972 /* SearchImagecell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A70E5642383E1E7008B8AE2 /* SearchImagecell.swift */; };
+		1AF7FA2B2388A8AD00FC8972 /* Clusters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD7CA612386B8ED00D11C2C /* Clusters.swift */; };
 		2028C4EA776D25C4083D2C59 /* Pods_IdeaStationTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B372D9412C6D388DBEF5BC49 /* Pods_IdeaStationTests.framework */; };
 		31EE13BAD2309604DF13A0D6 /* Pods_IdeaStation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 924A4A5B190E234000AAEF91 /* Pods_IdeaStation.framework */; };
 		AB564CCD2387AF88005FDC72 /* MainSproutCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB564CCB2387AF88005FDC72 /* MainSproutCollectionViewCell.swift */; };
@@ -721,6 +721,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1AF7FA2B2388A8AD00FC8972 /* Clusters.swift in Sources */,
+				1AF7FA2A2388A8A000FC8972 /* SearchImagecell.swift in Sources */,
 				ABA4DE0223817B3600F959EE /* BaseTabBarController.swift in Sources */,
 				AFF64DBF2304074A003F3E3A /* API.swift in Sources */,
 				1A136581237D4FEF00A941CB /* BubbleContainer.swift in Sources */,
@@ -734,7 +736,6 @@
 				1A13657F237D4DFD00A941CB /* SearchViewController.swift in Sources */,
 				AFCD53312307F31900A1D487 /* InterestViewController.swift in Sources */,
 				ABA4DDE82381764C00F959EE /* MainFeedCodable.swift in Sources */,
-				AFF64DB72303F68E003F3E3A /* SearchViewController.swift in Sources */,
 				AFCD53362307FDCD00A1D487 /* ExitButton.swift in Sources */,
 				1A040C262380166000A1DF10 /* MandalartViewController.swift in Sources */,
 				AFF64DB92304037D003F3E3A /* APISourceProtocol.swift in Sources */,
@@ -758,7 +759,6 @@
 				AFCD53302307F31900A1D487 /* InterestCollectionViewCell.swift in Sources */,
 				ABA4DDDD238175EB00F959EE /* MySeedViewController.swift in Sources */,
 				ABA4DE17238563F000F959EE /* MainSeedCollectionViewCell.swift in Sources */,
-				AFCD53282307F2F100A1D487 /* NewMandalartViewController.swift in Sources */,
 				1A136585237DB6BF00A941CB /* SearchPathCell.swift in Sources */,
 				AB62A96F238843EA00C56D37 /* MainCompetitionCollectionViewCell.swift in Sources */,
 				ABA4DDFC2381780500F959EE /* SignUpViewController.swift in Sources */,
@@ -951,10 +951,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.swm.IdeaStation;
+				PRODUCT_BUNDLE_IDENTIFIER = kau.com.IdeaStation;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -971,10 +971,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.swm.IdeaStation;
+				PRODUCT_BUNDLE_IDENTIFIER = kau.com.IdeaStation;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

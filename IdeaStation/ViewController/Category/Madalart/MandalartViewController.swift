@@ -68,7 +68,7 @@ class MandalartViewController: UIViewController {
         }
         
         setupView()
-        testCode()
+        //testCode()
     }
     
     private func testCode() {
@@ -149,6 +149,7 @@ class MandalartViewController: UIViewController {
         target.transitioningDelegate = self
         target.modalPresentationStyle = .custom
         target.view.backgroundColor = button.backgroundColor!
+        target.selectedKeywords = mandalartKeywords
         target.interactiveTransition = interactiveTransition
         interactiveTransition.attach(to: target)
         present(target, animated: true, completion: nil)
