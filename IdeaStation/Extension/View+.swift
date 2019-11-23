@@ -274,3 +274,42 @@ extension CALayer {
         shadowRadius = blur / 2.0
     }
 }
+
+extension UIViewController {
+    class func displaySpinner(onView: UIView, text: String) -> UIView {
+        let spinnerView = UIView.init(frame: onView.bounds)
+        
+        spinnerView.backgroundColor = UIColor.init(red: 0.5, green: 0.5, blue: 0.5, alpha: 1.0)
+        let ai = UIActivityIndicatorView.init(style: .whiteLarge)
+        ai.startAnimating()
+        ai.center = spinnerView.center
+        
+        let textLabel = UILabel(frame: .zero)
+        textLabel.translatesAutoresizingMaskIntoConstraints = false
+        textLabel.text = text
+        textLabel.textColor = .white
+        textLabel.textAlignment = .center
+        textLabel.font = textLabel.font.withSize(17)
+        
+        DispatchQueue.main.async {
+            spinnerView.addSubview(ai)
+            spinnerView.addSubview(textLabel)
+            onView.addSubview(spinnerView)
+            NSLayoutConstraint.activate([
+                textLabel.leftAnchor.constraint(equalTo: spinnerView.leftAnchor),
+                textLabel.rightAnchor.constraint(equalTo: spinnerView.rightAnchor),
+                textLabel.topAnchor.constraint(equalTo: ai.bottomAnchor, constant: 15),
+                textLabel.heightAnchor.constraint(equalToConstant: 30)
+            ])
+            
+        }
+        
+        return spinnerView
+    }
+    
+    class func removeSpinner(spinner : UIView) {
+        DispatchQueue.main.async {
+            spinner.removeFromSuperview()
+        }
+    }
+}

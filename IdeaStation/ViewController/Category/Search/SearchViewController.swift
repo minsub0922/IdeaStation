@@ -60,6 +60,7 @@ class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(countLabel)
+        let loadingVC = UIViewController.displaySpinner(onView: view, text: "추론 엔진 준비중입니다")
         setupCollectionView()
         setupButtons()
         setupAutolayouts()
@@ -81,7 +82,8 @@ class SearchViewController: UIViewController {
                 }
             }
             
-            /////
+
+            loadingVC.removeFromSuperview()/////
             
             self.setupBubbleContainer(subject: self.keywords[0], childs: children)
             self.imagesCollectionView.fadeIn()
