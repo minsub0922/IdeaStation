@@ -289,7 +289,7 @@ extension UIViewController {
         textLabel.text = text
         textLabel.textColor = .white
         textLabel.textAlignment = .center
-        textLabel.font = textLabel.font.withSize(17)
+        textLabel.font = textLabel.font.withSize(15)
         
         DispatchQueue.main.async {
             spinnerView.addSubview(ai)

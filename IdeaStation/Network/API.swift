@@ -31,7 +31,8 @@ class API {
     }()
     
     static let getRelatedTexts = {
-        return "http://13.124.243.199:5000/search"
+        //return "http://13.124.243.199:5000/search"
+        return "http://54.180.93.206:5000/search"
     }()
     
     static let getGooglePictures = {

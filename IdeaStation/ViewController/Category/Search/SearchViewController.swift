@@ -60,7 +60,7 @@ class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(countLabel)
-        let loadingVC = UIViewController.displaySpinner(onView: view, text: "추론 엔진 준비중입니다")
+        let loadingVC = UIViewController.displaySpinner(onView: view, text: "연관단어 추론 중..")
         setupCollectionView()
         setupButtons()
         setupAutolayouts()

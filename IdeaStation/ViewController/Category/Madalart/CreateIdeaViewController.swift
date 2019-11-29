@@ -10,18 +10,18 @@ import UIKit
 import BubbleTransition
 
 class CreateIdeaViewController: UIViewController {
-    private let ideaLabel: UIButton = {
-        let label = UIButton(frame: .zero)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        //label.font = label.font.withSize(30)
-        label.titleLabel?.font = label.titleLabel?.font.withSize(30)
-        label.layer.borderWidth = 0.5
-        label.layer.borderColor = UIColor.lightText.cgColor
-        label.setTitleColor(.black, for: .normal)
-        label.isUserInteractionEnabled = true
-        //label.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(tapIdeaLabel(_:))))
-        label.addTarget(self, action: #selector(touchupIdeaLabel(_:)), for: .touchUpInside)
-        return label
+    private let ideaButton: UIButton = {
+        let button = UIButton(frame: .zero)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.titleLabel?.font = button.titleLabel?.font.withSize(30)
+        button.layer.borderWidth = 0.5
+        button.layer.borderColor = UIColor.lightText.cgColor
+        //demo
+        button.setTitle("공기 순환 가로등", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.isUserInteractionEnabled = true
+        button.addTarget(self, action: #selector(touchupIdeaLabel(_:)), for: .touchUpInside)
+        return button
     } ()
     private let refreshButton: UIButton = {
         let button = UIButton(frame: .zero)
@@ -71,7 +71,7 @@ class CreateIdeaViewController: UIViewController {
 //        collectionView.reloadSection(section: 0)
 //    }
     @objc private func touchupIdeaLabel(_ recognizer: Any) {
-           ideas.append(self.ideaLabel.currentTitle!)
+           ideas.append(self.ideaButton.currentTitle!)
            collectionView.reloadSection(section: 0)
        }
     
@@ -98,7 +98,7 @@ class CreateIdeaViewController: UIViewController {
     }
     
     private func addSubviews() {
-        view.addSubview(ideaLabel)
+        view.addSubview(ideaButton)
         view.addSubview(refreshButton)
         view.addSubview(closeButton)
         view.addSubview(collectionView)
@@ -106,21 +106,21 @@ class CreateIdeaViewController: UIViewController {
     
     private func addConstraints() {
         NSLayoutConstraint.activate([
-            ideaLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -15),
-            ideaLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7),
-            ideaLabel.heightAnchor.constraint(equalToConstant: 50),
-            ideaLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -50),
+            ideaButton.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: -15),
+            ideaButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7),
+            ideaButton.heightAnchor.constraint(equalToConstant: 50),
+            ideaButton.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -50),
             refreshButton.widthAnchor.constraint(equalToConstant: 25),
             refreshButton.heightAnchor.constraint(equalToConstant: 25),
-            refreshButton.leftAnchor.constraint(equalTo: ideaLabel.rightAnchor, constant: 15),
-            refreshButton.bottomAnchor.constraint(equalTo: ideaLabel.bottomAnchor),
+            refreshButton.leftAnchor.constraint(equalTo: ideaButton.rightAnchor, constant: 15),
+            refreshButton.bottomAnchor.constraint(equalTo: ideaButton.bottomAnchor),
             closeButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             closeButton.widthAnchor.constraint(equalToConstant: idealButtonSize),
             closeButton.heightAnchor.constraint(equalToConstant: idealButtonSize),
             closeButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -idealButtonBottomSpace),
             collectionView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            collectionView.widthAnchor.constraint(equalTo: ideaLabel.widthAnchor),
-            collectionView.topAnchor.constraint(equalTo: ideaLabel.bottomAnchor, constant: 30),
+            collectionView.widthAnchor.constraint(equalTo: ideaButton.widthAnchor),
+            collectionView.topAnchor.constraint(equalTo: ideaButton.bottomAnchor, constant: 30),
             collectionView.bottomAnchor.constraint(equalTo: closeButton.topAnchor, constant: -30),
         ])
     }
@@ -129,7 +129,7 @@ class CreateIdeaViewController: UIViewController {
         //TODO
         APISource.shared.getIdea(words: keywords) { idea in
 //            self.ideaLabel.text = idea[0]
-            self.ideaLabel.setTitle(idea[0], for: .normal)
+            self.ideaButton.setTitle(idea[0], for: .normal)
         }
     }
 }

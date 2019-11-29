@@ -60,7 +60,14 @@ class MandalartViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let loadingVCM = UIViewController.displaySpinner(onView: view, text: "아이디어 추론 중입니다...")// loading start
+      
+        testCode()
+        setupView()
+        //testCode()
+    }
+    
+    private func getMandalartKeywords() {
+        let loadingVCM = UIViewController.displaySpinner(onView: view, text: "아이디어 추론 중..")// loading start
         APISource.shared.getMandalart(words: keywords.map { $0.keyword }) { mandalartKeywords in
             self.mandalartKeywords = mandalartKeywords
             self.cellCount = 9
@@ -68,16 +75,15 @@ class MandalartViewController: UIViewController {
             
             self.collectionView.reloadSection(section: 0)
         }
-        
-        setupView()
-        //testCode()
     }
     
     private func testCode() {
         self.cellCount = 9
+        let words = keywords.map { $0.keyword }
         for i in 0..<81 {
-            self.mandalartKeywords.append("방가\(i)")
+            self.mandalartKeywords.append(words[i%words.count])
         }
+        self.cellCount = 9
         self.collectionView.reloadSection(section: 0)
     }
     
