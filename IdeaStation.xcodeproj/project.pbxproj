@@ -21,6 +21,8 @@
 		1A70E56923841393008B8AE2 /* GooglePictures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A70E56823841393008B8AE2 /* GooglePictures.swift */; };
 		1A70E57023844702008B8AE2 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A70E56F23844702008B8AE2 /* Utils.swift */; };
 		1A726E8D237FC58E00BFBCE8 /* MDKeyword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A726E8C237FC58E00BFBCE8 /* MDKeyword.swift */; };
+		1AB6AA58239B495B0031E454 /* clusters.json in Resources */ = {isa = PBXBuildFile; fileRef = 1AF66A1A239B44ED0013A327 /* clusters.json */; };
+		1AF66A1C239B45770013A327 /* Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF66A1B239B45770013A327 /* Mock.swift */; };
 		1AF7FA2923885B8300FC8972 /* CreateIdeaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AF7FA2823885B8300FC8972 /* CreateIdeaViewController.swift */; };
 		1AF7FA2A2388A8A000FC8972 /* SearchImagecell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A70E5642383E1E7008B8AE2 /* SearchImagecell.swift */; };
 		1AF7FA2B2388A8AD00FC8972 /* Clusters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AD7CA612386B8ED00D11C2C /* Clusters.swift */; };
@@ -113,6 +115,8 @@
 		1A70E56F23844702008B8AE2 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		1A726E8C237FC58E00BFBCE8 /* MDKeyword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDKeyword.swift; sourceTree = "<group>"; };
 		1AD7CA612386B8ED00D11C2C /* Clusters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clusters.swift; sourceTree = "<group>"; };
+		1AF66A1A239B44ED0013A327 /* clusters.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = clusters.json; sourceTree = "<group>"; };
+		1AF66A1B239B45770013A327 /* Mock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mock.swift; sourceTree = "<group>"; };
 		1AF7FA2823885B8300FC8972 /* CreateIdeaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateIdeaViewController.swift; sourceTree = "<group>"; };
 		20DC494623C92F89AECC6516 /* Pods-IdeaStationUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IdeaStationUITests.release.xcconfig"; path = "Target Support Files/Pods-IdeaStationUITests/Pods-IdeaStationUITests.release.xcconfig"; sourceTree = "<group>"; };
 		3027C387E40DFAAD7FDDDF6D /* Pods-IdeaStationTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IdeaStationTests.debug.xcconfig"; path = "Target Support Files/Pods-IdeaStationTests/Pods-IdeaStationTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -471,6 +475,8 @@
 				AFF64DB82304037D003F3E3A /* APISourceProtocol.swift */,
 				AFF64DBC2304058E003F3E3A /* APISource.swift */,
 				AFF64DBE23040749003F3E3A /* API.swift */,
+				1AF66A1A239B44ED0013A327 /* clusters.json */,
+				1AF66A1B239B45770013A327 /* Mock.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -594,6 +600,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1AB6AA58239B495B0031E454 /* clusters.json in Resources */,
 				ABA4DE122383DCA800F959EE /* GoogleService-Info.plist in Resources */,
 				1A70E5672383E1E7008B8AE2 /* SearchImagecell.xib in Resources */,
 				AF07B32722FFC3C400FAE1C8 /* LaunchScreen.storyboard in Resources */,
@@ -723,6 +730,7 @@
 			files = (
 				1AF7FA2B2388A8AD00FC8972 /* Clusters.swift in Sources */,
 				1AF7FA2A2388A8A000FC8972 /* SearchImagecell.swift in Sources */,
+				1AF66A1C239B45770013A327 /* Mock.swift in Sources */,
 				ABA4DE0223817B3600F959EE /* BaseTabBarController.swift in Sources */,
 				AFF64DBF2304074A003F3E3A /* API.swift in Sources */,
 				1A136581237D4FEF00A941CB /* BubbleContainer.swift in Sources */,

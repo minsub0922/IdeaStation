@@ -1,0 +1,667 @@
+{
+    "n_cluster": 3,
+    "clusters": [
+        {
+            "category": "보이루",
+            "correlation": 0.8121781349182129,
+            "words": [
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                }
+            ]
+        },
+        {
+            "category": "보이루",
+            "correlation": 0.8121781349182129,
+            "words": [
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                }
+            ]
+        },
+        {
+           "category": "보이루",
+            "correlation": 0.8121781349182129,
+            "words": [
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                }
+            ]
+        },
+        {
+            "category": "보이루",
+            "correlation": 0.8121781349182129,
+            "words": [
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                }
+            ]
+        },
+        {
+          "category": "보이루",
+            "correlation": 0.8121781349182129,
+            "words": [
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                }
+            ]
+        },
+        {
+          "category": "보이루",
+            "correlation": 0.8121781349182129,
+            "words": [
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                }
+            ]
+        },
+        {
+           "category": "보이루",
+            "correlation": 0.8121781349182129,
+            "words": [
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                }
+            ]
+        },
+        {
+           "category": "보이루",
+            "correlation": 0.8121781349182129,
+            "words": [
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                }
+            ]
+        },
+        {
+           "category": "보이루",
+            "correlation": 0.8121781349182129,
+            "words": [
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                }
+            ]
+        },
+        {
+            "category": "보이루",
+            "correlation": 0.8121781349182129,
+            "words": [
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                }
+            ]
+        },
+        {"category": "보이루",
+            "correlation": 0.8121781349182129,
+            "words": [
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                },
+                {
+                    "word": {
+                        "text": "새끼오리",
+                        "correlation": 0.8121781349182129
+                    }
+                }
+            ]
+        }
+    ]
+}
+
+
+

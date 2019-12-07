@@ -60,7 +60,7 @@ class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(countLabel)
-        let loadingVC = UIViewController.displaySpinner(onView: view, text: "연관단어 추론 중..")
+        //let loadingVC = UIViewController.displaySpinner(onView: view, text: "연관단어 추론 중..")
         setupCollectionView()
         setupButtons()
         setupAutolayouts()
@@ -71,7 +71,6 @@ class SearchViewController: UIViewController {
             var children = clusters.related8ClustersMDKeywords()
             
             ///set Dummy
-            
             if word.elementsEqual("대기 오염") {
                 for i in 0..<children.count {
                     children[i].keyword = self.dummyAtmosphere[i]
@@ -82,9 +81,7 @@ class SearchViewController: UIViewController {
                 }
             }
             
-
-            loadingVC.removeFromSuperview()/////
-            
+            //loadingVC.removeFromSuperview()
             self.setupBubbleContainer(subject: self.keywords[0], childs: children)
             self.imagesCollectionView.fadeIn()
             self.navigationBar.fadeIn()
@@ -215,7 +212,16 @@ extension SearchViewController {
     }
     
     fileprivate func getClusters(subjects: [String], completion: @escaping (Clusters) -> Void) {
-        APISource.shared.getCluster(words: subjects, completion: completion)
+        //set Mock data
+        Mock.getMockClusters { res in
+            switch res {
+            case .value(let value) :
+                completion(value)
+            case .error(let err):
+                print(err)
+            }
+        }
+        //APISource.shared.getCluster(words: subjects, completion: completion)
     }
 }
 
