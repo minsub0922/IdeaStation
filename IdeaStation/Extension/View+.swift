@@ -313,3 +313,10 @@ extension UIViewController {
         }
     }
 }
+
+extension NSLayoutConstraint {
+    func withPriority(_ p: CGFloat) -> NSLayoutConstraint {
+        priority = UILayoutPriority(rawValue: UILayoutPriority.RawValue(p))
+        return self
+    }
+}

@@ -18,24 +18,35 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gmN-EQ-eUi">
-                        <rect key="frame" x="10" y="0.0" width="160" height="56"/>
+                        <rect key="frame" x="0.0" y="18" width="180" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.55000000000000004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uOj-qH-Qbl">
+                        <rect key="frame" x="0.0" y="0.0" width="180" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
             </view>
             <constraints>
-                <constraint firstItem="gmN-EQ-eUi" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="6jP-xj-BUR"/>
-                <constraint firstAttribute="trailing" secondItem="gmN-EQ-eUi" secondAttribute="trailing" constant="10" id="Dsc-VP-RbY"/>
-                <constraint firstItem="gmN-EQ-eUi" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="NWA-6U-1tP"/>
-                <constraint firstItem="gmN-EQ-eUi" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="Wke-0n-79Z"/>
-                <constraint firstAttribute="bottom" secondItem="gmN-EQ-eUi" secondAttribute="bottom" id="szk-nn-JbK"/>
-                <constraint firstItem="gmN-EQ-eUi" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="zqo-i4-u6e"/>
+                <constraint firstItem="uOj-qH-Qbl" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Gn1-A9-9Gh"/>
+                <constraint firstItem="gmN-EQ-eUi" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="Nas-3n-aUv"/>
+                <constraint firstAttribute="trailing" secondItem="uOj-qH-Qbl" secondAttribute="trailing" id="NbX-CC-kZN"/>
+                <constraint firstItem="uOj-qH-Qbl" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="aaA-3Q-uCS"/>
+                <constraint firstItem="gmN-EQ-eUi" firstAttribute="top" secondItem="uOj-qH-Qbl" secondAttribute="bottom" id="eHc-Qe-kEZ"/>
+                <constraint firstAttribute="trailing" secondItem="gmN-EQ-eUi" secondAttribute="trailing" id="huK-IL-9e3"/>
+                <constraint firstItem="uOj-qH-Qbl" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="krD-rV-fDr"/>
+                <constraint firstItem="gmN-EQ-eUi" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="l20-of-Noy"/>
+                <constraint firstItem="gmN-EQ-eUi" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="oMV-MX-xiS"/>
+                <constraint firstItem="uOj-qH-Qbl" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="tLs-Lq-Vf6"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="180" height="56"/>
             <connections>
+                <outlet property="historyLabel" destination="uOj-qH-Qbl" id="9F9-UY-Wm8"/>
                 <outlet property="label" destination="gmN-EQ-eUi" id="SG3-BT-jEk"/>
             </connections>
             <point key="canvasLocation" x="68.115942028985515" y="34.821428571428569"/>

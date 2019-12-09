@@ -15,11 +15,13 @@ struct Clusters: Codable {
     func related8Clusters() -> [Cluster] {
         return Array(clusters.sorted { $0.correlation > $1.correlation } [0..<8])
     }
-    func related8ClustersMDKeywords() -> [MDKeyword] {
+    func related8ClustersMDKeywords(subject: MDKeyword = MDKeyword(keyword: "")) -> [MDKeyword] {
         var count = 0
         return related8Clusters().map { a -> MDKeyword in
             count += 1
-            return MDKeyword(keyword: a.category, rank: count)
+            return MDKeyword(keyword: a.category,
+                             rank: count,
+                             history: subject.keyword + " " + subject.history)
         }
     }
     func isCategory(word: String) -> Bool {
@@ -32,11 +34,13 @@ struct Clusters: Codable {
         let words = Array(clusters.filter { $0.category.trim.elementsEqual(word.trim) })[0].words
         return Array(words.map { $0.word }.sorted { $0.correlation > $1.correlation }[0..<8])
     }
-    func related8WordsMDKeywords(word: String) -> [MDKeyword] {
+    func related8WordsMDKeywords(word: MDKeyword) -> [MDKeyword] {
         var count = 0
-        return relatedWords(word: word).map { a -> MDKeyword in
+        return relatedWords(word: word.keyword).map { a -> MDKeyword in
             count += 1
-            return MDKeyword(keyword: a.text, rank: count)
+            return MDKeyword(keyword: a.text,
+                             rank: count,
+                             history: word.keyword + " " + word.history)
         }
     }
 }

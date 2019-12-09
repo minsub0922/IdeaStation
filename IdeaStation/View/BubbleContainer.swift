@@ -10,9 +10,9 @@ import UIKit
 protocol BubbleContainerDelegate {
     func expanded()
     func collapsed()
-    func childSelected(selectedText: String)
-    func childDeSelected(selectedText: String)
-    func gotoExplore(selectedText: String, completion: @escaping (_ childArray: [MDKeyword]) -> Void)
+    func childSelected(selectedMDKeyword: MDKeyword)
+    func childDeSelected(selectedMDKeyword: MDKeyword)
+    func gotoExplore(selectedMDKeyword: MDKeyword, completion: @escaping (_ childArray: [MDKeyword]) -> Void)
 }
 
 class BubbleContainer: UIView {
@@ -46,7 +46,7 @@ class BubbleContainer: UIView {
     private var radius: CGFloat = 0.0
     private var centerLabel: UILabel = UILabel()
     private var childArray: [UILabel] = []
-    private var selectedChildText: String
+    private var selectedChild: MDKeyword
     fileprivate var keywords: [MDKeyword] = []
     fileprivate let childCount: Int
     fileprivate var isCollapse = true
@@ -55,7 +55,7 @@ class BubbleContainer: UIView {
     // MARK:- init
     init(frame: CGRect, centerText: String, childTextArray: [MDKeyword]) {
         childCount = childTextArray.count
-        selectedChildText = centerText
+        selectedChild = MDKeyword(keyword: centerText)
         super.init(frame: frame)
         
         updateCenterLabel()
@@ -71,12 +71,12 @@ class BubbleContainer: UIView {
         duration: 0.25,
         options: .transitionCrossDissolve,
         animations: { [weak self] in
-              self?.centerLabel.text = self?.selectedChildText
+            self?.centerLabel.text = self?.selectedChild.keyword
           })
     }
     
     fileprivate func initChildLabels(children: [MDKeyword]) {
-        centerLabel.text = selectedChildText
+        centerLabel.text = selectedChild.keyword
         let children = children.shuffled()
         for child in children {
             let text = child.keyword
@@ -179,20 +179,25 @@ extension BubbleContainer {
 
 // MARK:- Actions
 extension BubbleContainer {
+    // Explore With LongClickGesture
     @objc fileprivate func exploreKeyword(_ recognizer: UILongPressGestureRecognizer) {
         if recognizer.state == .ended || !isPossibleExplore { return }
         isPossibleExplore = false
-        guard let bubble = recognizer.view as? UILabel else {return}
-        selectedChildText = bubble.text ?? ""
-        self.delegate?.gotoExplore(selectedText: selectedChildText, completion: { keywords in
+        guard
+            let bubble = recognizer.view as? UILabel,
+            let text = bubble.text
+            else { return }
+        selectedChild = self.keywords.filter { $0.keyword.elementsEqual(text) }.last!
+        self.delegate?.gotoExplore(selectedMDKeyword: selectedChild, completion: { keywords in
             self.keywords.append(contentsOf: keywords.shuffled())
             self.collapsed()
         })
     }
     
-    public func exploreSelectedKeyword(keyword: String) {
-        self.delegate?.gotoExplore(selectedText: keyword, completion: { keywords in
-            self.selectedChildText = keyword
+    //Explore From View Controller
+    public func exploreSelectedKeyword(keyword: MDKeyword) {
+        self.delegate?.gotoExplore(selectedMDKeyword: keyword, completion: { keywords in
+            self.selectedChild = keyword
             self.keywords.append(contentsOf: keywords.shuffled())
             self.collapsed()
         })
@@ -296,13 +301,15 @@ extension BubbleContainer {
     }
     
     private func selectBubble(text: String, index: Int) {
-        self.keywords[self.keywords.count - childCount + index].isSelected = true
-        self.delegate?.childSelected(selectedText: text)
+        var keyword = self.keywords[self.keywords.count - childCount + index]
+        keyword.isSelected = true
+        self.delegate?.childSelected(selectedMDKeyword: keyword)
     }
     
     private func deSelectBubble(text: String, index: Int) {
-        self.keywords[self.keywords.count - childCount + index].isSelected = false
-        self.delegate?.childDeSelected(selectedText: text)
+        var keyword = self.keywords[self.keywords.count - childCount + index]
+        keyword.isSelected = false
+        self.delegate?.childDeSelected(selectedMDKeyword: keyword)
     }
     
     // MARK: TODO

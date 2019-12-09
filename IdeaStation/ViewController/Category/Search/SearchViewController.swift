@@ -47,8 +47,6 @@ class SearchViewController: UIViewController {
     fileprivate var clusters: Clusters?
     public var keywords: [String] = []
     fileprivate var centerImageURL: String = String()
-    private var dummyAtmosphere = ["공기","순환","미세먼지", "가로등", "마일리지", "공기청정기", "대기오염", "태양열"]
-    private var dummyTraveling = ["여행준비물","관광지", "대여", "짐", "관광객", "서비스", "관광상품", "렌트"]
     
     @IBOutlet weak var navigationBar: UINavigationBar! {
         didSet {
@@ -65,21 +63,9 @@ class SearchViewController: UIViewController {
         setupButtons()
         setupAutolayouts()
         
-        let word = self.keywords.reduce("") { $0 + $1 + " "}.trim
         getClusters(subjects: keywords) { clusters in
             self.clusters = clusters
-            var children = clusters.related8ClustersMDKeywords()
-            
-            ///set Dummy
-            if word.elementsEqual("대기 오염") {
-                for i in 0..<children.count {
-                    children[i].keyword = self.dummyAtmosphere[i]
-                }
-            } else if word.elementsEqual("여행 관광") {
-                for i in 0..<children.count {
-                    children[i].keyword = self.dummyTraveling[i]
-                }
-            }
+            let children = clusters.related8ClustersMDKeywords(subject: MDKeyword(keyword: self.keywords[0]))
             
             //loadingVC.removeFromSuperview()
             self.setupBubbleContainer(subject: self.keywords[0], childs: children)
@@ -188,18 +174,20 @@ extension SearchViewController {
 
 // APIS
 extension SearchViewController {
-    fileprivate func refreshDatas(keyword: String, completion: @escaping ([MDKeyword]) -> Void) {
+    fileprivate func refreshDatas(keyword: MDKeyword, completion: @escaping ([MDKeyword]) -> Void) {
         guard let clusters = clusters else { return }
-        if clusters.isCategory(word: keyword) {
+        
+        if clusters.isCategory(word: keyword.keyword) {
             completion(clusters.related8WordsMDKeywords(word: keyword))
         } else {
-            getClusters(subjects: [keyword]) { clusters in
+            getClusters(subjects: [keyword.keyword]) { clusters in
+                // 이전 클러스터에 있던 애를
                 self.clusters = clusters
-                completion(clusters.related8ClustersMDKeywords())
+                completion(clusters.related8ClustersMDKeywords(subject: keyword))
             }
         }
         
-        getPixaPictures(subject: keyword)
+        getPixaPictures(subject: keyword.keyword)
     }
     
     fileprivate func getPixaPictures(subject: String) {
@@ -258,8 +246,14 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDelega
         if collectionView.isEqual(keyWordsCollectionView) {
             if indexPath.row % 2 == 0 {
                 let cell = collectionView.dequeueReusableCell(SearchPathCell.self, for: indexPath)
-                cell.label.text = selectedKeywords[indexPath.row / 2].keyword
+                let selectedKeyword = selectedKeywords[indexPath.row / 2]
+                cell.label.text = selectedKeyword.keyword
+                cell.historyLabel.text = selectedKeyword.history
                 cell.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(longpressCellRecognizer(_:))))
+                if indexPath.row == (selectedKeywords.count - 1) * 2 && collectionView.indexPathsForSelectedItems?.isEmpty ?? true {
+                    cell.isSelected = true
+                }
+                cell.historyLabel.isHidden = !cell.isSelected
                 return cell
             } else {
                 let cell = collectionView.dequeueReusableCell(HorizontalArrowCell.self, for: indexPath)
@@ -274,8 +268,11 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDelega
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView.isEqual(keyWordsCollectionView) && indexPath.row % 2 == 0 {
+            if let cell = collectionView.cellForItem(at: indexPath) as? SearchPathCell {
+                cell.historyLabel.isHidden = false
+            }
             collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
-            bubbleContainer.exploreSelectedKeyword(keyword: selectedKeywords[indexPath.row / 2].keyword)
+            bubbleContainer.exploreSelectedKeyword(keyword: selectedKeywords[indexPath.row / 2])
         } else {    // Select Image
             guard let cell = collectionView.cellForItem(at: indexPath) as? SearchImagecell else { return }
             cell.applyShadow()
@@ -289,11 +286,13 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDelega
         }
     }
     
-    
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         if collectionView.isEqual(imagesCollectionView) {
             guard let cell = collectionView.cellForItem(at: indexPath) as? SearchImagecell else { return }
             cell.applyShadow()
+        } else {
+            guard let cell = collectionView.cellForItem(at: indexPath) as? SearchPathCell else { return }
+            cell.historyLabel.isHidden = true
         }
     }
     
@@ -311,12 +310,12 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDelega
 }
 
 extension SearchViewController: BubbleContainerDelegate {
-    func gotoExplore(selectedText: String, completion: @escaping ([MDKeyword]) -> Void) {
-        refreshDatas(keyword: selectedText, completion: completion)
+    func gotoExplore(selectedMDKeyword: MDKeyword, completion: @escaping ([MDKeyword]) -> Void) {
+        refreshDatas(keyword: selectedMDKeyword, completion: completion)
     }
     
-    func childSelected(selectedText: String) {
-        selectedKeywords.append(MDKeyword(keyword: selectedText))
+    func childSelected(selectedMDKeyword: MDKeyword) {
+        selectedKeywords.append(selectedMDKeyword)
         keyWordsCollectionView.reloadSection(section: 0)
         let row = keyWordsCollectionView.numberOfItems(inSection: 0)-1
         keyWordsCollectionView.scrollToItem(at: IndexPath(row: row,
@@ -326,11 +325,12 @@ extension SearchViewController: BubbleContainerDelegate {
         self.mandalartButton.bounce()
         self.countLabel.fadeIn()
         self.countLabel.text = "\(selectedKeywords.count) / 70"
+        print(selectedMDKeyword.history)
     }
     
-    func childDeSelected(selectedText: String) {
+    func childDeSelected(selectedMDKeyword: MDKeyword) {
         let selectedKeywords = self.selectedKeywords.map {$0.keyword}
-        guard let index = selectedKeywords.firstIndex(of: selectedText) else {return}
+        guard let index = selectedKeywords.firstIndex(of: selectedMDKeyword.keyword) else {return}
         self.selectedKeywords.remove(at: index)
         self.countLabel.text = "\(self.selectedKeywords.count) / 70"
         let indexPath = IndexPath(row: index, section: 0)

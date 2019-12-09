@@ -10,10 +10,14 @@ import UIKit
 
 class SearchPathCell: UICollectionViewCell {
     @IBOutlet weak var label: UILabel!
+    @IBOutlet weak var historyLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         label.adjustsFontSizeToFitWidth = true
         label.lineBreakMode = .byClipping
+        historyLabel.adjustsFontSizeToFitWidth = true
+        historyLabel.lineBreakMode = .byClipping
+        historyLabel.isHidden = true
     }
 }
