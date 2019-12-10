@@ -19,5 +19,11 @@ class SearchPathCell: UICollectionViewCell {
         historyLabel.adjustsFontSizeToFitWidth = true
         historyLabel.lineBreakMode = .byClipping
         historyLabel.isHidden = true
+        
+        addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(longPressGetureRecognizer(_:))))
+    }
+    
+    @objc private func longPressGetureRecognizer(_ recognizer: UILongPressGestureRecognizer) {
+        
     }
 }

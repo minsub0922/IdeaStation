@@ -14,7 +14,7 @@ class API {
     private static let googlePicturesBaseURL = "https://serpapi.com/search.json"
     static let googleCustomSearchAPI = "AIzaSyB-7pyM5gA5T0mcrRYC2CwRj3plNWxGfgI"
     static let cx = "000918527958296156522:a7pppxbmzt8"
-    private static let clusteringAPI = "http://54.180.103.186:8000/clusters/"
+    private static let clusteringAPI = "http://112.161.81.230:8000/clusters/"
     
     static let jsonDecoder: JSONDecoder = {
         let jsonDecoder = JSONDecoder()

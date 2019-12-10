@@ -17,7 +17,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.34999999999999998" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic-double-arrow" translatesAutoresizingMaskIntoConstraints="NO" id="iS1-gh-zUF">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.34999999999999998" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="slash" translatesAutoresizingMaskIntoConstraints="NO" id="iS1-gh-zUF">
                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="iS1-gh-zUF" secondAttribute="height" multiplier="1:1" id="CRr-7W-lRs"/>
@@ -35,6 +35,6 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="ic-double-arrow" width="48" height="48"/>
+        <image name="slash" width="64" height="64"/>
     </resources>
 </document>

@@ -40,6 +40,14 @@ class SearchViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     } ()
+    private let historyLabel: UILabel = {
+        let label = UILabel(frame: .zero)
+        label.textColor = UIColor.black.withAlphaComponent(0.5)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        return label
+    } ()
     private var bubbleContainer: BubbleContainer!
     
     fileprivate var selectedKeywords: [MDKeyword] = []
@@ -72,6 +80,7 @@ class SearchViewController: UIViewController {
             self.imagesCollectionView.fadeIn()
             self.navigationBar.fadeIn()
         }
+        
         getPixaPictures(subject: keywords[0])
     }
 }
@@ -94,7 +103,11 @@ extension SearchViewController {
             bubbleContainer.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             bubbleContainer.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             bubbleContainer.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7),
-            bubbleContainer.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7)
+            bubbleContainer.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7),
+            historyLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            historyLabel.topAnchor.constraint(equalTo: bubbleContainer.bottomAnchor, constant: 20),
+            historyLabel.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30),
+            historyLabel.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.7)
         ])
         bubbleContainer.fadeIn()
     }
@@ -127,6 +140,7 @@ extension SearchViewController {
         mandalartButton.alpha = 0
         mandalartButton.addShadow()
         view.addSubview(mandalartButton)
+        view.addSubview(historyLabel)
     }
     
     private func setupAutolayouts() {
@@ -142,20 +156,18 @@ extension SearchViewController {
         keyWordsCollectionView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         keyWordsCollectionView.rightAnchor.constraint(equalTo: mandalartButton.leftAnchor,
         constant: -20).isActive = true
-    
-        imagesCollectionView.translatesAutoresizingMaskIntoConstraints = false
-        imagesCollectionView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        imagesCollectionView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        imagesCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20).isActive = true
-        imagesCollectionView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.2).isActive = true
-        
+
         countLabel.centerXAnchor.constraint(equalTo: mandalartButton.centerXAnchor).isActive = true
         countLabel.widthAnchor.constraint(equalToConstant: 50).isActive = true
         countLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
         countLabel.bottomAnchor.constraint(equalTo: mandalartButton.topAnchor, constant: -5).isActive = true
     }
     
-   
+    //        imagesCollectionView.translatesAutoresizingMaskIntoConstraints = false
+    //        imagesCollectionView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+    //        imagesCollectionView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+    //        imagesCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20).isActive = true
+    //        imagesCollectionView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.2).isActive = true
 }
 
 // MARK:- Actions
@@ -191,12 +203,12 @@ extension SearchViewController {
     }
     
     fileprivate func getPixaPictures(subject: String) {
-        APISource.shared.getPicturesPixay(word: subject) { res in
-            self.pictures = res.hits
-            self.imagesCollectionView.performBatchUpdates({
-                self.imagesCollectionView.reloadSections(IndexSet(0...0))
-            }, completion: nil)
-        }
+//        APISource.shared.getPicturesPixay(word: subject) { res in
+//            self.pictures = res.hits
+//            self.imagesCollectionView.performBatchUpdates({
+//                self.imagesCollectionView.reloadSections(IndexSet(0...0))
+//            }, completion: nil)
+//        }
     }
     
     fileprivate func getClusters(subjects: [String], completion: @escaping (Clusters) -> Void) {
@@ -209,7 +221,9 @@ extension SearchViewController {
                 print(err)
             }
         }
-        //APISource.shared.getCluster(words: subjects, completion: completion)
+        
+//        APISource.shared.getCluster(words: subjects,
+//                                    completion: completion)
     }
 }
 
@@ -225,7 +239,7 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDelega
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView.isEqual(keyWordsCollectionView) {
             let isEven = indexPath.row % 2 == 0
-            let width: CGFloat = isEven ? 70 : 15
+            let width: CGFloat = isEven ? 50 : 15
             let height: CGFloat = isEven ? collectionView.bounds.height : 15
             return CGSize(width: width, height: height)
         } else {
@@ -253,7 +267,7 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDelega
                 if indexPath.row == (selectedKeywords.count - 1) * 2 && collectionView.indexPathsForSelectedItems?.isEmpty ?? true {
                     cell.isSelected = true
                 }
-                cell.historyLabel.isHidden = !cell.isSelected
+                //cell.historyLabel.isHidden = !cell.isSelected
                 return cell
             } else {
                 let cell = collectionView.dequeueReusableCell(HorizontalArrowCell.self, for: indexPath)
@@ -268,11 +282,11 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDelega
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView.isEqual(keyWordsCollectionView) && indexPath.row % 2 == 0 {
-            if let cell = collectionView.cellForItem(at: indexPath) as? SearchPathCell {
-                cell.historyLabel.isHidden = false
-            }
             collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
             bubbleContainer.exploreSelectedKeyword(keyword: selectedKeywords[indexPath.row / 2])
+            historyLabel.text = selectedKeywords[indexPath.row / 2].history.trim.replacingOccurrences(of: " ",
+                                                                                                 with: " > ",
+            options: NSString.CompareOptions.literal, range:nil)
         } else {    // Select Image
             guard let cell = collectionView.cellForItem(at: indexPath) as? SearchImagecell else { return }
             cell.applyShadow()
@@ -305,6 +319,7 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDelega
             self.selectedKeywords.remove(at: indexPath.row / 2)
             let indexPathOfArrow = IndexPath(row: indexPath.row - 1, section: 0)
             self.keyWordsCollectionView.deleteItems(at: [indexPathOfArrow, indexPath])
+            self.countLabel.text = "\(selectedKeywords.count) / 70"
         }
     }
 }
@@ -325,7 +340,9 @@ extension SearchViewController: BubbleContainerDelegate {
         self.mandalartButton.bounce()
         self.countLabel.fadeIn()
         self.countLabel.text = "\(selectedKeywords.count) / 70"
-        print(selectedMDKeyword.history)
+        self.historyLabel.text = selectedKeywords.last?.history.trim.replacingOccurrences(of: " ",
+                                                                                             with: " > ",
+        options: NSString.CompareOptions.literal, range:nil)
     }
     
     func childDeSelected(selectedMDKeyword: MDKeyword) {

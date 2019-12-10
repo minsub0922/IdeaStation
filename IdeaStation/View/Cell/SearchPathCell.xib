@@ -29,15 +29,22 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nia-7i-8Vk">
+                        <rect key="frame" x="0.0" y="0.0" width="180" height="8"/>
+                    </view>
                 </subviews>
             </view>
             <constraints>
+                <constraint firstItem="nia-7i-8Vk" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="7RY-fk-9M5"/>
+                <constraint firstItem="nia-7i-8Vk" firstAttribute="width" secondItem="gTV-IL-0wX" secondAttribute="width" id="Etp-e5-AVs"/>
                 <constraint firstItem="uOj-qH-Qbl" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Gn1-A9-9Gh"/>
+                <constraint firstItem="nia-7i-8Vk" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="Mew-T6-F9J"/>
                 <constraint firstItem="gmN-EQ-eUi" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="Nas-3n-aUv"/>
                 <constraint firstAttribute="trailing" secondItem="uOj-qH-Qbl" secondAttribute="trailing" id="NbX-CC-kZN"/>
                 <constraint firstItem="uOj-qH-Qbl" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="aaA-3Q-uCS"/>
                 <constraint firstItem="gmN-EQ-eUi" firstAttribute="top" secondItem="uOj-qH-Qbl" secondAttribute="bottom" id="eHc-Qe-kEZ"/>
                 <constraint firstAttribute="trailing" secondItem="gmN-EQ-eUi" secondAttribute="trailing" id="huK-IL-9e3"/>
+                <constraint firstItem="gmN-EQ-eUi" firstAttribute="top" secondItem="nia-7i-8Vk" secondAttribute="bottom" constant="10" id="iXO-PD-nA6"/>
                 <constraint firstItem="uOj-qH-Qbl" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="krD-rV-fDr"/>
                 <constraint firstItem="gmN-EQ-eUi" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="l20-of-Noy"/>
                 <constraint firstItem="gmN-EQ-eUi" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="oMV-MX-xiS"/>
