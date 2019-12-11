@@ -21,7 +21,7 @@ struct Clusters: Codable {
             count += 1
             return MDKeyword(keyword: a.category,
                              rank: count,
-                             history: subject.keyword + " " + subject.history)
+                             history: subject.history + " " + subject.keyword)
         }
     }
     func isCategory(word: String) -> Bool {
@@ -40,7 +40,7 @@ struct Clusters: Codable {
             count += 1
             return MDKeyword(keyword: a.text,
                              rank: count,
-                             history: word.keyword + " " + word.history)
+                             history: word.history + " " + word.keyword)
         }
     }
 }

@@ -18,6 +18,9 @@
                         <subviews>
                             <navigationBar contentMode="scaleToFill" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" translucent="NO" largeTitles="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TQT-G1-4ta">
                                 <rect key="frame" x="0.0" y="44" width="414" height="105"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="105" id="Z96-CX-buW"/>
+                                </constraints>
                                 <viewLayoutGuide key="safeArea" id="jYE-RS-ZQ8"/>
                                 <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <items>
@@ -28,8 +31,8 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="TQT-G1-4ta" firstAttribute="trailing" secondItem="h1c-we-zEn" secondAttribute="trailing" id="R5G-XI-y9c"/>
+                            <constraint firstItem="TQT-G1-4ta" firstAttribute="top" secondItem="h1c-we-zEn" secondAttribute="top" id="SOH-7i-ZN9"/>
                             <constraint firstItem="TQT-G1-4ta" firstAttribute="leading" secondItem="h1c-we-zEn" secondAttribute="leading" id="sYz-e6-bx2"/>
-                            <constraint firstItem="TQT-G1-4ta" firstAttribute="top" secondItem="h1c-we-zEn" secondAttribute="top" id="ugg-f1-Lye"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="h1c-we-zEn"/>
                     </view>

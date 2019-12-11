@@ -12,11 +12,20 @@ class SearchViewController: UIViewController {
     // MARK:- Parameters
     private let testLabel = UILabel()
     private var confirmBarButton = UIBarButtonItem()
+    private let keywordsTitleLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 25)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .black
+        label.attributedText = getAttributedString(text: "선택된 키워드", start: 4, length: 3, color: .purple)
+        return label
+    } ()
     private let keyWordsCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.allowsSelection = true
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
     } ()
     private let imagesCollectionView: UICollectionView = {
@@ -28,8 +37,10 @@ class SearchViewController: UIViewController {
         return collectionView
     } ()
     private let mandalartButton: UIButton =  {
-        return UIButton(frame: CGRect(origin: .zero,
-                                      size: CGSize(width: 25, height: 25)))
+        let button = UIButton(frame: CGRect(origin: .zero,
+                                            size: CGSize(width: 25, height: 25)))
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
     } ()
     private let countLabel: UILabel = {
         let label = UILabel(frame: .zero)
@@ -41,11 +52,18 @@ class SearchViewController: UIViewController {
         return label
     } ()
     private let historyLabel: UILabel = {
-        let label = UILabel(frame: .zero)
-        label.textColor = UIColor.black.withAlphaComponent(0.5)
+        let label = UILabel()
+        label.textColor = UIColor.black.withAlphaComponent(0.7)
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textAlignment = .center
+        label.font = label.font.withSize(18)
         label.numberOfLines = 0
+        return label
+    } ()
+    private let historyTitleLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 25)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .black
         return label
     } ()
     private var bubbleContainer: BubbleContainer!
@@ -56,11 +74,7 @@ class SearchViewController: UIViewController {
     public var keywords: [String] = []
     fileprivate var centerImageURL: String = String()
     
-    @IBOutlet weak var navigationBar: UINavigationBar! {
-        didSet {
-            navigationBar.alpha = 0
-        }
-    }
+    @IBOutlet weak var navigationBar: UINavigationBar!
     
     // MARK:- View Life Cycle
     override func viewDidLoad() {
@@ -69,6 +83,7 @@ class SearchViewController: UIViewController {
         //let loadingVC = UIViewController.displaySpinner(onView: view, text: "연관단어 추론 중..")
         setupCollectionView()
         setupButtons()
+        setupLabels()
         setupAutolayouts()
         
         getClusters(subjects: keywords) { clusters in
@@ -101,15 +116,24 @@ extension SearchViewController {
             topConstraints,
             bottomConstraint,
             bubbleContainer.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            bubbleContainer.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            bubbleContainer.centerYAnchor.constraint(equalTo: view.centerYAnchor,constant: 40),
             bubbleContainer.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7),
-            bubbleContainer.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7),
-            historyLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            historyLabel.topAnchor.constraint(equalTo: bubbleContainer.bottomAnchor, constant: 20),
-            historyLabel.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30),
-            historyLabel.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.7)
+            bubbleContainer.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7)
         ])
         bubbleContainer.fadeIn()
+        
+        setupHistoryLabels()
+    }
+    
+    private func setupHistoryLabels() {
+        NSLayoutConstraint.activate([
+            historyLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
+            historyLabel.topAnchor.constraint(equalTo: historyTitleLabel.bottomAnchor, constant: 5),
+            historyLabel.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.7),
+            historyTitleLabel.leftAnchor.constraint(equalTo: historyLabel.leftAnchor),
+            historyTitleLabel.topAnchor.constraint(equalTo: bubbleContainer.bottomAnchor, constant: 70),
+            historyTitleLabel.heightAnchor.constraint(equalToConstant: 25)
+        ])
     }
     
     private func setupCollectionView() {
@@ -133,34 +157,42 @@ extension SearchViewController {
     }
     
     private func setupButtons() {
-        ExitButton(on: navigationBar, target: self)
         mandalartButton.setImage(UIImage(named: "ic-mandalart"), for: .normal)
         mandalartButton.addTarget(self, action: #selector(touchupButton(_:)), for: .touchUpInside)
         mandalartButton.tintColor = .black
         mandalartButton.alpha = 0
         mandalartButton.addShadow()
         view.addSubview(mandalartButton)
+    }
+    
+    private func setupLabels() {
         view.addSubview(historyLabel)
+        view.addSubview(historyTitleLabel)
+        view.addSubview(keywordsTitleLabel)
     }
     
     private func setupAutolayouts() {
-        mandalartButton.translatesAutoresizingMaskIntoConstraints = false
-        mandalartButton.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor,
-                                               constant: -15).isActive = true
-        mandalartButton.centerYAnchor.constraint(equalTo: keyWordsCollectionView.centerYAnchor).isActive = true
+        NSLayoutConstraint.activate([
+            mandalartButton.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor,
+                                                   constant: -15),
+            mandalartButton.centerYAnchor.constraint(equalTo: keyWordsCollectionView.centerYAnchor),
+            keywordsTitleLabel.topAnchor.constraint(equalTo: navigationBar.bottomAnchor,
+                                                    constant: 30),
+            keywordsTitleLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
+            keywordsTitleLabel.heightAnchor.constraint(equalToConstant: 25),
+            keyWordsCollectionView.topAnchor.constraint(equalTo: keywordsTitleLabel.bottomAnchor,
+                                                        constant: 10),
+            keyWordsCollectionView.heightAnchor.constraint(equalToConstant: 70),
+            keyWordsCollectionView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            keyWordsCollectionView.rightAnchor.constraint(equalTo: mandalartButton.leftAnchor,
+                                                          constant: -20),
+            countLabel.centerXAnchor.constraint(equalTo: mandalartButton.centerXAnchor),
+            countLabel.widthAnchor.constraint(equalToConstant: 50),
+            countLabel.heightAnchor.constraint(equalToConstant: 20),
+            countLabel.bottomAnchor.constraint(equalTo: mandalartButton.topAnchor, constant: -5)
+        ])
         
-        keyWordsCollectionView.translatesAutoresizingMaskIntoConstraints = false
-        keyWordsCollectionView.topAnchor.constraint(equalTo: navigationBar.bottomAnchor,
-                                                    constant: 16).isActive = true
-        keyWordsCollectionView.heightAnchor.constraint(equalToConstant: 100).isActive = true
-        keyWordsCollectionView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        keyWordsCollectionView.rightAnchor.constraint(equalTo: mandalartButton.leftAnchor,
-        constant: -20).isActive = true
-
-        countLabel.centerXAnchor.constraint(equalTo: mandalartButton.centerXAnchor).isActive = true
-        countLabel.widthAnchor.constraint(equalToConstant: 50).isActive = true
-        countLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
-        countLabel.bottomAnchor.constraint(equalTo: mandalartButton.topAnchor, constant: -5).isActive = true
+        ExitButton(on: navigationBar, target: self)
     }
     
     //        imagesCollectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -284,9 +316,7 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDelega
         if collectionView.isEqual(keyWordsCollectionView) && indexPath.row % 2 == 0 {
             collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
             bubbleContainer.exploreSelectedKeyword(keyword: selectedKeywords[indexPath.row / 2])
-            historyLabel.text = selectedKeywords[indexPath.row / 2].history.trim.replacingOccurrences(of: " ",
-                                                                                                 with: " > ",
-            options: NSString.CompareOptions.literal, range:nil)
+            updateHistoryLabel(selectedKeyword: selectedKeywords[indexPath.row / 2])
         } else {    // Select Image
             guard let cell = collectionView.cellForItem(at: indexPath) as? SearchImagecell else { return }
             cell.applyShadow()
@@ -324,6 +354,34 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDelega
     }
 }
 
+// MARK:- Functions
+extension SearchViewController {
+    private func updateHistoryLabel(selectedKeyword: MDKeyword?) {
+        UIView.transition(with: self.historyLabel,
+                          duration: 0.3,
+                          options: .transitionCrossDissolve,
+                          animations: { [weak self] in
+                            self?.historyLabel.text = selectedKeyword?.history.trim.replacingOccurrences(of: " ",
+                                                                                         with: " > ",
+                                                                                         options: NSString.CompareOptions.literal, range:nil)
+            }, completion: nil)
+        UIView.transition(with: self.historyTitleLabel,
+                      duration: 0.3,
+                      options: .transitionCrossDissolve,
+                      animations: { [weak self] in
+                        //self?.historyTitleLabel.text = "\(selectedKeyword!.keyword)의 히스토리"
+                        self?.historyTitleLabel.attributedText = SearchViewController.getAttributedString(text: "\(selectedKeyword!.keyword)의 히스토리", start:0, length: selectedKeyword!.keyword.count, color: .brown)
+        }, completion: nil)
+    }
+    
+    private static func getAttributedString(text: String, start: Int, length: Int, color: UIColor) -> NSMutableAttributedString {
+        var myMutableString = NSMutableAttributedString(string: text, attributes: [NSAttributedString.Key.font :UIFont(name: "Georgia", size: 25.0)!])
+        myMutableString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.black, range: NSRange(location:0,length: text.count))
+        myMutableString.addAttribute(NSAttributedString.Key.foregroundColor, value: color, range: NSRange(location: start, length: length))
+        return myMutableString
+    }
+}
+
 extension SearchViewController: BubbleContainerDelegate {
     func gotoExplore(selectedMDKeyword: MDKeyword, completion: @escaping ([MDKeyword]) -> Void) {
         refreshDatas(keyword: selectedMDKeyword, completion: completion)
@@ -340,9 +398,7 @@ extension SearchViewController: BubbleContainerDelegate {
         self.mandalartButton.bounce()
         self.countLabel.fadeIn()
         self.countLabel.text = "\(selectedKeywords.count) / 70"
-        self.historyLabel.text = selectedKeywords.last?.history.trim.replacingOccurrences(of: " ",
-                                                                                             with: " > ",
-        options: NSString.CompareOptions.literal, range:nil)
+        self.updateHistoryLabel(selectedKeyword: selectedKeywords.last)
     }
     
     func childDeSelected(selectedMDKeyword: MDKeyword) {
