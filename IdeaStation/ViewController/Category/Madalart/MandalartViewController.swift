@@ -18,7 +18,7 @@ class MandalartViewController: UIViewController {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.backgroundColor = .white
         return collectionView
-    }()
+    } ()
     private let ideaButton: UIButton = {
         let button = UIButton(frame: .zero)
         button.setImage(UIImage(named: "ic-logo"), for: .normal)
@@ -29,7 +29,7 @@ class MandalartViewController: UIViewController {
         button.addTarget(self, action: #selector(touchupIdeaButton(_:)), for: .touchUpInside)
         button.backgroundColor = .white
         return button
-    }()
+    } ()
     private let transition = BubbleTransition()
     private let interactiveTransition = BubbleInteractiveTransition()
     private let scrollView: UIScrollView = UIScrollView(frame: .zero)
@@ -61,19 +61,19 @@ class MandalartViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
       
-        testCode()
-        setupView()
         //testCode()
+        getMandalartKeywords()
+        setupView()
     }
     
     private func getMandalartKeywords() {
         let loadingVCM = UIViewController.displaySpinner(onView: view, text: "아이디어 추론 중..")// loading start
         APISource.shared.getMandalart(words: keywords.map { $0.keyword }) { mandalartKeywords in
+            loadingVCM.removeFromSuperview()//loading finish
             self.mandalartKeywords = mandalartKeywords
             self.cellCount = 9
-            loadingVCM.removeFromSuperview()//loading finish
-            
             self.collectionView.reloadSection(section: 0)
+              print(mandalartKeywords)
         }
     }
     

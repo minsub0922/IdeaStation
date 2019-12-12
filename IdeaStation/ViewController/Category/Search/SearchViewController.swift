@@ -80,7 +80,7 @@ class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(countLabel)
-        //let loadingVC = UIViewController.displaySpinner(onView: view, text: "연관단어 추론 중..")
+        let loadingVC = UIViewController.displaySpinner(onView: view, text: "연관단어 추론 중..")
         setupCollectionView()
         setupButtons()
         setupLabels()
@@ -90,7 +90,7 @@ class SearchViewController: UIViewController {
             self.clusters = clusters
             let children = clusters.related8ClustersMDKeywords(subject: MDKeyword(keyword: self.keywords[0]))
             
-            //loadingVC.removeFromSuperview()
+            loadingVC.removeFromSuperview()
             self.setupBubbleContainer(subject: self.keywords[0], childs: children)
             self.imagesCollectionView.fadeIn()
             self.navigationBar.fadeIn()
@@ -128,7 +128,7 @@ extension SearchViewController {
     private func setupHistoryLabels() {
         NSLayoutConstraint.activate([
             historyLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
-            historyLabel.topAnchor.constraint(equalTo: historyTitleLabel.bottomAnchor, constant: 5),
+            historyLabel.topAnchor.constraint(equalTo: historyTitleLabel.bottomAnchor, constant: 10),
             historyLabel.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor, multiplier: 0.7),
             historyTitleLabel.leftAnchor.constraint(equalTo: historyLabel.leftAnchor),
             historyTitleLabel.topAnchor.constraint(equalTo: bubbleContainer.bottomAnchor, constant: 70),
@@ -150,6 +150,7 @@ extension SearchViewController {
         keyWordsCollectionView.contentInset = UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 0)
         keyWordsCollectionView.showsHorizontalScrollIndicator = false
         keyWordsCollectionView.backgroundColor = .white
+        keyWordsCollectionView.isMultipleTouchEnabled = false
         
         imagesCollectionView.contentInset = UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 0)
         imagesCollectionView.showsHorizontalScrollIndicator = false
@@ -181,7 +182,7 @@ extension SearchViewController {
             keywordsTitleLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
             keywordsTitleLabel.heightAnchor.constraint(equalToConstant: 25),
             keyWordsCollectionView.topAnchor.constraint(equalTo: keywordsTitleLabel.bottomAnchor,
-                                                        constant: 10),
+                                                        constant: 5),
             keyWordsCollectionView.heightAnchor.constraint(equalToConstant: 70),
             keyWordsCollectionView.leftAnchor.constraint(equalTo: view.leftAnchor),
             keyWordsCollectionView.rightAnchor.constraint(equalTo: mandalartButton.leftAnchor,
@@ -245,24 +246,24 @@ extension SearchViewController {
     
     fileprivate func getClusters(subjects: [String], completion: @escaping (Clusters) -> Void) {
         //set Mock data
-        Mock.getMockClusters { res in
-            switch res {
-            case .value(let value) :
-                completion(value)
-            case .error(let err):
-                print(err)
-            }
-        }
+//        Mock.getMockClusters { res in
+//            switch res {
+//            case .value(let value) :
+//                completion(value)
+//            case .error(let err):
+//                print(err)
+//            }
+//        }
         
-//        APISource.shared.getCluster(words: subjects,
-//                                    completion: completion)
+        APISource.shared.getCluster(words: subjects,
+                                    completion: completion)
     }
 }
 
 extension SearchViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView.isEqual(keyWordsCollectionView) {
-            return selectedKeywords.count * 2 - 1
+            return selectedKeywords.count
         } else {
             return pictures.count
         }
@@ -270,9 +271,8 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDelega
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView.isEqual(keyWordsCollectionView) {
-            let isEven = indexPath.row % 2 == 0
-            let width: CGFloat = isEven ? 50 : 15
-            let height: CGFloat = isEven ? collectionView.bounds.height : 15
+            let width: CGFloat = 70
+            let height: CGFloat = collectionView.bounds.height
             return CGSize(width: width, height: height)
         } else {
             let height = collectionView.bounds.height * 0.8
@@ -290,21 +290,17 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDelega
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView.isEqual(keyWordsCollectionView) {
-            if indexPath.row % 2 == 0 {
-                let cell = collectionView.dequeueReusableCell(SearchPathCell.self, for: indexPath)
-                let selectedKeyword = selectedKeywords[indexPath.row / 2]
-                cell.label.text = selectedKeyword.keyword
-                cell.historyLabel.text = selectedKeyword.history
-                cell.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(longpressCellRecognizer(_:))))
-                if indexPath.row == (selectedKeywords.count - 1) * 2 && collectionView.indexPathsForSelectedItems?.isEmpty ?? true {
-                    cell.isSelected = true
-                }
-                //cell.historyLabel.isHidden = !cell.isSelected
-                return cell
+            let cell = collectionView.dequeueReusableCell(SearchPathCell.self, for: indexPath)
+            let selectedKeyword = selectedKeywords[indexPath.row]
+            cell.label.text = selectedKeyword.keyword
+            cell.historyLabel.text = selectedKeyword.history
+            cell.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(longpressCellRecognizer(_:))))
+            if cell.isSelected {
+                cell.activate()
             } else {
-                let cell = collectionView.dequeueReusableCell(HorizontalArrowCell.self, for: indexPath)
-                return cell
+                cell.inActivate()
             }
+            return cell
         } else {
             let cell = collectionView.dequeueReusableCell(SearchImagecell.self, for: indexPath)
             cell.setupView(imagePath: pictures[indexPath.row].previewURL)
@@ -313,10 +309,13 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDelega
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if collectionView.isEqual(keyWordsCollectionView) && indexPath.row % 2 == 0 {
+        if collectionView.isEqual(keyWordsCollectionView) {
             collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
-            bubbleContainer.exploreSelectedKeyword(keyword: selectedKeywords[indexPath.row / 2])
-            updateHistoryLabel(selectedKeyword: selectedKeywords[indexPath.row / 2])
+            bubbleContainer.exploreSelectedKeyword(keyword: selectedKeywords[indexPath.row])
+            updateHistoryLabel(selectedKeyword: selectedKeywords[indexPath.row])
+            
+            guard let cell = collectionView.cellForItem(at: indexPath) as? SearchPathCell else { return }
+            cell.activate()
         } else {    // Select Image
             guard let cell = collectionView.cellForItem(at: indexPath) as? SearchImagecell else { return }
             cell.applyShadow()
@@ -336,7 +335,7 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDelega
             cell.applyShadow()
         } else {
             guard let cell = collectionView.cellForItem(at: indexPath) as? SearchPathCell else { return }
-            cell.historyLabel.isHidden = true
+            cell.inActivate()
         }
     }
     
@@ -345,10 +344,8 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDelega
         if sender.state == .ended {
             let p = sender.location(in: self.keyWordsCollectionView)
             guard let indexPath = self.keyWordsCollectionView.indexPathForItem(at: p) else { return }
-            if indexPath.row % 2 != 0 { return }
-            self.selectedKeywords.remove(at: indexPath.row / 2)
-            let indexPathOfArrow = IndexPath(row: indexPath.row - 1, section: 0)
-            self.keyWordsCollectionView.deleteItems(at: [indexPathOfArrow, indexPath])
+            self.selectedKeywords.remove(at: indexPath.row)
+            self.keyWordsCollectionView.deleteItems(at: [indexPath])
             self.countLabel.text = "\(selectedKeywords.count) / 70"
         }
     }
@@ -389,16 +386,17 @@ extension SearchViewController: BubbleContainerDelegate {
     
     func childSelected(selectedMDKeyword: MDKeyword) {
         selectedKeywords.append(selectedMDKeyword)
-        keyWordsCollectionView.reloadSection(section: 0)
-        let row = keyWordsCollectionView.numberOfItems(inSection: 0)-1
-        keyWordsCollectionView.scrollToItem(at: IndexPath(row: row,
-                                                  section: 0),
-                                    at: .left, animated: true)
+        let indexPath = IndexPath(row: self.selectedKeywords.count-1, section: 0)
+        keyWordsCollectionView.insertItems(at: [indexPath])
+        keyWordsCollectionView.reloadItems(at: [indexPath])
+        keyWordsCollectionView.scrollToItem(at: indexPath,
+                                            at: .left,
+                                            animated: true)
         self.mandalartButton.fadeIn()
         self.mandalartButton.bounce()
         self.countLabel.fadeIn()
         self.countLabel.text = "\(selectedKeywords.count) / 70"
-        self.updateHistoryLabel(selectedKeyword: selectedKeywords.last)
+        //self.updateHistoryLabel(selectedKeyword: selectedKeywords.last)
     }
     
     func childDeSelected(selectedMDKeyword: MDKeyword) {

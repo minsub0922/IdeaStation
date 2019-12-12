@@ -58,12 +58,36 @@ struct APISource: APISourceProtocol {
             completion: commonResponseHandler(completion: completion))
     }
     
-    func getCluster(words: [String], completion: @escaping (Clusters) -> Void) {
+    func getCluster(words: [String], dataSet: Int = 0, completion: @escaping (Clusters) -> Void) {
         let word = words.reduce("") { $0 + $1 + " "}.trim
         let params = [
-            "word": word
-        ]
+            "word": word,
+            "dataset": dataSet
+            ] as [String : Any]
+        
+//        0 : wiki
+//        1 : news
+//        2: kipris
+//        3 : wiki+news
+//        4 : wiki+kipris
+//        5 : news+kipris
+//        6 : all
+        
         get(API.getClusters,
+            params: params,
+            completion: commonResponseHandler(completion: completion))
+    }
+    
+    
+    func getMandalart(words: [String], dataSet: Int = 0, completion: @escaping ([String]) -> Void)  {
+        let word = words.reduce("") { $0 + $1 + " "}.trim
+        
+        let params = [
+            "word": word,
+            "dataset": dataSet
+            ] as [String : Any]
+        
+        get(API.getMandalart(),
             params: params,
             completion: commonResponseHandler(completion: completion))
     }
@@ -74,16 +98,6 @@ struct APISource: APISourceProtocol {
             "word": word
         ]
         get(API.getIdea(),
-            params: params,
-            completion: commonResponseHandler(completion: completion))
-    }
-    
-    func getMandalart(words: [String], completion: @escaping ([String]) -> Void)  {
-        let word = words.reduce("") { $0 + $1 + " "}.trim
-        let params = [
-            "word": word
-        ]
-        get(API.getMandalart(),
             params: params,
             completion: commonResponseHandler(completion: completion))
     }

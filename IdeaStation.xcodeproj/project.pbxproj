@@ -15,6 +15,11 @@
 		1A136581237D4FEF00A941CB /* BubbleContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A136580237D4FEF00A941CB /* BubbleContainer.swift */; };
 		1A136585237DB6BF00A941CB /* SearchPathCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A136583237DB6BF00A941CB /* SearchPathCell.swift */; };
 		1A136586237DB6BF00A941CB /* SearchPathCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A136584237DB6BF00A941CB /* SearchPathCell.xib */; };
+		1A3900BB23A2137A00081E34 /* CategorySelectionContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3900BA23A2137A00081E34 /* CategorySelectionContainer.swift */; };
+		1A3900BE23A2185600081E34 /* CategorySelectionContainerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3900BC23A2185600081E34 /* CategorySelectionContainerCell.swift */; };
+		1A3900BF23A2185600081E34 /* CategorySelectionContainerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A3900BD23A2185600081E34 /* CategorySelectionContainerCell.xib */; };
+		1A3900C123A224FE00081E34 /* CategorySelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3900C023A224FE00081E34 /* CategorySelectionViewController.swift */; };
+		1A3900C323A22DD700081E34 /* Singleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3900C223A22DD700081E34 /* Singleton.swift */; };
 		1A6FFFAF237E406C00AAEFC5 /* HorizontalArrowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6FFFAD237E406C00AAEFC5 /* HorizontalArrowCell.swift */; };
 		1A6FFFB0237E406C00AAEFC5 /* HorizontalArrowCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A6FFFAE237E406C00AAEFC5 /* HorizontalArrowCell.xib */; };
 		1A70E5672383E1E7008B8AE2 /* SearchImagecell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A70E5652383E1E7008B8AE2 /* SearchImagecell.xib */; };
@@ -109,6 +114,11 @@
 		1A136580237D4FEF00A941CB /* BubbleContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BubbleContainer.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		1A136583237DB6BF00A941CB /* SearchPathCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPathCell.swift; sourceTree = "<group>"; };
 		1A136584237DB6BF00A941CB /* SearchPathCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchPathCell.xib; sourceTree = "<group>"; };
+		1A3900BA23A2137A00081E34 /* CategorySelectionContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectionContainer.swift; sourceTree = "<group>"; };
+		1A3900BC23A2185600081E34 /* CategorySelectionContainerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectionContainerCell.swift; sourceTree = "<group>"; };
+		1A3900BD23A2185600081E34 /* CategorySelectionContainerCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategorySelectionContainerCell.xib; sourceTree = "<group>"; };
+		1A3900C023A224FE00081E34 /* CategorySelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectionViewController.swift; sourceTree = "<group>"; };
+		1A3900C223A22DD700081E34 /* Singleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Singleton.swift; sourceTree = "<group>"; };
 		1A6FFFAD237E406C00AAEFC5 /* HorizontalArrowCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalArrowCell.swift; sourceTree = "<group>"; };
 		1A6FFFAE237E406C00AAEFC5 /* HorizontalArrowCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HorizontalArrowCell.xib; sourceTree = "<group>"; };
 		1A70E5642383E1E7008B8AE2 /* SearchImagecell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchImagecell.swift; sourceTree = "<group>"; };
@@ -228,6 +238,8 @@
 				1A70E5652383E1E7008B8AE2 /* SearchImagecell.xib */,
 				1AB6AA5B239B81CD0031E454 /* SearchPathHistoryCell.swift */,
 				1AB6AA5C239B81CD0031E454 /* SearchPathHistoryCell.xib */,
+				1A3900BC23A2185600081E34 /* CategorySelectionContainerCell.swift */,
+				1A3900BD23A2185600081E34 /* CategorySelectionContainerCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -410,6 +422,7 @@
 				AFCD53352307FDCD00A1D487 /* ExitButton.swift */,
 				1A136580237D4FEF00A941CB /* BubbleContainer.swift */,
 				1A040C2B23801F7C00A1DF10 /* Mandalart.swift */,
+				1A3900BA23A2137A00081E34 /* CategorySelectionContainer.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -470,6 +483,7 @@
 			children = (
 				AFF64DC323041A9D003F3E3A /* Search.storyboard */,
 				1A13657E237D4DFD00A941CB /* SearchViewController.swift */,
+				1A3900C023A224FE00081E34 /* CategorySelectionViewController.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -494,6 +508,7 @@
 				ABB6EF21238170ED00F7EDF4 /* PostResponse.swift */,
 				1A70E56823841393008B8AE2 /* GooglePictures.swift */,
 				1AD7CA612386B8ED00D11C2C /* Clusters.swift */,
+				1A3900C223A22DD700081E34 /* Singleton.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -616,6 +631,7 @@
 				1A6FFFB0237E406C00AAEFC5 /* HorizontalArrowCell.xib in Resources */,
 				AB564CCE2387AF88005FDC72 /* MainSproutCollectionViewCell.xib in Resources */,
 				AFCD53322307F31900A1D487 /* InterestStoryboard.storyboard in Resources */,
+				1A3900BF23A2185600081E34 /* CategorySelectionContainerCell.xib in Resources */,
 				AFF64DC423041A9D003F3E3A /* Search.storyboard in Resources */,
 				ABA4DDED2381770700F959EE /* SpecificationStoryboard.storyboard in Resources */,
 				1A040C2A2380186400A1DF10 /* MandalartCell.xib in Resources */,
@@ -745,6 +761,7 @@
 				ABA4DDFA238177FA00F959EE /* LoginViewController.swift in Sources */,
 				AB62A97223884FF100C56D37 /* SeedDetailViewController.swift in Sources */,
 				1AB6AA5D239B81CD0031E454 /* SearchPathHistoryCell.swift in Sources */,
+				1A3900BE23A2185600081E34 /* CategorySelectionContainerCell.swift in Sources */,
 				AF07B35322FFF71600FAE1C8 /* CategoryViewController.swift in Sources */,
 				AFF64DBD2304058E003F3E3A /* APISource.swift in Sources */,
 				1A726E8D237FC58E00BFBCE8 /* MDKeyword.swift in Sources */,
@@ -762,9 +779,11 @@
 				1A6FFFAF237E406C00AAEFC5 /* HorizontalArrowCell.swift in Sources */,
 				AB564CCD2387AF88005FDC72 /* MainSproutCollectionViewCell.swift in Sources */,
 				AFCD53332307F31900A1D487 /* DidSelectViewController.swift in Sources */,
+				1A3900C323A22DD700081E34 /* Singleton.swift in Sources */,
 				AF07B3592302629B00FAE1C8 /* ExpandableBubbleLabel(deprecated).swift in Sources */,
 				AF07B31A22FFC3C300FAE1C8 /* AppDelegate.swift in Sources */,
 				AFF64DC623041E74003F3E3A /* Object+.swift in Sources */,
+				1A3900BB23A2137A00081E34 /* CategorySelectionContainer.swift in Sources */,
 				AF07B35B2302771300FAE1C8 /* FlexibleLabel(deprecated).swift in Sources */,
 				ABA4DE0A23819BBC00F959EE /* SharingData.swift in Sources */,
 				ABA4DE0E2382351600F959EE /* UserAnalysisCollectionViewCell.swift in Sources */,
@@ -784,6 +803,7 @@
 				1A040C2C23801F7C00A1DF10 /* Mandalart.swift in Sources */,
 				AF07B32222FFC3C300FAE1C8 /* IdeaStation.xcdatamodeld in Sources */,
 				1AF7FA2923885B8300FC8972 /* CreateIdeaViewController.swift in Sources */,
+				1A3900C123A224FE00081E34 /* CategorySelectionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

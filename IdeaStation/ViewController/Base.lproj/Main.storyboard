@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="qqC-ZI-jQn">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -8,6 +8,38 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Category Selection View Controller-->
+        <scene sceneID="v4Q-9P-KDV">
+            <objects>
+                <viewController storyboardIdentifier="CategorySelectionViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="qqC-ZI-jQn" customClass="CategorySelectionViewController" customModule="IdeaStation" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="WL8-am-wCQ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translucent="NO" largeTitles="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7yi-WJ-r48">
+                                <rect key="frame" x="0.0" y="44" width="414" height="105"/>
+                                <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <items>
+                                    <navigationItem title="관심사를 선택하세요." id="88t-X3-pc6"/>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="7yi-WJ-r48" firstAttribute="leading" secondItem="W6C-fn-VrR" secondAttribute="leading" id="Kgz-OF-qef"/>
+                            <constraint firstItem="7yi-WJ-r48" firstAttribute="trailing" secondItem="W6C-fn-VrR" secondAttribute="trailing" id="LG9-Lt-LJ6"/>
+                            <constraint firstItem="7yi-WJ-r48" firstAttribute="top" secondItem="W6C-fn-VrR" secondAttribute="top" id="NWG-rK-iVB"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="W6C-fn-VrR"/>
+                    </view>
+                    <connections>
+                        <outlet property="navigationBar" destination="7yi-WJ-r48" id="mAH-gy-Ygx"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZA6-pm-jy8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="130" y="348"/>
+        </scene>
         <!--아이디어 탐색-->
         <scene sceneID="tne-QT-ifu">
             <objects>

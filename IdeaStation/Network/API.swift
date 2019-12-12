@@ -43,7 +43,9 @@ class API {
         return "http://13.124.243.199:5000/make_idea"
     }
     
+    //112.161.81.230:8000/mandal/?word=자동차%20세단%20한국
+    
     static let getMandalart = {
-        return "http://13.124.243.199:5000/mapping"
+        return "http://112.161.81.230:8000/mandal/"
     }
 }

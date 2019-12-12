@@ -16,6 +16,7 @@ class SearchPathCell: UICollectionViewCell {
         super.awakeFromNib()
         label.adjustsFontSizeToFitWidth = true
         label.lineBreakMode = .byClipping
+        inActivate()
         historyLabel.adjustsFontSizeToFitWidth = true
         historyLabel.lineBreakMode = .byClipping
         historyLabel.isHidden = true
@@ -25,5 +26,15 @@ class SearchPathCell: UICollectionViewCell {
     
     @objc private func longPressGetureRecognizer(_ recognizer: UILongPressGestureRecognizer) {
         
+    }
+    
+    public func activate() {
+        label.alpha = 1
+        label.font = .boldSystemFont(ofSize: 20)
+    }
+    
+    public func inActivate() {
+        label.alpha = 0.6
+        label.font = .italicSystemFont(ofSize: 15)
     }
 }
