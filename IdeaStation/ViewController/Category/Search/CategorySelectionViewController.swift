@@ -63,6 +63,7 @@ class CategorySelectionViewController: UIViewController {
             if let target = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: CategoryViewController.className) as? CategoryViewController {
                 target.modalTransitionStyle = .crossDissolve
                 target.modalPresentationStyle = .fullScreen
+                UserDatas.shared.selectedDataset = container.selectedCategories
                 present(target, animated: true, completion: nil)
             }
         }

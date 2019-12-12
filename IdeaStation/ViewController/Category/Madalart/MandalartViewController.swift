@@ -28,6 +28,9 @@ class MandalartViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(touchupIdeaButton(_:)), for: .touchUpInside)
         button.backgroundColor = .white
+        
+        //
+        button.isHidden = true
         return button
     } ()
     private let transition = BubbleTransition()
@@ -40,7 +43,7 @@ class MandalartViewController: UIViewController {
     private var keywords: [MDKeyword] {
         //if selectedTexts.count == 0 { return ["이게사랑인가요","이제다시","사랑에연습이있었다면"]}
         var keywords: [MDKeyword] = []
-        keywords.append(MDKeyword(keyword: centerKeyword, imagePath: centerImageURL))
+        //keywords.append(MDKeyword(keyword: centerKeyword, imagePath: centerImageURL))
         keywords.append(contentsOf: selectedTexts)
         return keywords
     }
@@ -68,7 +71,9 @@ class MandalartViewController: UIViewController {
     
     private func getMandalartKeywords() {
         let loadingVCM = UIViewController.displaySpinner(onView: view, text: "아이디어 추론 중..")// loading start
-        APISource.shared.getMandalart(words: keywords.map { $0.keyword }) { mandalartKeywords in
+        APISource.shared.getMandalart(words: keywords.map { $0.keyword },
+                                      dataSet: UserDatas.shared.dataSetIndex)
+        { mandalartKeywords in
             loadingVCM.removeFromSuperview()//loading finish
             self.mandalartKeywords = mandalartKeywords
             self.cellCount = 9

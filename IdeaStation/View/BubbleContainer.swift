@@ -189,7 +189,8 @@ extension BubbleContainer {
             else { return }
         selectedChild = self.keywords.filter { $0.keyword.elementsEqual(text) }.last!
         self.delegate?.gotoExplore(selectedMDKeyword: selectedChild, completion: { keywords in
-            self.keywords.append(contentsOf: keywords.shuffled())
+            //self.keywords.append(contentsOf: keywords.shuffled())
+            self.keywords = keywords.shuffled()
             self.collapsed()
         })
     }
@@ -211,6 +212,7 @@ extension BubbleContainer {
             else { return }
         
         let isSelected = isBubbleSelected(index: index)
+        print("index: \(index)  isSelected: \(isSelected)")
         bubble.bounce()
         bubble.changeAlphaWithAnimation(alpha: !isSelected ? 1 : 0.4)
         
@@ -297,19 +299,17 @@ extension BubbleContainer {
     }
     
     private func isBubbleSelected(index: Int) -> Bool {
-        return self.keywords[self.keywords.count - childCount + index].isSelected
+        return self.keywords[index].isSelected
     }
     
     private func selectBubble(text: String, index: Int) {
-        var keyword = self.keywords[self.keywords.count - childCount + index]
-        keyword.isSelected = true
-        self.delegate?.childSelected(selectedMDKeyword: keyword)
+        self.keywords[index].isSelected = true
+        self.delegate?.childSelected(selectedMDKeyword: self.keywords[index])
     }
     
     private func deSelectBubble(text: String, index: Int) {
-        var keyword = self.keywords[self.keywords.count - childCount + index]
-        keyword.isSelected = false
-        self.delegate?.childDeSelected(selectedMDKeyword: keyword)
+        self.keywords[index].isSelected = false
+        self.delegate?.childDeSelected(selectedMDKeyword: self.keywords[index])
     }
     
     // MARK: TODO

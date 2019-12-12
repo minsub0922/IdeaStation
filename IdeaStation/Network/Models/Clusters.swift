@@ -13,7 +13,7 @@ struct Clusters: Codable {
     let clusters: [Cluster]
     
     func related8Clusters() -> [Cluster] {
-        return Array(clusters.sorted { $0.correlation > $1.correlation } [0..<8])
+        return Array(clusters.sorted { $0.correlation > $1.correlation } [1...8])
     }
     func related8ClustersMDKeywords(subject: MDKeyword = MDKeyword(keyword: "")) -> [MDKeyword] {
         var count = 0

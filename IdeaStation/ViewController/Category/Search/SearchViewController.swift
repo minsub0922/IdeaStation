@@ -85,7 +85,7 @@ class SearchViewController: UIViewController {
         setupButtons()
         setupLabels()
         setupAutolayouts()
-        
+        selectedKeywords.append(contentsOf: keywords.map { MDKeyword(keyword: $0) } )
         getClusters(subjects: keywords) { clusters in
             self.clusters = clusters
             let children = clusters.related8ClustersMDKeywords(subject: MDKeyword(keyword: self.keywords[0]))
@@ -220,16 +220,22 @@ extension SearchViewController {
 // APIS
 extension SearchViewController {
     fileprivate func refreshDatas(keyword: MDKeyword, completion: @escaping ([MDKeyword]) -> Void) {
-        guard let clusters = clusters else { return }
+//        guard let clusters = clusters else { return }
+//
+//        if clusters.isCategory(word: keyword.keyword) {
+//            completion(clusters.related8WordsMDKeywords(word: keyword))
+//        } else {
+//            getClusters(subjects: [keyword.keyword]) { clusters in
+//                // 이전 클러스터에 있던 애를
+//                self.clusters = clusters
+//                completion(clusters.related8ClustersMDKeywords(subject: keyword))
+//            }
+//        }
         
-        if clusters.isCategory(word: keyword.keyword) {
-            completion(clusters.related8WordsMDKeywords(word: keyword))
-        } else {
-            getClusters(subjects: [keyword.keyword]) { clusters in
-                // 이전 클러스터에 있던 애를
-                self.clusters = clusters
-                completion(clusters.related8ClustersMDKeywords(subject: keyword))
-            }
+        getClusters(subjects: [keyword.keyword]) { clusters in
+            // 이전 클러스터에 있던 애를
+            self.clusters = clusters
+            completion(clusters.related8ClustersMDKeywords(subject: keyword))
         }
         
         getPixaPictures(subject: keyword.keyword)
@@ -255,7 +261,11 @@ extension SearchViewController {
 //            }
 //        }
         
+        var subjects = subjects
+        subjects.append(subjects.first!)
+        subjects.append(contentsOf:  UserDatas.shared.selectedCategory)
         APISource.shared.getCluster(words: subjects,
+                                    dataSet: UserDatas.shared.dataSetIndex,
                                     completion: completion)
     }
 }
