@@ -89,7 +89,7 @@ class SearchViewController: UIViewController {
         getClusters(subjects: keywords) { clusters in
             self.clusters = clusters
             let children = clusters.related8ClustersMDKeywords(subject: MDKeyword(keyword: self.keywords[0]))
-            
+            print("dione??????")
             loadingVC.removeFromSuperview()
             self.setupBubbleContainer(subject: self.keywords[0], childs: children)
             self.imagesCollectionView.fadeIn()
@@ -252,21 +252,21 @@ extension SearchViewController {
     
     fileprivate func getClusters(subjects: [String], completion: @escaping (Clusters) -> Void) {
         //set Mock data
-//        Mock.getMockClusters { res in
-//            switch res {
-//            case .value(let value) :
-//                completion(value)
-//            case .error(let err):
-//                print(err)
-//            }
-//        }
+        Mock.getMockClusters { res in
+            switch res {
+            case .value(let value) :
+                completion(value)
+            case .error(let err):
+                print(err)
+            }
+        }
         
-        var subjects = subjects
-        subjects.append(subjects.first!)
-        subjects.append(contentsOf:  UserDatas.shared.selectedCategory)
-        APISource.shared.getCluster(words: subjects,
-                                    dataSet: UserDatas.shared.dataSetIndex,
-                                    completion: completion)
+//        var subjects = subjects
+//        subjects.append(subjects.first!)
+//        subjects.append(contentsOf:  UserDatas.shared.selectedCategory)
+//        APISource.shared.getCluster(words: subjects,
+//                                    dataSet: UserDatas.shared.dataSetIndex,
+//                                    completion: completion)
     }
 }
 

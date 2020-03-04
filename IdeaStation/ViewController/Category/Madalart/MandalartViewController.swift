@@ -9,7 +9,7 @@
 import UIKit
 import BubbleTransition
 
-class MandalartViewController: UIViewController {
+class MandalartViewController: BaseViewController {
     private let collectionView: UICollectionView = {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.scrollDirection = .vertical
@@ -64,27 +64,32 @@ class MandalartViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
       
-        //testCode()
         getMandalartKeywords()
         setupView()
     }
     
+    
     private func getMandalartKeywords() {
-        let loadingVCM = UIViewController.displaySpinner(onView: view, text: "아이디어 추론 중..")// loading start
-        APISource.shared.getMandalart(words: keywords.map { $0.keyword },
-                                      dataSet: UserDatas.shared.dataSetIndex)
-        { mandalartKeywords in
-            loadingVCM.removeFromSuperview()//loading finish
-            self.mandalartKeywords = mandalartKeywords
-            self.cellCount = 9
-            self.collectionView.reloadSection(section: 0)
-              print(mandalartKeywords)
-        }
+        displaySpinner(text: "단어를 받아오고 있습니다.")
+        getDummy()
+//        APISource.shared.getMandalart(words: keywords.map { $0.keyword },
+//                                      dataSet: UserDatas.shared.dataSetIndex,
+//                                      completion: { mandalartKeywords in
+//                                        self.removeSpinner()//loading finish
+//                                        self.mandalartKeywords = mandalartKeywords
+//                                        self.cellCount = 9
+//                                        self.collectionView.reloadSection(section: 0)
+//        },
+//                                      failure: { code, msg in
+//                                        self.getDummy()
+//        })
     }
     
-    private func testCode() {
+    private func getDummy() {
+        self.removeSpinner()
         self.cellCount = 9
         let words = keywords.map { $0.keyword }
+        
         for i in 0..<81 {
             self.mandalartKeywords.append(words[i%words.count])
         }

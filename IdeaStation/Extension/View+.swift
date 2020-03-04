@@ -291,18 +291,15 @@ extension UIViewController {
         textLabel.textAlignment = .center
         textLabel.font = textLabel.font.withSize(15)
         
-        DispatchQueue.main.async {
-            spinnerView.addSubview(ai)
-            spinnerView.addSubview(textLabel)
-            onView.addSubview(spinnerView)
-            NSLayoutConstraint.activate([
-                textLabel.leftAnchor.constraint(equalTo: spinnerView.leftAnchor),
-                textLabel.rightAnchor.constraint(equalTo: spinnerView.rightAnchor),
-                textLabel.topAnchor.constraint(equalTo: ai.bottomAnchor, constant: 15),
-                textLabel.heightAnchor.constraint(equalToConstant: 30)
-            ])
-            
-        }
+        spinnerView.addSubview(ai)
+        spinnerView.addSubview(textLabel)
+        onView.addSubview(spinnerView)
+        NSLayoutConstraint.activate([
+            textLabel.leftAnchor.constraint(equalTo: spinnerView.leftAnchor),
+            textLabel.rightAnchor.constraint(equalTo: spinnerView.rightAnchor),
+            textLabel.topAnchor.constraint(equalTo: ai.bottomAnchor, constant: 15),
+            textLabel.heightAnchor.constraint(equalToConstant: 30)
+        ])
         
         return spinnerView
     }

@@ -12,15 +12,16 @@ import Alamofire
 struct APISource: APISourceProtocol {
     static let shared = APISource()
     
-    private func commonResponseHandler<T>(completion: @escaping (T) -> Void) -> (NetworkResult<(Int, T)>) -> Void {
+    private func commonResponseHandler<T>(completion: @escaping (T) -> Void,
+                                          failure: @escaping (Int, String) -> Void = {_,_ in }) -> (NetworkResult<(Int, T)>) -> Void {
         return { (res: NetworkResult<(Int, T)>) in
             switch res {
             case .networkSuccess(let data):
                 completion(data.1)
             case .networkError(let error):
-                print(error)
+                failure(error.resCode, error.msg)
             case .networkFail:
-                print("Network Fail")
+                failure(-1, "failure")
             }
         }
     }
@@ -79,7 +80,10 @@ struct APISource: APISourceProtocol {
     }
     
     
-    func getMandalart(words: [String], dataSet: Int = 0, completion: @escaping ([String]) -> Void)  {
+    func getMandalart(words: [String],
+                      dataSet: Int = 0,
+                      completion: @escaping ([String]) -> Void,
+                      failure: @escaping (Int, String) -> Void)  {
         let word = words.reduce("") { $0 + $1 + " "}.trim
         
         let params = [
@@ -89,7 +93,7 @@ struct APISource: APISourceProtocol {
         
         get(API.getMandalart(),
             params: params,
-            completion: commonResponseHandler(completion: completion))
+            completion: commonResponseHandler(completion: completion, failure: failure))
     }
     
     func getIdea(words: [String], completion: @escaping ([String]) -> Void)  {
