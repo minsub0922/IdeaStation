@@ -19,8 +19,34 @@ import Firebase
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         window?.becomeKey()
+        
+        setNavigationbarAppearance()
+        
         FirebaseApp.configure()
+        
+        test()
+        
         return true
+    }
+    
+    private func test() {
+        testSeachViewController()
+    }
+    
+    private func testSeachViewController() {
+        let searchVC = SearchViewController()
+        searchVC.keyWordsFromParent = ["하늘"]
+        window?.rootViewController = UINavigationController(rootViewController: searchVC)
+    }
+    
+    private func setNavigationbarAppearance() {
+        if let navigationBar = UINavigationBar.appearance() as? UINavigationBar {
+            navigationBar.setBackgroundImage(UIImage(), for: .default)
+            navigationBar.tintColor = .black
+            navigationBar.backgroundColor = .white
+            let inset = UIEdgeInsets(top: -16, left: -16, bottom: 0, right: 0)
+            navigationBar.backIndicatorTransitionMaskImage = #imageLiteral(resourceName: "arrowLeft").withAlignmentRectInsets(inset)
+        }
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

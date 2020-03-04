@@ -13,6 +13,8 @@ target 'IdeaStation' do
   pod 'Firebase/Analytics'
   pod 'Firebase/Storage'
   pod 'BubbleTransition', '~> 3.2.0'
+  pod 'Kingfisher'
+  pod 'SnapKit'
 
   target 'IdeaStationTests' do
     inherit! :search_paths

@@ -10,31 +10,27 @@ import UIKit
 
 class SearchPathCell: UICollectionViewCell {
     @IBOutlet weak var label: UILabel!
-    @IBOutlet weak var historyLabel: UILabel!
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
         label.adjustsFontSizeToFitWidth = true
         label.lineBreakMode = .byClipping
+        label.font = UIFont.boldSystemFont(ofSize: 13)
+        
+        layer.cornerRadius = 15
         inActivate()
-        historyLabel.adjustsFontSizeToFitWidth = true
-        historyLabel.lineBreakMode = .byClipping
-        historyLabel.isHidden = true
-        
-        addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(longPressGetureRecognizer(_:))))
-    }
-    
-    @objc private func longPressGetureRecognizer(_ recognizer: UILongPressGestureRecognizer) {
-        
     }
     
     public func activate() {
         label.alpha = 1
-        label.font = .boldSystemFont(ofSize: 20)
+        label.font = .boldSystemFont(ofSize: 15)
+        backgroundColor = UIColor.defaultText.withAlphaComponent(1)
     }
     
     public func inActivate() {
         label.alpha = 0.6
         label.font = .italicSystemFont(ofSize: 15)
+        backgroundColor = UIColor.defaultText.withAlphaComponent(0.5)
     }
 }

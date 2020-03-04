@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class Mandalart: UIView {
     override var bounds: CGRect {
@@ -70,7 +71,7 @@ extension Mandalart {
             label.textColor = .black
             label.textAlignment = .center
             children.append(label)
-            containers[i].loadImageAsyc(url: childTexts[i].imagePath)
+            containers[i].kf.setImage(with: URL(string: childTexts[i].imagePath))
         }
         
         containers[8].loadImageAsyc(url: centerText.imagePath)

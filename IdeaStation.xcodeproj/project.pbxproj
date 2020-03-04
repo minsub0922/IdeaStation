@@ -17,6 +17,7 @@
 		1A136586237DB6BF00A941CB /* SearchPathCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A136584237DB6BF00A941CB /* SearchPathCell.xib */; };
 		1A1CB2CE240F800C00840C8E /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1CB2CD240F800C00840C8E /* BaseViewController.swift */; };
 		1A1CB2D0240F865A00840C8E /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1CB2CF240F865A00840C8E /* String+.swift */; };
+		1A1CB2D2240FD5CC00840C8E /* Colors+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1CB2D1240FD5CC00840C8E /* Colors+.swift */; };
 		1A3900BB23A2137A00081E34 /* CategorySelectionContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3900BA23A2137A00081E34 /* CategorySelectionContainer.swift */; };
 		1A3900BE23A2185600081E34 /* CategorySelectionContainerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3900BC23A2185600081E34 /* CategorySelectionContainerCell.swift */; };
 		1A3900BF23A2185600081E34 /* CategorySelectionContainerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1A3900BD23A2185600081E34 /* CategorySelectionContainerCell.xib */; };
@@ -84,7 +85,6 @@
 		AFF64DBD2304058E003F3E3A /* APISource.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF64DBC2304058E003F3E3A /* APISource.swift */; };
 		AFF64DBF2304074A003F3E3A /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF64DBE23040749003F3E3A /* API.swift */; };
 		AFF64DC223040EB6003F3E3A /* PixaPictures.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF64DC123040EB6003F3E3A /* PixaPictures.swift */; };
-		AFF64DC423041A9D003F3E3A /* Search.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AFF64DC323041A9D003F3E3A /* Search.storyboard */; };
 		AFF64DC623041E74003F3E3A /* Object+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFF64DC523041E74003F3E3A /* Object+.swift */; };
 		C8192C8A4C50ED9291EB9EF2 /* Pods_IdeaStationUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B05A6B68FCC86D29F487D72 /* Pods_IdeaStationUITests.framework */; };
 /* End PBXBuildFile section */
@@ -118,6 +118,7 @@
 		1A136584237DB6BF00A941CB /* SearchPathCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchPathCell.xib; sourceTree = "<group>"; };
 		1A1CB2CD240F800C00840C8E /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		1A1CB2CF240F865A00840C8E /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
+		1A1CB2D1240FD5CC00840C8E /* Colors+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Colors+.swift"; sourceTree = "<group>"; };
 		1A3900BA23A2137A00081E34 /* CategorySelectionContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectionContainer.swift; sourceTree = "<group>"; };
 		1A3900BC23A2185600081E34 /* CategorySelectionContainerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySelectionContainerCell.swift; sourceTree = "<group>"; };
 		1A3900BD23A2185600081E34 /* CategorySelectionContainerCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategorySelectionContainerCell.xib; sourceTree = "<group>"; };
@@ -194,7 +195,6 @@
 		AFF64DBC2304058E003F3E3A /* APISource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APISource.swift; sourceTree = "<group>"; };
 		AFF64DBE23040749003F3E3A /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		AFF64DC123040EB6003F3E3A /* PixaPictures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixaPictures.swift; sourceTree = "<group>"; };
-		AFF64DC323041A9D003F3E3A /* Search.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Search.storyboard; sourceTree = "<group>"; };
 		AFF64DC523041E74003F3E3A /* Object+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Object+.swift"; sourceTree = "<group>"; };
 		B21B083B41ACFA9326BB7656 /* Pods-IdeaStationTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IdeaStationTests.release.xcconfig"; path = "Target Support Files/Pods-IdeaStationTests/Pods-IdeaStationTests.release.xcconfig"; sourceTree = "<group>"; };
 		B372D9412C6D388DBEF5BC49 /* Pods_IdeaStationTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IdeaStationTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -448,6 +448,7 @@
 				AF07B35422FFFFE600FAE1C8 /* View+.swift */,
 				AFF64DC523041E74003F3E3A /* Object+.swift */,
 				1A1CB2CF240F865A00840C8E /* String+.swift */,
+				1A1CB2D1240FD5CC00840C8E /* Colors+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -487,7 +488,6 @@
 		AFF64DB52303F67F003F3E3A /* Search */ = {
 			isa = PBXGroup;
 			children = (
-				AFF64DC323041A9D003F3E3A /* Search.storyboard */,
 				1A13657E237D4DFD00A941CB /* SearchViewController.swift */,
 				1A3900C023A224FE00081E34 /* CategorySelectionViewController.swift */,
 			);
@@ -638,7 +638,6 @@
 				AB564CCE2387AF88005FDC72 /* MainSproutCollectionViewCell.xib in Resources */,
 				AFCD53322307F31900A1D487 /* InterestStoryboard.storyboard in Resources */,
 				1A3900BF23A2185600081E34 /* CategorySelectionContainerCell.xib in Resources */,
-				AFF64DC423041A9D003F3E3A /* Search.storyboard in Resources */,
 				ABA4DDED2381770700F959EE /* SpecificationStoryboard.storyboard in Resources */,
 				1A040C2A2380186400A1DF10 /* MandalartCell.xib in Resources */,
 				AFCD53272307F2F100A1D487 /* MandalartStoryboard.storyboard in Resources */,
@@ -778,6 +777,7 @@
 				AFCD53312307F31900A1D487 /* InterestViewController.swift in Sources */,
 				ABA4DDE82381764C00F959EE /* MainFeedCodable.swift in Sources */,
 				AFCD53362307FDCD00A1D487 /* ExitButton.swift in Sources */,
+				1A1CB2D2240FD5CC00840C8E /* Colors+.swift in Sources */,
 				1A040C262380166000A1DF10 /* MandalartViewController.swift in Sources */,
 				AFF64DB92304037D003F3E3A /* APISourceProtocol.swift in Sources */,
 				ABA4DDEF2381772D00F959EE /* IdeaNoteViewController.swift in Sources */,

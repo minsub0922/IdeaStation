@@ -12,21 +12,12 @@ class SearchViewController: BaseViewController {
     // MARK:- Parameters
     private let testLabel = UILabel()
     private var confirmBarButton = UIBarButtonItem()
-    private let keywordsTitleLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 25)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = .black
-        label.attributedText = "선택된 키워드".getAttributedString(range: 4...6, color: .purple)
-        return label
-    } ()
     
     private lazy var keyWordsCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.registerNib(SearchPathCell.self)
-        cv.registerNib(HorizontalArrowCell.self)
         cv.delegate = self
         cv.dataSource = self
         cv.allowsSelection = true
@@ -54,12 +45,15 @@ class SearchViewController: BaseViewController {
     } ()
     
     private lazy var mandalartButton: UIButton =  {
-        let button = UIButton(frame: CGRect(origin: .zero,
-                                            size: CGSize(width: 25, height: 25)))
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(UIImage(named: "ic-mandalart"), for: .normal)
+        let button = UIButton(frame: .zero)
+        let iv = UIImageView(image: #imageLiteral(resourceName: "ic-mandalart"))
+        button.addSubview(iv)
+        iv.snp.makeConstraints {
+            $0.height.equalToSuperview().multipliedBy(0.5)
+            $0.width.equalTo(iv.snp.height)
+            $0.center.equalToSuperview()
+        }
         button.addTarget(self, action: #selector(touchupButton(_:)), for: .touchUpInside)
-        button.tintColor = .black
         button.alpha = 0
         return button
     } ()
@@ -67,17 +61,25 @@ class SearchViewController: BaseViewController {
     private let countLabel: UILabel = {
         let label = UILabel(frame: .zero)
         label.alpha = 0
-        label.textColor = .lightGray
-        label.font = label.font.withSize(12)
+        label.textColor = .gray
+        label.font = label.font.withSize(9)
         label.textAlignment = .center
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     } ()
+    
+    private lazy var mandalartBarButton: UIBarButtonItem = {
+        let sv = UIStackView(arrangedSubviews: [mandalartButton])
+        sv.axis = .vertical
+        sv.distribution = .fillEqually
+        let bb = UIBarButtonItem()
+        bb.customView = sv
+        return bb
+    }()
     
     private let historyLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
-        label.font = label.font.withSize(11)
+        label.font = label.font.withSize(13)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = UIColor.black.withAlphaComponent(0.4)
         return label
@@ -93,18 +95,18 @@ class SearchViewController: BaseViewController {
     fileprivate var selectedKeywords: [MDKeyword] = []
     fileprivate var pictures: [Hit] = []
     fileprivate var clusters: Clusters?
-    public var keyWordsFromParent: [String] = [] {
+    public var keyWordsFromParent: [String] = ["하늘"] {
         didSet {
             selectedKeywords.append(contentsOf: keyWordsFromParent.map { MDKeyword(keyword: $0) } )
         }
     }
     fileprivate var centerImageURL: String = String()
-    
-    @IBOutlet weak var navigationBar: UINavigationBar!
-    
+        
     // MARK:- View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        title = "탐색"
         
         displaySpinner(text: "연관단어 추론중")
         
@@ -116,7 +118,6 @@ class SearchViewController: BaseViewController {
             self.removeSpinner()
             self.bubbleContainer.children = children
             self.imagesCollectionView.fadeIn()
-            self.navigationBar.fadeIn()
         }
         
         getPixaPictures(subject: keyWordsFromParent[0])
@@ -130,46 +131,35 @@ extension SearchViewController {
         view.addSubview(keyWordsCollectionView)
         view.addSubview(imagesCollectionView)
         view.addSubview(historyLabel)
-        view.addSubview(keywordsTitleLabel)
-        view.addSubview(mandalartButton)
-        view.addSubview(countLabel)
-
-        NSLayoutConstraint.activate([
-            bubbleContainer.topAnchor.constraint(equalTo: keyWordsCollectionView.bottomAnchor, constant: 15),
-            bubbleContainer.bottomAnchor.constraint(equalTo: imagesCollectionView.topAnchor, constant: -15),
-            bubbleContainer.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            bubbleContainer.centerYAnchor.constraint(equalTo: view.centerYAnchor,constant: 40),
-            bubbleContainer.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7),
-            bubbleContainer.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7),
-            
-            mandalartButton.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor,
-                                                   constant: -15),
-            mandalartButton.centerYAnchor.constraint(equalTo: keyWordsCollectionView.centerYAnchor),
-            keywordsTitleLabel.topAnchor.constraint(equalTo: navigationBar.bottomAnchor,
-                                                    constant: 30),
-            keywordsTitleLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20),
-            keywordsTitleLabel.heightAnchor.constraint(equalToConstant: 25),
-            keyWordsCollectionView.topAnchor.constraint(equalTo: keywordsTitleLabel.bottomAnchor,
-                                                        constant: 5),
-            keyWordsCollectionView.heightAnchor.constraint(equalToConstant: 70),
-            keyWordsCollectionView.leftAnchor.constraint(equalTo: view.leftAnchor),
-            keyWordsCollectionView.rightAnchor.constraint(equalTo: mandalartButton.leftAnchor,
-                                                          constant: -20),
-            countLabel.centerXAnchor.constraint(equalTo: mandalartButton.centerXAnchor),
-            countLabel.widthAnchor.constraint(equalToConstant: 50),
-            countLabel.heightAnchor.constraint(equalToConstant: 20),
-            countLabel.bottomAnchor.constraint(equalTo: mandalartButton.topAnchor, constant: -5),
-            
-            imagesCollectionView.leftAnchor.constraint(equalTo: view.leftAnchor),
-            imagesCollectionView.rightAnchor.constraint(equalTo: view.rightAnchor),
-            imagesCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
-            imagesCollectionView.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: 0.2),
-            
-            historyLabel.centerXAnchor.constraint(equalTo: bubbleContainer.centerXAnchor, constant: -5).withPriority(999),
-            historyLabel.centerYAnchor.constraint(equalTo: bubbleContainer.centerYAnchor, constant: -30).withPriority(999)
-        ])
+     
+        navigationItem.setRightBarButton(mandalartBarButton, animated: true)
         
-        ExitButton(on: navigationBar, target: self)
+        keyWordsCollectionView.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(30)
+            $0.width.equalToSuperview()
+            $0.centerX.equalToSuperview()
+            $0.height.equalTo(90)
+        }
+        
+        imagesCollectionView.snp.makeConstraints {
+            $0.width.equalToSuperview()
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-20)
+            $0.height.equalToSuperview().multipliedBy(0.2)
+        }
+        
+        
+        bubbleContainer.snp.makeConstraints {
+            $0.top.greaterThanOrEqualTo(keyWordsCollectionView.snp.bottom).offset(15)
+            $0.bottom.greaterThanOrEqualTo(imagesCollectionView.snp.top).offset(-15)
+            $0.center.equalToSuperview()
+            $0.width.equalToSuperview().multipliedBy(0.7)
+            $0.height.equalTo(bubbleContainer.snp.width)
+        }
+        
+        historyLabel.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.centerY.equalTo(bubbleContainer).offset(-30)
+        }
     }
 }
 
@@ -252,9 +242,13 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDelega
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView.isEqual(keyWordsCollectionView) {
-            let width: CGFloat = 70
-            let height: CGFloat = collectionView.bounds.height
-            return CGSize(width: width, height: height)
+            //let width: CGFloat = 70
+            let height: CGFloat = 40
+            let label = UILabel(frame: .zero)
+            label.font = UIFont.systemFont(ofSize: 20)
+            label.text = selectedKeywords[indexPath.row].keyword
+            label.sizeToFit()
+            return CGSize(width: label.frame.width + 20, height: height)
         } else {
             let height = collectionView.bounds.height * 0.8
             return CGSize(width: height * 1.5, height: height)
@@ -263,7 +257,7 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDelega
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         if collectionView.isEqual(keyWordsCollectionView) {
-            return .leastNonzeroMagnitude
+            return 10
         } else {
             return collectionView.bounds.width / 30
         }
@@ -273,8 +267,7 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDelega
         if collectionView.isEqual(keyWordsCollectionView) {
             let cell = collectionView.dequeueReusableCell(SearchPathCell.self, for: indexPath)
             let selectedKeyword = selectedKeywords[indexPath.row]
-            cell.label.text = selectedKeyword.keyword
-            cell.historyLabel.text = selectedKeyword.history
+            cell.label.text = "# \(selectedKeyword.keyword)"
             cell.addGestureRecognizer(UILongPressGestureRecognizer(target: self, action: #selector(longpressCellRecognizer(_:))))
             if cell.isSelected {
                 cell.activate()
@@ -293,7 +286,6 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDelega
         if collectionView.isEqual(keyWordsCollectionView) {
             collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
             bubbleContainer.exploreSelectedKeyword(keyword: selectedKeywords[indexPath.row])
-            //updateHistoryLabel(selectedKeyword: selectedKeywords[indexPath.row])
             
             guard let cell = collectionView.cellForItem(at: indexPath) as? SearchPathCell else { return }
             cell.activate()

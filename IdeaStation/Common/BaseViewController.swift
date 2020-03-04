@@ -12,6 +12,32 @@ class BaseViewController: UIViewController {
     
     var spinner: UIView?
     
+    lazy var topAnchor: NSLayoutYAxisAnchor = {
+        var topAnchor: NSLayoutYAxisAnchor
+        if #available(iOS 11.0, *) {
+            topAnchor = view.safeAreaLayoutGuide.topAnchor
+        } else {
+            topAnchor = view.topAnchor
+        }
+        return topAnchor
+    }()
+    
+    lazy var bottomAnchor: NSLayoutYAxisAnchor = {
+        var bottomAnchor: NSLayoutYAxisAnchor
+        if #available(iOS 11.0, *) {
+            bottomAnchor = view.safeAreaLayoutGuide.bottomAnchor
+        } else {
+            bottomAnchor = view.bottomAnchor
+        }
+        return bottomAnchor
+    }()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        view.backgroundColor = .white
+    }
+    
     func displaySpinner(text: String) {
         spinner = UIView.init(frame: view.bounds)
         

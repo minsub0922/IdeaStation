@@ -65,24 +65,28 @@ class MandalartViewController: BaseViewController {
         super.viewDidLoad()
       
         getMandalartKeywords()
-        setupView()
+        setLayout()
     }
     
     
     private func getMandalartKeywords() {
         displaySpinner(text: "단어를 받아오고 있습니다.")
         getDummy()
-//        APISource.shared.getMandalart(words: keywords.map { $0.keyword },
-//                                      dataSet: UserDatas.shared.dataSetIndex,
-//                                      completion: { mandalartKeywords in
-//                                        self.removeSpinner()//loading finish
-//                                        self.mandalartKeywords = mandalartKeywords
-//                                        self.cellCount = 9
-//                                        self.collectionView.reloadSection(section: 0)
-//        },
-//                                      failure: { code, msg in
-//                                        self.getDummy()
-//        })
+        //getRealData()
+    }
+    
+    private func getRealData() {
+        APISource.shared.getMandalart(words: keywords.map { $0.keyword },
+                                      dataSet: UserDatas.shared.dataSetIndex,
+                                      completion: { mandalartKeywords in
+                                        self.removeSpinner()//loading finish
+                                        self.mandalartKeywords = mandalartKeywords
+                                        self.cellCount = 9
+                                        self.collectionView.reloadSection(section: 0)
+        },
+                                      failure: { code, msg in
+                                        self.getDummy()
+        })
     }
     
     private func getDummy() {
@@ -97,33 +101,39 @@ class MandalartViewController: BaseViewController {
         self.collectionView.reloadSection(section: 0)
     }
     
-    private func setupView() {
+    private func setLayout() {
         view.addSubview(UIView(frame: .zero))
+        view.addSubview(scrollView)
+        view.addSubview(ideaButton)
+    
         container.addSubview(collectionView)
         scrollView.addSubview(container)
-        view.addSubview(scrollView)
+        
         
         setupCollectionView()
         setupScrollView()
         setupButtons()
         
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        ideaButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -idealButtonBottomSpace).isActive = true
+        ideaButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        ideaButton.widthAnchor.constraint(equalToConstant: idealButtonSize).isActive = true
+        ideaButton.heightAnchor.constraint(equalToConstant: idealButtonSize).isActive = true
+        
+        
+        ExitButton(on: navigationController!.navigationBar, target: self)
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        
         ideaButton.addCircularRounded()
         ideaButton.addCircularShadow()
     }
     
     private func setupButtons() {
-        ExitButton(on: navigationController!.navigationBar, target: self)
-        view.addSubview(ideaButton)
         
-        ideaButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -idealButtonBottomSpace).isActive = true
-        ideaButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        ideaButton.widthAnchor.constraint(equalToConstant: idealButtonSize).isActive = true
-        ideaButton.heightAnchor.constraint(equalToConstant: idealButtonSize).isActive = true
+        
+        
     }
     
     private func setupScrollView() {

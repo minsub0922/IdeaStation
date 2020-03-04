@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Kingfisher
+import SnapKit
 
 class SearchImagecell: UICollectionViewCell {
     private let imageView: UIImageView = {
@@ -30,18 +32,18 @@ class SearchImagecell: UICollectionViewCell {
     
     private func setupImageView() {
         addSubview(imageView)
-        NSLayoutConstraint.activate([
-            imageView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            imageView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            imageView.widthAnchor.constraint(equalTo: widthAnchor),
-            imageView.heightAnchor.constraint(equalTo: heightAnchor)
-        ])
+        
+        imageView.snp.makeConstraints {
+            $0.center.equalToSuperview()
+            $0.size.equalToSuperview()
+        }
+        
         imageView.addRounded()
     }
     
     public func setupView(imagePath: String) {
         imageView.image = UIImage()
-        imageView.loadImageAsyc(url: imagePath)
+        imageView.kf.setImage(with: URL(string: imagePath))
         layer.shadowOpacity = isSelected ? 5 : 0.2
     }
 }
