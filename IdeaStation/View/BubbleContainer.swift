@@ -19,7 +19,14 @@ class BubbleContainer: UIView {
     /*
      Set FontSize Depends on Bunds Size
      */
-    public var delegate: BubbleContainerDelegate?
+    var delegate: BubbleContainerDelegate?
+    var children: [MDKeyword] = [] {
+        didSet {
+            childCount = children.count
+            initChildLabels(children: children)
+        }
+    }
+    
     override var bounds: CGRect {
         didSet {
             let width = bounds.width
@@ -48,19 +55,18 @@ class BubbleContainer: UIView {
     private var childArray: [UILabel] = []
     private var selectedChild: MDKeyword
     fileprivate var keywords: [MDKeyword] = []
-    fileprivate let childCount: Int
+    fileprivate var childCount: Int = 0
     fileprivate var isCollapse = true
     fileprivate var isPossibleExplore: Bool = true
     
     // MARK:- init
-    init(frame: CGRect, centerText: String, childTextArray: [MDKeyword]) {
-        childCount = childTextArray.count
+    init(frame: CGRect, centerText: String) {
         selectedChild = MDKeyword(keyword: centerText)
         super.init(frame: frame)
         
         updateCenterLabel()
-        initChildLabels(children: childTextArray)
     }
+    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
