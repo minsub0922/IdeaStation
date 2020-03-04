@@ -44,7 +44,7 @@ class BubbleContainer: UIView {
      */
     private var fontSize: CGFloat = 0.0
     private var minFonSize: CGFloat {
-        return fontSize * 0.3
+        return fontSize * 0.5
     }
     private var maxFontSize: CGFloat {
         return fontSize * 1.3

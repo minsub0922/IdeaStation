@@ -11,10 +11,9 @@ import UIKit
 class SearchViewController: BaseViewController {
     // MARK:- Parameters
     private let testLabel = UILabel()
-    private var confirmBarButton = UIBarButtonItem()
     
     private lazy var keyWordsCollectionView: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
+        let layout = CustomFlowLayout()
         layout.scrollDirection = .horizontal
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.registerNib(SearchPathCell.self)
@@ -26,6 +25,7 @@ class SearchViewController: BaseViewController {
         cv.showsHorizontalScrollIndicator = false
         cv.backgroundColor = .white
         cv.isMultipleTouchEnabled = false
+        cv.contentInsetAdjustmentBehavior = .always
         return cv
     } ()
     private lazy var imagesCollectionView: UICollectionView = {
@@ -242,13 +242,13 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDelega
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView.isEqual(keyWordsCollectionView) {
-            //let width: CGFloat = 70
             let height: CGFloat = 40
             let label = UILabel(frame: .zero)
             label.font = UIFont.systemFont(ofSize: 20)
             label.text = selectedKeywords[indexPath.row].keyword
             label.sizeToFit()
-            return CGSize(width: label.frame.width + 20, height: height)
+            let width = label.frame.width + 20
+            return CGSize(width: width, height: height)
         } else {
             let height = collectionView.bounds.height * 0.8
             return CGSize(width: height * 1.5, height: height)
