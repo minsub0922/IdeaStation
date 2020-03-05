@@ -36,14 +36,17 @@ import Firebase
     private func testSeachViewController() {
         let searchVC = SearchViewController()
         searchVC.keyWordsFromParent = ["하늘"]
-        window?.rootViewController = UINavigationController(rootViewController: searchVC)
+        let navigationVC = UINavigationController(rootViewController: searchVC)
+        searchVC.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        window?.rootViewController = navigationVC
     }
     
     private func setNavigationbarAppearance() {
         if let navigationBar = UINavigationBar.appearance() as? UINavigationBar {
             navigationBar.setBackgroundImage(UIImage(), for: .default)
-            navigationBar.tintColor = .black
-            navigationBar.backgroundColor = .white
+            navigationBar.shadowImage = UIImage()
+            navigationBar.tintColor = .defaultText
+            navigationBar.prefersLargeTitles = true
             let inset = UIEdgeInsets(top: -16, left: -16, bottom: 0, right: 0)
             navigationBar.backIndicatorTransitionMaskImage = #imageLiteral(resourceName: "arrowLeft").withAlignmentRectInsets(inset)
         }

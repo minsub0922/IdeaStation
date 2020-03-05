@@ -51,7 +51,11 @@ class BubbleContainer: UIView {
     }
     private var maxWidthOfLabel: CGFloat = 0.0
     private var radius: CGFloat = 0.0
-    private var centerLabel: UILabel = UILabel()
+    private let centerLabel: UILabel = {
+        let lb = UILabel()
+        lb.textAlignment = .center
+        return lb
+    }()
     private var childArray: [UILabel] = []
     private var selectedChild: MDKeyword
     fileprivate var keywords: [MDKeyword] = []
@@ -218,7 +222,6 @@ extension BubbleContainer {
             else { return }
         
         let isSelected = isBubbleSelected(index: index)
-        print("index: \(index)  isSelected: \(isSelected)")
         bubble.bounce()
         bubble.changeAlphaWithAnimation(alpha: !isSelected ? 1 : 0.4)
         

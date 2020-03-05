@@ -9,9 +9,8 @@
 import UIKit
 
 class SearchViewController: BaseViewController {
-    // MARK:- Parameters
-    private let testLabel = UILabel()
     
+    // MARK:- Parameters
     private lazy var keyWordsCollectionView: UICollectionView = {
         let layout = CustomFlowLayout()
         layout.scrollDirection = .horizontal
@@ -28,6 +27,7 @@ class SearchViewController: BaseViewController {
         cv.contentInsetAdjustmentBehavior = .always
         return cv
     } ()
+    
     private lazy var imagesCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -47,9 +47,10 @@ class SearchViewController: BaseViewController {
     private lazy var mandalartButton: UIButton =  {
         let button = UIButton(frame: .zero)
         let iv = UIImageView(image: #imageLiteral(resourceName: "ic-mandalart"))
+        iv.tintColor = .defaultText
         button.addSubview(iv)
         iv.snp.makeConstraints {
-            $0.height.equalToSuperview().multipliedBy(0.5)
+            $0.height.equalToSuperview().multipliedBy(0.7)
             $0.width.equalTo(iv.snp.height)
             $0.center.equalToSuperview()
         }
@@ -67,19 +68,25 @@ class SearchViewController: BaseViewController {
         return label
     } ()
     
-    private lazy var mandalartBarButton: UIBarButtonItem = {
-        let sv = UIStackView(arrangedSubviews: [mandalartButton])
+    private lazy var stackView: UIStackView = {
+        let sv = UIStackView(arrangedSubviews: [mandalartButton, countLabel])
         sv.axis = .vertical
-        sv.distribution = .fillEqually
+        sv.spacing = 5
+        return sv
+    }()
+    
+    private lazy var mandalartBarButton: UIBarButtonItem = {
+       
         let bb = UIBarButtonItem()
-        bb.customView = sv
+        bb.customView = stackView
         return bb
     }()
     
     private let historyLabel: UILabel = {
         let label = UILabel()
-        label.numberOfLines = 0
+        label.numberOfLines = 1
         label.font = label.font.withSize(13)
+        label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = UIColor.black.withAlphaComponent(0.4)
         return label
@@ -113,14 +120,27 @@ class SearchViewController: BaseViewController {
         setLayout()
         
         getClusters(subjects: keyWordsFromParent) { clusters in
+            self.removeSpinner()
+            
             self.clusters = clusters
             let children = clusters.related8ClustersMDKeywords(subject: MDKeyword(keyword: self.keyWordsFromParent[0]))
-            self.removeSpinner()
             self.bubbleContainer.children = children
             self.imagesCollectionView.fadeIn()
         }
         
         getPixaPictures(subject: keyWordsFromParent[0])
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        stackView.fadeIn()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        stackView.alpha = 0
     }
 }
 
@@ -131,8 +151,13 @@ extension SearchViewController {
         view.addSubview(keyWordsCollectionView)
         view.addSubview(imagesCollectionView)
         view.addSubview(historyLabel)
-     
-        navigationItem.setRightBarButton(mandalartBarButton, animated: true)
+        
+        navigationController?.navigationBar.addSubview(stackView)
+        
+        stackView.snp.makeConstraints {
+            $0.bottom.equalToSuperview()
+            $0.right.equalToSuperview().offset(-10)
+        }
         
         keyWordsCollectionView.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(30)
@@ -150,8 +175,8 @@ extension SearchViewController {
         
         bubbleContainer.snp.makeConstraints {
             $0.top.greaterThanOrEqualTo(keyWordsCollectionView.snp.bottom).offset(15)
-            $0.bottom.greaterThanOrEqualTo(imagesCollectionView.snp.top).offset(-15)
-            $0.center.equalToSuperview()
+            $0.top.equalTo(keyWordsCollectionView.snp.bottom).offset(50).priority(890)
+            $0.centerX.equalToSuperview()
             $0.width.equalToSuperview().multipliedBy(0.7)
             $0.height.equalTo(bubbleContainer.snp.width)
         }
@@ -159,6 +184,7 @@ extension SearchViewController {
         historyLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
             $0.centerY.equalTo(bubbleContainer).offset(-30)
+            $0.width.equalToSuperview().multipliedBy(0.8)
         }
     }
 }
@@ -166,14 +192,10 @@ extension SearchViewController {
 // MARK:- Actions
 extension SearchViewController {
     @objc private func touchupButton(_ sender: UIButton) {
-        guard
-            let navigationController = UIStoryboard(name: "MandalartStoryboard", bundle: nil).instantiateViewController(withIdentifier: "MandalartNavigationController") as? UINavigationController,
-            let target = navigationController.viewControllers.first as? MandalartViewController
-        else { return }
-        target.setKeywords(centerKeyword: self.keyWordsFromParent[0], centerImageURL: self.centerImageURL, selectedTexts: self.selectedKeywords)
-        navigationController.modalTransitionStyle = .crossDissolve
-        navigationController.modalPresentationStyle = .fullScreen
-        present(navigationController, animated: true, completion: nil)
+        let mandalartVC = MandalartViewController()
+        mandalartVC.setKeywords(centerKeyword: self.keyWordsFromParent[0], centerImageURL: self.centerImageURL, selectedTexts: self.selectedKeywords)
+        mandalartVC.view.backgroundColor = .white
+        navigationController?.pushViewController(mandalartVC, animated: true)
     }
 }
 

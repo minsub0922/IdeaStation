@@ -33,7 +33,6 @@ class IdeaStationTests: XCTestCase {
 //    }
 
     func testPerformanceExample() {
-       print("hellow?????")
     }
     
     func testReduceFunction() {

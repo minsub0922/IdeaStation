@@ -70,7 +70,6 @@
                     </view>
                     <navigationItem key="navigationItem" title="아이디어 탐색" id="BvR-SJ-qGG"/>
                     <connections>
-                        <segue destination="4IQ-nn-jMq" kind="show" identifier="madalart" id="LA5-Rc-zmz"/>
                         <segue destination="i24-cz-vlf" kind="show" identifier="note" id="xq7-pC-pYm"/>
                     </connections>
                 </viewController>
@@ -92,16 +91,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PdP-9I-S23" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1272" y="-210"/>
-        </scene>
-        <!--MandalartStoryboard-->
-        <scene sceneID="WhO-Bw-5A1">
-            <objects>
-                <viewControllerPlaceholder storyboardName="MandalartStoryboard" id="4IQ-nn-jMq" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="xhn-fW-l1A"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="5k7-kC-eng" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1297" y="-72"/>
         </scene>
         <!--SpecificationStoryboard-->
         <scene sceneID="MLy-Wc-3hK">

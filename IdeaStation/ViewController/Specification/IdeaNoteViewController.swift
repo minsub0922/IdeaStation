@@ -66,17 +66,14 @@ class IdeaNoteViewController: UIViewController, UICollectionViewDataSource, UICo
     }
     
     func textViewDidChange(_ textView: UITextView) {
-        print(textView.text)
         self.view.endEditing(true)
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
-        print(textView.text)
         self.view.endEditing(true)
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        print(textField.text)
         self.view.endEditing(true)
     }
     

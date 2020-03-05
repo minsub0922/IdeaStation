@@ -10,15 +10,20 @@ import UIKit
 import BubbleTransition
 
 class MandalartViewController: BaseViewController {
-    private let collectionView: UICollectionView = {
-        let flowLayout = UICollectionViewFlowLayout()
-        flowLayout.scrollDirection = .vertical
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
-        collectionView.contentInset = .init(top: 5, left: 5, bottom: 5, right: 5)
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.backgroundColor = .white
-        return collectionView
+    private lazy var collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        cv.contentInset = .init(top: 5, left: 5, bottom: 5, right: 5)
+        cv.translatesAutoresizingMaskIntoConstraints = false
+        cv.registerNib(MandalartCell.self)
+        cv.isScrollEnabled = false
+        cv.delegate = self
+        cv.dataSource = self
+        cv.backgroundColor = .white
+        return cv
     } ()
+    
     private let ideaButton: UIButton = {
         let button = UIButton(frame: .zero)
         button.setImage(UIImage(named: "ic-logo"), for: .normal)
@@ -28,22 +33,37 @@ class MandalartViewController: BaseViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(touchupIdeaButton(_:)), for: .touchUpInside)
         button.backgroundColor = .white
-        
-        //
-        button.isHidden = true
+//        button.isHidden = true
+        button.addRounded(radius: idealButtonSize / 2)
         return button
     } ()
+    
+    private lazy var scrollView: UIScrollView = {
+        let sv = UIScrollView(frame: .zero)
+        sv.delegate = self
+        sv.minimumZoomScale = 1
+        sv.maximumZoomScale = 2.4
+        sv.showsHorizontalScrollIndicator = false
+        sv.showsVerticalScrollIndicator = false
+        sv.alwaysBounceHorizontal = false
+        sv.alwaysBounceVertical = false
+        sv.translatesAutoresizingMaskIntoConstraints = false
+        return sv
+    }()
+    private let container: UIView = {
+        let v = UIView(frame: .zero)
+        v.isUserInteractionEnabled = true
+        v.translatesAutoresizingMaskIntoConstraints = false
+        return v
+    }()
+    
     private let transition = BubbleTransition()
     private let interactiveTransition = BubbleInteractiveTransition()
-    private let scrollView: UIScrollView = UIScrollView(frame: .zero)
-    private let container: UIView = UIView(frame: .zero)
     private var selectedTexts: [MDKeyword] = []
     private var centerKeyword: String = String()
     private var centerImageURL: String = String()
     private var keywords: [MDKeyword] {
-        //if selectedTexts.count == 0 { return ["이게사랑인가요","이제다시","사랑에연습이있었다면"]}
         var keywords: [MDKeyword] = []
-        //keywords.append(MDKeyword(keyword: centerKeyword, imagePath: centerImageURL))
         keywords.append(contentsOf: selectedTexts)
         return keywords
     }
@@ -64,8 +84,9 @@ class MandalartViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
       
-        getMandalartKeywords()
+        title = "만달아트"
         setLayout()
+        getMandalartKeywords()
     }
     
     
@@ -90,7 +111,6 @@ class MandalartViewController: BaseViewController {
     }
     
     private func getDummy() {
-        self.removeSpinner()
         self.cellCount = 9
         let words = keywords.map { $0.keyword }
         
@@ -99,6 +119,8 @@ class MandalartViewController: BaseViewController {
         }
         self.cellCount = 9
         self.collectionView.reloadSection(section: 0)
+        
+        self.removeSpinner()
     }
     
     private func setLayout() {
@@ -109,78 +131,39 @@ class MandalartViewController: BaseViewController {
         container.addSubview(collectionView)
         scrollView.addSubview(container)
         
+        // scrollview ) container ) collectionview
+       
+        collectionView.snp.makeConstraints {
+            $0.size.equalTo(container.snp.size)
+            $0.center.equalToSuperview()
+        }
         
-        setupCollectionView()
-        setupScrollView()
-        setupButtons()
+        scrollView.snp.makeConstraints {
+            $0.size.equalTo(min(view.bounds.width, view.bounds.height))
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(30)
+        }
         
-        ideaButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -idealButtonBottomSpace).isActive = true
-        ideaButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        ideaButton.widthAnchor.constraint(equalToConstant: idealButtonSize).isActive = true
-        ideaButton.heightAnchor.constraint(equalToConstant: idealButtonSize).isActive = true
-        
-        
-        ExitButton(on: navigationController!.navigationBar, target: self)
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-        ideaButton.addCircularRounded()
-        ideaButton.addCircularShadow()
-    }
-    
-    private func setupButtons() {
-        
-        
-        
-    }
-    
-    private func setupScrollView() {
-        scrollView.delegate = self
-        scrollView.minimumZoomScale = 1
-        scrollView.maximumZoomScale = 2.4
-        scrollView.showsHorizontalScrollIndicator = false
-        scrollView.showsVerticalScrollIndicator = false
-        scrollView.alwaysBounceHorizontal = false
-        scrollView.alwaysBounceVertical = false
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        
-        let sizeAnchor = view.bounds.width > view.bounds.height ? view.heightAnchor : view.widthAnchor
-        scrollView.widthAnchor.constraint(equalTo: sizeAnchor).isActive = true
-        scrollView.heightAnchor.constraint(equalTo: sizeAnchor).isActive = true
-        scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        scrollView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        
-        container.translatesAutoresizingMaskIntoConstraints = false
-        container.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
-        container.centerYAnchor.constraint(equalTo: scrollView.centerYAnchor).isActive = true
-        container.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
-        container.heightAnchor.constraint(equalTo: scrollView.heightAnchor).isActive = true
-        
-        container.isUserInteractionEnabled = true
-    }
-    
-    private func setupCollectionView() {
-        collectionView.registerNib(MandalartCell.self)
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        
-        collectionView.widthAnchor.constraint(equalTo: container.widthAnchor).isActive = true
-        collectionView.heightAnchor.constraint(equalTo: container.heightAnchor).isActive = true
-        collectionView.centerXAnchor.constraint(equalTo: container.centerXAnchor).isActive = true
-        collectionView.centerYAnchor.constraint(equalTo: container.centerYAnchor).isActive = true
+        container.snp.makeConstraints {
+            $0.size.equalTo(scrollView.snp.size)
+            $0.center.equalToSuperview()
+        }
+
+        ideaButton.snp.makeConstraints {
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-idealButtonBottomSpace)
+            $0.centerX.equalToSuperview()
+            $0.size.equalTo(idealButtonSize)
+        }
     }
     
     @objc private func touchupIdeaButton(_ button: UIButton) {
-        guard let target = UIStoryboard(name: "MandalartStoryboard", bundle: nil).instantiateViewController(withIdentifier: CreateIdeaViewController.className) as? CreateIdeaViewController else { return }
-        target.transitioningDelegate = self
-        target.modalPresentationStyle = .custom
-        target.view.backgroundColor = button.backgroundColor!
-        target.selectedKeywords = mandalartKeywords
-        target.interactiveTransition = interactiveTransition
-        interactiveTransition.attach(to: target)
-        present(target, animated: true, completion: nil)
+        let ideaVC = CreateIdeaViewController()
+        ideaVC.transitioningDelegate = self
+        ideaVC.modalPresentationStyle = .custom
+        ideaVC.view.backgroundColor = button.backgroundColor!
+        ideaVC.selectedKeywords = mandalartKeywords
+        ideaVC.interactiveTransition = interactiveTransition
+        interactiveTransition.attach(to: ideaVC)
+        present(ideaVC, animated: true, completion: nil)
     }
 }
 
